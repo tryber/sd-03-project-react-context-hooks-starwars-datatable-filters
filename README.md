@@ -11,9 +11,9 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 ### ANTES DE COMEÇAR A DESENVOLVER:
 
 1. Clone o repositório
-  * `git clone git@github.com:tryber/sd-03-project-react-context-hooks-starwars-datatable-filters.git`.
+  * `git clone git@github.com:tryber/sd-03-project-starwars-datatable-hooks.git`.
   * Entre na pasta do repositório que você acabou de clonar:
-    * `sd-03-project-react-context-hooks-starwars-datatable-filters`
+    * `sd-03-project-starwars-datatable-hooks`
 
 2. Instale as dependências
   * `npm install`
@@ -25,7 +25,7 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
     * Exemplo: `git checkout master`
   * Agora crie uma branch para a qual você vai submeter os `commits` do seu projeto
     * Você deve criar uma branch no seguinte formato: `nome-de-usuario-nome-do-projeto`
-    * Exemplo: `git checkout -b joaozinho-react-context-hooks-starwars-datatable-filters`
+    * Exemplo: `git checkout -b joaozinho-starwars-datatable-hooks`
 
 
 4. Crie um contexto. Por exemplo, se você quer nomear seu contexto `StarWarsContext`, e colocá-lo no diretório `context` dentro de `src`, faça:
@@ -58,16 +58,16 @@ export default StarWarsContext;
         * `git status` (deve aparecer uma mensagem tipo _nothing to commit_ )
 
 6. Adicione a sua branch com o novo `commit` ao repositório remoto
-  * Usando o exemplo anterior: `git push -u origin joaozinho-react-context-hooks-starwars-datatable-filters`
+  * Usando o exemplo anterior: `git push -u origin joaozinho-starwars-datatable-hooks`
 
 7. Crie um novo `Pull Request` _(PR)_
-  * Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/sd-03-project-react-context-hooks-starwars-datatable-filters/pulls)
+  * Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/sd-03-project-starwars-datatable-hooks/pulls)
   * Clique no botão verde _"New pull request"_
   * Clique na caixa de seleção _"Compare"_ e escolha a sua branch **com atenção**
   * Clique no botão verde _"Create pull request"_
   * Adicione uma descrição para o _Pull Request_ e clique no botão verde _"Create pull request"_
   * **Não se preocupe em preencher mais nada por enquanto!**
-  * Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-03-project-react-context-hooks-starwars-datatable-filters/pulls) e confira que o seu _Pull Request_ está criado
+  * Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-03-project-starwars-datatable-hooks/pulls) e confira que o seu _Pull Request_ está criado
 
 ---
 
@@ -83,11 +83,11 @@ Caso não tenha realizado o projeto anterior, você deverá implementar todos os
 
 ### Copiando os arquivos entre projetos
 
-Supondo que seus projetos passado e atual estejam, respectivamente, nos diretórios `sd-03-project-react-redux-starwars-datatable-filters` e `sd-03-project-react-context-hooks-starwars-datatable-filters` dentro do mesmo diretório em sua máquina, execute o comando a seguir para copiar entre projetos.
+Supondo que seus projetos passado e atual estejam, respectivamente, nos diretórios `sd-03-project-react-redux-starwars-datatable-filters` e `sd-03-project-starwars-datatable-hooks` dentro do mesmo diretório em sua máquina, execute o comando a seguir para copiar entre projetos.
 
 ```shell
 cd <diretorio onde estão seus projetos>
-cp -av sd-03-project-react-redux-starwars-datatable-filters/src/ sd-03-project-react-context-hooks-starwars-datatable-filters/src/
+cp -av sd-03-project-react-redux-starwars-datatable-filters/src/ sd-03-project-starwars-datatable-hooks/src/
 ```
 
 Atente para a barra (`/`) ao final dos nomes dos diretórios. Adapte os comandos com os nomes dos diretórios onde estão seus repositórios em sua máquina local.

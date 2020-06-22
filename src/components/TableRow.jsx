@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { planetShape } from '../services/constants';
 
-const TableRow = ({ planet, properties, isMultiHeader, index}) => (
+const TableRow = ({ planet, properties, isMultiHeader, index }) => (
   <tr style={{ backgroundColor: index % 2 === 0 ? 'red' : 'blue' }}>
     {properties.map((feature) => (
       <td className={isMultiHeader ? 'multi-headers' : ''} key={`${planet.name}-${feature}`}>

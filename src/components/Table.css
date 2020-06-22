@@ -1,11 +1,11 @@
-table, tbody, td, tr {
+table , tbody , tr {
   border: 1px solid #ccc;
   flex-basis: 60%;
 }
 
 table {
-  overflow: auto;
   flex: 2 1 50%;
+  overflow: auto;
 }
 
 caption {
@@ -19,10 +19,14 @@ caption {
   border: 1px solid black;
 }
 
+td {
+  font-size: 1.3em;
+  border-bottom: 1px solid #ccc;
+  word-wrap: break-word;
+}
+
 td.multi-headers {
   display: block;
-  font-size: 1.3em;
   padding-left: 50%;
   position: relative;
-  word-wrap: break-word;
 }

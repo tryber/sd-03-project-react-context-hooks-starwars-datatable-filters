@@ -9,10 +9,11 @@ function App() {
 
   const filterDataByText = (data) => {
     if (textFilter.filterByName.name !== '') {
-      return data.filter(({name}) => name.toLowerCase().includes(textFilter.filterByName.name.toLowerCase()));
+      return data.filter(({ name }) =>
+      name.toLowerCase().includes(textFilter.filterByName.name.toLowerCase()));
     }
     return data;
-  }
+  };
 
   useEffect(() => {
     fetchPlanets();

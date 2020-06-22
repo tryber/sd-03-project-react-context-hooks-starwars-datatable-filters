@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import FilterByNameInput from './FilterByNameInput';
 
 function FilterContainer({ onChange }) {
@@ -8,5 +9,9 @@ function FilterContainer({ onChange }) {
     </div>
   );
 }
+
+FilterContainer.propTypes = {
+  onChange: PropTypes.func.isRequired,
+};
 
 export default FilterContainer;

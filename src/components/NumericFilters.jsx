@@ -20,7 +20,6 @@ export default function Numericfilters() {
 
   function getColumns() {
     const usedFilters = filters.filterByNumericValues.map((filter) => filter.column);
-    console.log(usedFilters);
     return colunmns.filter((f) => !usedFilters.includes(f));
   }
 

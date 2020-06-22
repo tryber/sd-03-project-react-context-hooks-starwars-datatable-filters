@@ -3,6 +3,7 @@ import getPlanets from '../services/PlanetsAPI';
 import { StarWarsContext } from '../context/StarWarsContext';
 import Numericfilters from './NumericFilters';
 import Filter from './Filter';
+import Orderfilter from './OrderFilter';
 
 const headers = [
   'name',
@@ -22,17 +23,26 @@ const headers = [
 
 function filter(column, comparison, value) {
   if (comparison === 'maior que') {
-    console.log(comparison);
     return (planet) => +planet[column] > +value;
   }
   if (comparison === 'menor que') {
-    console.log(comparison);
     return (planet) => +planet[column] < +value;
   }
   if (comparison === 'igual a') {
-    console.log(comparison);
     return (planet) => planet[column] === value;
   }
+}
+
+function sortFunction(column) {
+  return (a, b) => {
+    if (a[column] > b[column]) {
+      return 1;
+    }
+    if (a[column] < b[column]) {
+      return -1;
+    }
+    return 0;
+  };
 }
 
 export default function Table() {
@@ -42,7 +52,7 @@ export default function Table() {
   useEffect(() => {
     getPlanets().then((r) => {
       store.setPlanets(r);
-      store.setPlanetsFiltered(r);
+      store.setPlanetsFiltered(r.sort(sortFunction('name')));
     });
   }, []);
 
@@ -54,8 +64,19 @@ export default function Table() {
     store.setPlanetsFiltered(planets);
   }, [store.filters.filterByNumericValues]);
 
+  //   useEffect(() => {
+  //     let { planetsFiltered: planets, filters } = store;
+
+  //     console.log(filters.order);
+
+  //     planets = filters.order.sort !== 'DESC'
+  //       ? planets.sort(sortFunction(filters.order.column))
+  //       : planets.sort(sortFunction(filters.order.column)).reverse();
+
+  //     store.setPlanetsFiltered(planets);
+  //   }, [store.filters.order]);
+
   function setFilterByName(e) {
-    console.log('change');
     store.changeFilterByName(e.target.value);
     store.setPlanetsFiltered(store.planets.filter(({ name }) => name.includes(e.target.value)));
   }
@@ -66,6 +87,7 @@ export default function Table() {
         <div>
           <button type="button" onClick={() => console.log(store)}>State</button>
           <Numericfilters />
+          <Orderfilter />
           <div>
             {store.filters.filterByNumericValues.map((f) => <Filter key={f.column} {...f} />)}
           </div>
@@ -85,7 +107,7 @@ export default function Table() {
             <tbody>
               {store.planetsFiltered.map((planet) => (
                 <tr key={planet.name}>
-                  {Object.values(planet).map((e) => <td key={e}>{e}</td>)}
+                  {Object.values(planet).map((e, i) => (i === 0 ? <td data-testid="planet-name" key={e}>{e}</td> : <td key={e}>{e}</td>))}
                 </tr>
               ))}
 

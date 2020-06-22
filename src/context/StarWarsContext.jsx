@@ -5,6 +5,10 @@ export const StarWarsContext = createContext(null);
 const filterTemplate = {
   filterByName: { name: '' },
   filterByNumericValues: [],
+  order: {
+    column: 'Name',
+    sort: 'ASC',
+  },
 };
 
 export default ({ children }) => {
@@ -28,6 +32,10 @@ export default ({ children }) => {
     }
   }
 
+  function changeOrderFilter(order) {
+    setFilters({ ...filters, order });
+  }
+
   const store = {
     setPlanetsFiltered,
     planetsFiltered,
@@ -36,6 +44,7 @@ export default ({ children }) => {
     filters,
     changeFilterByName,
     changeNumericFilter,
+    changeOrderFilter,
 
   };
 

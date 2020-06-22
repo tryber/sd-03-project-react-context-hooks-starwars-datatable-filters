@@ -1,29 +1,21 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { filterByText } from '../../actions/actionsCreators';
+import React, { useContext } from 'react';
+import PlanetTableContext from '../../context/context';
 
-
-const FilterByNameBar = ({ planetName }) => (
-  <div>
-    <h2>Selecione um planeta</h2>
-    <input
-      type="text"
-      name="filter-by-name"
-      id="filter-by-name"
-      data-testid="name-filter"
-      placeholder="Digite o nome do planeta"
-      onChange={(event) => planetName(event.target.value)}
-    />
-  </div>
-);
-
-FilterByNameBar.propTypes = {
-  planetName: PropTypes.func.isRequired,
+const FilterByNameBar = () => {
+  const { setFilterByName } = useContext(PlanetTableContext);
+  return (
+    <div>
+      <h2>Selecione um planeta</h2>
+      <input
+        type="text"
+        name="filter-by-name"
+        id="filter-by-name"
+        data-testid="name-filter"
+        placeholder="Digite o nome do planeta"
+        onChange={(event) => setFilterByName(event.target.value)}
+      />
+    </div>
+  );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  planetName: (planetName) => dispatch(filterByText(planetName)),
-});
-
-export default connect(null, mapDispatchToProps)(FilterByNameBar);
+export default FilterByNameBar;

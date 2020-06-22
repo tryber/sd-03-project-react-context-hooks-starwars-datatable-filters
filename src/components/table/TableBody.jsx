@@ -1,21 +1,22 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+import PlanetTableContext from '../../context/context';
 import filterDataByNumericValue from '../../helpers/index';
 
-const TableBody = ({
-  data,
-  nameFilter,
-  sortColumnFilter,
-  sortOrderFilter,
-  valueFilters,
-}) => {
+const TableBody = () => {
+  const { data, filters } = useContext(PlanetTableContext);
+
+  const {
+    filterByName: { name },
+    filterByNumericValues,
+    order: { column, sort },
+  } = filters;
+
   const filteredData = filterDataByNumericValue(
     data,
-    nameFilter,
-    sortColumnFilter,
-    sortOrderFilter,
-    valueFilters,
+    name,
+    column,
+    sort,
+    filterByNumericValues,
   );
 
   return filteredData.length === 0 ? (
@@ -62,31 +63,4 @@ const TableBody = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  data: state.planetsInfoReducer.data,
-  nameFilter: state.filters.filterByName.name,
-  sortColumnFilter: state.filters.order.column,
-  sortOrderFilter: state.filters.order.sort,
-  valueFilters: state.filters.filterByNumericValues,
-});
-
-TableBody.defaultProps = {
-  nameFilter: '',
-  valueFilters: [
-    {
-      column: '',
-      comparison: '',
-      value: '',
-    },
-  ],
-};
-
-TableBody.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  nameFilter: PropTypes.string,
-  sortColumnFilter: PropTypes.string.isRequired,
-  sortOrderFilter: PropTypes.string.isRequired,
-  valueFilters: PropTypes.arrayOf(PropTypes.object),
-};
-
-export default connect(mapStateToProps)(TableBody);
+export default TableBody;

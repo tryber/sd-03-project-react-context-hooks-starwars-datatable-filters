@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { PlanetTableProvider as Provider } from './context/provider';
+import Provider from './context/provider';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';

@@ -4,21 +4,19 @@ import FilterByValuesBar from './FilterByValuesBar';
 import SelectedFilters from './SelectedFilters';
 import SortColumnsFilter from './SortColumnsFilter';
 
-function FilterContainer() {
-  return (
+const FilterContainer = () => (
+  <div>
+    <FilterByNameBar />
     <div>
-      <FilterByNameBar />
-      <div>
-        <FilterByValuesBar />
-      </div>
-      <div>
-        <SelectedFilters />
-      </div>
-      <div>
-        <SortColumnsFilter />
-      </div>
+      <FilterByValuesBar />
     </div>
-  );
-}
+    <div>
+      <SelectedFilters />
+    </div>
+    <div>
+      <SortColumnsFilter />
+    </div>
+  </div>
+);
 
 export default FilterContainer;

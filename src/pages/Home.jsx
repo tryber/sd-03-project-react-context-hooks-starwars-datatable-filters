@@ -4,9 +4,7 @@ import Table from '../components/table/Table';
 import FilterContainer from '../components/filters/FilterContainer';
 
 const Home = () => {
-  const {
-    error, setData, loading, setLoading, getPlanetsInfo,
-  } = useContext(
+  const { error, setData, loading, setLoading, getPlanetsInfo } = useContext(
     PlanetTableContext,
   );
 
@@ -16,15 +14,17 @@ const Home = () => {
       setLoading(false);
       setData([]);
     };
-  }, []);
+  }, [getPlanetsInfo, setData, setLoading]);
 
   return (
     <>
       {loading && <h1>Loading...</h1>}
-      {!loading && error && <h3>{error}</h3>}
+      {!loading && error !== '' && <h3>{error}</h3>}
       {!loading && (
         <div>
-          <div><FilterContainer /></div>
+          <div>
+            <FilterContainer />
+          </div>
           <Table />
         </div>
       )}

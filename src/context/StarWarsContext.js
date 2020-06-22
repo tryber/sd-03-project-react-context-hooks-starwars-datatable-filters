@@ -10,7 +10,7 @@ const StarWarsContextProvider = ({ children }) => {
   const getPlanets = (url) => new Promise((resolve, reject) => {
     fetch(url)
       .then((response) => response.json())
-      .then((data) => resolve(data))
+      .then((dat) => resolve(dat))
       .catch((err) => reject(err));
   });
 

@@ -12,7 +12,7 @@ function App() {
       return dataSent.filter(({ name }) =>
       name.toLowerCase().includes(textFilter.filterByName.name.toLowerCase()));
     }
-    return data;
+    return dataSent;
   };
 
   useEffect(() => {

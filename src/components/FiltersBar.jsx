@@ -6,7 +6,7 @@ import FilterSetted from './FilterSetted';
 import OrderFilters from './OrderFilters';
 
 import { filtersContext } from '../context/Filters';
-// import { changeTable } from '../actions/changeTableActions';
+import { formatContext } from '../context/Format';
 import * as constants from '../services/constants';
 import './FiltersBar.css';
 
@@ -16,20 +16,11 @@ const takeUnused = (completeList, usedListOfObj) => (
   ))
 );
 
-/* <button
-className="radius-border filter-button"
-type="button"
-onClick={() => changeTableFormat(!isClassicFormatTable)}
->
-  Change Table Format
-</button>*/
 
-function FilterBar(
-  // { numFilters, changeTableFormat, isClassicFormatTable }
-) {
-  const [{
-    filterByNumericValues,
-  }] = useContext(filtersContext);
+
+function FilterBar() {
+  const [{ filterByNumericValues }] = useContext(filtersContext);
+  const [isMultiHeader, setIMultiHeader] = useContext(formatContext);
   return (
     <section className="filter-bar">
       <div className="filters">
@@ -48,27 +39,17 @@ function FilterBar(
           />
         ))}
       </div>
+      <div>
+        <button
+          className="radius-border filter-button"
+          type="button"
+          onClick={() => setIMultiHeader(!isMultiHeader)}
+        >
+          Change Table Format
+        </button>
+      </div>
     </section>
   );
 }
-
-// const mapStateToProps = ({ filters: { filterByNumericValues }, format }) => ({
-//   numFilters: [...filterByNumericValues],
-//   isClassicFormatTable: format,
-// });
-
-// const mapDispatchToProps = (dispatch) => ({
-//   changeTableFormat: (isClassic) => dispatch(changeTable(isClassic)),
-// });
-
-// FilterBar.propTypes = {
-//   numFilters: PropTypes.arrayOf(
-//     PropTypes.objectOf(PropTypes.string.isRequired),
-//   ).isRequired,
-//   isClassicFormatTable: PropTypes.bool,
-//   changeTableFormat: PropTypes.func.isRequired,
-// };
-
-// FilterBar.defaultProps = { isClassicFormatTable: false };
 
 export default FilterBar;

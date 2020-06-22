@@ -8,11 +8,14 @@ import FiltersProvider from './context/Filters';
 import './index.css';
 
 import * as serviceWorker from './serviceWorker';
+import FormatProvider from './context/Format';
 
 ReactDOM.render(
   <DataPlanetsProvider>
     <FiltersProvider>
-      <App />
+      <FormatProvider>
+        <App />
+      </FormatProvider>
     </FiltersProvider>
   </DataPlanetsProvider>,
   document.getElementById('root'),

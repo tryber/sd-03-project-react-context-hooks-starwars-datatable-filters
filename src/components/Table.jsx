@@ -6,6 +6,7 @@ import * as constants from '../services/constants';
 
 import { dataPlanetsContext } from '../context/DataPlanets';
 import { filtersContext } from '../context/Filters';
+import { formatContext } from '../context/Format';
 import './Table.css';
 
 const filterByNumProperties = (list, { value, column, comparison }) => {
@@ -27,9 +28,9 @@ const orderByStringProperties = (list, col, direction) => {
   return sortedList;
 };
 
-const renderBody = (planets, properties/*, isClassic*/) => (
+const renderBody = (planets, properties, isMultiHeader) => (
   <tbody
-    // style={/*isClassic ?*/{ border: '1px solid #ccc' }/*{ display: 'block', flexBasis: '60%' }*/}
+    style={isMultiHeader ? { border: '1px solid #ccc' } : { display: 'block', flexBasis: '60%' }}
   >
     {planets
       .map((planet, index) => (
@@ -37,7 +38,7 @@ const renderBody = (planets, properties/*, isClassic*/) => (
           key={planet.name}
           planet={planet}
           properties={properties}
-          // isClassic={isClassic}
+          isMultiHeader={isMultiHeader}
           index={index}
         />
       ))
@@ -45,40 +46,43 @@ const renderBody = (planets, properties/*, isClassic*/) => (
   </tbody>
 );
 
-// const generateStyle = (isClassic) => (
-//   isClassic ? { display: 'inline-block' } : ({
-//     border: '1px solid #ccc',
-//     display: 'flex',
-//     flexDirection: 'column',
-//     flexBasis: '60%',
-//   })
-// );
+const generateStyle = (isMultiHeader) => (
+  isMultiHeader ? { display: 'inline-block' } : ({
+    border: '1px solid #ccc',
+    display: 'flex',
+    flexDirection: 'column',
+    flexBasis: '60%',
+  })
+);
 
-// const makeHeadersInMultiHeadersTable = (headers, ...stringStyles) => {
-//   const nthOfTypeBefore = (order, title) => (`
-//   td:nth-of-type(${order}):before {
-//     content: "${title}";
-//   }`);
+const makeHeadersInMultiHeadersTable = (headers) => {
+  const extraStyle = (`
+    td:before {
+      left: 6px;padding-right: 10px;position: absolute;top: 6px;white-space: nowrap;width: 45%;
+    }`);
 
-//   return (
-//     <style>
-//       {stringStyles.reduce((str, style) => str.concat(style), '')
-//       + headers.reduce((string, prop, index) => (
-//           string.concat(nthOfTypeBefore(index + 1, constants.frendlyUser(prop)))
-//       ), '')}
-//     </style>
-//   );
-// };
+  const nthOfTypeBefore = (order, title) => (`
+  td:nth-of-type(${order}):before {
+    content: "${title}";
+  }`);
 
-const Table = (
-  // { numFilters, column, sort, isClassic },
-) => {
+  return (
+    <style>
+      {extraStyle + headers.reduce((string, prop, index) => (
+          string.concat(nthOfTypeBefore(index + 1, constants.frendlyUser(prop)))
+      ), '')}
+    </style>
+  );
+};
+
+function Table() {
   const { state: { data: planets, headers } } = useContext(dataPlanetsContext);
   const [{
     filterByName: { name: searchText },
     filterByNumericValues: numFilters,
     order: { column, sort },
   }, ] = useContext(filtersContext);
+  const [isMultiHeader, setIMultiHeader] = useContext(formatContext);
 
   if (planets.length === 0) return <div>None Planet Found</div>;
 
@@ -88,39 +92,22 @@ const Table = (
     planetsToShow = filterByNumProperties(planetsToShow, filter);
   });
 
-  // const extraStyle = (`
-  //   td:before {
-  //     left: 6px;padding-right: 10px;position: absolute;top: 6px;white-space: nowrap;width: 45%;
-  //   }`);
-
   return (
     <React.Fragment>
-      {/* {isClassic || makeHeadersInMultiHeadersTable(headers, extraStyle)} */}
+      {isMultiHeader && makeHeadersInMultiHeadersTable(headers)}
       <table
         className="table"
-        // style={generateStyle(isClassic)}
+        style={generateStyle(isMultiHeader)}
       >
         <caption>Star Wars Planets</caption>
         <TableHeader
           headers={headers}
-          // isClassic={isClassic}
+          isMultiHeader={isMultiHeader}
         />
-        {renderBody(planetsToShow, headers,/* isClassic, */)}
+        {renderBody(planetsToShow, headers, isMultiHeader)}
       </table>
     </React.Fragment>
   );
 };
-
-// const mapStateToProps = ({
-//   format,
-// }) => ({
-//   isClassic: format,
-// });
-
-// Table.propTypes = {
-//   isClassic: PropTypes.bool,
-// };
-
-// PropTypes.defaultProps = { isClassic: false };
 
 export default Table;

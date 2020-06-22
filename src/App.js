@@ -5,7 +5,7 @@ import FetchData from './components/FetchData';
 import FiltersBar from './components/FiltersBar';
 
 import { dataPlanetsContext } from './context/DataPlanets';
-// import './App.css';
+import './App.css';
 
 const App = () => {
   const { state: { isFetching } } = useContext(dataPlanetsContext);

@@ -2,31 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { planetShape } from '../services/constants';
 
-const generateTDStyle = (isMultiHeader) => (
-  isMultiHeader ? ({
-    fontSize: '1.3em',
-    paddingLeft: '50%',
-    position: 'relative',
-    wordWrap: 'break-word',
-    display: 'block',
-  }) : {}
-);
-
-const generateTRStyle = (isMultiHeader, num) => (
-  isMultiHeader
-  ? ({ display: 'block', flexBasis: '60%', backgroundColor: num % 2 === 0 ? 'red' : 'blue' })
-  : {}
-);
-
 const TableRow = ({ planet, properties, isMultiHeader, index}) => (
-  <tr
-    style={generateTRStyle(isMultiHeader, index)}
-  >
+  <tr style={{ backgroundColor: index % 2 === 0 ? 'red' : 'blue' }}>
     {properties.map((feature) => (
-      <td
-        style={generateTDStyle(isMultiHeader)}
-        key={`${planet.name}-${feature}`}
-      >
+      <td className={isMultiHeader ? 'multi-headers' : ''} key={`${planet.name}-${feature}`}>
         {planet[feature]}
       </td>
     ))}
@@ -37,6 +16,7 @@ TableRow.propTypes = {
   planet: PropTypes.shape(planetShape()).isRequired,
   properties: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   isMultiHeader: PropTypes.bool.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default TableRow;

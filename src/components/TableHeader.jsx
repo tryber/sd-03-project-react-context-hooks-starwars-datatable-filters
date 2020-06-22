@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import * as constants from '../services/constants';
-import './TableHeader.css';
 
 const generateStyle = (isMultiHeader) => (
   isMultiHeader ? ({

@@ -81,8 +81,8 @@ function Table() {
     filterByName: { name: searchText },
     filterByNumericValues: numFilters,
     order: { column, sort },
-  }, ] = useContext(filtersContext);
-  const [isMultiHeader, setIMultiHeader] = useContext(formatContext);
+  }] = useContext(filtersContext);
+  const [isMultiHeader] = useContext(formatContext);
 
   if (planets.length === 0) return <div>None Planet Found</div>;
 
@@ -108,6 +108,6 @@ function Table() {
       </table>
     </React.Fragment>
   );
-};
+}
 
 export default Table;

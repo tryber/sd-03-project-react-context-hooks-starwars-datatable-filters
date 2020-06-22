@@ -16,8 +16,6 @@ const takeUnused = (completeList, usedListOfObj) => (
   ))
 );
 
-
-
 function FilterBar() {
   const [{ filterByNumericValues }] = useContext(filtersContext);
   const [isMultiHeader, setIMultiHeader] = useContext(formatContext);

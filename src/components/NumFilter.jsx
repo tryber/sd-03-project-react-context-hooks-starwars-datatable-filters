@@ -7,7 +7,7 @@ import * as constants from '../services/constants';
 
 const comparisonOptions = ['maior que', 'menor que', 'igual a'];
 
-const renderSelectOf = (name, value, optionsList, callback) => (
+const renderSelectOf = (name, value, optionsList, dispatch) => (
   <label htmlFor={name} className="container">
     {name}
     <select
@@ -16,7 +16,7 @@ const renderSelectOf = (name, value, optionsList, callback) => (
       value={value}
       id={name}
       name={name}
-      onChange={({ target: { value: nextValue } }) => callback(name, nextValue)}
+      onChange={({ target }) => dispatch(actions.changeValue(name, target.value))}
     >
       {constants.renderOptions(optionsList)}
     </select>
@@ -26,14 +26,11 @@ const renderSelectOf = (name, value, optionsList, callback) => (
 function NumFilter({ columnOptions }) {
   const [{ inProgress: { column, value, comparison } }, dispatch] = useContext(filtersContext);
 
-  const onChange = (filter, value) => dispatch(actions.changeValue(filter, value));
-  const createFilter = () => dispatch(actions.createFilter());
-
   return (
     <fieldset className="container">
       <span>Filter by Numeric Params</span>
-      {renderSelectOf('column', column, columnOptions, onChange)}
-      {renderSelectOf('comparison', comparison, comparisonOptions, onChange)}
+      {renderSelectOf('column', column, columnOptions, dispatch)}
+      {renderSelectOf('comparison', comparison, comparisonOptions, dispatch)}
       <label htmlFor="value-filter" className="container">
         number
         <input
@@ -50,7 +47,7 @@ function NumFilter({ columnOptions }) {
         className="radius-border filter-button"
         data-testid="button-filter"
         type="button"
-        onClick={() => createFilter()}
+        onClick={() => dispatch(actions.createFilter())}
       >
         Activate
       </button>

@@ -15,7 +15,7 @@ export const dataPlanetsContext = createContext(INITIAL_STATE);
 
 function dataReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case REQUEST_PLANETS: 
+    case REQUEST_PLANETS:
       return ({ ...state, isFetching: true });
 
     case FETCH_PLANETS_SUCESS:

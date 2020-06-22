@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 import TableHeader from './TableHeader';
 import TableRow from './TableRow';
@@ -105,9 +104,9 @@ const mapStateToProps = ({
   format,
 }) => ({
   planets: data,
-  searchText: filterByName.name,
+  // searchText: filterByName.name,
   headers,
-  numFilters: filterByNumericValues,
+  // numFilters: filterByNumericValues,
   ...order, // column and sort
   isClassic: format,
 });
@@ -126,4 +125,4 @@ Table.propTypes = {
 
 PropTypes.defaultProps = { isClassic: false };
 
-export default connect(mapStateToProps)(Table);
+export default Table;

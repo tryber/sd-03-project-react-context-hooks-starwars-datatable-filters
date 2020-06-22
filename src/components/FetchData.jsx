@@ -1,26 +1,21 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
+
+import { dataPlanetsContext } from '../context/DataPlanets';
 import fetchPlanets from '../actions/fetchPlanetsAction';
 import './FetchData.css';
 
-class FetchData extends React.Component {
-  componentDidMount() {
-    this.props.fetchPlanets();
-  }
+function FetchData() {
+  const { dispatch } = useContext(dataPlanetsContext);
 
-  render() {
-    return (
-      <div className="loading">Loading...</div>
-    );
-  }
+  useEffect(() => { fetchPlanets()(dispatch) }, [])
+
+  return <div className="loading">Loading...</div>;
 }
 
-const mapDipatchToProps = (dispatch) => ({
-  fetchPlanets: () => dispatch(fetchPlanets()),
-});
+// const mapDipatchToProps = (dispatch) => ({
+//   fetchPlanets: () => dispatch(fetchPlanets()),
+// });
 
-FetchData.propTypes = { fetchPlanets: PropTypes.func.isRequired };
-
-export default connect(null, mapDipatchToProps)(FetchData);
+export default FetchData;

@@ -1,21 +1,18 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
-const axios = require('axios');
-
 const StarWarsContext = createContext();
 
 const StarWarsContextProvider = ({ children }) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState([]);
 
-  const getPlanets = (url) => (
-    new Promise((resolve, reject) => {
-      axios.get(url).then((response) => {
-        resolve(response.data);
-      }).catch((err) => reject(err));
-    })
-  );
+  const getPlanets = (url) => new Promise((resolve, reject) => {
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch((err) => reject(err));
+  });
 
   const updateData = (info) => {
     setData([...info]);

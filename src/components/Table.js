@@ -45,8 +45,7 @@ function tbody(data, name) {
 }
 
 function Table() {
-
-  const [titles, setTitles] = React.useState([
+  const [titles] = React.useState([
     { id: 1, title: 'name' },
     { id: 2, title: 'climate' },
     { id: 3, title: 'created' },
@@ -60,12 +59,10 @@ function Table() {
     { id: 11, title: 'rotation period' },
     { id: 12, title: 'surface water' },
     { id: 13, title: 'terrain' },
-  ])
-
+  ]);
   const { data, name } = React.useContext(StarWarsContext);
-
-  const table = () => {
-    return (
+  return (
+    <div>
       <table>
         <thead>
           <tr>
@@ -74,11 +71,6 @@ function Table() {
         </thead>
         {tbody(data, name)}
       </table>
-    );
-  }
-  return (
-    <div>
-      {table()}
     </div>
   );
 }

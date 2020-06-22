@@ -63,10 +63,10 @@ const NumericFilter = () => {
       stateColumn,
       stateComparison,
       stateValue,
-    }
+    };
     return filter;
   };
-  
+
   const filterForms = () =>
     <div>
       <label htmlFor="column-filter">Filtre por coluna</label>
@@ -93,7 +93,7 @@ const NumericFilter = () => {
       >Filtrar</button>
     </div>;
 
-filterMenu();
+  filterMenu();
   verifyColumns(columnOptions);
   return (
     <div>

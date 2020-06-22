@@ -29,21 +29,19 @@ const verifyColumns = (obj) => {
   }
 };
 
-
 const NumericFilter = () => {
-
   const { filters } = useContext(StarWarsContext);
   const { filterByNumericValues } = filters;
 
   const [column, setColumn] = useState('');
   const [comparison, setComparison] = useState('');
   const [value, setValue] = useState(0);
-  
+
   const handleChange = (type, value) => {
     if (type === 'column') { setColumn(value); }
     if (type === 'comparison') { setComparison(value); }
     if (type === 'value') { setValue(value); }
-  }
+  };
 
   const filterMenu = () => {
     // Thanks for topic
@@ -58,7 +56,7 @@ const NumericFilter = () => {
         newColumnOptions.splice(index, 1);
       }
     }
-  }
+  };
 
   const filterForms = () => {
     // const { filters } = useContext(StarWarsContext);
@@ -89,8 +87,8 @@ const NumericFilter = () => {
         >Filtrar</button>
       </div>
     );
-  }
-  
+  };
+
   filterMenu();
   verifyColumns(columnOptions);
   return (
@@ -98,6 +96,6 @@ const NumericFilter = () => {
       {showFilter && filterForms()}
     </div>
   );
-}
+};
 
 export default NumericFilter;

@@ -17,6 +17,6 @@ const ListFilters = () => {
       return undefined;
     })
   );
-}
+};
 
 export default ListFilters;

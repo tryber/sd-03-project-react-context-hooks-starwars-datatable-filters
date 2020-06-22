@@ -25,25 +25,24 @@ contextValue = {
 
 */
 
-const Provider = ({children}) => {
-
+const Provider = ({ children }) => {
   const [isFetching, setIsFetching] = useState(false);
   const [planets, setPlanets] = useState([]);
   const [error, setError] = useState('');
-  
+
   const receivePlanetsSuccess = (data) => {
     setIsFetching(false);
     setPlanets(data.results);
   };
-  
+
   const receivePlanetsError = (error) => {
     setIsFetching(false);
     setError(error);
   };
-  
+
   const fetchPlanets = () => {
     setIsFetching(true);
-  
+
     getPlanetsAPI()
     .then(
       receivePlanetsSuccess,
@@ -51,9 +50,9 @@ const Provider = ({children}) => {
     );
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchPlanets();
-  },[]);
+  }, []);
 
   const contextValue = {
     data: {
@@ -63,7 +62,7 @@ const Provider = ({children}) => {
     },
     filters: {
       filterByName: {
-        name: ''
+        name: '',
       },
       filterByNumericValues: [
         {
@@ -81,6 +80,6 @@ const Provider = ({children}) => {
       {children}
     </StarWarsContext.Provider>
   );
-}
+};
 
 export default Provider;

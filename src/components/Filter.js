@@ -14,7 +14,7 @@ const Filter = () => {
         onChange={(e) => getPlanetByName(e.target.value)}
       />
     </div>
-  );  
-}
+  );
+};
 
 export default Filter;

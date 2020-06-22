@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import SearchBox from './SearchBox';
 import NumFilter from './NumFilter';
 import FilterSetted from './FilterSetted';
-// import OrderFilters from './OrderFilters';
+import OrderFilters from './OrderFilters';
 
 import { filtersContext } from '../context/Filters';
 // import { changeTable } from '../actions/changeTableActions';
@@ -29,13 +29,13 @@ function FilterBar(
 ) {
   const [{
     filterByNumericValues,
-  }, dispatch] = useContext(filtersContext);
+  }] = useContext(filtersContext);
   return (
     <section className="filter-bar">
       <div className="filters">
         <SearchBox />
         <NumFilter columnOptions={takeUnused(constants.numColumn, filterByNumericValues)} />
-        {/* <OrderFilters /> */}
+        <OrderFilters />
       </div>
       <div>
         {filterByNumericValues.map(({ column, comparison, value }, id) => (

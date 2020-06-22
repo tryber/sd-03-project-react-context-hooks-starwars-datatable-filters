@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import TableHeader from './TableHeader';
 import TableRow from './TableRow';
-// import * as constants from '../services/constants';
+import * as constants from '../services/constants';
 
 import { dataPlanetsContext } from '../context/DataPlanets';
 import { filtersContext } from '../context/Filters';
@@ -18,14 +18,14 @@ const filterByNumProperties = (list, { value, column, comparison }) => {
   }
 };
 
-// const orderByStringProperties = (list, col, direction) => {
-//   const sortedList = (constants.numColumn.some((option) => option === col))
-//     ? list.sort((elemA, elemB) => elemA[col] - elemB[col])
-//     : list.sort((elemA, elemB) => elemA[col].localeCompare(elemB[col]));
+const orderByStringProperties = (list, col, direction) => {
+  const sortedList = (constants.numColumn.some((option) => option === col))
+    ? list.sort((elemA, elemB) => elemA[col] - elemB[col])
+    : list.sort((elemA, elemB) => elemA[col].localeCompare(elemB[col]));
 
-//   if (direction === 'DESC') sortedList.reverse();
-//   return sortedList;
-// };
+  if (direction === 'DESC') sortedList.reverse();
+  return sortedList;
+};
 
 const renderBody = (planets, properties/*, isClassic*/) => (
   <tbody
@@ -77,12 +77,13 @@ const Table = (
   const [{
     filterByName: { name: searchText },
     filterByNumericValues: numFilters,
+    order: { column, sort },
   }, ] = useContext(filtersContext);
 
   if (planets.length === 0) return <div>None Planet Found</div>;
 
   let planetsToShow = planets.filter((planet) => planet.name.includes(searchText));
-  // planetsToShow = orderByStringProperties(planetsToShow, column.toLowerCase(), sort);
+  planetsToShow = orderByStringProperties(planetsToShow, column.toLowerCase(), sort);
   numFilters.forEach((filter) => {
     planetsToShow = filterByNumProperties(planetsToShow, filter);
   });
@@ -111,23 +112,12 @@ const Table = (
 };
 
 // const mapStateToProps = ({
-//   headers,
-//   // filters: { filterByName, filterByNumericValues, order },
 //   format,
 // }) => ({
-//   // searchText: filterByName.name,
-//   headers,
-//   // numFilters: filterByNumericValues,
-//   ...order, // column and sort
 //   isClassic: format,
 // });
 
 // Table.propTypes = {
-//   numFilters: PropTypes.arrayOf(
-//     PropTypes.objectOf(PropTypes.string.isRequired).isRequired,
-//   ).isRequired,
-//   column: PropTypes.string.isRequired,
-//   sort: PropTypes.string.isRequired,
 //   isClassic: PropTypes.bool,
 // };
 

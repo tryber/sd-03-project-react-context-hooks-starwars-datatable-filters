@@ -7,9 +7,9 @@ import './App.css';
 function App() {
   const { isFetching, data, fetchPlanets, filterByText, textFilter } = useContext(StarWarsContext);
 
-  const filterDataByText = (data) => {
+  const filterDataByText = (dataSent) => {
     if (textFilter.filterByName.name !== '') {
-      return data.filter(({ name }) =>
+      return dataSent.filter(({ name }) =>
       name.toLowerCase().includes(textFilter.filterByName.name.toLowerCase()));
     }
     return data;

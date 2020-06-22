@@ -5,16 +5,13 @@ import TableHeader from './TableHeader';
 import TableBody from './TableBody';
 
 function Table() {
-  const { getPlanets, updateData, updateError } = useContext(StarWarsContext);
+  const { getPlanets, updateData } = useContext(StarWarsContext);
 
   useEffect(() => {
     getPlanets('https://swapi-trybe.herokuapp.com/api/planets/')
       .then((res) => {
         updateData(res.results);
       })
-      .catch((err) => {
-        updateError(err);
-      });
   }, []);
 
   return (

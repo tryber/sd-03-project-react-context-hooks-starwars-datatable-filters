@@ -7,13 +7,12 @@ const StarWarsContext = createContext();
 
 const StarWarsContextProvider = ({ children }) => {
   const [data, setData] = useState([]);
-  const [error, setError] = useState('');
 
   const getPlanets = (url) => (
     new Promise((resolve, reject) => {
       axios.get(url).then((response) => {
         resolve(response.data);
-      }).catch((err) => reject(err));
+      })
     })
   );
 
@@ -21,16 +20,10 @@ const StarWarsContextProvider = ({ children }) => {
     setData([...info]);
   };
 
-  const updateError = (err) => {
-    setError(error = err);
-  };
-
   const planetsContext = {
     data,
     getPlanets,
     updateData,
-    updateError,
-    error,
   };
 
   return (
@@ -42,6 +35,6 @@ const StarWarsContextProvider = ({ children }) => {
 
 export { StarWarsContext, StarWarsContextProvider as Provider };
 
-StarWarsContextProvider.protoTypes = {
-  children: PropTypes.element.isRequired,
-}
+StarWarsContext.protoTypes = {
+  children: PropTypes.node.isRequired,
+};

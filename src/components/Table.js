@@ -1,7 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes, { object } from 'prop-types';
-import * as actions from '../actions/index';
+import React, { useContext } from 'react';
+import StarWarsContext from '../context/StarWarsContext';
 import './Table.css';
 
 const tableCreator = (obj) =>
@@ -50,56 +48,36 @@ const filteredPlanets = (filters, planets) => {
   return result;
 };
 
-class Table extends React.Component {
-  render() {
-    const { planets, isFetching, filterByName } = this.props;
-    const { filterByNumericValues } = this.props;
-    const dataReceived = planets.length;
-    let planetoides = [];
-    let dataReady = false;
-    let dataKeys = [];
-    let regex = '';
-    if (dataReceived) {
-      dataKeys = [...Object.keys(planets[0])];
-      const cutData = dataKeys.indexOf('residents');
-      regex = new RegExp(`${filterByName}`, 'i');
-      dataKeys.splice(cutData, 1);
-      dataReady = true;
-      planetoides = [...filteredPlanets(filterByNumericValues, planets)];
-    }
-    return (
-      <div>
-        {dataReady && !isFetching &&
-        <table><tbody>
-          <tr>{dataKeys.map((e) => <th key={e}>{e}</th>)}</tr>
-          {
-            planetoides.filter(({ name }) => name.match(regex)).map((e) => tableCreator(e))
-          }
-        </tbody></table>
-        }
-        { isFetching && <span>...Loading</span>}
-      </div>
-    );
+const Table = () => {
+  const { data, filters } = useContext(StarWarsContext);
+  const { planets, isFetching } = data;
+  const { filterByName, filterByNumericValues } = filters;
+  const dataReceived = planets.length;
+  let planetoides = [];
+  let dataReady = false;
+  let dataKeys = [];
+  let regex = '';
+  if (dataReceived) {
+    dataKeys = [...Object.keys(planets[0])];
+    const cutData = dataKeys.indexOf('residents');
+    regex = new RegExp(`${filterByName}`, 'i');
+    dataKeys.splice(cutData, 1);
+    dataReady = true;
+    planetoides = [...filteredPlanets(filterByNumericValues, planets)];
   }
+  return (
+    <div>
+      {dataReady && !isFetching &&
+      <table><tbody>
+        <tr>{dataKeys.map((e) => <th key={e}>{e}</th>)}</tr>
+        {
+          planetoides.filter(({ name }) => name.match(regex)).map((e) => tableCreator(e))
+        }
+      </tbody></table>
+      }
+      { isFetching && <span>...Loading</span>}
+    </div>
+  );
 }
 
-const mapStateToProps = (state) => ({
-  planets: state.data.planets,
-  isFetching: state.data.isFetching,
-  filterByName: state.filters.filterByName.name,
-  filterByNumericValues: state.filters.filterByNumericValues,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  savePlanetByNumericValues: (data) => dispatch(actions.filteredPlanets(data)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Table);
-
-// faça as proptypes da ação oriunda do thunk
-Table.propTypes = {
-  planets: PropTypes.arrayOf(object).isRequired,
-  isFetching: PropTypes.bool.isRequired,
-  filterByName: PropTypes.string.isRequired,
-  filterByNumericValues: PropTypes.arrayOf(object),
-};
+export default Table;

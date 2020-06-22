@@ -1,7 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import * as actions from '../actions/index';
+import React, { useState, useContext } from 'react';
+import StarWarsContext from '../context/StarWarsContext';
 
 const columnOptions = [
   'select column',
@@ -31,27 +29,23 @@ const verifyColumns = (obj) => {
   }
 };
 
-class NumericFilter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      column: '',
-      comparison: '',
-      value: 0,
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.filterMenu = this.filterMenu.bind(this);
-    this.filterForms = this.filterForms.bind(this);
+
+const NumericFilter = () => {
+
+  const { filters } = useContext(StarWarsContext);
+  const { filterByNumericValues } = filters;
+
+  const [column, setColumn] = useState('');
+  const [comparison, setComparison] = useState('');
+  const [value, setValue] = useState(0);
+  
+  const handleChange = (type, value) => {
+    if (type === 'column') { setColumn(value); }
+    if (type === 'comparison') { setComparison(value); }
+    if (type === 'value') { setValue(value); }
   }
 
-  handleChange(type, value) {
-    this.setState({
-      [type]: value,
-    });
-  }
-
-  filterMenu() {
-    const { filterByNumericValues } = this.props;
+  const filterMenu = () => {
     // Thanks for topic
     // https://stackoverflow.com/
     // questions/14515382/javascript-compare-two-arrays-return-differences-but
@@ -66,68 +60,44 @@ class NumericFilter extends React.Component {
     }
   }
 
-  filterForms() {
-    const { getPlanetByNumericValues } = this.props;
+  const filterForms = () => {
+    // const { filters } = useContext(StarWarsContext);
+    // const { getPlanetByNumericValues } = filters;
     return (
       <div>
         <label htmlFor="column-filter">Filtre por coluna</label>
         <select
           data-testid="column-filter" name="column-filter"
-          onChange={(e) => this.handleChange('column', e.target.value)}
+          onChange={(e) => handleChange('column', e.target.value)}
         >
           {newColumnOptions.map((e) => <option key={e} value={e}>{e}</option>)}
         </select>
         <label htmlFor="comparison-filter">Condição</label>
         <select
           data-testid="comparison-filter" name="comparison-filter"
-          onChange={(e) => this.handleChange('comparison', e.target.value)}
+          onChange={(e) => handleChange('comparison', e.target.value)}
         >
           {comparisonOptions.map((e) => <option key={e} value={e}>{e}</option>)}
         </select>
         <label htmlFor="value-filter">Valor</label>
         <input
           data-testid="value-filter" type="number" maxLength="12"
-          onChange={(e) => this.handleChange('value', e.target.value)}
+          onChange={(e) => handleChange('value', e.target.value)}
         />
         <button
-          data-testid="button-filter" onClick={() => getPlanetByNumericValues(this.state)}
+          data-testid="button-filter" onClick={() => console.log('Fui clickado')}
         >Filtrar</button>
       </div>
     );
   }
-
-  render() {
-    this.filterMenu();
-    verifyColumns(columnOptions);
-    return (
-      <div>
-        {showFilter && this.filterForms()}
-      </div>
-    );
-  }
+  
+  filterMenu();
+  verifyColumns(columnOptions);
+  return (
+    <div>
+      {showFilter && filterForms()}
+    </div>
+  );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  getPlanetByNumericValues: (data) => dispatch(actions.filterByNumericValues(data)),
-});
-
-const mapStateToProps = (state) => ({
-  filterByNumericValues: state.filters.filterByNumericValues,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(NumericFilter);
-
-NumericFilter.defaultProps = {
-  filterByNumericValues: [
-    {
-      column: '',
-      comparison: '',
-      value: '',
-    },
-  ],
-};
-
-NumericFilter.propTypes = {
-  getPlanetByNumericValues: PropTypes.func.isRequired,
-  filterByNumericValues: PropTypes.arrayOf(PropTypes.object),
-};
+export default NumericFilter;

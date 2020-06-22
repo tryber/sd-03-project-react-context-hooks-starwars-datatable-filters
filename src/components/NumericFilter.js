@@ -58,33 +58,42 @@ const NumericFilter = () => {
     }
   };
 
+  const getFilters = () => {
+    const filter = {
+      stateColumn,
+      stateComparison,
+      stateValue,
+    }
+    return filter;
+  };
+  
   const filterForms = () =>
-      <div>
-        <label htmlFor="column-filter">Filtre por coluna</label>
-        <select
-          data-testid="column-filter" name="column-filter"
-          onChange={(e) => handleChange('column', e.target.value)}
-        >
-          {newColumnOptions.map((e) => <option key={e} value={e}>{e}</option>)}
-        </select>
-        <label htmlFor="comparison-filter">Condição</label>
-        <select
-          data-testid="comparison-filter" name="comparison-filter"
-          onChange={(e) => handleChange('comparison', e.target.value)}
-        >
-          {comparisonOptions.map((e) => <option key={e} value={e}>{e}</option>)}
-        </select>
-        <label htmlFor="value-filter">Valor</label>
-        <input
-          data-testid="value-filter" type="number" maxLength="12"
-          onChange={(e) => handleChange('value', e.target.value)}
-        />
-        <button
-          data-testid="button-filter" onClick={() => console.log('Fui clickado')}
-        >Filtrar</button>
-      </div>;
+    <div>
+      <label htmlFor="column-filter">Filtre por coluna</label>
+      <select
+        data-testid="column-filter" name="column-filter"
+        onChange={(e) => handleChange('column', e.target.value)}
+      >
+        {newColumnOptions.map((e) => <option key={e} value={e}>{e}</option>)}
+      </select>
+      <label htmlFor="comparison-filter">Condição</label>
+      <select
+        data-testid="comparison-filter" name="comparison-filter"
+        onChange={(e) => handleChange('comparison', e.target.value)}
+      >
+        {comparisonOptions.map((e) => <option key={e} value={e}>{e}</option>)}
+      </select>
+      <label htmlFor="value-filter">Valor</label>
+      <input
+        data-testid="value-filter" type="number" maxLength="12"
+        onChange={(e) => handleChange('value', e.target.value)}
+      />
+      <button
+        data-testid="button-filter" onClick={() => getFilters()}
+      >Filtrar</button>
+    </div>;
 
-  filterMenu();
+filterMenu();
   verifyColumns(columnOptions);
   return (
     <div>

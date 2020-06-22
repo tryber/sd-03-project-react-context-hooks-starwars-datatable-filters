@@ -7,7 +7,7 @@ import './FetchData.css';
 function FetchData() {
   const { dispatch } = useContext(dataPlanetsContext);
 
-  useEffect(() => { fetchPlanets()(dispatch) }, [])
+  useEffect(() => { fetchPlanets()(dispatch) }, [dispatch])
 
   return <div className="loading">Loading...</div>;
 }

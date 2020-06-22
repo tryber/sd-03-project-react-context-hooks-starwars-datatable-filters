@@ -1,13 +1,11 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 
 import Table from './components/Table';
 import FetchData from './components/FetchData';
-// import FiltersBar from './components/FiltersBar';
-
+import FiltersBar from './components/FiltersBar';
 
 import { dataPlanetsContext } from './context/DataPlanets';
-import './App.css';
+// import './App.css';
 
 const App = () => {
   const { state: { isFetching } } = useContext(dataPlanetsContext);
@@ -15,7 +13,7 @@ const App = () => {
   if (isFetching) return <FetchData />;
   return (
     <div className="App">
-      {/* <FiltersBar /> */}
+      <FiltersBar />
       <Table />
     </div>
   );

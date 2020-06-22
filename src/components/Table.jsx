@@ -5,6 +5,7 @@ import TableRow from './TableRow';
 // import * as constants from '../services/constants';
 
 import { dataPlanetsContext } from '../context/DataPlanets';
+import { filtersContext } from '../context/Filters';
 import './Table.css';
 
 // const filterByNumPropertie = (list, { value, column, comparison }) => {
@@ -28,7 +29,7 @@ import './Table.css';
 
 const renderBody = (planets, properties/*, isClassic*/) => (
   <tbody
-    style={/*isClassic ?*/{ border: '1px solid #ccc' }/*{ display: 'block', flexBasis: '60%' }*/}
+    // style={/*isClassic ?*/{ border: '1px solid #ccc' }/*{ display: 'block', flexBasis: '60%' }*/}
   >
     {planets
       .map((planet, index) => (
@@ -70,13 +71,13 @@ const renderBody = (planets, properties/*, isClassic*/) => (
 // };
 
 const Table = (
-  // { searchText, numFilters, column, sort, isClassic },
+  // { numFilters, column, sort, isClassic },
 ) => {
   const { state: { data: planets, headers } } = useContext(dataPlanetsContext);
+  const [{ filterByName: { name: searchText } }, ] = useContext(filtersContext);
 
   if (planets.length === 0) return <div>None Planet Found</div>;
 
-  const searchText = '';
   let planetsToShow = planets.filter((planet) => planet.name.includes(searchText));
   // planetsToShow = orderByStringProperties(planetsToShow, column.toLowerCase(), sort);
   // numFilters.forEach((filter) => {
@@ -100,11 +101,7 @@ const Table = (
           headers={headers}
           // isClassic={isClassic}
         />
-        {renderBody(
-          planetsToShow,
-          headers,
-        )}
-          {/* isClassic, */}
+        {renderBody(planetsToShow, headers,/* isClassic, */)}
       </table>
     </React.Fragment>
   );
@@ -123,7 +120,6 @@ const Table = (
 // });
 
 // Table.propTypes = {
-//   searchText: PropTypes.string.isRequired,
 //   numFilters: PropTypes.arrayOf(
 //     PropTypes.objectOf(PropTypes.string.isRequired).isRequired,
 //   ).isRequired,

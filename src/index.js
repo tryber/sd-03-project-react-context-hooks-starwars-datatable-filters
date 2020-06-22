@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import App from './App';
 import DataPlanetsProvider from './context/DataPlanets';
+import FiltersProvider from './context/Filters';
 
 import './index.css';
 
@@ -10,7 +11,9 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <DataPlanetsProvider>
-    <App />
+    <FiltersProvider>
+      <App />
+    </FiltersProvider>
   </DataPlanetsProvider>,
   document.getElementById('root'),
 );

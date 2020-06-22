@@ -1,10 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { useContext } from 'react';
 
+import { filtersContext } from '../context/Filters';
 import typeName from '../actions/SearchTextAction';
 
-function SearchBox({ searchText, onType }) {
+function SearchBox() {
+  const [{ filterByName: { name: searchText } }, dispatch] = useContext(filtersContext);
+
   return (
     <label htmlFor="search-text-input" className="container">
       <span>Search By Name</span>
@@ -14,19 +15,10 @@ function SearchBox({ searchText, onType }) {
         id="search-text-input"
         type="text"
         value={searchText}
-        onChange={({ target: { value } }) => onType(value)}
+        onChange={({ target: { value } }) => dispatch(typeName(value))}
       />
     </label>
   );
 }
 
-const mapStateToProps = ({ filters: { filterByName } }) => ({ searchText: filterByName.name });
-
-const mapDispatchToProps = (dispatch) => ({ onType: (text) => dispatch(typeName(text)) });
-
-SearchBox.propTypes = {
-  searchText: PropTypes.string.isRequired,
-  onType: PropTypes.func.isRequired,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBox);
+export default SearchBox;

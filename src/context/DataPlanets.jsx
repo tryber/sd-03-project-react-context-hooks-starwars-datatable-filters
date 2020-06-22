@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 export const REQUEST_PLANETS = 'REQUEST_PLANETS';
 export const FETCH_PLANETS_SUCESS = 'FETCH_PLANETS_SUCESS';

@@ -10,7 +10,7 @@ const StarWarsProvider = ({ children }) => {
   useEffect(() => {
     fetch('https://swapi-trybe.herokuapp.com/api/planets/')
       .then((response) => response.json()
-        .then((planets) => setPlanets(planets.results)));
+        .then((data) => setPlanets(data.results)));
   }, []);
 
   const store = {

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { starWarsContext } from '../context/starWarsContext';
 
 const PlanetsApi = () => {

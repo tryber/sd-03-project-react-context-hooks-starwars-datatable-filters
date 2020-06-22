@@ -15,6 +15,6 @@ const FilterPlanets = () => {
       />
     </div>
   );
-}
+};
 
 export default FilterPlanets;

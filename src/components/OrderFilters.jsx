@@ -5,7 +5,7 @@ import { filtersContext } from '../context/Filters';
 import * as actions from '../actions/orderActions';
 import * as constants from '../services/constants';
 
-const renderRadio = (value, text, callback) => (
+const renderRadio = (value, text, dispatch) => (
   <label htmlFor={`sort-radio-${value}`}>
     {text}
     <input
@@ -13,7 +13,7 @@ const renderRadio = (value, text, callback) => (
       data-testid="column-sort-input"
       id={`sort-radio-${value}`}
       name="sort-filter-radio"
-      onChange={() => callback('sort', value)}
+      onChange={() => dispatch(actions.changeOrder('sort', value))}
       type="radio"
       value={value}
     />
@@ -21,17 +21,15 @@ const renderRadio = (value, text, callback) => (
 );
 
 function OrderFilters() {
-  const { state: { headers } } = useContext(dataPlanetsContext);
+  const [{ headers }] = useContext(dataPlanetsContext);
   const [{ order: { column } }, dispatch] = useContext(filtersContext);
-
-  const change = (prop, value) => dispatch(actions.changeOrder(prop, value));
 
   return (
     <fieldset className="container">
       <span>Order By Column</span>
-      <div className="">
-        {renderRadio('ASC', 'Ascendent', change)}
-        {renderRadio('DESC', 'Descendent', change)}
+      <div>
+        {renderRadio('ASC', 'Ascendent', dispatch)}
+        {renderRadio('DESC', 'Descendent', dispatch)}
         <label htmlFor="column-order" className="container">
           column
           <select
@@ -40,7 +38,7 @@ function OrderFilters() {
             defaultValue={column}
             id="column-order"
             name="column-order"
-            onChange={({ target: { value } }) => change('column', value)}
+            onChange={({ target }) => dispatch(actions.changeOrder('column', target.value))}
           >
             {constants.renderOptions(headers)}
           </select>

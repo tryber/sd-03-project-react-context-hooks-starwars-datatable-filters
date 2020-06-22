@@ -1,6 +1,6 @@
-table , tbody , tr {
+table , thead , tbody , td , tr {
   border: 1px solid #ccc;
-  flex-basis: 60%;
+  border-collapse: collapse;
 }
 
 table {
@@ -16,17 +16,24 @@ caption {
 }
 
 .table-header {
-  border: 1px solid black;
+  font-size: 1.5em;
 }
 
 td {
-  border-bottom: 1px solid #ccc;
   font-size: 1.3em;
   word-wrap: break-word;
 }
 
-.multi-headers {
+td.multi-headers {
   display: block;
   padding-left: 50%;
   position: relative;
+}
+
+tr.multi-headers {
+  display: block;
+  flex-basis: 60%;
+  left: -9999px;
+  position: absolute;
+  top: -9999px;
 }

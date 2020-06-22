@@ -5,13 +5,15 @@ import fetchPlanets from '../actions/fetchPlanetsAction';
 import './FetchData.css';
 
 function FetchData() {
-  const { dispatch } = useContext(dataPlanetsContext);
+  const [state, dispatch] = useContext(dataPlanetsContext);
+  const { loading } = state;
 
   useEffect(() => {
-    fetchPlanets()(dispatch);
-  }, [dispatch]);
+    if (loading) fetchPlanets()(dispatch);
+  }, [dispatch, loading]);
 
-  return <div className="loading">Loading...</div>;
+  if (loading) return <div className="loading">Loading...</div>;
+  return null;
 }
 
 export default FetchData;

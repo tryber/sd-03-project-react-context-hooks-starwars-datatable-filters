@@ -1,22 +1,25 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import Table from './components/Table';
-import FetchData from './components/FetchData';
-import FiltersBar from './components/FiltersBar';
+import DataPlanetsProvider from './context/DataPlanets';
+import FiltersProvider from './context/Filters';
+import FormatProvider from './context/Format';
 
-import { dataPlanetsContext } from './context/DataPlanets';
+import { FetchData, Table, FiltersBar } from './components/';
+
 import './App.css';
 
-const App = () => {
-  const { state: { isFetching } } = useContext(dataPlanetsContext);
-
-  if (isFetching) return <FetchData />;
-  return (
-    <div className="App">
-      <FiltersBar />
-      <Table />
-    </div>
-  );
-};
+const App = () => (
+  <div className="App">
+    <DataPlanetsProvider>
+      <FetchData />
+      <FiltersProvider>
+        <FormatProvider>
+          <Table />
+          <FiltersBar />
+        </FormatProvider>
+      </FiltersProvider>
+    </DataPlanetsProvider>,
+  </div>
+);
 
 export default App;

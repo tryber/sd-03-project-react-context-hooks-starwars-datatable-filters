@@ -9,6 +9,7 @@ const INITIAL_STATE = {
   isFetching: true,
   data: [],
   error: '',
+  headers: [],
 };
 
 export const dataPlanetsContext = createContext(INITIAL_STATE);
@@ -42,7 +43,7 @@ function DataPlanetsProvider({ children }) {
   const [state, dispatch] = useReducer(dataReducer, INITIAL_STATE);
 
   return (
-    <dataPlanetsContext.Provider value={{ state, dispatch }}>
+    <dataPlanetsContext.Provider value={[state, dispatch]}>
       {children}
     </dataPlanetsContext.Provider>
   );

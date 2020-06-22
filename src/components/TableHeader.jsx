@@ -3,20 +3,10 @@ import PropTypes from 'prop-types';
 
 import * as constants from '../services/constants';
 
-const generateStyle = (isMultiHeader) => (
-  isMultiHeader ? ({
-    display: 'block',
-    flexBasis: '60%',
-    left: -9999,
-    position: 'absolute',
-    top: -9999,
-  }) : {}
-);
-
 const TableHeader = ({ headers, isMultiHeader }) => (
   <thead>
     {
-      <tr style={generateStyle(isMultiHeader)}>
+      <tr className={isMultiHeader ? 'multi-headers' : ''}>
         {headers.map((title) => (
           <th
             className="table-header"

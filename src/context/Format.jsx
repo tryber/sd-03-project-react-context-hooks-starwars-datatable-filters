@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export const formatContext = createContext(false);
 
 function FormatProvider({ children }) {
-  const isMultiHeaderState = useState(true);
+  const isMultiHeaderState = useState(false);
 
   return (
     <formatContext.Provider value={isMultiHeaderState}>

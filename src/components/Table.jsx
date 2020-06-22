@@ -76,7 +76,7 @@ const makeHeadersInMultiHeadersTable = (headers) => {
 };
 
 function Table() {
-  const { state: { data: planets, headers } } = useContext(dataPlanetsContext);
+  const [{ data: planets, headers }] = useContext(dataPlanetsContext);
   const [{
     filterByName: { name: searchText },
     filterByNumericValues: numFilters,

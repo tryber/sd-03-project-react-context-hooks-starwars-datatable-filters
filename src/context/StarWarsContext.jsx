@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { createContext, useState } from 'react';
 
 export const StarWarsContext = createContext(null);
@@ -11,7 +12,7 @@ const filterTemplate = {
   },
 };
 
-export default ({ children }) => {
+const provider = ({ children }) => {
   const [planets, setPlanets] = useState([]);
   const [planetsFiltered, setPlanetsFiltered] = useState([]);
   const [filters, setFilters] = useState(filterTemplate);
@@ -50,3 +51,9 @@ export default ({ children }) => {
 
   return <StarWarsContext.Provider value={store}>{children}</StarWarsContext.Provider>;
 };
+
+provider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export default provider;

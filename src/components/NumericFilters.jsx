@@ -23,29 +23,39 @@ export default function Numericfilters() {
     return colunmns.filter((f) => !usedFilters.includes(f));
   }
 
+  function renderSelects() {
+    return (
+      <div>
+        <select
+          data-testid="column-filter"
+          name=""
+          id=""
+          value={column}
+          onChange={(e) => setColumn(e.target.value)}
+        >
+          <option value="">Column</option>
+          {getColumns()
+            .map((columnName) => <option key={columnName} value={columnName}>{columnName}</option>)}
+        </select>
+        <select
+          data-testid="comparison-filter"
+          name=""
+          id=""
+          value={comparison}
+          onChange={(e) => setcomparison(e.target.value)}
+        >
+          <option value="">compa</option>
+          {comparation.map((compa) => <option key={compa} value={compa}>{compa}</option>)}
+        </select>
+
+      </div>
+    );
+  }
+
   return (
     <div>
-      <select
-        data-testid="column-filter"
-        name=""
-        id=""
-        value={column}
-        onChange={(e) => setColumn(e.target.value)}
-      >
-        <option value="">Column</option>
-        {getColumns()
-          .map((columnName) => <option key={columnName} value={columnName}>{columnName}</option>)}
-      </select>
-      <select
-        data-testid="comparison-filter"
-        name=""
-        id=""
-        value={comparison}
-        onChange={(e) => setcomparison(e.target.value)}
-      >
-        <option value="">compa</option>
-        {comparation.map((compa) => <option key={compa} value={compa}>{compa}</option>)}
-      </select>
+      {renderSelects()}
+
       <input
         data-testid="value-filter"
         type="text"

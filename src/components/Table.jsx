@@ -83,23 +83,32 @@ export default function Table() {
     store.setPlanetsFiltered(store.planets.filter(({ name }) => name.includes(e.target.value)));
   }
 
+  function renderthings() {
+    return (
+      <div>
+        <button type="button" onClick={() => console.log(store)}>State</button>
+        <Numericfilters />
+        <Orderfilter />
+        <div>
+          {store.filters.filterByNumericValues.map((f) => <Filter key={f.column} {...f} />)}
+        </div>
+
+        <input
+          type="text"
+          data-testid="name-filter"
+          value={store.filters.filterByName.name}
+          onChange={(e) => setFilterByName(e)}
+        />
+      </div>
+    );
+  }
+
   return (
     store.planets.length
       ? (
         <div>
-          <button type="button" onClick={() => console.log(store)}>State</button>
-          <Numericfilters />
-          <Orderfilter />
-          <div>
-            {store.filters.filterByNumericValues.map((f) => <Filter key={f.column} {...f} />)}
-          </div>
+          {renderthings()}
 
-          <input
-            type="text"
-            data-testid="name-filter"
-            value={store.filters.filterByName.name}
-            onChange={(e) => setFilterByName(e)}
-          />
           <table>
             <thead>
               <tr>

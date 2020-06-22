@@ -50,7 +50,7 @@ export default function Orderfilter() {
   return (
     <div>
       <form>
-        <label>
+        <label htmlFor="order">
           ASC
           <input
             checked={sort === 'ASC'}
@@ -61,7 +61,7 @@ export default function Orderfilter() {
             data-testid="column-sort-input-asc"
           />
         </label>
-        <label>
+        <label htmlFor="order">
           DESC
           <input
             data-testid="column-sort-input-desc"
@@ -72,7 +72,13 @@ export default function Orderfilter() {
             onChange={(e) => setSort(e.target.value)}
           />
         </label>
-        <select name="" id="" onChange={(e) => setColumn(e.target.value)} value={column} data-testid="column-sort">
+        <select
+          name=""
+          id=""
+          onChange={(e) => setColumn(e.target.value)}
+          value={column}
+          data-testid="column-sort"
+        >
           {colunmns
             .map((columnName) => <option key={columnName} value={columnName}>{columnName}</option>)}
         </select>

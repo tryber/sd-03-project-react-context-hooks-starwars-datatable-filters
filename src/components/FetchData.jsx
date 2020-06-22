@@ -1,23 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { fetchingPlanetsInfo } from '../actions/actionsCreators';
+import React, { useContext, useEffect } from 'react';
+import PlanetTableContext from '../context/context';
+import getAllPlanetsFromAPI from '../services/starWarsAPI';
 
-class FetchData extends React.Component {
-  componentDidMount() {
-    const { getPlanetsInfo } = this.props;
-    getPlanetsInfo();
-  }
+const FetchData = () => {
+  const { setData, loading, setLoading } = useContext(PlanetTableContext);
 
-  render() {
-    return <div>Loading...</div>;
-  }
-}
+  useEffect(() => {
+    if (loading) return;
+    setData(getAllPlanetsFromAPI());
+    setLoading(false);
+    return () => {
+      setLoading(false);
+    };
+  }, []);
 
-const mapDispatchToProps = (dispatch) => ({
-  getPlanetsInfo: () => dispatch(fetchingPlanetsInfo()),
-});
+  return <div>Loading...</div>;
+};
 
-FetchData.propTypes = { getPlanetsInfo: PropTypes.func.isRequired };
-
-export default connect(null, mapDispatchToProps)(FetchData);
+export default FetchData;

@@ -1,27 +1,21 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+import PlanetTableContext from '../context/context';
 import Table from '../components/table/Table';
 import FilterContainer from '../components/filters/FilterContainer';
 import FetchData from '../components/FetchData';
 
-const Home = ({ loading }) => (loading ? (
-  <FetchData />
-) : (
-  <div>
+const Home = () => {
+  const { loading } = useContext(PlanetTableContext);
+  return loading ? (
+    <FetchData />
+  ) : (
     <div>
-      <FilterContainer />
+      <div>
+        <FilterContainer />
+      </div>
+      <Table />
     </div>
-    <Table />
-  </div>
-));
-
-const mapStateToProps = (state) => ({
-  loading: state.planetsInfoReducer.loading,
-});
-
-Home.propTypes = {
-  loading: PropTypes.bool.isRequired,
+  );
 };
 
-export default connect(mapStateToProps)(Home);
+export default Home;

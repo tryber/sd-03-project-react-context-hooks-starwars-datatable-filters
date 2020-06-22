@@ -36,9 +36,9 @@ const Provider = ({ children }) => {
     setPlanets(data.results);
   };
 
-  const receivePlanetsError = (error) => {
+  const receivePlanetsError = (errorMessage) => {
     setIsFetching(false);
-    setError(error);
+    setError(errorMessage);
   };
 
   const fetchPlanets = () => {

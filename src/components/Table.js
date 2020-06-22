@@ -78,6 +78,6 @@ const Table = () => {
       { isFetching && <span>...Loading</span>}
     </div>
   );
-}
+};
 
 export default Table;

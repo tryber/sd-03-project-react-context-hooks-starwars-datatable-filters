@@ -33,14 +33,14 @@ const NumericFilter = () => {
   const { filters } = useContext(StarWarsContext);
   const { filterByNumericValues } = filters;
 
-  const [column, setColumn] = useState('');
-  const [comparison, setComparison] = useState('');
-  const [value, setValue] = useState(0);
+  const [stateColumn, setStateColumn] = useState('');
+  const [stateComparison, setStateComparison] = useState('');
+  const [stateValue, setStateValue] = useState(0);
 
-  const handleChange = (type, value) => {
-    if (type === 'column') { setColumn(value); }
-    if (type === 'comparison') { setComparison(value); }
-    if (type === 'value') { setValue(value); }
+  const handleChange = (type, passedValue) => {
+    if (type === 'column') { setStateColumn(passedValue); }
+    if (type === 'comparison') { setStateComparison(passedValue); }
+    if (type === 'value') { setStateValue(passedValue); }
   };
 
   const filterMenu = () => {
@@ -58,10 +58,7 @@ const NumericFilter = () => {
     }
   };
 
-  const filterForms = () => {
-    // const { filters } = useContext(StarWarsContext);
-    // const { getPlanetByNumericValues } = filters;
-    return (
+  const filterForms = () =>
       <div>
         <label htmlFor="column-filter">Filtre por coluna</label>
         <select
@@ -85,9 +82,7 @@ const NumericFilter = () => {
         <button
           data-testid="button-filter" onClick={() => console.log('Fui clickado')}
         >Filtrar</button>
-      </div>
-    );
-  };
+      </div>;
 
   filterMenu();
   verifyColumns(columnOptions);

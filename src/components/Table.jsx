@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import getPlanets from '../services/PlanetsAPI';
 import { StarWarsContext } from '../context/StarWarsContext';
 import Numericfilters from './NumericFilters';
@@ -31,6 +31,8 @@ function filter(column, comparison, value) {
   if (comparison === 'igual a') {
     return (planet) => planet[column] === value;
   }
+
+  return undefined;
 }
 
 function sortFunction(column) {
@@ -107,7 +109,10 @@ export default function Table() {
             <tbody>
               {store.planetsFiltered.map((planet) => (
                 <tr key={planet.name}>
-                  {Object.values(planet).map((e, i) => (i === 0 ? <td data-testid="planet-name" key={e}>{e}</td> : <td key={e}>{e}</td>))}
+                  {Object.values(planet)
+                    .map((e, i) => (i === 0
+                      ? <td data-testid="planet-name" key={e}>{e}</td>
+                      : <td key={e}>{e}</td>))}
                 </tr>
               ))}
 

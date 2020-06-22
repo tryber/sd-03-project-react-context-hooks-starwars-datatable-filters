@@ -33,7 +33,8 @@ export default function Numericfilters() {
         onChange={(e) => setColumn(e.target.value)}
       >
         <option value="">Column</option>
-        {getColumns().map((columnName) => <option key={columnName} value={columnName}>{columnName}</option>)}
+        {getColumns()
+          .map((columnName) => <option key={columnName} value={columnName}>{columnName}</option>)}
       </select>
       <select
         data-testid="comparison-filter"
@@ -52,7 +53,14 @@ export default function Numericfilters() {
         onChange={(e) => setValue(e.target.value)}
       />
 
-      <button type="button" data-testid="button-filter" onClick={() => numericFilter()}>Filtrar</button>
+      <button
+        type="button"
+        data-testid="button-filter"
+        onClick={() => numericFilter()}
+      >
+        Filtrar
+
+      </button>
     </div>
   );
 }

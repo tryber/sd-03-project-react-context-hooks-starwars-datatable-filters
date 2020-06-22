@@ -1,17 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { StarWarsContext as Context } from '../../context';
+import filterByNumeric from '../../service/Filter';
 import RenderThead from './renderThead';
 import RenderFilters from './RenderFilters';
-
-import {
-  filterColumn,
-  requestAction,
-  selectChanged,
-  textChanged,
-  unfilterColumn,
-} from '../../actions';
-import { useContext } from 'react';
 
 const temp = {
   columnFilter: [
@@ -28,66 +21,18 @@ const temp = {
   ],
 };
 
-const comparisonFilter = [
-  'maior que',
-  'igual a',
-  'menor que',
-];
 
-// Compare wheter the planet feets the filter
-const comparator = (column, comparison, value, element) => {
-  switch (comparison) {
-    case 'maior que':
-      return Number(element[column]) > Number(value);
-    case 'igual a':
-      return Number(element[column]) === Number(value);
-    case 'menor que':
-      return Number(element[column]) < Number(value);
-    default:
-      return [];
-  }
-};
-
-// CONST { CONTEXTO } = USECONTEXT(CONTEXTO)
 
 const Table = (props) => {
   const [column, setColumn] = useState('');
   const [comparison, setComparison] = useState('');
   const [value, setValue] = useState('');
+  const context = useContext(Context);
 
+  // component did mount
   useEffect(() => {
-
+    Context.getTable();
   }, []);
-  const { requestTable } = this.props;
-  requestTable();
-
-  const filterByText = () => {
-    const { name, table } = this.props;
-    if (name) {
-      return table.filter(
-        (planet) => planet
-          .name
-          .toLowerCase()
-          .includes(
-            name.toLowerCase(),
-          ),
-      );
-    }
-    return table;
-  }
-
-  // column filter
-  const filterByNumeric = () => {
-    const { columnFilter, filters } = this.props;
-    const filteredList = filters.reduce(
-      (acc, { column, comparison, value }) => acc.filter(
-        (element) => comparator(column, comparison, value, element),
-      ), this.filterByText(),
-    );
-    const columns = filters.map((filter) => filter.column);
-    // columnFilter = columnFilter.filter((item) => !columns.includes(item));
-    return filteredList;
-  }
 
   const handleChange = (e) => {
     const { search } = this.props;
@@ -111,7 +56,6 @@ const Table = (props) => {
       </label>
     );
   }
-  // column filter
 
   const renderComparisonSelect = () => {
     return (
@@ -199,24 +143,24 @@ const Table = (props) => {
 
   return (
     <div className="table-container">
-      {this.renderColumnSelect()}
-      {this.renderComparisonSelect()}
-      {this.renderValueSelect()}
-      {this.renderButton()}
+      {renderColumnSelect()}
+      {renderComparisonSelect()}
+      {renderValueSelect()}
+      {renderButton()}
       <label htmlFor="name-filter">
       &nbsp;Pesquisa:&nbsp;
         <input
           id="name-filter"
           data-testid="name-filter"
           type="text"
-          onChange={({ target: { value } }) => this.handleChange(value)}
+          onChange={({ target: { value } }) => handleChange(value)}
         />
       </label>
-      {this.renderFiltersActive()}
+      {renderFiltersActive()}
       <br />
       <table>
         <RenderThead />
-        {this.renderTbody()}
+        {renderTbody()}
       </table>
     </div>
   );

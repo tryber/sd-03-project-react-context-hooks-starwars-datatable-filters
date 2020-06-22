@@ -18,31 +18,29 @@ export const getColumns = (onColumnChange, column, numericValues) => {
   );
 };
 
-export const getRadios = (onInputChange) => {
-  return (
-    <div>
-      <input
-        defaultChecked
-        data-testid="column-sort-input"
-        type="radio"
-        id="ASC"
-        name="order"
-        value="ASC"
-        onChange={(event) => onInputChange(event)}
-      />
-      <label htmlFor="ASC">ASC</label>
-      <input
-        data-testid="column-sort-input"
-        type="radio"
-        id="DESC"
-        name="order"
-        value="DESC"
-        onChange={(event) => onInputChange(event)}
-      />
-      <label htmlFor="DESC">DESC</label>
-    </div>
-  );
-};
+export const getRadios = (onInputChange) => (
+  <div>
+    <input
+      defaultChecked
+      data-testid="column-sort-input"
+      type="radio"
+      id="ASC"
+      name="order"
+      value="ASC"
+      onChange={(event) => onInputChange(event)}
+    />
+    <label htmlFor="ASC">ASC</label>
+    <input
+      data-testid="column-sort-input"
+      type="radio"
+      id="DESC"
+      name="order"
+      value="DESC"
+      onChange={(event) => onInputChange(event)}
+    />
+    <label htmlFor="DESC">DESC</label>
+  </div>
+);
 
 export const getComparation = (onComparationChange, comparation) => {
   const comparationValues = ['', 'maior que', 'menor que', 'igual a'];

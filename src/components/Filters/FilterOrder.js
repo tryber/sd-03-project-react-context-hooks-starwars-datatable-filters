@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { getRadios } from './getSelects';
+import StarWarsContext from '../../context/StarWarsContext';
+
 
 function FilterOrder() {
   const [columnSort, setColumnSort] = useState('Name');

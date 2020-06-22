@@ -1,9 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import StarWarsContext from '../context/StarWarsContext';
 import '../App.css';
 
-function filterPlanetsFunc(data, filters) {
+/* function filterPlanetsFunc(data, filters) {
   let dataParam = [...data];
   let filterPlanets;
   filters.forEach((item) => {
@@ -20,7 +19,7 @@ function filterPlanetsFunc(data, filters) {
     dataParam = filterPlanets;
   });
   return filterPlanets;
-}
+} */
 
 function tbody(data, name) {
   return (
@@ -45,35 +44,27 @@ function tbody(data, name) {
   );
 }
 
-class Table extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      titles: [
-        { id: 1, title: 'name' },
-        { id: 2, title: 'climate' },
-        { id: 3, title: 'created' },
-        { id: 4, title: 'diameter' },
-        { id: 5, title: 'edited' },
-        { id: 6, title: 'films' },
-        { id: 7, title: 'gravity' },
-        { id: 8, title: 'orbital period' },
-        { id: 9, title: 'population' },
-        { id: 10, title: 'residents' },
-        { id: 11, title: 'rotation period' },
-        { id: 12, title: 'surface water' },
-        { id: 13, title: 'terrain' },
-      ],
-    };
-  }
+function Table() {
 
-  table() {
-    const { titles } = this.state;
-    const { name, filters } = this.props;
-    let { data } = this.props;
-    if (filters.length > 0) {
-      data = filterPlanetsFunc(data, filters);
-    }
+  const [titles, setTitles] = React.useState([
+    { id: 1, title: 'name' },
+    { id: 2, title: 'climate' },
+    { id: 3, title: 'created' },
+    { id: 4, title: 'diameter' },
+    { id: 5, title: 'edited' },
+    { id: 6, title: 'films' },
+    { id: 7, title: 'gravity' },
+    { id: 8, title: 'orbital period' },
+    { id: 9, title: 'population' },
+    { id: 10, title: 'residents' },
+    { id: 11, title: 'rotation period' },
+    { id: 12, title: 'surface water' },
+    { id: 13, title: 'terrain' },
+  ])
+
+  const { data, name } = React.useContext(StarWarsContext);
+
+  const table = () => {
     return (
       <table>
         <thead>
@@ -85,24 +76,11 @@ class Table extends React.Component {
       </table>
     );
   }
-
-  render() {
-    return (
-      <div>
-        {this.table()}
-      </div>
-    );
-  }
+  return (
+    <div>
+      {table()}
+    </div>
+  );
 }
 
-const mapStateToProps = (state) => ({
-  filters: state.filters.filterByNumericValues,
-});
-
-Table.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  name: PropTypes.string.isRequired,
-  filters: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
-
-export default connect(mapStateToProps)(Table);
+export default Table;

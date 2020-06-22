@@ -1,25 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PlanetsApi from './PlanetsApi';
 import FilterPlanets from './FilterPlanets';
 import { useContext } from 'react';
 import { starWarsContext } from '../context/starWarsContext';
 
-const Table = () => {
-  const { selectInput, filterByName, planets, Loading} = useContext(starWarsContext)
-  console.log(planets)
+const switchComparison = (column, comparison, value, planet) => {
+  switch (comparison) {
+    case 'maior que':
+      return Number(planet[column]) > Number(value);
+    case 'igual a':
+      return Number(planet[column]) === Number(value);
+    case 'menor que':
+      return Number(planet[column]) < Number(value);
+    default:
+      return [];
+  };
+}
 
-  const switchComparison = (column, comparison, value, planet) => {
-    switch (comparison) {
-      case 'maior que':
-        return Number(planet[column]) > Number(value);
-      case 'igual a':
-        return Number(planet[column]) === Number(value);
-      case 'menor que':
-        return Number(planet[column]) < Number(value);
-      default:
-        return [];
+const Table = () => {
+  const { selectInput, filterByName, planets } = useContext(starWarsContext)
+  console.log(planets);
+
+  const filteredPlanet = () => {
+    if (filterByName !== '') {
+      return planets.filter(({ name }) => name.toLowerCase().includes(filterByName.toLowerCase()));
     }
-  }
+    return planets;
+  };
 
   const filterSelectedValues = (planets) => {
     if (selectInput) {
@@ -30,14 +37,7 @@ const Table = () => {
       );
     }
     return filteredPlanet(planets);
-  }
-
-  const filteredPlanet = (planets) => {
-    if (filterByName !== '') {
-      return planets.filter(({ name }) => name.toLowerCase().includes(filterByName.toLowerCase()));
-    }
-    return planets;
-  }
+  };
 
   const planetsData = planets;
 
@@ -50,4 +50,4 @@ const Table = () => {
   );
 }
 
-export default Table
+export default Table;

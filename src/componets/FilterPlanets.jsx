@@ -1,6 +1,6 @@
 import React from 'react';
-import FilterByNumeric from './FilterByNumeric';
 import { useContext } from 'react';
+import FilterByNumeric from './FilterByNumeric';
 import { starWarsContext } from '../context/starWarsContext';
 
 const FilterPlanets = () => {
@@ -17,4 +17,4 @@ const FilterPlanets = () => {
   );
 }
 
-export default FilterPlanets
+export default FilterPlanets;

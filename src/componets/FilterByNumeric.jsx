@@ -13,8 +13,8 @@ const FilterByNumeric = () => {
   //   return !valueFilter.find(({ column }) => column === option);
   // }
 
-  const columns = ['population', 'orbital_period', 'diameter',
-    'rotation_period', 'surface_water'];
+  // const columns = ['population', 'orbital_period', 'diameter',
+  //   'rotation_period', 'surface_water'];
   const comparisons = ['', 'maior que', 'igual a', 'menor que'];
 
   return (
@@ -46,6 +46,6 @@ const FilterByNumeric = () => {
       </button>
     </div>
   );
-}
+};
 
-export default FilterByNumeric
+export default FilterByNumeric;

@@ -1,32 +1,21 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { starWarsContext } from '../context/starWarsContext';
 
 const PlanetsApi = () => {
   // linha 12 a 16 faz a mesma coisa que 7, mas o teste nao aceita
-  // const { planets } = useContext(starWarsContext)
-  const [planets, setPlanets] = useState([])
-  
-  useEffect(() => {
-    fetch('https://swapi-trybe.herokuapp.com/api/planets/')
-    .then(response => response.json()
-    .then(planets => setPlanets(planets.results)))
-  }, []);
-  console.log('alguem me loga', planets)
+  const { planets } = useContext(starWarsContext);
+  // const [planets, setPlanets] = useState([]);
+
+  // useEffect(() => {
+  //   fetch('https://swapi-trybe.herokuapp.com/api/planets/')
+  //     .then(response => response.json()
+  //       .then(planets => setPlanets(planets.results)))
+  // }, []);
+  // console.log('alguem me loga', planets)
 
   const headers = [
-    'Name',
-    'Rotation',
-    'Orbital',
-    'Diameter',
-    'Climate',
-    'Gravity',
-    'Terrain',
-    'Surface',
-    'Population',
-    'films',
-    'created',
-    'edited',
-    'url',
+    'Name', 'Rotation', 'Orbital', 'Diameter', 'Climate', 'Gravity',
+    'Terrain', 'Surface', 'Population', 'films', 'created', 'edited', 'url',
   ];
 
   return (
@@ -57,6 +46,6 @@ const PlanetsApi = () => {
       </tbody>
     </table>
   );
-}
+};
 
 export default PlanetsApi;

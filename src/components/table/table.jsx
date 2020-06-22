@@ -6,27 +6,22 @@ import filterByNumeric from '../../service/Filter';
 import RenderThead from './renderThead';
 import RenderFilters from './RenderFilters';
 
-const temp = {
-  columnFilter: [
+const Table = () => {
+  const [column, setColumn] = useState('');
+  const [comparison, setComparison] = useState('');
+  const [value, setValue] = useState('');
+  const [columnOptions, setColumnOptions] = useState([
     'population',
     'orbital_period',
     'diameter',
     'rotation_period',
     'surface_water',
-  ],
-  comparisonFilter: [
+  ]);
+  const [comparisonOptions, setComparisonOptions] = useState([
     'maior que',
     'igual a',
     'menor que',
-  ],
-};
-
-
-
-const Table = (props) => {
-  const [column, setColumn] = useState('');
-  const [comparison, setComparison] = useState('');
-  const [value, setValue] = useState('');
+  ]);
   const context = useContext(Context);
 
   // component did mount
@@ -37,7 +32,7 @@ const Table = (props) => {
   const handleChange = (e) => {
     const { search } = this.props;
     search(e);
-    filterByText();
+    filterByNumeric()
   }
 
   const renderColumnSelect = () => {
@@ -101,8 +96,7 @@ const Table = (props) => {
     );
   }
 
-  const renderFiltersActive = () => {
-    const { filters, columnFilter } = this.props;
+  const renderFiltersActive = (filters) => {
     const renderedFilters = filters.map(
       (item) => <RenderFilters key={item.column} filter={item} />,
     );
@@ -116,6 +110,7 @@ const Table = (props) => {
     return 0;
   }
 
+  // render the table after filtering
   const renderTbody = () => {
     const filteredTable = this.filterByNumeric();
     return (
@@ -198,9 +193,6 @@ const mapStateTProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  requestTable: () => dispatch(requestAction()),
-  search: (e) => dispatch(textChanged(e)),
-  selectDispatch: (value) => dispatch(selectChanged(value)),
   filterColumn: (column) => dispatch(filterColumn(column)),
   unfilterColumn: (column) => dispatch(unfilterColumn(column)),
 });

@@ -28,19 +28,29 @@ const TableProvider = ({ children }) => {
     return;
   }
 
-  // Update text
+  // Update name filter by user input
   const textChanged = (text) => {
     setFilterByName({ name: text });
   }
 
+  // Salve numeric filters to the array
+  const saveNumericFilters = ({ column, comparison, value }) => {
+    setFilterByNumericValues([
+      ...filterByNumericValues,
+      { column, comparison, value }
+    ]);
+  };
+
 
   const Context = {
     data,
+    err,
     filters: {
       filterByName,
       filterByNumericValues,
     },
     isRequesting,
+    saveNumericFilters,
     textChanged,
   }
 

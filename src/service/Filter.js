@@ -26,9 +26,9 @@ const filterByText = (name, table) => {
           name.toLowerCase(),
         ),
     );
-  }
+  };
   return table;
-}
+};
 
 // column filter
 const filterByNumeric = (name, table, filters) => {
@@ -38,6 +38,6 @@ const filterByNumeric = (name, table, filters) => {
     ), filterByText(name, table),
   );
   return filteredList;
-}
+};
 
 export default filterByNumeric();

@@ -29,6 +29,35 @@ function sortFunction(column) {
   };
 }
 
+function renderInputs(sort, setSort) {
+  return (
+    <div>
+      <label htmlFor="order">
+        ASC
+        <input
+          checked={sort === 'ASC'}
+          type="radio"
+          name="order"
+          value="ASC"
+          onChange={(e) => setSort(e.target.value)}
+          data-testid="column-sort-input-asc"
+        />
+      </label>
+      <label htmlFor="order">
+        DESC
+        <input
+          data-testid="column-sort-input-desc"
+          checked={sort === 'DESC'}
+          type="radio"
+          name="order"
+          value="DESC"
+          onChange={(e) => setSort(e.target.value)}
+        />
+      </label>
+    </div>
+  );
+}
+
 export default function Orderfilter() {
   const {
     changeOrderFilter, setPlanetsFiltered, planetsFiltered,
@@ -50,28 +79,8 @@ export default function Orderfilter() {
   return (
     <div>
       <form>
-        <label htmlFor="order">
-          ASC
-          <input
-            checked={sort === 'ASC'}
-            type="radio"
-            name="order"
-            value="ASC"
-            onChange={(e) => setSort(e.target.value)}
-            data-testid="column-sort-input-asc"
-          />
-        </label>
-        <label htmlFor="order">
-          DESC
-          <input
-            data-testid="column-sort-input-desc"
-            checked={sort === 'DESC'}
-            type="radio"
-            name="order"
-            value="DESC"
-            onChange={(e) => setSort(e.target.value)}
-          />
-        </label>
+        {renderInputs(sort, setSort)}
+
         <select
           name=""
           id=""

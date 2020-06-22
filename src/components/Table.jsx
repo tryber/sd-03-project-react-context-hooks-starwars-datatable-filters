@@ -21,6 +21,26 @@ const headers = [
   'url',
 ];
 
+function renderthings(store, setFilterByName) {
+  return (
+    <div>
+      <button type="button" onClick={() => console.log(store)}>State</button>
+      <Numericfilters />
+      <Orderfilter />
+      <div>
+        {store.filters.filterByNumericValues.map((f) => <Filter key={f.column} {...f} />)}
+      </div>
+
+      <input
+        type="text"
+        data-testid="name-filter"
+        value={store.filters.filterByName.name}
+        onChange={(e) => setFilterByName(e)}
+      />
+    </div>
+  );
+}
+
 function filter(column, comparison, value) {
   if (comparison === 'maior que') {
     return (planet) => +planet[column] > +value;
@@ -49,7 +69,6 @@ function sortFunction(column) {
 
 export default function Table() {
   const store = useContext(StarWarsContext);
-  //   const [planetsFiltered, setPlanetsFiltered] = useState([]);
 
   useEffect(() => {
     getPlanets().then((r) => {
@@ -66,48 +85,16 @@ export default function Table() {
     store.setPlanetsFiltered(planets);
   }, [store.filters.filterByNumericValues]);
 
-  //   useEffect(() => {
-  //     let { planetsFiltered: planets, filters } = store;
-
-  //     console.log(filters.order);
-
-  //     planets = filters.order.sort !== 'DESC'
-  //       ? planets.sort(sortFunction(filters.order.column))
-  //       : planets.sort(sortFunction(filters.order.column)).reverse();
-
-  //     store.setPlanetsFiltered(planets);
-  //   }, [store.filters.order]);
-
   function setFilterByName(e) {
     store.changeFilterByName(e.target.value);
     store.setPlanetsFiltered(store.planets.filter(({ name }) => name.includes(e.target.value)));
-  }
-
-  function renderthings() {
-    return (
-      <div>
-        <button type="button" onClick={() => console.log(store)}>State</button>
-        <Numericfilters />
-        <Orderfilter />
-        <div>
-          {store.filters.filterByNumericValues.map((f) => <Filter key={f.column} {...f} />)}
-        </div>
-
-        <input
-          type="text"
-          data-testid="name-filter"
-          value={store.filters.filterByName.name}
-          onChange={(e) => setFilterByName(e)}
-        />
-      </div>
-    );
   }
 
   return (
     store.planets.length
       ? (
         <div>
-          {renderthings()}
+          {renderthings(store, setFilterByName)}
 
           <table>
             <thead>

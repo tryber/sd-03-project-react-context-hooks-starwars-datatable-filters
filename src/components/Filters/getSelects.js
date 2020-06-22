@@ -1,7 +1,7 @@
 import React from 'react';
 import updateColumn from './updateColumn';
 
-export const getColumns = (onColumnChange, numericValues, column) => {
+export const getColumns = (onColumnChange, column, numericValues) => {
   const select = updateColumn(numericValues);
   return (
     <select
@@ -15,6 +15,32 @@ export const getColumns = (onColumnChange, numericValues, column) => {
         </option>
       ))}
     </select>
+  );
+};
+
+export const getRadios = (onInputChange) => {
+  return (
+    <div>
+      <input
+        defaultChecked
+        data-testid="column-sort-input"
+        type="radio"
+        id="ASC"
+        name="order"
+        value="ASC"
+        onChange={(event) => onInputChange(event)}
+      />
+      <label htmlFor="ASC">ASC</label>
+      <input
+        data-testid="column-sort-input"
+        type="radio"
+        id="DESC"
+        name="order"
+        value="DESC"
+        onChange={(event) => onInputChange(event)}
+      />
+      <label htmlFor="DESC">DESC</label>
+    </div>
   );
 };
 

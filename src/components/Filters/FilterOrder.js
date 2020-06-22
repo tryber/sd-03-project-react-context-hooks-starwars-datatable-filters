@@ -1,34 +1,17 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { orderColumns } from '../../actions';
+import React, { useState } from 'react';
+import { getRadios } from './getSelects';
 
-class FilterOrder extends React.Component {
-  constructor(props) {
-    super(props);
+function FilterOrder() {
+  const [columnSort, setColumnSort] = useState('Name');
+  const [inputSort, setInputSort] = useState('ASC');
 
-    this.state = {
-      columnSort: 'Name',
-      inputSort: 'ASC',
-    };
+  const { orderColumns } = useContext(StarWarsContext);
 
-    this.onOrderChange = this.onOrderChange.bind(this);
-    this.getColumns = this.getColumns.bind(this);
-    this.getRadios = this.getRadios.bind(this);
-    this.onClick = this.onClick.bind(this);
-  }
+  const onInputChange = (event) => setInputSort(event.target.value);
+  const onColumnChange = (event) => setColumnSort(event.target.value);
+  const onClick = () => orderColumns(columnSort, inputSort);
 
-  onOrderChange(event, chave) {
-    const { value } = event.target;
-    this.setState({ [chave]: value });
-  }
-
-  onClick() {
-    const { columnSort, inputSort } = this.state;
-    this.props.orderFunc(columnSort, inputSort);
-  }
-
-  getColumns() {
+  const getColumns = () => {
     const columns = [
       'Name',
       'population',
@@ -39,9 +22,9 @@ class FilterOrder extends React.Component {
     ];
     return (
       <select
-        onChange={(event) => this.onOrderChange(event, 'columnSort')}
+        onChange={(event) => onColumnChange(event)}
         data-testid="column-sort"
-        value={this.state.columnSort}
+        value={columnSort}
       >
         {columns.map((option) => (
           <option key={option} value={option}>
@@ -50,61 +33,21 @@ class FilterOrder extends React.Component {
         ))}
       </select>
     );
-  }
+  };
 
-  getRadios() {
-    return (
-      <div>
-        <input
-          defaultChecked
-          data-testid="column-sort-input"
-          type="radio"
-          id="ASC"
-          name="order"
-          value="ASC"
-          onChange={(event) => this.onOrderChange(event, 'inputSort')}
-        />
-        <label htmlFor="ASC">ASC</label>
-        <input
-          data-testid="column-sort-input"
-          type="radio"
-          id="DESC"
-          name="order"
-          value="DESC"
-          onChange={(event) => this.onOrderChange(event, 'inputSort')}
-        />
-        <label htmlFor="DESC">DESC</label>
-      </div>
-    );
-  }
-
-  render() {
-    return (
-      <div>
-        {this.getColumns()}
-        {this.getRadios()}
-        <button
-          data-testid="column-sort-button"
-          type="button"
-          onClick={this.onClick}
-        >
-          Ordenar
+  return (
+    <div>
+      {getColumns()}
+      {getRadios(onInputChange)}
+      <button
+        data-testid="column-sort-button"
+        type="button"
+        onClick={onClick}
+      >
+        Ordenar
         </button>
-      </div>
-    );
-  }
+    </div>
+  );
 }
 
-const mapStateToProps = (state) => ({
-  numericValues: state.filters.filterByNumericValues,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  orderFunc: (column, sort) => dispatch(orderColumns(column, sort)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(FilterOrder);
-
-FilterOrder.propTypes = {
-  orderFunc: PropTypes.func.isRequired,
-};
+export default FilterOrder;

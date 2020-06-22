@@ -1,6 +1,7 @@
+import React from 'react';
 import updateColumn from './updateColumn';
 
-export const getColumns = (onColumnChange, numericValues) => {
+export const getColumns = (onColumnChange, numericValues, column) => {
   const select = updateColumn(numericValues);
   return (
     <select
@@ -17,7 +18,7 @@ export const getColumns = (onColumnChange, numericValues) => {
   );
 };
 
-export const getComparation = (onComparationChange) => {
+export const getComparation = (onComparationChange, comparation) => {
   const comparationValues = ['', 'maior que', 'menor que', 'igual a'];
   return (
     <select

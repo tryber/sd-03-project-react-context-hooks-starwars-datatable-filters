@@ -1,10 +1,9 @@
 import React, { useContext } from 'react';
-import { removeFilterNumeric } from '../../actions';
 import StarWarsContext from '../../context/StarWarsContext';
 
 function RemoveFilter() {
   const { removeFilterNumeric,
-    filters: { filterByNumericValues: numericValues }
+    filters: { filterByNumericValues: numericValues },
   } = useContext(StarWarsContext);
 
   const onClick = (type) => removeFilterNumeric(type);

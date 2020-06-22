@@ -28,8 +28,8 @@ function FilterValue() {
 
   return (
     <div>
-      {getColumns(onColumnChange, numericValues)}
-      {getComparation(onComparationChange)}
+      {getColumns(onColumnChange, numericValues, column)}
+      {getComparation(onComparationChange, comparation)}
       <input
         type="number"
         data-testid="value-filter"

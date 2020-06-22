@@ -4,22 +4,25 @@ import TableHeaders from './TableHeaders';
 
 const Table = () => {
   console.log(useContext(StarWarsContext));
-  const { fetchData, data } = useContext(StarWarsContext);
-  useEffect(() => fetchData(), []);
+  const { fetchData, filteredData, setData } = useContext(StarWarsContext);
+  useEffect(() => {
+    fetchData();
+    return setData([]);
+  }, []);
 
-  return (
+  return filteredData.length > 0 ? (
     <table border="1px">
       <tbody>
-        {data.length > 0 && <TableHeaders heads={Object.keys(data[0])} />}
-        {data ? data.map((planet) => (
+        <TableHeaders heads={Object.keys(filteredData[0])} />
+        {filteredData.map((planet) => (
           <tr key={planet.name}>
             {Object.values(planet).map((value) => <td key={value}>{value}</td>)}
           </tr>
-        ))
-          : <h2>Loading</h2>}
+        ))}
       </tbody>
     </table>
-  );
+  )
+    : <h2>Loading</h2>;
 };
 
 export default Table;

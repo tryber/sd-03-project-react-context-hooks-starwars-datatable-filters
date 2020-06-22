@@ -1,17 +1,12 @@
 import React from 'react';
 import { SWProvider } from './context/StarWarsContext';
 import './App.css';
-import Table from './components/Table';
-import Filters from './components/Filters';
-
+import Home from './components/Home';
 
 function App() {
   return (
     <SWProvider>
-      <div className="App">
-        <Filters />
-        <Table />
-      </div>
+      <Home />
     </SWProvider>
   );
 }

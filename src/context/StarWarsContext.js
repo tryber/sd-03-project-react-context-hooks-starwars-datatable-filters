@@ -60,21 +60,29 @@ export const SWProvider = ({ children }) => {
   };
   // const cleanUpFilters = () => setFilters(initalFilterState);
 
+
   useEffect(() => {
     applyFiltersEffect();
   }, [filters, isFetching]);
 
-  const setFilter = (filter) => {
+  const setNameFilter = (filter) => {
     console.log(filter);
     setFilters(({ filterByName: { name: filter } }));
   };
+  const submitNumericFilter = ({ column, comparison, value }) => {
+    setFilters((prevState) => ({
+      ...prevState,
+      filterByNumericValues: [...prevState.filterByNumericValues, { column, comparison, value }],
+    }));
+  };
   const context = {
+    submitNumericFilter,
     fetchData,
     fetchError,
     filteredData,
     isFetching,
     filters,
-    setFilter,
+    setNameFilter,
     setData,
   };
   return (
@@ -86,7 +94,7 @@ export const SWProvider = ({ children }) => {
 };
 
 SWProvider.propTypes = {
-  children: propTypes.elementType.isRequired,
+  children: propTypes.node.isRequired,
 };
 
 export default StarWarsContext;

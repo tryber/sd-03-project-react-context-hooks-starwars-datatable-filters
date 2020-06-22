@@ -1,49 +1,26 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { filterByName } from '../../actions';
+import React, { useState, useContext } from 'react';
+import StarWarsContext from '../../context/StarWarsContext';
 
-class FilterName extends React.Component {
-  constructor(props) {
-    super(props);
+function FilterName() {
+  const [text, setText] = useState('');
+  const { filterByName } = useContext(StarWarsContext);
 
-    this.state = {
-      text: '',
-    };
+  const onTextChange = (event) => {
+    setText(event.target.value);
+    filterByName(event.target.value);
+  };
 
-    this.onTextChange = this.onTextChange.bind(this);
-  }
-
-  onTextChange(event) {
-    this.setState({ text: event.target.value });
-    this.props.filterByName(event.target.value);
-  }
-
-  render() {
-    return (
-      <div>
-        <input
-          data-testid="name-filter"
-          type="text"
-          value={this.state.text}
-          placeholder="Faça uma pesquisa"
-          onChange={(event) => this.onTextChange(event)}
-        />
-      </div>
-    );
-  }
+  return (
+    <div>
+      <input
+        data-testid="name-filter"
+        type="text"
+        value={text}
+        placeholder="Faça uma pesquisa"
+        onChange={(event) => onTextChange(event)}
+      />
+    </div>
+  );
 }
 
-const mapStateToProps = (state) => ({
-  numericValues: state.filters.filterByNumericValues,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  filterByName: (name) => dispatch(filterByName(name)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(FilterName);
-
-FilterName.propTypes = {
-  filterByName: PropTypes.func.isRequired,
-};
+export default FilterName;

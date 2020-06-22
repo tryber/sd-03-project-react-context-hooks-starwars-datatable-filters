@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import StarWarsContext from './StarWarsContext';
 import getPlanetsAPI from '../services/getPlanetsAPI';
 
-/* objeto a ser retornado
+/* objeto a ser retornado yes
 contextValue = {
   data: {
     isFetching: false,

@@ -3,6 +3,7 @@ import { StarWarsContext } from '../context/StarWarsContext';
 
 function TableBody() {
   const { data } = useContext(StarWarsContext);
+  console.log(data);
   return (
     <tbody>
       {data.map((planet) => (

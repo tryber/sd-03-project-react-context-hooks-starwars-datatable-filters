@@ -6,11 +6,11 @@ import { Provider } from './context/StarWarsContext';
 
 function App() {
   return (
-    <>
+    <div>
       <Provider>
         <Table />
       </Provider>
-    </>
+    </div>
   );
 }
 

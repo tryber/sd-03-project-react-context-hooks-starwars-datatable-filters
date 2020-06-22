@@ -1,27 +1,29 @@
 import React, { createContext, useState } from 'react';
+import PropTypes from 'prop-types';
+
 const axios = require('axios');
 
 const StarWarsContext = createContext();
 
 const StarWarsContextProvider = ({ children }) => {
   const [data, setData] = useState([]);
-  let [error, setError] = useState('');
+  const [error, setError] = useState('');
 
-  const getPlanets = (url) => {
-    return new Promise((resolve, reject) => {
+  const getPlanets = (url) => (
+    new Promise((resolve, reject) => {
       axios.get(url).then((response) => {
         resolve(response.data);
-      }).catch((error) => reject(error));
-    });
-  };
+      }).catch((err) => reject(err));
+    })
+  );
 
   const updateData = (info) => {
     setData([...info]);
-  }
+  };
 
   const updateError = (err) => {
     setError(error = err);
-  }
+  };
 
   const planetsContext = {
     data,
@@ -39,3 +41,7 @@ const StarWarsContextProvider = ({ children }) => {
 };
 
 export { StarWarsContext, StarWarsContextProvider as Provider };
+
+StarWarsContextProvider.protoTypes = {
+  children: PropTypes.element.isRequired,
+}

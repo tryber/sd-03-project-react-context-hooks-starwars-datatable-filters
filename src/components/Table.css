@@ -20,12 +20,12 @@ caption {
 }
 
 td {
-  font-size: 1.3em;
   border-bottom: 1px solid #ccc;
+  font-size: 1.3em;
   word-wrap: break-word;
 }
 
-td.multi-headers {
+.multi-headers {
   display: block;
   padding-left: 50%;
   position: relative;

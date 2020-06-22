@@ -1,4 +1,5 @@
 import React, { createContext, useReducer } from 'react';
+import PropTypes from 'prop-types';
 
 import { CHANGE_VALUES, CREATE_NUMERIC_FILTER, REMOVE_FILTER } from '../actions/NumFilterActions';
 import { ON_CHANGE_ORDER, ACTIVATE_ORDER } from '../actions/orderActions';
@@ -55,5 +56,6 @@ function FiltersProvider({ children }) {
   );
 }
 
-export default FiltersProvider;
+FiltersProvider.propTypes = { children: PropTypes.node.isRequired };
 
+export default FiltersProvider;

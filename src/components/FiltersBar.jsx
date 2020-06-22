@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import SearchBox from './SearchBox';
 import NumFilter from './NumFilter';
-// import FilterSetted from './FilterSetted';
+import FilterSetted from './FilterSetted';
 // import OrderFilters from './OrderFilters';
 
 import { filtersContext } from '../context/Filters';
@@ -38,7 +38,7 @@ function FilterBar(
         {/* <OrderFilters /> */}
       </div>
       <div>
-        {/* {filterByNumericValues.map(({ column, comparison, value }, id) => (
+        {filterByNumericValues.map(({ column, comparison, value }, id) => (
           <FilterSetted
             id={id}
             key={column}
@@ -46,7 +46,7 @@ function FilterBar(
             comparison={comparison}
             value={value}
           />
-        ))} */}
+        ))}
       </div>
     </section>
   );

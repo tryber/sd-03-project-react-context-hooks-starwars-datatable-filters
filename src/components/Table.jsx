@@ -8,15 +8,15 @@ import { dataPlanetsContext } from '../context/DataPlanets';
 import { filtersContext } from '../context/Filters';
 import './Table.css';
 
-// const filterByNumPropertie = (list, { value, column, comparison }) => {
-//   const numValue = Number(value);
-//   switch (comparison) {
-//     case 'maior que': return list.filter((obj) => Number(obj[column]) > numValue);
-//     case 'menor que': return list.filter((obj) => Number(obj[column]) < numValue);
-//     case 'igual a': return list.filter((obj) => Number(obj[column]) === numValue);
-//     default: return list;
-//   }
-// };
+const filterByNumProperties = (list, { value, column, comparison }) => {
+  const numValue = Number(value);
+  switch (comparison) {
+    case 'maior que': return list.filter((obj) => Number(obj[column]) > numValue);
+    case 'menor que': return list.filter((obj) => Number(obj[column]) < numValue);
+    case 'igual a': return list.filter((obj) => Number(obj[column]) === numValue);
+    default: return list;
+  }
+};
 
 // const orderByStringProperties = (list, col, direction) => {
 //   const sortedList = (constants.numColumn.some((option) => option === col))
@@ -74,15 +74,18 @@ const Table = (
   // { numFilters, column, sort, isClassic },
 ) => {
   const { state: { data: planets, headers } } = useContext(dataPlanetsContext);
-  const [{ filterByName: { name: searchText } }, ] = useContext(filtersContext);
+  const [{
+    filterByName: { name: searchText },
+    filterByNumericValues: numFilters,
+  }, ] = useContext(filtersContext);
 
   if (planets.length === 0) return <div>None Planet Found</div>;
 
   let planetsToShow = planets.filter((planet) => planet.name.includes(searchText));
   // planetsToShow = orderByStringProperties(planetsToShow, column.toLowerCase(), sort);
-  // numFilters.forEach((filter) => {
-  //   planetsToShow = filterByNumPropertie(planetsToShow, filter);
-  // });
+  numFilters.forEach((filter) => {
+    planetsToShow = filterByNumProperties(planetsToShow, filter);
+  });
 
   // const extraStyle = (`
   //   td:before {

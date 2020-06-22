@@ -11,7 +11,7 @@ function Table() {
     getPlanets('https://swapi-trybe.herokuapp.com/api/planets/')
       .then((res) => {
         updateData(res.results);
-      })
+      });
   }, []);
 
   return (

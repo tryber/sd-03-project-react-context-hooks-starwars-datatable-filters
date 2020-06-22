@@ -30,6 +30,7 @@ const StarWarsContextProvider = ({ children }) => {
     getPlanets,
     updateData,
     updateError,
+    error,
   };
 
   return (

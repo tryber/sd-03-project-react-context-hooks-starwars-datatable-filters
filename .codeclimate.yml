@@ -17,7 +17,7 @@ checks:
       threshold: 20
   method-lines:
     config:
-      threshold: 45
+      threshold: 30
   nested-control-flow:
     config:
       threshold: 4
@@ -36,6 +36,7 @@ exclude_patterns:
   - "src/App.css"
   - "**/libs/*.css"
   - "**/libs/*.js"
+  - "src/testData.js"
 plugins:
   csslint:
     enabled: true

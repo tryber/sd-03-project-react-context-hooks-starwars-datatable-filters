@@ -1,6 +1,4 @@
 import React, { useEffect, useContext } from 'react';
-import PropTypes from 'prop-types';
-
 
 import { dataPlanetsContext } from '../context/DataPlanets';
 import fetchPlanets from '../actions/fetchPlanetsAction';
@@ -13,9 +11,5 @@ function FetchData() {
 
   return <div className="loading">Loading...</div>;
 }
-
-// const mapDipatchToProps = (dispatch) => ({
-//   fetchPlanets: () => dispatch(fetchPlanets()),
-// });
 
 export default FetchData;

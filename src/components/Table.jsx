@@ -1,35 +1,34 @@
 import React, { useContext } from 'react';
-// import PropTypes from 'prop-types';
 
 import TableHeader from './TableHeader';
 import TableRow from './TableRow';
-import * as constants from '../services/constants';
+// import * as constants from '../services/constants';
 
 import { dataPlanetsContext } from '../context/DataPlanets';
 import './Table.css';
 
-const filterByNumPropertie = (list, { value, column, comparison }) => {
-  const numValue = Number(value);
-  switch (comparison) {
-    case 'maior que': return list.filter((obj) => Number(obj[column]) > numValue);
-    case 'menor que': return list.filter((obj) => Number(obj[column]) < numValue);
-    case 'igual a': return list.filter((obj) => Number(obj[column]) === numValue);
-    default: return list;
-  }
-};
+// const filterByNumPropertie = (list, { value, column, comparison }) => {
+//   const numValue = Number(value);
+//   switch (comparison) {
+//     case 'maior que': return list.filter((obj) => Number(obj[column]) > numValue);
+//     case 'menor que': return list.filter((obj) => Number(obj[column]) < numValue);
+//     case 'igual a': return list.filter((obj) => Number(obj[column]) === numValue);
+//     default: return list;
+//   }
+// };
 
-const orderByStringProperties = (list, col, direction) => {
-  const sortedList = (constants.numColumn.some((option) => option === col))
-    ? list.sort((elemA, elemB) => elemA[col] - elemB[col])
-    : list.sort((elemA, elemB) => elemA[col].localeCompare(elemB[col]));
+// const orderByStringProperties = (list, col, direction) => {
+//   const sortedList = (constants.numColumn.some((option) => option === col))
+//     ? list.sort((elemA, elemB) => elemA[col] - elemB[col])
+//     : list.sort((elemA, elemB) => elemA[col].localeCompare(elemB[col]));
 
-  if (direction === 'DESC') sortedList.reverse();
-  return sortedList;
-};
+//   if (direction === 'DESC') sortedList.reverse();
+//   return sortedList;
+// };
 
-const renderBody = (planets, properties, isClassic) => (
+const renderBody = (planets, properties/*, isClassic*/) => (
   <tbody
-    style={isClassic ? { border: '1px solid #ccc' } : { display: 'block', flexBasis: '60%' }}
+    style={/*isClassic ?*/{ border: '1px solid #ccc' }/*{ display: 'block', flexBasis: '60%' }*/}
   >
     {planets
       .map((planet, index) => (
@@ -37,7 +36,7 @@ const renderBody = (planets, properties, isClassic) => (
           key={planet.name}
           planet={planet}
           properties={properties}
-          isClassic={isClassic}
+          // isClassic={isClassic}
           index={index}
         />
       ))
@@ -45,14 +44,14 @@ const renderBody = (planets, properties, isClassic) => (
   </tbody>
 );
 
-const generateStyle = (isClassic) => (
-  isClassic ? { display: 'inline-block' } : ({
-    border: '1px solid #ccc',
-    display: 'flex',
-    flexDirection: 'column',
-    flexBasis: '60%',
-  })
-);
+// const generateStyle = (isClassic) => (
+//   isClassic ? { display: 'inline-block' } : ({
+//     border: '1px solid #ccc',
+//     display: 'flex',
+//     flexDirection: 'column',
+//     flexBasis: '60%',
+//   })
+// );
 
 // const makeHeadersInMultiHeadersTable = (headers, ...stringStyles) => {
 //   const nthOfTypeBefore = (order, title) => (`
@@ -71,7 +70,7 @@ const generateStyle = (isClassic) => (
 // };
 
 const Table = (
-  // { searchText, numFilters, column, sort, headers, isClassic },
+  // { searchText, numFilters, column, sort, isClassic },
 ) => {
   const { state: { data: planets, headers } } = useContext(dataPlanetsContext);
 
@@ -125,7 +124,6 @@ const Table = (
 
 // Table.propTypes = {
 //   searchText: PropTypes.string.isRequired,
-//   headers: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 //   numFilters: PropTypes.arrayOf(
 //     PropTypes.objectOf(PropTypes.string.isRequired).isRequired,
 //   ).isRequired,

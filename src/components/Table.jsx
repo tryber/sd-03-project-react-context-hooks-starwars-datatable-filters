@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { DataContext } from './TableData';
 import { FilterContext } from './Filters';
 
+const TableContext = React.createContext();
+
 const header = ['name', 'population', 'climate', 'diameter', 'created', 'gravity', 'orbital_period', 'rotation_period',
   'surface_water', 'terrain', 'films', 'edited', 'url'];
 
@@ -14,7 +16,7 @@ function doCompare(e, el) {
   }
 }
 
-export default function Table() {
+export default function Table({ children }) {
   const { data } = useContext(DataContext);
   const { nameFilter, filterByNumericValues, order } = useContext(FilterContext);
 
@@ -67,7 +69,7 @@ export default function Table() {
           <tr key={e.name}>
             {header.map((el) => <td key={e.name + el}>{e[el]}</td>)}
           </tr>
-        ))
+      ))
     );
   }
 
@@ -91,6 +93,9 @@ export default function Table() {
           {renderFilteredDataByNumeric()}
         </tbody>
       </table>
+      <TableContext.Provider>
+        { children }
+      </TableContext.Provider>
     </div>
   );
 }

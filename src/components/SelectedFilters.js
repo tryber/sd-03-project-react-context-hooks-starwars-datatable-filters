@@ -3,7 +3,6 @@ import StarWarsContext from '../context/StarWarsContext';
 
 const SelectedFilters = () => {
   const { filters, removeFilter } = useContext(StarWarsContext);
-  console.log(filters)
   return filters.filterByNumericValues.length > 0 && filters.filterByNumericValues.map((
     { column, comparison, value },
   ) => (

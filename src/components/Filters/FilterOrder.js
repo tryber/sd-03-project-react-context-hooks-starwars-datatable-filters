@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { getRadios } from './getSelects';
 import StarWarsContext from '../../context/StarWarsContext';
 
-
 function FilterOrder() {
   const [columnSort, setColumnSort] = useState('Name');
   const [inputSort, setInputSort] = useState('ASC');
@@ -47,7 +46,7 @@ function FilterOrder() {
         onClick={onClick}
       >
         Ordenar
-        </button>
+      </button>
     </div>
   );
 }

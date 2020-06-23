@@ -5,20 +5,19 @@ import { RootAPI } from '../service/RootAPI';
 import APIcontext from './APIcontext';
 
 const state = {
-  filters:
-    {
-      filterByName: {
-        name: ''
+  filters: {
+    filterByName: {
+      name: '',
+    },
+    filterByNumericValues: [
+      {
+        column: '',
+        comparison: '',
+        value: '',
       },
-      filterByNumericValues: [
-        {
-          column: '',
-          comparison: '',
-          value: '',
-        }
-      ]
-    }
-  }
+    ],
+  },
+};
 
 function Provider({ children }) {
   const [error, setError] = useState(null);
@@ -42,15 +41,8 @@ function Provider({ children }) {
     setFilterSelect(
       (param === 'remove')
       ? filterSelect.filters.filterByNumericValues.filter((filter) => filter !== input)
-      : {...filterSelect.filters.filterByNumericValues.concat(input), filters}
+      : { ...filterSelect.filters.filterByNumericValues.concat(input), filters, }
     );
-  };
-
-  const fetchAPI = () => {
-    if (loading) return;
-    setLoading(true);
-
-    RootAPI().then(handleSuccess, handleFailure);
   };
 
   const handleSuccess = (data) => {
@@ -61,6 +53,12 @@ function Provider({ children }) {
   const handleFailure = (error) => {
     setError(error.message);
     setLoading(false);
+  };
+  const fetchAPI = () => {
+    if (loading) return;
+    setLoading(true);
+
+    RootAPI().then(handleSuccess, handleFailure);
   };
 
   const contextValue = {
@@ -78,7 +76,7 @@ function Provider({ children }) {
   return (
     <APIcontext.Provider value={contextValue}>{children}</APIcontext.Provider>
   );
-};
+}
 
 Provider.propTypes = {
   children: PropTypes.node.isRequired,

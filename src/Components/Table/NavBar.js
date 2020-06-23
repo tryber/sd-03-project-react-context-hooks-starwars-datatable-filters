@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import APIcontext from '../Context/APIcontext';
 
 const columns = [
@@ -14,7 +14,7 @@ const comparisons = ['', 'maior que', 'igual a', 'menor que'];
 
 const filterColumn = (valueFilter, option) => {
   return !valueFilter.find(({ column }) => column === option);
-}
+};
 
 function NavBar() {
   const { saveFilter, filterSelect } = useContext(APIcontext);
@@ -23,15 +23,15 @@ function NavBar() {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     saveFilter((filterSelect.filters.filterByNumericValues[0].column === '')
-    ? list : list );
-  }
+    ? list : list);
+  };
 
   const handleChangeInput = (name, ele) => {
     setList({
       ...list,
       [name]: ele,
     });
-  }
+  };
 
   const sideBar = () => {
     return (
@@ -65,7 +65,7 @@ function NavBar() {
         </nav>
       </header>
     );
-  }
+  };
 
   return (
     <div>
@@ -83,14 +83,14 @@ function NavBar() {
   );
 }
 
-NavBar.propTypes = {
-  columns: PropTypes.arrayOf(
-    PropTypes.shape({
-      column: PropTypes.string,
-      comparison: PropTypes.string,
-      value: PropTypes.string,
-    }),
-  ),
-};
+// NavBar.propTypes = {
+//   columns: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       column: PropTypes.string,
+//       comparison: PropTypes.string,
+//       value: PropTypes.string,
+//     }),
+//   ),
+// };
 
 export default NavBar;

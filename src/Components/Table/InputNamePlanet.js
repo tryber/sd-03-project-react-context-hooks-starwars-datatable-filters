@@ -14,7 +14,7 @@ function InputNamePlanet() {
         type="text"
         data-testid="name-filter"
         name="name"
-        onChange={(e) => saveFilter({name: e.target.value})}
+        onChange={(e) => saveFilter({ name: e.target.value })}
       />
     </form>
   );

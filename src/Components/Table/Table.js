@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import InputNamePlanet from './InputNamePlanet';
 import CreateTable from './CreateTable';
@@ -29,34 +29,33 @@ function Table() {
     fetchAPI();
   }, []);
 
+  const filteredPlanet = (data) => {
+    const nameInput = filterSelect.filters.filterByName.name;
+    if (nameInput !== undefined) {
+      return data.filter(({ name }) => name.toLowerCase().includes(nameInput.toLowerCase()));
+    }
+    return data;
+  };
+
   const filterSelectedValues = (data) => {
-    let inputFilter = filterSelect.filters.filterByNumericValues;
-    console.log(filterSelect.filters.filterByNumericValues)
+    const inputFilter = filterSelect.filters.filterByNumericValues;
     if (inputFilter) {
       return inputFilter.reduce(
         (acc, { column, comparison, value }) =>
-          acc.filter((planet) => switchComparison(column, comparison, value, planet)
+          acc.filter((planet) => switchComparison(column, comparison, value, planet),
           ),
-        filteredPlanet(data)
+        filteredPlanet(data),
       );
     }
     return filteredPlanet(data);
   };
 
-  const filteredPlanet = (data) => {
-    let nameInput = filterSelect.filters.filterByName.name;
-    if (nameInput !== undefined) {
-      return data.filter(({ name }) => name.toLowerCase().includes(nameInput.toLowerCase()));
-    }
-    else return data;
-  };
-
   return (
     <div>
       <div>
-        <hr style={{ border: "outset" }} />
+        <hr style={{ border: 'outset' }} />
         <h1>Star Wars Table</h1>
-        <hr style={{ border: "outset" }} />
+        <hr style={{ border: 'outset' }} />
       </div>
       <div className="input-filter">
         <InputNamePlanet />
@@ -64,25 +63,25 @@ function Table() {
         {/* <RemoveFilters /> */}
       </div>
       <div className="TabelaProdutos">
-        {data && <CreateTable data={filterSelectedValues(data)}/>}
+        {data && <CreateTable data={filterSelectedValues(data)} />}
       </div>
       {loading && <h1>Loading...</h1>}
     </div>
   );
 }
 
-Table.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  loading: PropTypes.bool.isRequired,
-  nameInput: PropTypes.string.isRequired,
-  inputFilter: PropTypes.arrayOf(
-    PropTypes.shape({
-      column: PropTypes.string,
-      comparison: PropTypes.string,
-      value: PropTypes.string,
-    })
-  ).isRequired,
-  fetchAPI: PropTypes.func.isRequired,
-};
+// Table.propTypes = {
+//   data: PropTypes.arrayOf(PropTypes.object).isRequired,
+//   loading: PropTypes.bool.isRequired,
+//   nameInput: PropTypes.string.isRequired,
+//   inputFilter: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       column: PropTypes.string,
+//       comparison: PropTypes.string,
+//       value: PropTypes.string,
+//     })
+//   ).isRequired,
+//   fetchAPI: PropTypes.func.isRequired,
+// };
 
 export default Table;

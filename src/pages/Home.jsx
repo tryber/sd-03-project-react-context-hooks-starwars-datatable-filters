@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
-import PlanetTableContext from '../context/context';
-import Table from '../components/table/Table';
-import FilterContainer from '../components/filters/FilterContainer';
+import PlanetTableContext from '../context';
+import { Table, FilterContainer } from '../components';
 
 const Home = () => {
   const {

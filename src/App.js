@@ -1,7 +1,7 @@
 import React from 'react';
-import Provider from './context/provider';
+import Provider from './context';
 import Home from './pages/Home';
-import Header from './components/Header';
+import Header from './components';
 import './App.css';
 
 const App = () => (

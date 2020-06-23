@@ -2,11 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PlanetTableContext from './context';
 import getAllPlanetsFromAPI from '../services/starWarsAPI';
-import useTableMethods from '../hooks/useTableMethods';
-import useStarWarsAPI from '../hooks/useStarWarsAPI';
+import { useTableMethods, useFetchData } from '../hooks';
 
 function PlanetTableProvider({ children }) {
-  const fetchData = useStarWarsAPI(getAllPlanetsFromAPI);
+  const fetchData = useFetchData(getAllPlanetsFromAPI);
   const filterMethods = useTableMethods();
 
   const context = {

@@ -6,7 +6,7 @@ import * as constants from '../services/constants';
 const TableHeader = ({ headers, isMultiHeader }) => (
   <thead>
     {
-      <tr className={isMultiHeader ? 'multi-headers' : ''}>
+      <tr className={isMultiHeader ? 'tr-multi-headers' : ''}>
         {headers.map((title) => (
           <th
             className="table-header"

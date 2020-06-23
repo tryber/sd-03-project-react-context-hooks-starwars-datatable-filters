@@ -14,8 +14,8 @@ const App = () => (
       <FetchData />
       <FiltersProvider>
         <FormatProvider>
-          <Table />
           <FiltersBar />
+          <Table />
         </FormatProvider>
       </FiltersProvider>
     </DataPlanetsProvider>,

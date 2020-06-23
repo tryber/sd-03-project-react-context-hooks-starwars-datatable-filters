@@ -24,13 +24,13 @@ td {
   word-wrap: break-word;
 }
 
-td.multi-headers {
+.td-multi-headers {
   display: block;
   padding-left: 50%;
   position: relative;
 }
 
-tr.multi-headers {
+.tr-multi-headers {
   display: block;
   flex-basis: 60%;
   left: -9999px;

@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 export const dataPlanetsContext = createContext({
   isFetching: true,
   error: '',
-  data: '',
-  headers: '',
+  data: [],
+  headers: [],
 });
 
 function DataPlanetsProvider({ children }) {
   const [isFetching, setIsFetching] = useState(true);
-  const [error, setError] = useState('');
   const [data, setData] = useState([]);
   const [headers, setHeaders] = useState([]);
+  const [error, setError] = useState('');
 
   const state = { isFetching, data, error, headers };
 

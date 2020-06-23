@@ -29,35 +29,34 @@ const verifyColumns = (obj) => {
   }
 };
 
-const NumericFilter = () => {
+const filterMenu = () => {
+  // Thanks for topic
+  // https://stackoverflow.com/
+  // questions/14515382/javascript-compare-two-arrays-return-differences-but
   const { filters } = useContext(StarWarsContext);
   const { filterByNumericValues } = filters;
+  const filterColumnArray = filterByNumericValues.map(({ column }) => column);
+  newColumnOptions = [...columnOptions];
+  let index;
+  for (let i = 0; i < filterColumnArray.length; i += 1) {
+    index = newColumnOptions.indexOf(filterColumnArray[i]);
+    if (index > -1) {
+      newColumnOptions.splice(index, 1);
+    }
+  }
+};
 
+const handleChange = (type, passedValue) => {
   const [stateColumn, setStateColumn] = useState('');
   const [stateComparison, setStateComparison] = useState('');
   const [stateValue, setStateValue] = useState(0);
 
-  const handleChange = (type, passedValue) => {
-    if (type === 'column') { setStateColumn(passedValue); }
-    if (type === 'comparison') { setStateComparison(passedValue); }
-    if (type === 'value') { setStateValue(passedValue); }
-  };
+  if (type === 'column') { setStateColumn(passedValue); }
+  if (type === 'comparison') { setStateComparison(passedValue); }
+  if (type === 'value') { setStateValue(passedValue); }
+};
 
-  const filterMenu = () => {
-    // Thanks for topic
-    // https://stackoverflow.com/
-    // questions/14515382/javascript-compare-two-arrays-return-differences-but
-    const filterColumnArray = filterByNumericValues.map(({ column }) => column);
-    newColumnOptions = [...columnOptions];
-    let index;
-    for (let i = 0; i < filterColumnArray.length; i += 1) {
-      index = newColumnOptions.indexOf(filterColumnArray[i]);
-      if (index > -1) {
-        newColumnOptions.splice(index, 1);
-      }
-    }
-  };
-
+const NumericFilter = () => {
   const getFilters = () => {
     const filter = {
       stateColumn,

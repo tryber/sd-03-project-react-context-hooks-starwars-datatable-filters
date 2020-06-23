@@ -32,7 +32,7 @@ function useFilters() {
       filterByNumericValues: [...filters.filterByNumericValues.filter((elem) => elem !== item),
       ],
     })),
-  }
+  };
 }
 
 export default useFilters;

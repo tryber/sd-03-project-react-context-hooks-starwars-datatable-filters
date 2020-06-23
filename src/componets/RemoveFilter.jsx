@@ -6,26 +6,24 @@ const RemoveFilter = () => {
   const {
     allFilters: {
       filters: { filterByNumericValues },
-      removeFilter }
+      removeFilter },
   } = useContext(starWarsContext);
 
-  const remove = (lista) => {
-    return (
-      <p
-        data-testid="filter"
+  const remove = (lista) => (
+    <p
+      data-testid="filter"
+    >
+      <span>{lista.column}</span>
+      <span>{lista.comparison}</span>
+      <span>{lista.value}</span>
+      <button
+        type="button"
+        onClick={() => removeFilter(lista)}
       >
-        <span>{lista.column}</span>
-        <span>{lista.comparison}</span>
-        <span>{lista.value}</span>
-        <button
-          type="button"
-          onClick={() => removeFilter(lista)}
-        >
-          x
+        x
         </button>
-      </p>
-    );
-  };
+    </p>
+  );
 
   const infoFilters = filterByNumericValues.filter((e) => e.column !== '');
 

@@ -7,7 +7,10 @@ import RemoveFilter from './RemoveFilter';
 
 
 const Table = () => {
-  const { planets, allFilters: { filters: { filterByName: { name } } } } = useContext(starWarsContext);
+  const { planets,
+    allFilters: { filters: 
+      { filterByName: { name } } } 
+  } = useContext(starWarsContext);
   const { allFilters: { filters: { filterByNumericValues } } } = useContext(starWarsContext);
 
   const switchComparison = (column, comparison, value, planet) => {
@@ -22,8 +25,8 @@ const Table = () => {
         return [];
     }
   };
+
   const filteredPlanet = (planets) => {
-    console.log('name', name)
     if (name !== '') {
       return planets.filter((e) => e.name.toLowerCase().includes(name.toLowerCase()));
     }

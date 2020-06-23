@@ -9,7 +9,7 @@ function FetchData() {
     { isFetching },
     { setIsFetching, setError, setHeaders, setData },
   ] = useContext(dataPlanetsContext);
-
+  
   useEffect(() => {
     if (isFetching) {
       fetchSWAPI().then(({ results }) => {
@@ -18,9 +18,7 @@ function FetchData() {
         setIsFetching(false);
       }).catch((error) => setError(error));
     }
-  }, [isFetching]);
-
-  if (isFetching) return <div className="loading">Loading...</div>;
+  }, [isFetching]);  if (isFetching) return <div className="loading">Loading...</div>;
   return null;
 }
 

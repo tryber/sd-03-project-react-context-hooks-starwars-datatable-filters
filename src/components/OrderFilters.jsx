@@ -1,12 +1,17 @@
 import React, { useContext, useState } from 'react';
 
+import Button from '@material-ui/core/Button';
+import { Select } from '@material-ui/core';
+
 import { dataPlanetsContext } from '../context/DataPlanets';
 import { filtersContext } from '../context/Filters';
 import { activateOrder } from '../actions/filterActions';
-import { renderOptions } from '../services/constants';
+import { renderOptions, allValuesSetted } from '../services/constants';
+import ButtonStyle from '../styles/Button';
+import SelectStyle from '../styles/Select';
 
 const renderRadio = (value, text, setSort) => (
-  <label htmlFor={`sort-radio-${value}`}>
+  <label htmlFor={`sort-radio-${value}`} className="container">
     {text}
     <input
       className="radius-border"
@@ -21,10 +26,12 @@ const renderRadio = (value, text, setSort) => (
 );
 
 function OrderFilters() {
-  const [column, setColumn] = useState('Name');
-  const [sort, setSort] = useState('ASC');
+  const [column, setColumn] = useState('');
+  const [sort, setSort] = useState('');
   const [{ headers }] = useContext(dataPlanetsContext);
   const [, dispatch] = useContext(filtersContext);
+  const { root } = ButtonStyle();
+  const { root: classesSelect } = SelectStyle();
 
   return (
     <fieldset className="container">
@@ -33,7 +40,7 @@ function OrderFilters() {
         {renderRadio('ASC', 'Ascendent', setSort)}
         {renderRadio('DESC', 'Descendent', setSort)}
         <label htmlFor="column-order" className="container">
-          column
+          Column
           <select
             className="radius-border"
             data-testid="column-sort"
@@ -45,14 +52,16 @@ function OrderFilters() {
             {renderOptions(headers)}
           </select>
         </label>
-        <button
-          className="radius-border filter-button"
+        <Button
+          classes={{ root }}
+          color="secondary"
+          disabled={!allValuesSetted(column, sort)}
           data-testid="column-sort-button"
           onClick={() => dispatch(activateOrder({ column, sort }))}
-          type="button"
+          variant="contained"
         >
           Apply Order
-        </button>
+        </Button>
       </div>
     </fieldset>
   );

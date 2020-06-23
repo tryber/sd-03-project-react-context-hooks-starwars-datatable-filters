@@ -33,3 +33,4 @@ export const frendlyUser = (title) => (
   title[0].toUpperCase() + title.replace('_', ' ').slice(1)
 );
 
+export const allValuesSetted = (...arr) => arr.every((value) => value !== '');

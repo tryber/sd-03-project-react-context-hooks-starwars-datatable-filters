@@ -1,9 +1,12 @@
 import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
+import Button from '@material-ui/core/Button';
+
 import { filtersContext } from '../context/Filters';
 import { createFilter } from '../actions/filterActions';
 import * as constants from '../services/constants';
+import ButtonStyle from '../styles/Button';
 
 const comparisonOptions = ['maior que', 'menor que', 'igual a'];
 
@@ -23,13 +26,12 @@ const renderSelectOf = (name, value, optionsList, set) => (
   </label>
 );
 
-const allValuesSetted = (...arr) => arr.every((value) => value !== '');
-
 function NumFilter({ columnOptions }) {
   const [column, setColumn] = useState('');
   const [value, setValue] = useState('');
   const [comparison, setComparison] = useState('');
   const [, dispatch] = useContext(filtersContext);
+  const classes = ButtonStyle();
 
   return (
     <fieldset className="container">
@@ -48,15 +50,16 @@ function NumFilter({ columnOptions }) {
           type="number"
         />
       </label>
-      <button
-        className="radius-border filter-button"
-        disabled={!allValuesSetted(column, comparison, value)}
+      <Button
+        classes={{ root: classes.root, label: classes.label }}
+        color="secondary"
+        disabled={!constants.allValuesSetted(column, comparison, value)}
         data-testid="button-filter"
-        type="button"
         onClick={() => dispatch(createFilter({ column, comparison, value }))}
+        variant="outlined"
       >
         Activate
-      </button>
+      </Button>
     </fieldset>
   );
 }

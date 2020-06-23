@@ -9,16 +9,19 @@ import { FetchData, Table, FiltersBar } from './components/';
 import './App.css';
 
 const App = () => (
-  <div className="App">
-    <DataPlanetsProvider>
-      <FetchData />
-      <FiltersProvider>
-        <FormatProvider>
-          <FiltersBar />
-          <Table />
-        </FormatProvider>
-      </FiltersProvider>
-    </DataPlanetsProvider>,
+  <div className="App-wrapper">
+    <h1>Star Wars</h1>
+    <div className="App">
+      <DataPlanetsProvider>
+        <FetchData />
+        <FiltersProvider>
+          <FormatProvider>
+            <FiltersBar />
+            <Table />
+          </FormatProvider>
+        </FiltersProvider>
+      </DataPlanetsProvider>,
+    </div>
   </div>
 );
 

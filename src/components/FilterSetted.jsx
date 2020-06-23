@@ -3,19 +3,22 @@ import PropTypes from 'prop-types';
 
 import { filtersContext } from '../context/Filters';
 import { removeFilter } from '../actions/filterActions';
+import { Button } from '@material-ui/core';
+import ButtonStyle from '../styles/Button';
 
 function FilterSetted({ id, obj }) {
   const [, dispatch] = useContext(filtersContext);
+  const classes = ButtonStyle();
   return (
     <div data-testid="filter" className="filters container">
       <span>{Object.values(obj).map((value) => `${value} | `)}</span>
-      <button
-        className="radius-border filter-button"
+      <Button
+        classes={{ root: classes.root }}
         type="button"
         onClick={() => dispatch(removeFilter(id))}
       >
         X
-      </button>
+      </Button>
     </div>
   );
 }

@@ -69,6 +69,7 @@ function Table() {
     <React.Fragment>
       {isMultiHeader && makeHeadersInMultiHeadersTable(headers)}
       <table className={isMultiHeader ? 'table-multi-headers' : ''}>
+        <caption>Planets</caption>
         <TableHeader headers={headers} isMultiHeader={isMultiHeader} />
         <TableBody items={planetsToShow} properties={headers} isMultiHeader={isMultiHeader} />
       </table>

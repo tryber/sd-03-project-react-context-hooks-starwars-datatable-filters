@@ -6,9 +6,15 @@ table , thead , tbody , td , tr {
 table {
   display: inline-block;
   font-size: 1.3em;
-  max-width: 50%;
-  overflow: auto;
+  flex-basis: 50%;
+  overflow: scroll;
+  max-height: 100vh;
   text-align: center;
+}
+
+caption {
+  font-size: 1.5em;
+  position: relative;
 }
 
 .table-multi-headers {

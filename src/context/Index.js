@@ -11,7 +11,7 @@ const TableProvider = ({ children }) => {
   const [isRequesting, setIsRequesting] = useState(false);
 
   // Fetch table from endpoint
-  getTable = () => {
+  const getTable = () => {
     if (!isRequesting) {
       setIsRequesting(true);
       request().then(
@@ -49,6 +49,7 @@ const TableProvider = ({ children }) => {
       filterByName,
       filterByNumericValues,
     },
+    getTable,
     isRequesting,
     saveNumericFilters,
     textChanged,

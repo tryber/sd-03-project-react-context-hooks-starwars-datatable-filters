@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { StarWarsContext as Context } from '../../context';
+import { StarWarsContext } from '../../context/Index';
 import filterByNumeric from '../../service/Filter';
 import RenderThead from './renderThead';
 import RenderFilters from './RenderFilters';
@@ -22,21 +22,20 @@ const Table = () => {
     'igual a',
     'menor que',
   ]);
-  const context = useContext(Context);
+  const Context = useContext(StarWarsContext);
 
   // component did mount
   useEffect(() => {
     Context.getTable();
   }, []);
 
+  // Update the context and filter the planets
   const handleChange = (e) => {
-    const { search } = this.props;
-    search(e);
+    Context.textChanged(e);
     filterByNumeric()
   }
 
   const renderColumnSelect = () => {
-    const { columnFilter } = this.props;
     return (
       <label htmlFor="column-filter">
         Coluna:&nbsp;
@@ -46,12 +45,13 @@ const Table = () => {
           onChange={({ target: { value } }) => this.setState({ column: value })}
         >
           <option value="" />
-          {columnFilter.map((item) => <option key={item} value={item}>{item}</option>)}
+          {columnOptions.map((item) => <option key={item} value={item}>{item}</option>)}
         </select>
       </label>
     );
   }
 
+  // render comparison selector
   const renderComparisonSelect = () => {
     return (
       <label htmlFor="comparison-filter">
@@ -62,12 +62,13 @@ const Table = () => {
           onChange={({ target: { value } }) => this.setState({ comparison: value })}
         >
           <option value="" />
-          {comparisonFilter.map((item) => <option key={item} value={item}>{item}</option>)}
+          {comparisonOptions.map((item) => <option key={item} value={item}>{item}</option>)}
         </select>
       </label>
     );
   }
 
+  // render input text for text search
   const renderValueSelect = () => {
     return (
       <label htmlFor="value-filter">
@@ -82,13 +83,12 @@ const Table = () => {
     );
   }
 
+  // render button that saves comparisons to the context
   const renderButton = () => {
-    const { selectDispatch } = this.props;
-    const { column, comparison, value } = this.state;
     return (
       <button
         data-testid="button-filter"
-        onClick={() => selectDispatch({ column, comparison, value })}
+        onClick={() => Context.saveNumericFilters({ column, comparison, value })}
         type="button"
       >
         Filtrar:
@@ -96,23 +96,23 @@ const Table = () => {
     );
   }
 
-  const renderFiltersActive = (filters) => {
-    const renderedFilters = filters.map(
-      (item) => <RenderFilters key={item.column} filter={item} />,
-    );
-    if (renderedFilters) {
-      return (
-        <div>
-          {renderedFilters}
-        </div>
-      );
-    }
-    return 0;
-  }
+  // const renderFiltersActive = (filters) => {
+  //   const renderedFilters = filters.map(
+  //     (item) => <RenderFilters key={item.column} filter={item} />,
+  //   );
+  //   if (renderedFilters) {
+  //     return (
+  //       <div>
+  //         {renderedFilters}
+  //       </div>
+  //     );
+  //   }
+  //   return;
+  // }
 
   // render the table after filtering
   const renderTbody = () => {
-    const filteredTable = this.filterByNumeric();
+    const filteredTable = Context.data;
     return (
       <tbody>
         {filteredTable.map((planet) => (
@@ -151,7 +151,6 @@ const Table = () => {
           onChange={({ target: { value } }) => handleChange(value)}
         />
       </label>
-      {renderFiltersActive()}
       <br />
       <table>
         <RenderThead />
@@ -193,8 +192,8 @@ const mapStateTProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  filterColumn: (column) => dispatch(filterColumn(column)),
-  unfilterColumn: (column) => dispatch(unfilterColumn(column)),
+  // filterColumn: (column) => dispatch(filterColumn(column)),
+  // unfilterColumn: (column) => dispatch(unfilterColumn(column)),
 });
 
 export default Table;

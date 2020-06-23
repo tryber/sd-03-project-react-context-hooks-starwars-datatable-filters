@@ -16,28 +16,28 @@ const comparator = (column, comparison, value, element) => {
 };
 
 // Text filter
-const filterByText = (name, table) => {
-  if (name) {
-    return table.filter(
-      (planet) => planet
-        .name
-        .toLowerCase()
-        .includes(
-          name.toLowerCase(),
-        ),
-    );
-  };
-  return table;
-};
+// const filterByText = (name, table) => {
+//   if (name) {
+//     return table.filter(
+//       (planet) => planet
+//         .name
+//         .toLowerCase()
+//         .includes(
+//           name.toLowerCase(),
+//         ),
+//     );
+//   };
+//   return table;
+// };
 
 // column filter
-const filterByNumeric = (name, table, filters) => {
-  const filteredList = filters.reduce(
-    (acc, { column, comparison, value }) => acc.filter(
-      (element) => comparator(column, comparison, value, element),
-    ), filterByText(name, table),
-  );
-  return filteredList;
-};
+// const filterByNumeric = (name, table, filters) => {
+//   const filteredList = filters.reduce(
+//     (acc, { column, comparison, value }) => acc.filter(
+//       (element) => comparator(column, comparison, value, element),
+//     ), filterByText(name, table),
+//   );
+//   return filteredList;
+// };
 
-export default filterByNumeric();
+// export default filterByNumeric();

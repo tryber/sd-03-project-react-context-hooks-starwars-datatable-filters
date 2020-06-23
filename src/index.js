@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { TableProvider as Provider } from './context/StarWarsContext';
+import { TableProvider as Provider } from './context/Index';
 import Table from './components/table/table';
 
 ReactDOM.render(

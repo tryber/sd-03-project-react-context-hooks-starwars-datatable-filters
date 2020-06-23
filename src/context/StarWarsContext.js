@@ -6,8 +6,8 @@ const StarWarsContext = createContext();
 const initialState = {
   filterByName: {
     name: '',
-  }
-}
+  },
+};
 
 const StarWarsContextProvider = ({ children }) => {
   const [data, setData] = useState([]);
@@ -21,9 +21,9 @@ const StarWarsContextProvider = ({ children }) => {
       .catch((err) => reject(err));
   });
 
-  const filterByName = (name) => {
-    return setFilters({ ...filters, filterByName: {name}})
-  }
+  const filterByName = (name) => (
+    setFilters({ ...filters, filterByName: { name } })
+  );
 
   const updateData = (info) => {
     setData([...info]);

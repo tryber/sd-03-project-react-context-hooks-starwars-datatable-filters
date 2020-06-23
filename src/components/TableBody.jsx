@@ -2,17 +2,16 @@ import React, { useContext } from 'react';
 import { StarWarsContext } from '../context/StarWarsContext';
 
 function TableBody() {
+  const { data, filters: { filterByName: { name } } } = useContext(StarWarsContext);
 
-  const { data, filters: { filterByName: { name }} } = useContext(StarWarsContext);
+  const filterByName = (planets, searched) => (
+    planets.filter((planet) => planet.name.includes(searched))
+  );
 
-  const filterByName = (planets, searched) => {
-    return planets.filter(({ name }) => name.includes(searched));
-  }
-  
-  const filterByParams = (data) => {
+  const filterByParams = (arrPlanets) => {
     // const { planets, numericValues, selectedOrder } = this.props;
 
-    let arrFiltered = filterByName(data, name)
+    const arrFiltered = filterByName(arrPlanets, name);
     // this.sortBySelectedOrder(arrFiltered, selectedOrder);
 
     // numericValues.forEach(
@@ -21,7 +20,7 @@ function TableBody() {
     // );
 
     return arrFiltered;
-  }
+  };
 
   const planets = filterByParams(data);
 

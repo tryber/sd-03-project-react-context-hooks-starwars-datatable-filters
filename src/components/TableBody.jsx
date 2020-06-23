@@ -2,11 +2,32 @@ import React, { useContext } from 'react';
 import { StarWarsContext } from '../context/StarWarsContext';
 
 function TableBody() {
-  const { data } = useContext(StarWarsContext);
-  console.log(data);
+
+  const { data, filters: { filterByName: { name }} } = useContext(StarWarsContext);
+
+  const filterByName = (planets, searched) => {
+    return planets.filter(({ name }) => name.includes(searched));
+  }
+  
+  const filterByParams = (data) => {
+    // const { planets, numericValues, selectedOrder } = this.props;
+
+    let arrFiltered = filterByName(data, name)
+    // this.sortBySelectedOrder(arrFiltered, selectedOrder);
+
+    // numericValues.forEach(
+    //   (filtro) =>
+    //     (arrFiltered = Table.filterByNumericValues(arrFiltered, filtro))
+    // );
+
+    return arrFiltered;
+  }
+
+  const planets = filterByParams(data);
+
   return (
     <tbody>
-      {data.map((planet) => (
+      {planets.map((planet) => (
         <tr key={planet.name}>
           <td>{planet.name}</td>
           <td>{planet.rotation_period}</td>

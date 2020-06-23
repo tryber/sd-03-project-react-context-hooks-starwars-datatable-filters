@@ -3,9 +3,16 @@ import PropTypes from 'prop-types';
 
 const StarWarsContext = createContext();
 
+const initialState = {
+  filterByName: {
+    name: '',
+  }
+}
+
 const StarWarsContextProvider = ({ children }) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState([]);
+  const [filters, setFilters] = useState(initialState);
 
   const getPlanets = (url) => new Promise((resolve, reject) => {
     fetch(url)
@@ -13,6 +20,10 @@ const StarWarsContextProvider = ({ children }) => {
       .then((dat) => resolve(dat))
       .catch((err) => reject(err));
   });
+
+  const filterByName = (name) => {
+    return setFilters({ ...filters, filterByName: {name}})
+  }
 
   const updateData = (info) => {
     setData([...info]);
@@ -28,6 +39,8 @@ const StarWarsContextProvider = ({ children }) => {
     updateData,
     updateError,
     error,
+    filterByName,
+    filters,
   };
 
   return (
@@ -40,5 +53,5 @@ const StarWarsContextProvider = ({ children }) => {
 export { StarWarsContext, StarWarsContextProvider as Provider };
 
 StarWarsContextProvider.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.node.isRequired,
 };

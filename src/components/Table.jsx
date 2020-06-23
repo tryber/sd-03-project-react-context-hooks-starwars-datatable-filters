@@ -15,8 +15,8 @@ function Table() {
   }, []);
 
   return (
-    <div>
-      <table className="striped highlight centered responsive-table">
+    <div className="table-container">
+      <table className="table is-hoverable is-striped">
         <TableHeader />
         <TableBody />
       </table>

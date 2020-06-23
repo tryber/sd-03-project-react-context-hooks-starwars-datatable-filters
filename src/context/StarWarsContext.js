@@ -1,5 +1,47 @@
-import { createContext } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
+import requestData from '../services/Request';
 
 const StarWarsContext = createContext();
 
-export default StarWarsContext;
+const StarWarsProvider = ({ children }) => {
+  const [dataTable, setDataTable] = useState([]);
+  const [errData, setErrData] = useState('');
+  const [isRequesting, setIsRequesting] = useState(false);
+
+  useEffect(() => {
+    requestDataTable();
+  }, [])
+
+  // Make request to endpoint and handles isRequesting
+  const requestDataTable = () => {
+    if (isRequesting) return;
+    setIsRequesting(true);
+    requestData().then(
+      // success
+      (res) => {
+        setDataTable(res.results);
+        setIsRequesting(false);
+      },
+      // Failure
+      (res) => {
+        setErrData(res.message);
+        setIsRequesting(false);
+      },
+    );
+  };
+  
+  const STContext = {
+    dataTable,
+    errData,
+    isRequesting,
+    requestDataTable,
+  };
+
+  return (
+    <StarWarsContext.Provider value={STContext}>
+      {children}
+    </StarWarsContext.Provider>
+  );
+}
+
+export { StarWarsContext, StarWarsProvider };

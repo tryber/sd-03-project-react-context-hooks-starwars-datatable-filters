@@ -29,18 +29,16 @@ const renderColumn = () => {
   );
 };
 
-const renderFilterBar = () => {
-  return (
-    <div>
-      <input
-        data-testid="value-filter"
-        type="number"
-        placeholder="Digite um Número"
-      />
-      <button data-testid="button-filter">Filtrar</button>
-    </div>
-  );
-};
+const renderFilterBar = () => (
+  <div>
+    <input
+      data-testid="value-filter"
+      type="number"
+      placeholder="Digite um Número"
+    />
+    <button data-testid="button-filter">Filtrar</button>
+  </div>
+);
 function Filters() {
   const { handleNameFilter } = useContext(StarWarsContext);
 

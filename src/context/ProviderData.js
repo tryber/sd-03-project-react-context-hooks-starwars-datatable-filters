@@ -37,13 +37,14 @@ function ProviderData({ children }) {
 
   const handleSelectColumn = ({ column, comparison, value }) => {
     setFilters((currentFilters) => ({
-      ...currentFilters, filterByNumericValues: [{
+      ...currentFilters,
+      filterByNumericValues: [{
         column,
         comparison,
         value,
       }],
     }));
-  }
+  };
 
   const context = {
     getPlanetsData: fetchPlanetsData,

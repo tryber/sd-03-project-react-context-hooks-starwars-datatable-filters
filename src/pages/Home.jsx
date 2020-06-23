@@ -1,22 +1,12 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import PlanetTableContext from '../context/context';
 import Table from '../components/table/Table';
 import FilterContainer from '../components/filters/FilterContainer';
 
 const Home = () => {
   const {
-    error, setData, loading, setLoading, getPlanetsInfo,
-  } = useContext(
-    PlanetTableContext,
-  );
-
-  useEffect(() => {
-    getPlanetsInfo();
-    return () => {
-      setLoading(false);
-      setData([]);
-    };
-  }, []);
+    fetchData: { error, loading },
+  } = useContext(PlanetTableContext);
 
   return (
     <main>

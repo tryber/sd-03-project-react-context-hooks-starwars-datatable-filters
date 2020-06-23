@@ -1,7 +1,7 @@
 import React from 'react';
 import updateColumn from './updateColumn';
 
-export const getColumns = (onColumnChange, column, numericValues) => {
+export const getColumns = (onColumnChange, numericValues, column) => {
   const select = updateColumn(numericValues);
   return (
     <select

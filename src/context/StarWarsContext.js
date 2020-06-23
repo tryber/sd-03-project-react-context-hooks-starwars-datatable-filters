@@ -1,5 +1,9 @@
 import { createContext } from 'react';
 
-const StarWarsContext = createContext();
+const initialState = {
+  data:[],
+}
+
+const StarWarsContext = createContext(initialState);
 
 export default StarWarsContext;

@@ -27,12 +27,13 @@ const TableBody = (data) => (
 );
 
 const Table = () => {
-  const { data } = useContext(PlanetsContext);
+  const { data, filters: { filterByName: { name } } } = useContext(PlanetsContext);
   if (data !== null) {
+    const sortedData = data.filter((planet) => planet.name.toLowerCase().match(name.toLowerCase()));
     return (
       <table>
-        {TableHead(data)}
-        {TableBody(data)}
+        {TableHead(sortedData)}
+        {TableBody(sortedData)}
       </table>
     );
   }

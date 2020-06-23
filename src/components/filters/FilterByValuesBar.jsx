@@ -17,6 +17,82 @@ const initialState = {
   value: '',
 };
 
+const renderColumnFilter = (callback1, callback2, object, array) => (
+  <select
+    id="column-filter"
+    data-testid="column-filter"
+    value={object.column}
+    onChange={(event) => callback1({
+      ...object,
+      column: event.target.value,
+    })}
+  >
+    <option>Escolha uma coluna</option>
+    {columns.map(
+      (column) => callback2(array, column) && (
+      <option value={column} key={column}>
+        {column}
+      </option>
+      ),
+    )}
+  </select>
+);
+
+const renderComparisonFilter = (callback, object) => (
+  <select
+    name="comparison-filter"
+    id="comparison-filter"
+    value={object.comparison}
+    data-testid="comparison-filter"
+    onChange={(event) => callback({
+      ...object,
+      comparison: event.target.value,
+    })}
+  >
+    <option>Escolha um comparador</option>
+    {comparisons.map((comparison) => (
+      <option value={comparison} key={comparison}>
+        {comparison}
+      </option>
+    ))}
+  </select>
+);
+
+const renderValueFilter = (callback, object) => (
+  <input
+    type="number"
+    name="value-filter"
+    id="value-filter"
+    value={object.value}
+    data-testid="value-filter"
+    placeholder="digite um valor"
+    onChange={(event) => callback({
+      ...object,
+      value: event.target.value,
+    })}
+  />
+);
+
+const renderSubmitFiltersButton = (callback1, callback2, object) => (
+  <button
+    type="button"
+    data-testid="button-filter"
+    onClick={() => ((
+      callback1({
+        ...object,
+      }),
+      callback2({
+        ...initialState,
+      })
+    ))}
+    disabled={
+      object.column === '' || object.comparison === '' || object.value === ''
+    }
+  >
+    Filtrar
+  </button>
+);
+
 function FilterByValuesBar() {
   const {
     filters: { filterByNumericValues },
@@ -29,90 +105,21 @@ function FilterByValuesBar() {
 
   const filterColumnsOptions = (filters, value) => !filters.find(({ column }) => column === value);
 
-  const renderColumnFilter = () => (
-    <select
-      id="column-filter"
-      data-testid="column-filter"
-      value={filterByNumeric.column}
-      onChange={(event) => setFilterByNumeric({
-        ...filterByNumeric,
-        column: event.target.value,
-      })}
-    >
-      <option value="" />
-      {columns.map(
-        (column) => filterColumnsOptions(filterByNumericValues, column) && (
-        <option value={column} key={column}>
-          {column}
-        </option>
-        ),
-      )}
-    </select>
-  );
-
-  const renderComparisonFilter = () => (
-    <select
-      name="comparison-filter"
-      id="comparison-filter"
-      value={filterByNumeric.comparison}
-      data-testid="comparison-filter"
-      onChange={(event) => setFilterByNumeric({
-        ...filterByNumeric,
-        comparison: event.target.value,
-      })}
-    >
-      <option value="" />
-      {comparisons.map((comparison) => (
-        <option value={comparison} key={comparison}>
-          {comparison}
-        </option>
-      ))}
-    </select>
-  );
-
-  const renderValueFilter = () => (
-    <input
-      type="number"
-      name="value-filter"
-      id="value-filter"
-      value={filterByNumeric.value}
-      data-testid="value-filter"
-      placeholder="digite um valor"
-      onChange={(event) => setFilterByNumeric({
-        ...filterByNumeric,
-        value: event.target.value,
-      })}
-    />
-  );
-
-  const renderSubmitFiltersButton = () => (
-    <button
-      type="button"
-      data-testid="button-filter"
-      onClick={() => ((
-        setFilterByNumericValues({
-          ...filterByNumeric,
-        }),
-        setFilterByNumeric({
-          ...initialState,
-        })
-      ))}
-      disabled={
-        filterByNumeric.column === ''
-        || filterByNumeric.comparison === ''
-        || filterByNumeric.value === ''
-      }
-    >
-      Filtrar
-    </button>
-  );
-
   return (
     <div>
-      {renderColumnFilter()}
-      {renderComparisonFilter()}
-      {renderValueFilter()}
-      {renderSubmitFiltersButton()}
+      {renderColumnFilter(
+        setFilterByNumeric,
+        filterColumnsOptions,
+        filterByNumeric,
+        filterByNumericValues,
+      )}
+      {renderComparisonFilter(setFilterByNumeric, filterByNumeric)}
+      {renderValueFilter(setFilterByNumeric, filterByNumeric)}
+      {renderSubmitFiltersButton(
+        setFilterByNumericValues,
+        setFilterByNumeric,
+        filterByNumeric,
+      )}
     </div>
   );
 }

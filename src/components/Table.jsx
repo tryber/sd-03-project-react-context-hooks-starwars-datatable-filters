@@ -20,8 +20,8 @@ function doCompare(e, el) {
 export default function Table({ children }) {
   const { data } = useContext(DataContext);
   const { nameFilter, filterByNumericValues, order } = useContext(FilterContext);
-  if (order.sort === 'ASC') { data.sort(function (a, b) { return Number(a[order.column]) - Number(b[order.column]); }); }
-  if (order.sort === 'DESC') { data.sort(function (a, b) { return Number(b[order.column]) - Number(a[order.column]); }); }
+  // if (order.sort === 'ASC') { data.sort(function (a, b) { return Number(a[order.column]) - Number(b[order.column]); }); }
+  // if (order.sort === 'DESC') { data.sort(function (a, b) { return Number(b[order.column]) - Number(a[order.column]); }); }
 
   function renderTableheaders() {
     return (

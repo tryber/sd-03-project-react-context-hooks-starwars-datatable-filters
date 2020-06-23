@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import proptypes from 'prop-types';
 import { DataContext } from './TableData';
 import { FilterContext } from './Filters';
 
@@ -99,3 +100,7 @@ export default function Table({ children }) {
     </div>
   );
 }
+
+Table.propTypes = {
+  children: proptypes.objectOf(proptypes.object).isRequired,
+};

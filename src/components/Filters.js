@@ -56,7 +56,7 @@ class Filters extends Component {
           data-testid="value-filter" type="number"
           onChange={(e) => this.handle(e, 'valueFilter')}
         />
-        <button type="button" data-testid="button-filter" onClick={() => this.btn()}>Filtr</button>
+        <button type="button" data-testid="button-filter" onClick={() => this.btn()}>Filtro</button>
       </div>
     );
   }

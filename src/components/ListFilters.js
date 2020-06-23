@@ -9,7 +9,7 @@ const ListFilters = () => {
     setColumn('');
     setComparison('');
     setValue('');
-    console.log(index);
+    console.log(arrayIndex);
   };
 
   return (

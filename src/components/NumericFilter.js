@@ -47,10 +47,11 @@ const NumericFilter = () => {
   const [stateValue, setStateValue] = useState('');
   const { filters, setFilterByNumericValues } = useContext(StarWarsContext);
   const { filterByNumericValues } = filters;
-
   const handleChange = () => {
     if (filterByNumericValues[0].column === '') {
-      setFilterByNumericValues([{ column: stateColumn, comparison: stateComparison, value: stateValue }]);
+      setFilterByNumericValues(
+        [{ column: stateColumn, comparison: stateComparison, value: stateValue }]
+      );
     } else {
       setFilterByNumericValues([
         ...filterByNumericValues,
@@ -59,7 +60,6 @@ const NumericFilter = () => {
     }
     setStateColumn(''); setStateComparison(''); setStateValue('');
   };
-
   const filterForms = () =>
     <div>
       <label htmlFor="column-filter">Filtre por coluna</label>
@@ -85,7 +85,6 @@ const NumericFilter = () => {
         data-testid="button-filter" onClick={() => handleChange()}
       >Filtrar</button>
     </div>;
-
   filterMenu(filterByNumericValues); verifyColumns(columnOptions);
   return (<div>{showFilter && filterForms()}</div>);
 };

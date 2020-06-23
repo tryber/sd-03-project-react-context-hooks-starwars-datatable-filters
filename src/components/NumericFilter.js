@@ -50,9 +50,7 @@ const NumericFilter = () => {
 
   const handleChange = () => {
     if (filterByNumericValues[0].column === '') {
-      setFilterByNumericValues([
-        { column: stateColumn, comparison: stateComparison, value: stateValue },
-      ]);  
+      setFilterByNumericValues([{ column: stateColumn, comparison: stateComparison, value: stateValue }]);
     } else {
       setFilterByNumericValues([
         ...filterByNumericValues,
@@ -88,13 +86,8 @@ const NumericFilter = () => {
       >Filtrar</button>
     </div>;
 
-  filterMenu(filterByNumericValues);
-  verifyColumns(columnOptions);
-  return (
-    <div>
-      {showFilter && filterForms()}
-    </div>
-  );
+  filterMenu(filterByNumericValues); verifyColumns(columnOptions);
+  return (<div>{showFilter && filterForms()}</div>);
 };
 
 export default NumericFilter;

@@ -7,7 +7,11 @@ export default function () {
   console.log('passando por aqui:');
   return filteredData.length > 0 && (
     <div>
-      <input value={filters.filterByName.name} onChange={(e) => setNameFilter(e.target.value)} />
+      <input
+        data-testid="name-filter"
+        value={filters.filterByName.name}
+        onChange={(e) => setNameFilter(e.target.value)}
+      />
       <FilterSelector />
     </div>
   );

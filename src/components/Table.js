@@ -1,15 +1,9 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 import TableHeaders from './TableHeaders';
 
 const Table = () => {
-  console.log(useContext(StarWarsContext));
-  const { fetchData, filteredData, setData } = useContext(StarWarsContext);
-  useEffect(() => {
-    fetchData();
-    return setData([]);
-  }, []);
-
+  const { filteredData } = useContext(StarWarsContext);
   return filteredData.length > 0 ? (
     <table border="1px">
       <tbody>

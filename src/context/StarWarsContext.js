@@ -33,6 +33,7 @@ export const SWProvider = ({ children }) => {
 
   const fetchData = () => fetch(URL)
     .then(async (resp) => {
+      console.log('new Fetch')
       setIsFetching(true);
       try {
         const json = await resp.json();
@@ -87,7 +88,6 @@ export const SWProvider = ({ children }) => {
   };
   return (
     <StarWarsContext.Provider value={context}>
-      {console.log(context)}
       {children}
     </StarWarsContext.Provider>
   );

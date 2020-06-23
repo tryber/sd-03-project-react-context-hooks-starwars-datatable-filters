@@ -1,11 +1,41 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { fetchPlanetsList } from '../actions';
+import React, { useContext, useEffect } from 'react';
+import { StarWarsContext } from './StarWarsContext';
 import PlanetLine from './PlanetLine';
 import TableHeader from './TableHeader';
 
-class Table extends Component {
+function Table() {
+  const {
+    isFetching,
+    data,
+    error,
+    fetchPlanetList,
+  } = useContext(StarWarsContext);
+
+  useEffect(() => {
+    fetchPlanetList();
+  }, []);
+
+  if (isFetching) { return <p>Loading...</p>; }
+
+  if (data.length > 0) {
+    return (
+      <table className="table-div">
+        <thead>
+          <TableHeader />
+        </thead>
+        <tbody>
+          {data.map((planet) => <PlanetLine planet={planet} key={planet.name} />)}
+        </tbody>
+      </table>
+    );
+  }
+  return <p>{error}</p>;
+
+}
+
+export default Table;
+
+/* class Table extends Component {
   constructor(props) {
     super(props);
     this.filterPlanets = this.filterPlanets.bind(this);
@@ -26,7 +56,7 @@ class Table extends Component {
           if (comparison === 'menor que') return Number(planet[column]) < Number(value);
           return planet;
         })
-      , filterName);
+        , filterName);
     }
     return filterName;
   }
@@ -50,30 +80,4 @@ class Table extends Component {
     }
     return <p>No Planet Found</p>;
   }
-}
-
-const mapStateToProps = (state) => ({
-  isFetching: state.planetsList.isFetching,
-  data: state.planetsList.data,
-  name: state.filters.filterByName.name,
-  numericFilters: state.filters.filterByNumericValues,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  getPlanetsList: () => dispatch(fetchPlanetsList()),
-});
-
-Table.propTypes = {
-  isFetching: PropTypes.bool.isRequired,
-  getPlanetsList: PropTypes.func.isRequired,
-  data: PropTypes.arrayOf(PropTypes.object),
-  name: PropTypes.string.isRequired,
-  numericFilters: PropTypes.arrayOf(PropTypes.object),
-};
-
-Table.defaultProps = {
-  data: null,
-  numericFilters: null,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Table);
+} */

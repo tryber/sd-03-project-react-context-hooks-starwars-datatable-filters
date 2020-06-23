@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { filtersContext } from '../context/Filters';
-import * as actions from '../actions/NumFilterActions';
+import { removeFilter } from '../actions/NumFilterActions';
 
 function FilterSetted({ id, obj }) {
   const [, dispatch] = useContext(filtersContext);
@@ -12,7 +12,7 @@ function FilterSetted({ id, obj }) {
       <button
         className="radius-border filter-button"
         type="button"
-        onClick={() => dispatch(actions.removeFilter(id))}
+        onClick={() => dispatch(removeFilter(id))}
       >
         X
       </button>

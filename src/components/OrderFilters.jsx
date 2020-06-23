@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import { dataPlanetsContext } from '../context/DataPlanets';
 import { filtersContext } from '../context/Filters';
-import { activateOrder } from '../actions/orderActions';
+import { activateOrder, changeOrder } from '../actions/orderActions';
 import { renderOptions } from '../services/constants';
 
 const renderRadio = (value, text, dispatch) => (
@@ -13,7 +13,7 @@ const renderRadio = (value, text, dispatch) => (
       data-testid="column-sort-input"
       id={`column-sort-input-${value.toLowerCase()}`}
       name="sort-filter-radio"
-      onChange={() => dispatch(actions.changeOrder('sort', value))}
+      onChange={() => dispatch(changeOrder('sort', value))}
       type="radio"
       value={value}
     />
@@ -38,7 +38,7 @@ function OrderFilters() {
             defaultValue={column}
             id="column-order"
             name="column-order"
-            onChange={({ target }) => dispatch(actions.changeOrder('column', target.value))}
+            onChange={({ target }) => dispatch(changeOrder('column', target.value))}
           >
             {renderOptions(headers)}
           </select>

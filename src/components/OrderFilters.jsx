@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 
 import { dataPlanetsContext } from '../context/DataPlanets';
 import { filtersContext } from '../context/Filters';
-import * as actions from '../actions/orderActions';
-import * as constants from '../services/constants';
+import { activateOrder } from '../actions/orderActions';
+import { renderOptions } from '../services/constants';
 
 const renderRadio = (value, text, dispatch) => (
   <label htmlFor={`sort-radio-${value}`}>
@@ -40,13 +40,13 @@ function OrderFilters() {
             name="column-order"
             onChange={({ target }) => dispatch(actions.changeOrder('column', target.value))}
           >
-            {constants.renderOptions(headers)}
+            {renderOptions(headers)}
           </select>
         </label>
         <button
           className="radius-border filter-button"
           data-testid="column-sort-button"
-          onClick={() => dispatch(actions.activateOrder())}
+          onClick={() => dispatch(activateOrder())}
           type="button"
         >
           Apply Order

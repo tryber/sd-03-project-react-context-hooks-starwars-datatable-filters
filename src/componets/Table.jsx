@@ -7,9 +7,12 @@ import RemoveFilter from './RemoveFilter';
 
 
 const Table = () => {
-  const { planets,
-    allFilters: { filters: 
-      { filterByName: { name } } } 
+  const {
+    planets,
+    allFilters: {
+      filters: {
+        filterByName: { name },
+      } }
   } = useContext(starWarsContext);
   const { allFilters: { filters: { filterByNumericValues } } } = useContext(starWarsContext);
 
@@ -49,8 +52,8 @@ const Table = () => {
   return (
     <div>
       <FilterPlanets />
-      <PlanetsApi planets={filterSelectedValues(planetsData)} />
       <RemoveFilter />
+      <PlanetsApi planets={filterSelectedValues(planetsData)} />
     </div>
   );
 };

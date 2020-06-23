@@ -29,7 +29,7 @@ const StarWarsProvider = ({ children }) => {
   );
 };
 
-starWarsContext.propType = {
+StarWarsProvider.propType = {
   children: PropTypes.node.isRequired,
 };
 

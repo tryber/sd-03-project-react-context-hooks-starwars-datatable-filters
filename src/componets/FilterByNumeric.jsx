@@ -5,17 +5,19 @@ import { starWarsContext } from '../context/starWarsContext';
 // valueFIlter prover um state pra ele
 // valueFilter: state.filters.filterByNumericValues,
 
+
 const FilterByNumeric = () => {
+  const { allFilters: { filters: { filterByNumericValues } } } = useContext(starWarsContext);
+  const { allFilters: { setfilterByNumericValues } } = useContext(starWarsContext);
+
+  function filterColumn(option) {
+    return !filterByNumericValues.find(({ column }) => column === option);
+  }
+
   const [value, setSelectInput] = useState('');
   const [column, setColumn] = useState('');
   const [comparison, setcomparison] = useState('');
 
-  const { allFilters: { setfilterByNumericValues } } = useContext(starWarsContext);
-  const { allFilters: { filters: { filterByNumericValues } } } = useContext(starWarsContext);
-
-  function filterColumn(option) {
-    return !filterByNumericValues.find((column) => column === option);
-  }
 
   const onClick = () => {
     setfilterByNumericValues({ value, column, comparison });

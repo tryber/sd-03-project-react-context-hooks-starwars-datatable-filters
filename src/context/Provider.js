@@ -3,29 +3,6 @@ import PropTypes from 'prop-types';
 import StarWarsContext from './StarWarsContext';
 import getPlanetsAPI from '../services/getPlanetsAPI';
 
-/* objeto a ser retornado yes
-contextValue = {
-  data: {
-    isFetching: false,
-    planets: [],
-    error: '',
-  }
-  filters: {
-    filterByName: {
-      name: ''
-    },
-    filterByNumericValues: [
-      {
-        column: '',
-        comparison: '',
-        value: '',
-      },
-    ]
-  }
-}
-
-*/
-
 const Provider = ({ children }) => {
   const [isFetching, setIsFetching] = useState(false);
   const [planets, setPlanets] = useState([]);
@@ -36,13 +13,13 @@ const Provider = ({ children }) => {
   const [value, setValue] = useState('');
 
   const receivePlanetsSuccess = (data) => {
-    setIsFetching(false);
     setPlanets(data.results);
+    setIsFetching(false);
   };
 
   const receivePlanetsError = (errorMessage) => {
-    setIsFetching(false);
     setError(errorMessage);
+    setIsFetching(false);
   };
 
   const fetchPlanets = () => {
@@ -59,30 +36,36 @@ const Provider = ({ children }) => {
     fetchPlanets();
   }, []);
 
-  const contextValue = {
-    data: {
-      isFetching,
-      planets,
-      error,
-    },
-    filters: {
-      filterByName: {
-        name,
+  const getPlanetsResult = () => {
+    if (isFetching) return;
+    const result = {
+      data: {
+        isFetching,
+        planets,
+        error,
       },
-      filterByNumericValues: [
-        {
-          column,
-          comparison,
-          value,
+      filters: {
+        filterByName: {
+          name,
         },
-      ],
-    },
-    clearFilter: (index) => console.log(index),
-    setName,
-    setColumn,
-    setComparison,
-    setValue,
+        filterByNumericValues: [
+          {
+            column,
+            comparison,
+            value,
+          },
+        ],
+      },
+      clearFilter: (index) => console.log(index),
+      setName,
+      setColumn,
+      setComparison,
+      setValue,
+    };
+    return result;
   };
+
+  const contextValue = getPlanetsResult();
 
   return (
     <StarWarsContext.Provider value={contextValue}>

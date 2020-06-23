@@ -36,38 +36,30 @@ const Provider = ({ children }) => {
     fetchPlanets();
   }, []);
 
-  const getPlanetsResult = () => {
-    if (isFetching) {
-      return undefined;
-    }
-    const result = {
-      data: {
-        isFetching,
-        planets,
-        error,
+  const contextValue = {
+    data: {
+      isFetching,
+      planets,
+      error,
+    },
+    filters: {
+      filterByName: {
+        name,
       },
-      filters: {
-        filterByName: {
-          name,
+      filterByNumericValues: [
+        {
+          column,
+          comparison,
+          value,
         },
-        filterByNumericValues: [
-          {
-            column,
-            comparison,
-            value,
-          },
-        ],
-      },
-      clearFilter: (index) => console.log(index),
-      setName,
-      setColumn,
-      setComparison,
-      setValue,
-    };
-    return result;
+      ],
+    },
+    clearFilter: (index) => console.log(index),
+    setName,
+    setColumn,
+    setComparison,
+    setValue,
   };
-
-  const contextValue = getPlanetsResult();
 
   return (
     <StarWarsContext.Provider value={contextValue}>

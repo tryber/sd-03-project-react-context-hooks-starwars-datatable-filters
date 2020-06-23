@@ -1,5 +1,4 @@
 import React from 'react';
-import StarWarsContext from './context/StarWarsContext';
 import Home from './pages/Home';
 
 import './App.css';

@@ -72,7 +72,9 @@ const renderSubmitButton = (callback, object) => (
 );
 
 function SortColumnsFilter() {
-  const { setOrderFilter } = useContext(PlanetTableContext);
+  const {
+    filterMethods: { setOrderFilter },
+  } = useContext(PlanetTableContext);
 
   const [sortFilter, setSortFilter] = useState({ ...initialState });
 

@@ -3,8 +3,10 @@ import PlanetTableContext from '../../context/context';
 
 const SelectedFilters = () => {
   const {
-    filters: { filterByNumericValues },
-    removeFilter,
+    filterMethods: {
+      filters: { filterByNumericValues },
+      removeFilter,
+    },
   } = useContext(PlanetTableContext);
   return (
     <div>

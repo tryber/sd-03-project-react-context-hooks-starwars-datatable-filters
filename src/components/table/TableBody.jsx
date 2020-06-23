@@ -4,8 +4,12 @@ import filterDataByNumericValue from '../../helpers/index';
 import NoResultsTableBody from './NoResultsTableBody';
 
 const TableBody = () => {
-  const { data, filters } = useContext(PlanetTableContext);
-  const { filterByName: { name }, filterByNumericValues, order: { column, sort } } = filters;
+  const { data, filterMethods } = useContext(PlanetTableContext);
+  const {
+    filterByName: { name },
+    filterByNumericValues,
+    order: { column, sort },
+  } = filterMethods.filters;
   const filteredData = filterDataByNumericValue(
     data,
     name,

@@ -2,7 +2,9 @@ import React, { useContext } from 'react';
 import PlanetTableContext from '../../context/context';
 
 const FilterByNameBar = () => {
-  const { setFilterByName } = useContext(PlanetTableContext);
+  const {
+    filterMethods: { setFilterByName },
+  } = useContext(PlanetTableContext);
   return (
     <div>
       <h2>Selecione um planeta</h2>

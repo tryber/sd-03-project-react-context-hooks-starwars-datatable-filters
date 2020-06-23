@@ -95,8 +95,10 @@ const renderSubmitFiltersButton = (callback1, callback2, object) => (
 
 function FilterByValuesBar() {
   const {
-    filters: { filterByNumericValues },
-    setFilterByNumericValues,
+    filterMethods: {
+      filters: { filterByNumericValues },
+      setFilterByNumericValues,
+    },
   } = useContext(PlanetTableContext);
 
   const [filterByNumeric, setFilterByNumeric] = useState({

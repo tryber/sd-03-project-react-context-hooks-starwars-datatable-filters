@@ -1,5 +1,4 @@
 import React, { useEffect, useContext } from 'react';
-// import PropTypes from 'prop-types';
 
 import InputNamePlanet from './InputNamePlanet';
 import CreateTable from './CreateTable';
@@ -24,13 +23,14 @@ function switchComparison(column, comparison, value, planet) {
 
 function Table() {
   const { fetchAPI, loading, data, filterSelect } = useContext(APIcontext);
+  const inputFilter = filterSelect.filters.filterByNumericValues;
+  const nameInput = filterSelect.filters.filterByName.name;
 
   useEffect(() => {
     fetchAPI();
   }, []);
 
   const filteredPlanet = (planets) => {
-    const nameInput = filterSelect.filters.filterByName.name;
     if (nameInput !== undefined) {
       return planets.filter(({ name }) => name.toLowerCase().includes(nameInput.toLowerCase()));
     }
@@ -38,7 +38,6 @@ function Table() {
   };
 
   const filterSelectedValues = (planetFiltered) => {
-    const inputFilter = filterSelect.filters.filterByNumericValues;
     if (inputFilter) {
       return inputFilter.reduce(
         (acc, { column, comparison, value }) =>
@@ -69,19 +68,5 @@ function Table() {
     </div>
   );
 }
-
-// Table.propTypes = {
-//   data: PropTypes.arrayOf(PropTypes.object).isRequired,
-//   loading: PropTypes.bool.isRequired,
-//   nameInput: PropTypes.string.isRequired,
-//   inputFilter: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       column: PropTypes.string,
-//       comparison: PropTypes.string,
-//       value: PropTypes.string,
-//     })
-//   ).isRequired,
-//   fetchAPI: PropTypes.func.isRequired,
-// };
 
 export default Table;

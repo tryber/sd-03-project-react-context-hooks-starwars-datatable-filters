@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-// import PropTypes from 'prop-types';
 import APIcontext from '../Context/APIcontext';
 
 const columns = [
@@ -65,7 +64,7 @@ function NavBar() {
         </nav>
       </header>
     );
-  }
+  };
 
   return (
     <div>
@@ -82,15 +81,5 @@ function NavBar() {
     </div>
   );
 }
-
-// NavBar.propTypes = {
-//   columns: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       column: PropTypes.string,
-//       comparison: PropTypes.string,
-//       value: PropTypes.string,
-//     }),
-//   ),
-// };
 
 export default NavBar;

@@ -1,26 +1,35 @@
 import React, { useContext } from 'react';
-import StarWarsContext from '../context/StarWarsContext';
+import { StarWarsContext } from '../context/StarWarsContext';
 
 const FiltersList = () => {
-  const { filterByNumericValues, removeFilter } = useContext(StarWarsContext);
-  if (filterByNumericValues.length === 0 || filterByNumericValues[0].column === '') return false;
+  const { filters, setFilters } = useContext(StarWarsContext);
+  const [, ...rest] = filters;
+
+  function deleteFilter(currentColumn) {
+    const remainedColumns = rest
+      .filter(({ numericValues: { column } }) => column !== currentColumn);
+    setFilters([filters[0], ...remainedColumns]);
+  }
+
   return (
-    <div>
-      {filterByNumericValues.map(({ column, comparison, value }) => (
-        <p data-testid="filter">
-          {`Filtro aplicado: ${column} | ${comparison} | ${value} `}
+    <section>
+      {rest.map(({ numericValues: { column, comparison, value } }) => (
+        <div className="column-filters" key={column}>
+          <p className="column-filter" name={column}>{`☉ ${column.replace('_', ' ')} ${comparison.toLowerCase()} ${value}`}</p>
           <button
-            key={column}
             type="button"
-            value="X"
-            onClick={() => removeFilter(column)}
+            data-testid="delete-button"
+            name={column}
+            onClick={() => {
+              deleteFilter(column);
+            }}
           >
             X
           </button>
-        </p>
+        </div>
       ))}
-    </div>
+    </section>
   );
-}
+};
 
 export default FiltersList;

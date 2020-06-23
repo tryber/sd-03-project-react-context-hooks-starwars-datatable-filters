@@ -44,14 +44,15 @@ const filterMenu = (numericValuesFilter) => {
 const NumericFilter = () => {
   const [stateColumn, setStateColumn] = useState('');
   const [stateComparison, setStateComparison] = useState('');
-  const [stateValue, setStateValue] = useState(0);
-  const { filters, setColumn, setComparison, setValue } = useContext(StarWarsContext);
+  const [stateValue, setStateValue] = useState('');
+  const { filters, setFilterByNumericValues } = useContext(StarWarsContext);
   const { filterByNumericValues } = filters;
 
   const handleChange = () => {
-    setColumn(stateColumn);
-    setComparison(stateComparison);
-    setValue(stateValue);
+    setFilterByNumericValues([
+      ...filterByNumericValues, { column: stateColumn, comparison: stateComparison, value: stateValue },
+    ]);
+    setStateColumn(''); setStateComparison(''); setStateValue('');
   };
 
   const filterForms = () =>
@@ -59,21 +60,21 @@ const NumericFilter = () => {
       <label htmlFor="column-filter">Filtre por coluna</label>
       <select
         data-testid="column-filter" name="column-filter"
-        onChange={(e) => setStateColumn(e.target.value)}
+        onChange={(e) => setStateColumn(e.target.value)} value={stateColumn}
       >
         {newColumnOptions.map((e) => <option key={e} value={e}>{e}</option>)}
       </select>
       <label htmlFor="comparison-filter">Condição</label>
       <select
         data-testid="comparison-filter" name="comparison-filter"
-        onChange={(e) => setStateComparison(e.target.value)}
+        onChange={(e) => setStateComparison(e.target.value)} value={stateComparison}
       >
         {comparisonOptions.map((e) => <option key={e} value={e}>{e}</option>)}
       </select>
       <label htmlFor="value-filter">Valor</label>
       <input
         data-testid="value-filter" type="number" maxLength="12"
-        onChange={(e) => setStateValue(e.target.value)}
+        onChange={(e) => setStateValue(e.target.value)} value={stateValue}
       />
       <button
         data-testid="button-filter" onClick={() => handleChange()}

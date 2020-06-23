@@ -2,14 +2,13 @@ import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 const ListFilters = () => {
-  const { filters, setColumn, setComparison, setValue } = useContext(StarWarsContext);
+  const { filters, setFilterByNumericValues} = useContext(StarWarsContext);
   const { filterByNumericValues } = filters;
 
   const clearFilter = (arrayIndex) => {
-    setColumn('');
-    setComparison('');
-    setValue('');
-    console.log(arrayIndex);
+    const result = [...filterByNumericValues];
+    result.splice(arrayIndex,1);
+    setFilterByNumericValues(result);
   };
 
   return (

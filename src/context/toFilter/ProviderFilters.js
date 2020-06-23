@@ -18,12 +18,13 @@ function ProviderFilters({ children }) {
     setFilters((currentFilters) => ({
       ...currentFilters,
       filterByNumericValues: [
-      ...filters.filterByNumericValues,
-      {
-        column,
-        comparison,
-        value,
-      }],
+        ...filters.filterByNumericValues,
+        {
+          column,
+          comparison,
+          value,
+        }
+      ],
     }));
   };
 

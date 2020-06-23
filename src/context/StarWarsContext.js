@@ -33,11 +33,11 @@ export const SWProvider = ({ children }) => {
 
   const fetchData = () => fetch(URL)
     .then(async (resp) => {
-      console.log('new Fetch')
       setIsFetching(true);
       try {
         const json = await resp.json();
         setData(json.results);
+        setFilteredData(json.results);
         setIsFetching(false);
       } catch (e) {
         setfetchError(e);
@@ -61,22 +61,34 @@ export const SWProvider = ({ children }) => {
   };
   // const cleanUpFilters = () => setFilters(initalFilterState);
 
-
-  useEffect(() => {
-    applyFiltersEffect();
-  }, [filters, isFetching]);
+  useEffect((prev) => {
+    console.log(prev);
+    if (filteredData.length) applyFiltersEffect();
+  }, [filters]);
 
   const setNameFilter = (filter) => {
-    console.log(filter);
-    setFilters(({ filterByName: { name: filter } }));
+    setFilters((prevFilters) => ({ ...prevFilters, filterByName: { name: filter } }));
   };
+
   const submitNumericFilter = ({ column, comparison, value }) => {
     setFilters((prevState) => ({
       ...prevState,
       filterByNumericValues: [...prevState.filterByNumericValues, { column, comparison, value }],
     }));
   };
+
+  const selectedFilters = filters.filterByNumericValues;
+
+  const removeFilter = (column) => {
+    const newFilters = filters.filterByNumericValues.filter(
+      (e) => e.column !== column,
+    );
+    setFilters((prevFilters) => ({ ...prevFilters, filterByNumericValues: newFilters }));
+  };
+
   const context = {
+    removeFilter,
+    selectedFilters,
     submitNumericFilter,
     fetchData,
     fetchError,

@@ -28,7 +28,7 @@ option {
 
 label {
   color: rgb(170, 0, 71);
-  font-size: .5rem;
+  font-weight: 400;
   left: 5px;
   pointer-events: none;
   position: absolute;

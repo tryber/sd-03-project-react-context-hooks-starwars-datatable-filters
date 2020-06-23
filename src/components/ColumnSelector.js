@@ -11,7 +11,7 @@ const ColumnSelector = () => {
       <span className="selector-label">Choose a column:</span>
       <select
         name="column"
-        data-testid="column-selector"
+        data-testid="column-filter"
         onChange={({
           target: { name, value },
         }) => setNumericFilter({ ...numericFilter, [name]: value })}

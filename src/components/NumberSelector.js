@@ -13,6 +13,7 @@ const NumberSelector = () => {
         }) => setNumericFilter({ ...numericFilter, [name]: value })}
         required
         id="number-bar"
+        data-testid="value-filter"
       />
       <span className="highlight" />
       <span className="bar" />

@@ -9,7 +9,7 @@ const FilterButton = () => {
       type="submit"
       value="Filtrar"
       className={!(column && comparison && value) ? 'filter-button-disabled' : undefined}
-      data-testid="filter-button"
+      data-testid="button-filter"
       disabled={!(column && comparison && value)}
     />
   );

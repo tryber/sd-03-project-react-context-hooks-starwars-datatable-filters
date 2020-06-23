@@ -12,7 +12,7 @@ const TableBody = ({ properties, isMultiHeader, items }) => (
         {properties.map((feature) => (
           <td
             className={isMultiHeader ? 'td-multi-headers' : ''}
-            data-testid={`planets-${feature}`}
+            data-testid={`planet-${feature}`}
             key={`${item.name}-${feature}`}
           >
             {item[feature]}

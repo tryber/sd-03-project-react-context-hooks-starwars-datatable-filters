@@ -18,8 +18,16 @@ export default function Table() {
   const { data } = useContext(DataContext);
   const { nameFilter, filterByNumericValues, order } = useContext(FilterContext);
 
-  if (order.sort === 'ASC') { data.sort(function (a, b) { return Number(a[order.column]) - Number(b[order.column]); }); }
-  if (order.sort === 'DESC') { data.sort(function (a, b) { return Number(b[order.column]) - Number(a[order.column]); }); }
+  function sortAsc(a, b) {
+    return Number(a[order.column]) - Number(b[order.column]);
+  }
+
+  function sortDesc(a, b) {
+    return Number(b[order.column]) - Number(a[order.column]);
+  }
+
+  if (order.sort === 'ASC') { data.sort(sortAsc); }
+  if (order.sort === 'DESC') { data.sort(sortDesc); }
 
   function renderTableheaders() {
     return (
@@ -59,7 +67,7 @@ export default function Table() {
           <tr key={e.name}>
             {header.map((el) => <td key={e.name + el}>{e[el]}</td>)}
           </tr>
-      ))
+        ))
     );
   }
 

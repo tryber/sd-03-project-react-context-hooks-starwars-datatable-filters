@@ -131,7 +131,11 @@ export default function Filters({ children }) {
     return (
       <div>
         Selecionar por Valores
-        <select value={column} data-testid="column-filter" onChange={(e) => setColumn(e.target.value)}>
+        <select
+          value={column}
+          data-testid="column-filter"
+          onChange={(e) => setColumn(e.target.value)}
+        >
           {getColumns().map((e) => <option value={e}>{e}</option>)}
         </select>
         <select
@@ -141,7 +145,11 @@ export default function Filters({ children }) {
         >
           {comparisonOptions.map((e) => <option value={e}>{e}</option>)}
         </select>
-        <input value={value} data-testid="value-filter" onChange={(e) => setValue(e.target.value)} />
+        <input
+          value={value}
+          data-testid="value-filter"
+          onChange={(e) => setValue(e.target.value)}
+        />
         <button
           type="button"
           data-testid="button-filter"

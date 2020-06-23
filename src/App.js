@@ -1,6 +1,6 @@
 import React from 'react';
 import TableData from './components/TableData';
-import ProviderData from './context/Provider';
+import ProviderData from './context/ProviderData';
 
 function App() {
   return (

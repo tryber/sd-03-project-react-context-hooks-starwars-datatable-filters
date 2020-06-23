@@ -28,7 +28,7 @@ function TableData() {
           </tr>
         </thead>
         <tbody>
-          <Table planets={data}/>
+          {data && <Table planets={data}/>}
         </tbody>
       </table>
     </div>

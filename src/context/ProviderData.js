@@ -27,8 +27,8 @@ function ProviderData({ children }) {
   const context = {
     getPlanetsData: fetchPlanetsData,
     data,
+    isFetching,
   }
-  const { children } = this.props;
   return(
     <StarWarsContext.Provider value={context}>
       {children}

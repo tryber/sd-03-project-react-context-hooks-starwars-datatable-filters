@@ -7,6 +7,6 @@ export const typeName = (text) => ({ type: TYPE_NAME, text });
 
 export const createFilter = (numericFilter) => ({ type: CREATE_NUMERIC_FILTER, numericFilter });
 
-export const removeFilter = (id) => ({ type: REMOVE_FILTER, id, });
+export const removeFilter = (id) => ({ type: REMOVE_FILTER, id });
 
 export const activateOrder = (sortFilter) => ({ type: ACTIVATE_ORDER, sortFilter });

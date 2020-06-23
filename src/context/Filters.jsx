@@ -14,11 +14,10 @@ const INITIAL_STATE = {
   filterByName: { name: '' },
   filterByNumericValues: [],
   order: { column: 'Name', sort: 'ASC' },
-  orderInProgerss: { column: 'Name', sort: 'ASC' },
 };
 
 function filtersReducer(state = INITIAL_STATE, action) {
-  const { filterByNumericValues: numFilters, orderInProgerss } = state;
+  const { filterByNumericValues: numFilters } = state;
   switch (action.type) {
     case TYPE_NAME: return { ...state, filterByName: { name: action.text } };
     case CREATE_NUMERIC_FILTER:

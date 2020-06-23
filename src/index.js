@@ -1,13 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { TableProvider as Provider } from './context/Index';
-import Table from './components/table/table';
+import App from './App';
 
-ReactDOM.render(
-  <Provider >
-    <div className="App">
-      <Table />
-    </div>
-  </Provider>,
-  document.getElementById('root'),
-);
+ReactDOM.render(<App />, document.getElementById('root'));

@@ -1,0 +1,55 @@
+import React, { useState } from 'react';
+import FiltersContext from '../context/FiltersContext';
+
+const FiltersProvider = ({ children }) => {
+  const [column, setColumn] = useState('all');
+  const [comparison, setComparison] = useState('');
+  const [name, setName] = useState('');
+  // const [sortType, setSortType] = useState('');
+  // const [sortColumn, setSortColumn] = useState('');
+  const [numericValue, setNumericValue] = useState('');
+  const [filterByNumericValues, setFilterByNumericValues] = useState([]);
+  const [order, setOrder] = useState({ column: 'Name', sort: 'ASC' });
+
+  const onChangeText = (event) => {
+    const { value } = event.target;
+    setName(value);
+  };
+
+  const setColumnFunc = (selectedcolumn) => setColumn(selectedcolumn);
+  const setComparisonFunc = (selectedComparison) => setComparison(selectedComparison);
+  const setNumericValueFunc = (number) => setNumericValue(number);
+  const filterByNumericValuesFunc = (array) => {
+    setFilterByNumericValues(array);
+  };
+  // const setSortColumnFunc = (columnSelected) => setSortColumn(columnSelected);
+  // const setSortTypeFunc = (type) => setSortType(type);
+  const setOrderFunc = (newObj) => setOrder(newObj);
+
+  const filtersContextObj = {
+    filters: {
+      filterByName: {
+        name,
+      },
+      filterByNumericValues,
+      order,
+    },
+    onChangeText,
+    setColumnFunc,
+    column,
+    setComparisonFunc,
+    comparison,
+    setNumericValueFunc,
+    numericValue,
+    filterByNumericValuesFunc,
+    setOrderFunc,
+  };
+
+  return (
+    <FiltersContext.Provider value={filtersContextObj}>
+      {children}
+    </FiltersContext.Provider>
+  );
+};
+
+export default FiltersProvider;

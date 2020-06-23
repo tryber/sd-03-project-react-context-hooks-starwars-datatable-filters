@@ -19,7 +19,7 @@ function InputByName() {
         />
       </div>
     </div>
-  )
+  );
 }
 
 export default InputByName;

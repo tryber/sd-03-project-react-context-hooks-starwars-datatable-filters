@@ -37,7 +37,9 @@ const Provider = ({ children }) => {
   }, []);
 
   const getPlanetsResult = () => {
-    if (isFetching) return;
+    if (isFetching) {
+      return undefined;
+    }
     const result = {
       data: {
         isFetching,

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import PlanetTableContext from '../context';
+import { PlanetTableContext } from '../context';
 import { Table, FilterContainer } from '../components';
 
 const Home = () => {

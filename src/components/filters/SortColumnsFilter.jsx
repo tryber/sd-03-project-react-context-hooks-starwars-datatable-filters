@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import PlanetTableContext from '../../context';
+import { PlanetTableContext } from '../../context';
 
 const columns = [
   'Name',

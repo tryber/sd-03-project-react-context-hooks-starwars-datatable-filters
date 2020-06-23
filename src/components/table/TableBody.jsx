@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import PlanetTableContext from '../../context';
+import { PlanetTableContext } from '../../context';
 import filterDataByNumericValue from '../../helpers/index';
 import NoResultsTableBody from './NoResultsTableBody';
 import RenderResultsTableBody from './RenderResultsTableBody';

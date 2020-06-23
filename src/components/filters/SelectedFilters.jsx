@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import PlanetTableContext from '../../context';
+import { PlanetTableContext } from '../../context';
 
 const SelectedFilters = () => {
   const {
@@ -11,8 +11,8 @@ const SelectedFilters = () => {
   return (
     <div>
       <h3>Filtros Ativos</h3>
-      {filterByNumericValues
-        && filterByNumericValues.map((filter) => (
+      {filterByNumericValues &&
+        filterByNumericValues.map((filter) => (
           <p key={filter.column} data-testid="filter">
             <span>{filter.column}</span>
             <span>{filter.comparison}</span>

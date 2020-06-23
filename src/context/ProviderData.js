@@ -6,7 +6,8 @@ import fetchPlanets from '../services/starWarsAPI';
 function ProviderData({ children }) {
   const [isFetching, setIsFetching] = useState();
   const [error, setError] = useState(null);
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
+  const [filters, setFilters] = useState({ filterByName: { name: '' } });
 
   const handlePlanetsFailure = (err) => {
     setIsFetching(false);
@@ -27,9 +28,12 @@ function ProviderData({ children }) {
 
   const context = {
     getPlanetsData: fetchPlanetsData,
+    setFilters,
+    setData,
     data,
     isFetching,
     error,
+    filters,
   };
   return (
     <StarWarsContext.Provider value={context}>

@@ -1,37 +1,24 @@
-import React, { useEffect, useContext } from 'react';
-import StarWarsContext from '../context/StarWarsContext';
-import Table from './Table';
+import React from 'react';
 
-function TableData() {
-  const { getPlanetsData, data } = useContext(StarWarsContext);
-
-  useEffect(() => getPlanetsData(), []);
-
+function TableData({ planets }) {
   return (
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>População</th>
-            <th>Clima</th>
-            <th>Criado</th>
-            <th>Diametro</th>
-            <th>Editado</th>
-            <th>Período Orbital</th>
-            <th>Período Rotacional</th>
-            <th>Terreno</th>
-            <th>Superfície Aquática</th>
-            <th>Filmes</th>
-            <th>Gravidade</th>
-            <th>URL</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data && <Table planets={data} />}
-        </tbody>
-      </table>
-    </div>
+    planets.map((planeta) =>
+      <tr key={planeta.name}>
+        <td>{planeta.name}</td>
+        <td>{planeta.population}</td>
+        <td>{planeta.climate}</td>
+        <td>{planeta.created}</td>
+        <td>{planeta.diameter}</td>
+        <td>{planeta.edited}</td>
+        <td>{planeta.orbital_period}</td>
+        <td>{planeta.rotation_period}</td>
+        <td>{planeta.terrain}</td>
+        <td>{planeta.surface_water}</td>
+        <td>{planeta.films}</td>
+        <td>{planeta.gravity}</td>
+        <td>{planeta.url}</td>
+      </tr>,
+    )
   );
 }
 

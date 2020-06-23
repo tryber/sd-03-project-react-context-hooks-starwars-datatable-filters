@@ -7,7 +7,10 @@ const SearchBar = () => {
 
   return (
     <div className="group search-bar">
-      <input onChange={({ target: { value } }) => setInput(value)} id="search-bar" required />
+      <input onChange={({ target: { value } }) => setInput(value)}
+        id="search-bar"
+        data-testid='name-filter'
+        required />
       <span className="highlight" />
       <span className="bar" />
       <label htmlFor="search-bar">Search by planet name</label>

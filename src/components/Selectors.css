@@ -11,7 +11,7 @@
   position: relative;
 }
 
-input , select {
+input, select {
   background-color: transparent;
   border: none;
   border-bottom: 1px solid rgb(82, 0, 34);
@@ -28,7 +28,7 @@ option {
 
 label {
   color: rgb(170, 0, 71);
-  font-weight: 400;
+  font-size: .5rem;
   left: 5px;
   pointer-events: none;
   position: absolute;
@@ -36,7 +36,7 @@ label {
   transition: 0.2s ease all;
 }
 
-input:focus ~ label , input:valid ~ label {
+input:focus~label, input:valid~label {
   color: rgb(82, 0, 34);
   font-size: 0.8rem;
   top: -20px;
@@ -48,7 +48,7 @@ input:focus ~ label , input:valid ~ label {
   width: 300px;
 }
 
-.bar:before , .bar:after {
+.bar:before, .bar:after {
   background: rgb(170, 0, 71);
   bottom: 1px;
   content: '';
@@ -66,7 +66,7 @@ input:focus ~ label , input:valid ~ label {
   right: 50%;
 }
 
-input:focus ~ .bar:before , input:focus ~ .bar:after {
+input:focus~.bar:before, input:focus~.bar:after {
   width: 50%;
 }
 
@@ -80,16 +80,14 @@ input:focus ~ .bar:before , input:focus ~ .bar:after {
   width: 100px;
 }
 
-input:focus ~ .highlight {
+input:focus~.highlight {
   animation: inputHighlighter 0.3s ease;
 }
 
 @keyframes inputHighlighter {
-
   from {
     background: rgb(82, 0, 34);
   }
-
   to {
     background: transparent;
     width: 0;

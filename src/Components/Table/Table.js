@@ -29,25 +29,25 @@ function Table() {
     fetchAPI();
   }, []);
 
-  const filteredPlanet = (data) => {
+  const filteredPlanet = (planets) => {
     const nameInput = filterSelect.filters.filterByName.name;
     if (nameInput !== undefined) {
-      return data.filter(({ name }) => name.toLowerCase().includes(nameInput.toLowerCase()));
+      return planets.filter(({ name }) => name.toLowerCase().includes(nameInput.toLowerCase()));
     }
-    return data;
+    return planets;
   };
 
-  const filterSelectedValues = (data) => {
+  const filterSelectedValues = (planetFiltered) => {
     const inputFilter = filterSelect.filters.filterByNumericValues;
     if (inputFilter) {
       return inputFilter.reduce(
         (acc, { column, comparison, value }) =>
           acc.filter((planet) => switchComparison(column, comparison, value, planet),
           ),
-        filteredPlanet(data),
+        filteredPlanet(planetFiltered),
       );
     }
-    return filteredPlanet(data);
+    return filteredPlanet(planetFiltered);
   };
 
   return (

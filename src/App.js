@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import Table from "./Components/Table/Table";
+import Table from './Components/Table/Table';
 
-import "./App.css";
-import Provider from "./Components/Context/APIProvider";
+import './App.css';
+import Provider from './Components/Context/APIProvider';
 
 function App() {
   return (

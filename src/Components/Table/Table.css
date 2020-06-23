@@ -9,11 +9,11 @@
 }
 
 .TabelaProdutos .Par {
-  background-color: #ddd;
+  background-color: whitesmoke;
 }
 
 .TabelaProdutos .Impar {
-  background-color: #fff;
+  background-color: white;
 }
 
 .input-filter {

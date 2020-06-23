@@ -41,17 +41,17 @@ function Provider({ children }) {
     setFilterSelect(
       (param === 'remove')
       ? filterSelect.filters.filterByNumericValues.filter((filter) => filter !== input)
-      : { ...filterSelect.filters.filterByNumericValues.concat(input), filters, }
+      : { ...filterSelect.filters.filterByNumericValues.concat(input), filters },
     );
   };
 
-  const handleSuccess = (data) => {
-    setData(data);
+  const handleSuccess = (elem) => {
+    setData(elem);
     setLoading(false);
   };
 
-  const handleFailure = (error) => {
-    setError(error.message);
+  const handleFailure = (elemen) => {
+    setError(elemen.message);
     setLoading(false);
   };
   const fetchAPI = () => {

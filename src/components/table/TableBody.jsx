@@ -42,9 +42,7 @@ const TableBody = () => {
             <td>{planet.created}</td>
             <td>{planet.edited}</td>
             <td>
-              <a href={planet.url} target="_blank" rel="noopener noreferrer">
-                {planet.url}
-              </a>
+              <a href={planet.url} target="_blank" rel="noopener noreferrer">{planet.url}</a>
             </td>
           </tr>
         ))}

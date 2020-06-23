@@ -22,7 +22,7 @@ function SearchBar() {
     updateNumericFilters(searchFilters);
   };
 
-  const filterColumnsOptions = (filters, columnV) => !filters.find(({ column }) => column === columnV);
+  const filterColumnsOption = (filters, columnV) => !filters.find(({ column }) => column === columnV);
 
   return (
     <div className="filters-div">
@@ -32,7 +32,7 @@ function SearchBar() {
         data-testid="column-filter"
         onChange={(event) => setselColumn(event.target.value)}
       >
-        {columnsArray.map((column) => (filterColumnsOptions(numericFilters, column) &&
+        {columnsArray.map((column) => (filterColumnsOption(numericFilters, column) &&
           (<option value={column} key={column}>{column}</option>)
         ))}
       </select>

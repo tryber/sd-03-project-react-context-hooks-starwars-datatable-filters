@@ -63,6 +63,7 @@ const renderSortSelect = (callback, object) => (
 
 const renderSubmitButton = (callback, object) => (
   <button
+    className="button is-dark is-small"
     type="button"
     data-testid="column-sort-button"
     onClick={() => callback({ ...object })}
@@ -79,7 +80,7 @@ function SortColumnsFilter() {
   const [sortFilter, setSortFilter] = useState({ ...initialState });
 
   return (
-    <div>
+    <div className="box">
       {renderColumnSelect(setSortFilter, sortFilter)}
       {renderSortSelect(setSortFilter, sortFilter)}
       {renderSubmitButton(setOrderFilter, sortFilter)}

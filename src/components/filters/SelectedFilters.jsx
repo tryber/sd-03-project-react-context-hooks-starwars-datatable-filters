@@ -9,18 +9,22 @@ const SelectedFilters = () => {
     },
   } = useContext(PlanetTableContext);
   return (
-    <div>
+    <div className="tags are-medium">
       <h3>Filtros Ativos</h3>
-      {filterByNumericValues &&
-        filterByNumericValues.map((filter) => (
-          <p key={filter.column} data-testid="filter">
-            <span>{filter.column}</span>
-            <span>{filter.comparison}</span>
-            <span>{filter.value}</span>
-            <button type="button" onClick={() => removeFilter(filter)}>
+      {filterByNumericValues
+        && filterByNumericValues.map((filter) => (
+          <section key={filter.column} data-testid="filter" className="box">
+            <span className="tag is-light">{filter.column}</span>
+            <span className="tag is-light">{filter.comparison}</span>
+            <span className="tag is-light">{filter.value}</span>
+            <button
+              className="button is-text is-small"
+              type="button"
+              onClick={() => removeFilter(filter)}
+            >
               X
             </button>
-          </p>
+          </section>
         ))}
     </div>
   );

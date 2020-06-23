@@ -3,8 +3,8 @@ import TableHeader from './TableHeader';
 import TableBody from './TableBody';
 
 const Table = () => (
-  <div>
-    <table>
+  <div className="table-container is-hoverable is-fullwidth">
+    <table className="table">
       <TableHeader />
       <TableBody />
     </table>

@@ -75,6 +75,7 @@ const renderValueFilter = (callback, object) => (
 
 const renderSubmitFiltersButton = (callback1, callback2, object) => (
   <button
+    className="button is-small is-dark"
     type="button"
     data-testid="button-filter"
     onClick={() => ((

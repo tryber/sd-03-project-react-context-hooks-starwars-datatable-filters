@@ -22,7 +22,7 @@ export const getRadios = (onInputChange) => (
   <div>
     <input
       defaultChecked
-      data-testid="column-sort-input"
+      data-testid="column-sort-input-asc"
       type="radio"
       id="ASC"
       name="order"
@@ -31,7 +31,7 @@ export const getRadios = (onInputChange) => (
     />
     <label htmlFor="ASC">ASC</label>
     <input
-      data-testid="column-sort-input"
+      data-testid="column-sort-input-desc"
       type="radio"
       id="DESC"
       name="order"

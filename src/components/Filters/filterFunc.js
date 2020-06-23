@@ -1,9 +1,6 @@
-const filterFunc = (planets, name, numericValues = []) => {
-  console.log('planets', planets)
+const filterFunc = (planets, text, numericValues) => {
   if (numericValues.length === 0) {
-    const filtroPlanets = planets.filter((planet) => name === '' ? planet.name : planet.name.includes(name));
-    console.log('filtroPlanets:', filtroPlanets);
-    return filtroPlanets;
+    return planets.filter((planet) => planet.name.includes(text));
   }
   return numericValues.reduce(
     (acc, { column, comparison, value }) =>
@@ -11,21 +8,21 @@ const filterFunc = (planets, name, numericValues = []) => {
         switch (comparison) {
           case 'maior que':
             return (
-              planet.name.includes(name) &&
+              planet.name.includes(text) &&
               parseFloat(planet[column]) > parseFloat(value)
             );
           case 'menor que':
             return (
-              planet.name.includes(name) &&
+              planet.name.includes(text) &&
               parseFloat(planet[column]) < parseFloat(value)
             );
           case 'igual a':
             return (
-              planet.name.includes(name) &&
+              planet.name.includes(text) &&
               parseFloat(planet[column]) === parseFloat(value)
             );
           default:
-            return planet.name.includes(name);
+            return planet.name.includes(text);
         }
       }),
     planets,

@@ -1,5 +1,4 @@
 import React, { useEffect, useContext } from 'react';
-
 import InputNamePlanet from './InputNamePlanet';
 import CreateTable from './CreateTable';
 import NavBar from './NavBar';
@@ -12,10 +11,13 @@ function switchComparison(column, comparison, value, planet) {
   switch (comparison) {
     case 'maior que':
       return Number(planet[column]) > Number(value);
+      break;
     case 'igual a':
       return Number(planet[column]) === Number(value);
+      break;
     case 'menor que':
       return Number(planet[column]) < Number(value);
+      break;
     default:
       return [];
   }
@@ -23,8 +25,8 @@ function switchComparison(column, comparison, value, planet) {
 
 function Table() {
   const { fetchAPI, loading, data, filterSelect } = useContext(APIcontext);
-  const inputFilter = filterSelect.filters.filterByNumericValues;
   const nameInput = filterSelect.filters.filterByName.name;
+  const inputFilter = filterSelect.filters.filterByNumericValues;
 
   useEffect(() => {
     fetchAPI();

@@ -12,6 +12,7 @@ const RenderFilters = () => {
       Nome:&nbsp;
       <input
         id="nameFilter"
+        data-testid="name-filter"
         onChange={(e) => setFilterByName(e.target.value)}
         type="text"
         value={filters.filterByName.name}

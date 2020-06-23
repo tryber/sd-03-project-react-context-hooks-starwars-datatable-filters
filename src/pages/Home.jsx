@@ -19,7 +19,7 @@ const Home = () => {
   }, []);
 
   return (
-    <>
+    <main>
       {loading && <h1>Loading...</h1>}
       {!loading && error !== '' && <h3>{error}</h3>}
       {!loading && (
@@ -30,7 +30,7 @@ const Home = () => {
           <Table />
         </div>
       )}
-    </>
+    </main>
   );
 };
 

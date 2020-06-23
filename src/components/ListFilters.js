@@ -2,8 +2,15 @@ import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 const ListFilters = () => {
-  const { filters } = useContext(StarWarsContext);
+  const { filters, setColumn, setComparison, setValue } = useContext(StarWarsContext);
   const { filterByNumericValues, clearFilter } = filters;
+
+  const clearFilter = (arrayIndex) => {
+    setColumn('');
+    setComparison('');
+    setValue('');
+  };
+
   return (
     filterByNumericValues.map(({ column, comparison, value }, index) => {
       if (column && comparison && value) {

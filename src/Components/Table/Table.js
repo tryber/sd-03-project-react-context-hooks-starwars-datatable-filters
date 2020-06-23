@@ -11,13 +11,10 @@ function switchComparison(column, comparison, value, planet) {
   switch (comparison) {
     case 'maior que':
       return Number(planet[column]) > Number(value);
-      break;
     case 'igual a':
       return Number(planet[column]) === Number(value);
-      break;
     case 'menor que':
       return Number(planet[column]) < Number(value);
-      break;
     default:
       return [];
   }

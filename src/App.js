@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useContext } from 'react';
+import { StarWarsContext } from './context/StarWarsContext';
+import RenderTHead from './components/RenderTHead'
+import RenderTBody from './components/RenderTBody'
 import './App.css';
 
-function App() {
+const App = () => {
+  const store = useContext(StarWarsContext);
+
+  if (store.isRequesting) return <h1>Loading ...</h1>;
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <table>
+        <RenderTHead />
+        <RenderTBody
+          filteredTable={store.dataTable}
+          isRequesting={store.isRequesting}
+        />
+      </table>
     </div>
   );
 }

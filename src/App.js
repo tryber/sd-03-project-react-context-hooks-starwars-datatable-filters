@@ -5,20 +5,20 @@ import RenderTBody from './components/RenderTBody';
 import './App.css';
 
 const App = () => {
-  const storeContext = useContext(StarWarsContext);
+  const { dataTable, isRequesting, requestDataTable } = useContext(StarWarsContext);
 
   useEffect(() => {
-    storeContext.requestDataTable();
+    requestDataTable();
   }, []);
 
-  if (storeContext.isRequesting) return <h1>Loading ...</h1>;
+  if (isRequesting) return <h1>Loading ...</h1>;
 
   return (
     <div className="App">
       <table>
         <RenderTHead />
         <RenderTBody
-          filteredTable={storeContext.dataTable}
+          filteredTable={dataTable}
         />
       </table>
     </div>

@@ -27,9 +27,9 @@ function Provider({ children }) {
 
   const saveFilter = (input, param) => {
     const filters = {
-        filterByName: {
-          name: input.name,
-        },
+      filterByName: {
+        name: input.name,
+      },
       filterByNumericValues: [
         {
           column: input.column,

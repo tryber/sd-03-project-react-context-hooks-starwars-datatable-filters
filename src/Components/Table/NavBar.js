@@ -12,7 +12,7 @@ const columns = [
 
 const comparisons = ['', 'maior que', 'igual a', 'menor que'];
 
-const filterColumn = (valueFilter, option) => {
+function filterColumn(valueFilter, option) {
   return !valueFilter.find(({ column }) => column === option);
 };
 
@@ -33,7 +33,7 @@ function NavBar() {
     });
   };
 
-  const sideBar = () => {
+  function sideBar() {
     return (
       <header className="header">
         <nav className="menu">

@@ -3,7 +3,7 @@ import StarWarsContext from '../context/StarWarsContext';
 import Table from './Table';
 
 function TableData() {
-  const  { getPlanetsData, data } = useContext(StarWarsContext);
+  const { getPlanetsData, data } = useContext(StarWarsContext);
 
   useEffect(() => getPlanetsData(), []);
 

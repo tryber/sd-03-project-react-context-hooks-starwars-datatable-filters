@@ -8,9 +8,9 @@ function ProviderData({ children }) {
   const [error, setError] = useState(null);
   const [data, setData] = useState();
 
-  const handlePlanetsFailure = (error) => {
+  const handlePlanetsFailure = (err) => {
     setIsFetching(false);
-    setError(error.message);
+    setError(err.message);
   };
 
   const handlePlanetsSuccess = (response) => {

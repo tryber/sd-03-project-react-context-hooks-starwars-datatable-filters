@@ -4,6 +4,8 @@ import { StarWarsProvider } from './context/StarWarsContext';
 import App from './App';
 
 ReactDOM.render(
-  <App />,
+  <StarWarsProvider>
+    <App />
+  </StarWarsProvider>,
   document.getElementById('root'),
 );

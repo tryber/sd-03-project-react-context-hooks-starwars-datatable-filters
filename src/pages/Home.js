@@ -3,21 +3,24 @@ import Loading from '../components/Loading';
 import Table from '../components/Table';
 import starWarsApi from '../services/starWarsApi';
 import StarWarsContext from '../context/StarWarsContext';
+import Inputs from '../components/Inputs';
 
 function Home() {
   const [name, setName] = React.useState('');
   const [data, setData] = React.useState([]);
   const [isFetching, setIsFetching] = React.useState(true);
 
-  const dataAndName = {
+  const context = {
+    setNameFunc: (name) => setName(name),
     data,
-    name,
+    filterByName: {
+      name,
+    }
   }
 
   React.useEffect(() => {
     starWarsApi('planets').then((res) => {
-      console.log(res);
-      setIsFetching(false)
+      setIsFetching(false);
       setData(res.results);
     });
   }, []);
@@ -25,19 +28,10 @@ function Home() {
   if (isFetching) return <Loading />;
   return (
     <div>
-      <label htmlFor="namePlanet">
-        <input
-          data-testid="name-filter"
-          name="namePlanet"
-          type="text"
-          onChange={(event) => setName(event.target.value)}
-        />
-      </label>
-
-      <StarWarsContext.Provider value={dataAndName}>
+      <StarWarsContext.Provider value={context}>
+        <Inputs />
         <Table />
       </StarWarsContext.Provider>
-
     </div>
   );
 }

@@ -60,7 +60,7 @@ function Table() {
     { id: 12, title: 'surface water' },
     { id: 13, title: 'terrain' },
   ]);
-  const { data, name } = React.useContext(StarWarsContext);
+  const { data, filterByName } = React.useContext(StarWarsContext);
   return (
     <div>
       <table>
@@ -69,7 +69,7 @@ function Table() {
             {titles.map((item) => <th key={item.id}>{item.title}</th>)}
           </tr>
         </thead>
-        {tbody(data, name)}
+        {tbody(data, filterByName.name)}
       </table>
     </div>
   );

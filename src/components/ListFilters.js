@@ -8,7 +8,11 @@ const ListFilters = () => {
   const clearFilter = (arrayIndex) => {
     const result = [...filterByNumericValues];
     result.splice(arrayIndex, 1);
-    setFilterByNumericValues(result);
+    if (result.length === 0) {
+      setFilterByNumericValues([{ column: '', comparison: '', value: '' }]);
+    } else {
+      setFilterByNumericValues(result);
+    }
   };
 
   return (

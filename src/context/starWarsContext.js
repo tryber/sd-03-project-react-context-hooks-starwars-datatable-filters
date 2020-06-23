@@ -1,28 +1,28 @@
 import React, { createContext, useState, useEffect } from 'react';
+import useFilters from '../Hooks/useFilters';
 
 export const starWarsContext = createContext();
 
-
 const StarWarsProvider = ({ children }) => {
   const [planets, setPlanets] = useState([]);
-  // const [Loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const allFilters = useFilters();
 
   useEffect(() => {
+    setLoading(true);
     fetch('https://swapi-trybe.herokuapp.com/api/planets/')
       .then((response) => response.json()
-        .then((data) => setPlanets(data.results)));
+        .then((data) => setPlanets(data.results), setLoading(false)));
   }, []);
 
-  const store = {
+  const context = {
+    allFilters,
     planets,
-    selectInput: [{ id: 77 }],
-    filterByNamet: '',
-    // Loading: [Loading, setLoading(true)],
-    getPlanetByname: '',
+    loading,
   };
 
   return (
-    <starWarsContext.Provider value={store}>
+    <starWarsContext.Provider value={context}>
       {children}
     </starWarsContext.Provider>
   );

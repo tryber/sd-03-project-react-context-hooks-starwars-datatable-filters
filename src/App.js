@@ -3,7 +3,6 @@ import './App.css';
 import Table from './componets/Table';
 import StarWarsProvider from './context/starWarsContext';
 
-
 function App() {
   return (
     <StarWarsProvider>

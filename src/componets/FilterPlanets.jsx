@@ -1,17 +1,17 @@
-import React from 'react';
-import { useContext } from 'react';
-import FilterByNumeric from './FilterByNumeric';
+import React, { useContext } from 'react';
 import { starWarsContext } from '../context/starWarsContext';
+import FilterByNumeric from './FilterByNumeric';
 
 const FilterPlanets = () => {
-  const { getPlanetByname } = useContext(starWarsContext);
+  const { allFilters: { setFiltersByName } } = useContext(starWarsContext);
   return (
     <div>
       <FilterByNumeric />
+      <h3>Filter Planets</h3>
       <input
         type="text"
         data-testid="name-filter"
-        onChange={(e) => getPlanetByname(e.target.value)}
+        onChange={(event) => setFiltersByName(event.target.value)}
       />
     </div>
   );

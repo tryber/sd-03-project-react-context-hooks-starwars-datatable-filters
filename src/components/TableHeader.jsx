@@ -8,11 +8,7 @@ const TableHeader = ({ headers, isMultiHeader }) => (
     {
       <tr className={isMultiHeader ? 'tr-multi-headers' : ''}>
         {headers.map((title) => (
-          <th
-            className="table-header"
-            style={isMultiHeader ? { left: -9999, position: 'absolute', top: -9999 } : {}}
-            key={title}
-          >
+          <th className={isMultiHeader ? 'th-multi-headers' : ''} key={title}>
             {constants.frendlyUser(title)}
           </th>
         ))}

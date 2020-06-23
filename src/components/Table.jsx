@@ -29,9 +29,7 @@ const orderByStringProperties = (list, col, direction) => {
 };
 
 const renderBody = (planets, properties, isMultiHeader) => (
-  <tbody
-    style={isMultiHeader ? { border: '1px solid #ccc' } : { display: 'block', flexBasis: '60%' }}
-  >
+  <tbody>
     {planets
       .map((planet, index) => (
         <TableRow
@@ -44,15 +42,6 @@ const renderBody = (planets, properties, isMultiHeader) => (
       ))
     }
   </tbody>
-);
-
-const generateStyle = (isMultiHeader) => (
-  isMultiHeader ? { display: 'inline-block' } : ({
-    border: '1px solid #ccc',
-    display: 'flex',
-    flexDirection: 'column',
-    flexBasis: '60%',
-  })
 );
 
 const makeHeadersInMultiHeadersTable = (headers) => {
@@ -95,11 +84,7 @@ function Table() {
   return (
     <React.Fragment>
       {isMultiHeader && makeHeadersInMultiHeadersTable(headers)}
-      <table
-        className="table"
-        style={generateStyle(isMultiHeader)}
-      >
-        <caption>Star Wars Planets</caption>
+      <table className={isMultiHeader ? 'table-multi-headers' : ''}>
         <TableHeader
           headers={headers}
           isMultiHeader={isMultiHeader}

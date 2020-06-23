@@ -4,7 +4,7 @@ import FilterList from './FilterList';
 import { StarWarsContext } from './StarWarsContext';
 
 function SearchBar() {
-  const [column, setcolumn] = useState('');
+  const [columnC, setcolumn] = useState('');
   const [comparison, setComparison] = useState('');
   const [value, setValue] = useState('');
 
@@ -18,7 +18,7 @@ function SearchBar() {
   } = useContext(StarWarsContext);
 
   const handleClick = () => {
-    const searchFilters = { column, comparison, value };
+    const searchFilters = { column: columnC, comparison, value };
     updateNumericFilters(searchFilters);
   };
 

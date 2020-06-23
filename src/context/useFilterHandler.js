@@ -16,7 +16,7 @@ const useFilterHandler = () => {
   const setFilterByNumericValues = ({ column, comparison, value }) => setFilters({
     ...filters,
     filterByNumericValues: [
-      ...filters.filterByNumericValues, { column, comparison, value }
+      ...filters.filterByNumericValues, { column, comparison, value },
     ],
   });
 

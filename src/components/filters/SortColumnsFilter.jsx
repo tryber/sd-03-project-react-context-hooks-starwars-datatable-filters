@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { sortColumns } from '../../actions/actionsCreators';
+import React, { useContext, useState } from 'react';
+import PlanetTableContext from '../../context/context';
 
 const columns = [
   'Name',
@@ -19,90 +17,72 @@ const columns = [
   'URL',
 ];
 
-class SortColumnsFilter extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      column: 'name',
-      order: '',
-    };
-  }
-
-  renderColumnSelect() {
-    return (
-      <select
-        data-testid="column-sort"
-        onChange={(event) => this.setState({ column: event.target.value })}
-      >
-        {columns.map((column) => (
-          <option value={column.toLowerCase()} key={column}>
-            {column}
-          </option>
-        ))}
-      </select>
-    );
-  }
-
-  renderSortSelect() {
-    return (
-      <div>
-        <label htmlFor="ASC">
-          ASC
-          <input
-            name="sort_radio"
-            type="radio"
-            data-testid="column-sort-input"
-            value="ASC"
-            defaultChecked
-            onChange={(event) => this.setState({ order: event.target.value })}
-          />
-        </label>
-        <label htmlFor="DESC">
-          DESC
-          <input
-            name="sort_radio"
-            type="radio"
-            data-testid="column-sort-input"
-            value="DESC"
-            onChange={(event) => this.setState({ order: event.target.value })}
-          />
-        </label>
-      </div>
-    );
-  }
-
-  renderSubmitButton() {
-    const { column, order } = this.state;
-    const { sortParams } = this.props;
-    return (
-      <button
-        type="button"
-        data-testid="column-sort-button"
-        onClick={() => sortParams({ column, order })}
-      >
-        Ordenar
-      </button>
-    );
-  }
-
-  render() {
-    return (
-      <div>
-        {this.renderColumnSelect()}
-        {this.renderSortSelect()}
-        {this.renderSubmitButton()}
-      </div>
-    );
-  }
-}
-
-SortColumnsFilter.propTypes = {
-  sortParams: PropTypes.func.isRequired,
+const initialState = {
+  column: 'name',
+  order: '',
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  sortParams: (sortParams) => dispatch(sortColumns(sortParams)),
-});
+function SortColumnsFilter() {
+  const { setOrderFilter } = useContext(PlanetTableContext);
 
-export default connect(null, mapDispatchToProps)(SortColumnsFilter);
+  const [sortFilter, setSortFilter] = useState({ ...initialState });
+
+  const renderColumnSelect = () => (
+    <select
+      data-testid="column-sort"
+      onChange={(event) => setSortFilter({ ...sortFilter, column: event.target.value })}
+    >
+      {columns.map((column) => (
+        <option value={column.toLowerCase()} key={column}>
+          {column}
+        </option>
+      ))}
+    </select>
+  );
+
+  const renderSortSelect = () => (
+    <div>
+      <label htmlFor="ASC">
+        ASC
+        <input
+          name="sort_radio"
+          type="radio"
+          data-testid="column-sort-input"
+          value="ASC"
+          defaultChecked
+          onChange={(event) => setSortFilter({ ...sortFilter, order: event.target.value })}
+        />
+      </label>
+      <label htmlFor="DESC">
+        DESC
+        <input
+          name="sort_radio"
+          type="radio"
+          data-testid="column-sort-input"
+          value="DESC"
+          onChange={(event) => setSortFilter({ ...sortFilter, order: event.target.value })}
+        />
+      </label>
+    </div>
+  );
+
+  const renderSubmitButton = () => (
+    <button
+      type="button"
+      data-testid="column-sort-button"
+      onClick={() => setOrderFilter({ ...sortFilter })}
+    >
+      Ordenar
+    </button>
+  );
+
+  return (
+    <div>
+      {renderColumnSelect()}
+      {renderSortSelect()}
+      {renderSubmitButton()}
+    </div>
+  );
+}
+
+export default SortColumnsFilter;

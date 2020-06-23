@@ -11,14 +11,21 @@ const columns = [
 
 const comparisons = ['maior que', 'menor que', 'igual a'];
 
+const initialState = {
+  column: '',
+  comparison: '',
+  value: '',
+};
+
 function FilterByValuesBar() {
   const {
     filters: { filterByNumericValues },
     setFilterByNumericValues,
   } = useContext(PlanetTableContext);
-  const [columnValue, setColumnValue] = useState('');
-  const [comparisonValue, setComparisonValue] = useState('');
-  const [valueState, setValueState] = useState('');
+
+  const [filterByNumeric, setFilterByNumeric] = useState({
+    ...initialState,
+  });
 
   const filterColumnsOptions = (filters, value) => !filters.find(({ column }) => column === value);
 
@@ -26,8 +33,11 @@ function FilterByValuesBar() {
     <select
       id="column-filter"
       data-testid="column-filter"
-      value={columnValue}
-      onChange={(event) => setColumnValue(event.target.value)}
+      value={filterByNumeric.column}
+      onChange={(event) => setFilterByNumeric({
+        ...filterByNumeric,
+        column: event.target.value,
+      })}
     >
       <option value="" />
       {columns.map(
@@ -44,9 +54,12 @@ function FilterByValuesBar() {
     <select
       name="comparison-filter"
       id="comparison-filter"
-      value={comparisonValue}
+      value={filterByNumeric.comparison}
       data-testid="comparison-filter"
-      onChange={(event) => setComparisonValue(event.target.value)}
+      onChange={(event) => setFilterByNumeric({
+        ...filterByNumeric,
+        comparison: event.target.value,
+      })}
     >
       <option value="" />
       {comparisons.map((comparison) => (
@@ -62,10 +75,13 @@ function FilterByValuesBar() {
       type="number"
       name="value-filter"
       id="value-filter"
-      value={valueState}
+      value={filterByNumeric.value}
       data-testid="value-filter"
       placeholder="digite um valor"
-      onChange={(event) => setValueState(event.target.value)}
+      onChange={(event) => setFilterByNumeric({
+        ...filterByNumeric,
+        value: event.target.value,
+      })}
     />
   );
 
@@ -73,16 +89,18 @@ function FilterByValuesBar() {
     <button
       type="button"
       data-testid="button-filter"
-      onClick={
-        (() => setFilterByNumericValues({
-          columnValue,
-          comparisonValue,
-          valueState,
+      onClick={() => ((
+        setFilterByNumericValues({
+          ...filterByNumeric,
         }),
-        () => ((setColumnValue(''), setComparisonValue(''), setColumnValue(''))))
-      }
+        setFilterByNumeric({
+          ...initialState,
+        })
+      ))}
       disabled={
-        columnValue === '' || comparisonValue === '' || valueState === ''
+        filterByNumeric.column === ''
+        || filterByNumeric.comparison === ''
+        || filterByNumeric.value === ''
       }
     >
       Filtrar

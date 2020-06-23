@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import StarWarsContext from '../context/StarWarsContext'
+import React from 'react';
+import StarWarsContext from '../context/StarWarsContext';
 import useContextAPIPlanets from '../hooks/useContextAPIPlanets';
 
 export default function Header() {

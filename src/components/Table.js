@@ -4,9 +4,7 @@ import TableData from './TableData';
 
 function Table() {
   const { getPlanetsData, data } = useContext(StarWarsContext);
-
   useEffect(() => getPlanetsData(), []);
-
   return (
     <div>
       <table>

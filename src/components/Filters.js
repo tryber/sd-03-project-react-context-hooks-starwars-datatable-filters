@@ -3,16 +3,16 @@ import React, { useContext, useEffect, useState } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 function Filters() {
-  const { setFilters, filters, data, setData } = useContext(StarWarsContext);
+  const { filters, data, setData, handleNameFilter } = useContext(StarWarsContext);
 
   useEffect(() => {
     setData(data.filter((planet) => planet.name.includes(filters.filterByName.name)))
   }, [filters.filterByName.name]);
-  console.log('FilterByName:', filters.filterByName.name);
+
   return(
     <form>
     <input
-      onChange={({ target: { value }}) => setFilters((currentState) => ({...currentState, filterByName: { name: value }}))}
+      onChange={(event) => handleNameFilter(event.target.value)}
       data-testid="name-filter"
       type="text"
       placeholder="Filtro"

@@ -9,6 +9,12 @@ function ProviderData({ children }) {
   const [data, setData] = useState([]);
   const [filters, setFilters] = useState({ filterByName: { name: '' } });
 
+  const handleNameFilter = (value) => {
+    setFilters((currentFilters) => ({
+      ...currentFilters, filterByName: { name: value }
+    }));
+  }
+
   const handlePlanetsFailure = (err) => {
     setIsFetching(false);
     setError(err.message);
@@ -30,6 +36,7 @@ function ProviderData({ children }) {
     getPlanetsData: fetchPlanetsData,
     setFilters,
     setData,
+    handleNameFilter,
     data,
     isFetching,
     error,

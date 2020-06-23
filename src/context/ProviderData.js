@@ -7,13 +7,16 @@ function ProviderData({ children }) {
   const [isFetching, setIsFetching] = useState();
   const [error, setError] = useState(null);
   const [data, setData] = useState([]);
-  const [filters, setFilters] = useState({ filterByName: { name: '' } });
+  const [filters, setFilters] = useState({
+    filterByName: { name: '' },
+    filterByNumericValues: [{ column: '', comparison: '', value: '' }],
+  });
 
   const handleNameFilter = (value) => {
     setFilters((currentFilters) => ({
-      ...currentFilters, filterByName: { name: value }
+      ...currentFilters, filterByName: { name: value },
     }));
-  }
+  };
 
   const handlePlanetsFailure = (err) => {
     setIsFetching(false);
@@ -32,11 +35,22 @@ function ProviderData({ children }) {
       .then(handlePlanetsSuccess, handlePlanetsFailure);
   };
 
+  const handleSelectColumn = ({ column, comparison, value }) => {
+    setFilters((currentFilters) => ({
+      ...currentFilters, filterByNumericValues: [{
+        column,
+        comparison,
+        value,
+      }],
+    }));
+  }
+
   const context = {
     getPlanetsData: fetchPlanetsData,
     setFilters,
     setData,
     handleNameFilter,
+    handleSelectColumn,
     data,
     isFetching,
     error,

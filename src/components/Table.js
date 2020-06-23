@@ -10,7 +10,7 @@ function Table() {
       <table>
         <thead>
           <tr>
-            <th>Nome</th>
+            <th data-testid="planet-name">Nome</th>
             <th>População</th>
             <th>Clima</th>
             <th>Criado</th>

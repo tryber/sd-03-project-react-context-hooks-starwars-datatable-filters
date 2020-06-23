@@ -1,24 +1,61 @@
-import React, { useContext, useEffect, useState } from 'react';
-// import FiltersContext from '../context/FiltersContext';
+import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 function Filters() {
-  const { filters, data, setData, handleNameFilter } = useContext(StarWarsContext);
+  const { handleNameFilter } = useContext(StarWarsContext);
 
-  useEffect(() => {
-    setData(data.filter((planet) => planet.name.includes(filters.filterByName.name)))
-  }, [filters.filterByName.name]);
+  const renderColumn = () => {
+    const columns = [
+      'population',
+      'orbital_period',
+      'diameter',
+      'rotation_period',
+      'surface_water',
+    ];
+    return (
+      <div>
+        <select data-testid="column-filter">
+          <option value="Coluna">Coluna</option>
+          {columns.map((column) =>
+          <React.Fragment key={`${column}`}>
+            <option>{`${column}`}</option>
+          </React.Fragment>)
+          }
+        </select>
+        <select data-testid="comparison-filter">
+          <option value="Select">Intervalo</option>
+          <option value="maior que">maior que</option>
+          <option value="menor que">menor que</option>
+          <option value="igual a">igual a</option>
+        </select>
+      </div>
+    );
+  }
 
-  return(
+  const renderFilterBar = () => {
+    return (
+      <div>
+        <input
+          data-testid="value-filter"
+          type="number"
+          placeholder="Digite um Número"
+        />
+        <button data-testid="button-filter">Filtrar</button>
+      </div>
+    );
+  }
+
+  return (
     <form>
-    <input
-      onChange={(event) => handleNameFilter(event.target.value)}
-      data-testid="name-filter"
-      type="text"
-      placeholder="Filtro"
-      value={filters.filterByName.name}
-    />
-  </form>
+      {renderColumn()}
+      {renderFilterBar()}
+      <input
+        onChange={(event) => handleNameFilter(event.target.value)}
+        data-testid="name-filter"
+        type="text"
+        placeholder="Filtro"
+      />
+    </form>
   );
 }
 

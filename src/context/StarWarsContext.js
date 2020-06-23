@@ -9,7 +9,29 @@ const initalFilterState = {
     name: '',
   },
   filterByNumericValues: [],
+  order: {
+    column: 'Name',
+    sort: 'ASC',
+  },
 };
+
+function sortBy(planetA, planetB, column) {
+  let planet1 = planetA[column];
+  let planet2 = planetB[column];
+  if (Number(planet1) && Number(planet2)) {
+    planet1 = Number(planet1);
+    planet2 = Number(planet2);
+    switch (true) {
+      case planet1 > planet2:
+        return 1;
+      case planet1 < planet2:
+        return -1;
+      default:
+        return 0;
+    }
+  }
+  return planet1.toLowerCase().localeCompare(planet2.toLowerCase());
+}
 
 const numericFilter = (planet, column, comparison, value) => {
   switch (comparison) {
@@ -55,16 +77,32 @@ export const SWProvider = ({ children }) => {
     }) => acc.filter((planet) => numericFilter(planet, column, comparison, value)), dataSample);
   };
 
-  const applyFiltersEffect = () => {
-    const nameFiltered = filterByText(data, filters.filterByName.name);
-    setFilteredData(filteredByNumeric(nameFiltered));
+  const sortByCondition = (dataToSort) => {
+    const { sort, column } = filters.order;
+    switch (sort) {
+      case 'ASC':
+        return dataToSort.sort((planetA, planetB) => sortBy(
+          planetA, planetB, column.toLowerCase(),
+        ));
+      case 'DESC':
+        return dataToSort.sort((planetA, planetB) => sortBy(
+          planetA, planetB, column.toLowerCase(),
+        )).reverse();
+      default:
+        return dataToSort;
+    }
   };
-  // const cleanUpFilters = () => setFilters(initalFilterState);
 
-  useEffect((prev) => {
-    console.log(prev);
+  const applyFiltersEffect = () => {
+    let arrayFiltered = filterByText(data, filters.filterByName.name);
+    arrayFiltered = filteredByNumeric(arrayFiltered);
+    arrayFiltered = sortByCondition(arrayFiltered);
+    return setFilteredData(arrayFiltered);
+  };
+
+  useEffect(() => {
     if (filteredData.length) applyFiltersEffect();
-  }, [filters]);
+  }, [filters, isFetching]);
 
   const setNameFilter = (filter) => {
     setFilters((prevFilters) => ({ ...prevFilters, filterByName: { name: filter } }));
@@ -86,7 +124,15 @@ export const SWProvider = ({ children }) => {
     setFilters((prevFilters) => ({ ...prevFilters, filterByNumericValues: newFilters }));
   };
 
+  const submitSort = (column, sort) => setFilters((prevFilters) => ({
+    ...prevFilters,
+    order: {
+      column, sort,
+    },
+  }));
+
   const context = {
+    submitSort,
     removeFilter,
     selectedFilters,
     submitNumericFilter,

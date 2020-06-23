@@ -5,7 +5,6 @@ import FilterSelector from './FilterSelector';
 
 export default function () {
   const { filters, setNameFilter, filteredData } = useContext(StarWarsContext);
-  console.log('passando por aqui:');
   return filteredData.length > 0 && (
     <div>
       <input

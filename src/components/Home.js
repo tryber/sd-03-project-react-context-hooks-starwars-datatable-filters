@@ -3,6 +3,7 @@ import Table from './Table';
 import Filters from './Filters';
 import StarWarsContext from '../context/StarWarsContext';
 import SelectedFilters from './SelectedFilters';
+import Sorter from './Sorter';
 
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
       <div className="App">
         <Filters />
         <SelectedFilters />
+        <Sorter />
         <Table />
       </div>
     )

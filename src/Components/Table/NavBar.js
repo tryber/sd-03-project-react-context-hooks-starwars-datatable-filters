@@ -14,7 +14,7 @@ const comparisons = ['', 'maior que', 'igual a', 'menor que'];
 
 function filterColumn(valueFilter, option) {
   return !valueFilter.find(({ column }) => column === option);
-};
+}
 
 function NavBar() {
   const { saveFilter, filterSelect } = useContext(APIcontext);
@@ -65,7 +65,7 @@ function NavBar() {
         </nav>
       </header>
     );
-  };
+  }
 
   return (
     <div>

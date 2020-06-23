@@ -1,37 +1,18 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext } from 'react';
 import PropTypes from 'prop-types';
 import requestData from '../services/Request';
+import useDataHandlers from './useDataHandler';
+import useFilterHandler from './useFilterHandler';
 
 const StarWarsContext = createContext();
 
 const StarWarsProvider = ({ children }) => {
-  const [dataTable, setDataTable] = useState([]);
-  const [errData, setErrData] = useState('');
-  const [isRequesting, setIsRequesting] = useState(false);
-
-  // Make request to endpoint and handles isRequesting
-  const requestDataTable = () => {
-    if (isRequesting) return;
-    setIsRequesting(true);
-    requestData().then(
-      // success
-      (res) => {
-        setDataTable(res.results);
-        setIsRequesting(false);
-      },
-      // Failure
-      (res) => {
-        setErrData(res.message);
-        setIsRequesting(false);
-      },
-    );
-  };
+  const filterData = useFilterHandler();
+  const tableData = useDataHandlers(requestData);
 
   const STContext = {
-    dataTable,
-    errData,
-    isRequesting,
-    requestDataTable,
+    filterData,
+    tableData,
   };
 
   return (

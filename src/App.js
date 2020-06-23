@@ -1,11 +1,12 @@
 import React from 'react';
 import { StarWarsProvider } from './context/StarWarsContext';
+import RenderFilters from './components/RenderFilters';
 import TableRender from './components/RenderTable';
-import './App.css';
 
 const App = () => (
   <div className="App">
     <StarWarsProvider>
+      <RenderFilters />
       <TableRender />
     </StarWarsProvider>
   </div>

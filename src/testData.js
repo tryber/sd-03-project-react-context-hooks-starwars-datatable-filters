@@ -237,6 +237,5 @@ const reponse = {
         }
     ]
   }
-  
-  module.exports = reponse;
-  
+
+module.exports = reponse;

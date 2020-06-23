@@ -5,7 +5,7 @@ import NumericFilter from './components/NumericFilter';
 import ListFilters from './components/ListFilters';
 import './App.css';
 
-const App = () => 
+const App = () =>
   <div className="App">
     <span>StarWars Datatable with Filters</span>
     <Filter />

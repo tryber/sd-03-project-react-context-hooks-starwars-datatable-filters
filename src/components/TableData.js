@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import FiltersContext from '../context/toFilter/FiltersContext';
+import filterData from '../services/filterData';
 
 function TableData({ planets }) {
   const { filters } = useContext(FiltersContext);
   return (
-    planets.filter((planet) => planet.name.includes(filters.filterByName.name)).map((planeta) =>
+    filterData(filters, planets).map((planeta) =>
       <tr key={planeta.name}>
         <td>{planeta.name}</td>
         <td>{planeta.population}</td>

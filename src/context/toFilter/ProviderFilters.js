@@ -5,7 +5,7 @@ import FiltersContext from './FiltersContext';
 function ProviderFilters({ children }) {
   const [filters, setFilters] = useState({
     filterByName: { name: '' },
-    filterByNumericValues: [{ column: '', comparison: '', value: '' }],
+    filterByNumericValues: [],
   });
 
   const handleNameFilter = (value) => {
@@ -17,7 +17,9 @@ function ProviderFilters({ children }) {
   const handleSelectColumn = ({ column, comparison, value }) => {
     setFilters((currentFilters) => ({
       ...currentFilters,
-      filterByNumericValues: [{
+      filterByNumericValues: [
+      ...filters.filterByNumericValues,
+      {
         column,
         comparison,
         value,

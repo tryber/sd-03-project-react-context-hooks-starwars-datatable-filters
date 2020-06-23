@@ -80,7 +80,7 @@ function SortColumnsFilter() {
   const [sortFilter, setSortFilter] = useState({ ...initialState });
 
   return (
-    <div className="box">
+    <div className="level-item has-text-centered">
       {renderColumnSelect(setSortFilter, sortFilter)}
       {renderSortSelect(setSortFilter, sortFilter)}
       {renderSubmitButton(setOrderFilter, sortFilter)}

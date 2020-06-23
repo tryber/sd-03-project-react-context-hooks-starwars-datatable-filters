@@ -8,16 +8,18 @@ const Home = () => {
   } = useContext(PlanetTableContext);
 
   return (
-    <main>
+    <main className="container">
       {loading && <h1>Loading...</h1>}
       {!loading && error && <h4>{error}</h4>}
       {!loading && (
-        <div>
-          <div>
+        <section className="section">
+          <div className="box">
             <FilterContainer />
           </div>
-          <Table />
-        </div>
+          <div className="box">
+            <Table />
+          </div>
+        </section>
       )}
     </main>
   );

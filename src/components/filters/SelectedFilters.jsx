@@ -9,11 +9,11 @@ const SelectedFilters = () => {
     },
   } = useContext(PlanetTableContext);
   return (
-    <div className="tags are-medium">
-      <h3>Filtros Ativos</h3>
+    <div className="container tags are-medium">
+      <h5 className="title is-5">Filtros Ativos</h5>
       {filterByNumericValues
         && filterByNumericValues.map((filter) => (
-          <section key={filter.column} data-testid="filter" className="box">
+          <section key={filter.column} data-testid="filter">
             <span className="tag is-light">{filter.column}</span>
             <span className="tag is-light">{filter.comparison}</span>
             <span className="tag is-light">{filter.value}</span>

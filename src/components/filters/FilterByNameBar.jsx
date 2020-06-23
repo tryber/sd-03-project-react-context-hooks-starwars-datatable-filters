@@ -7,7 +7,6 @@ const FilterByNameBar = () => {
   } = useContext(PlanetTableContext);
   return (
     <div>
-      <h2>Selecione um planeta</h2>
       <input
         type="text"
         name="filter-by-name"

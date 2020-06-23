@@ -11,10 +11,10 @@ const FilterContainer = () => (
       <FilterByValuesBar />
     </div>
     <div>
-      <SelectedFilters />
+      <SortColumnsFilter />
     </div>
     <div>
-      <SortColumnsFilter />
+      <SelectedFilters />
     </div>
   </div>
 );

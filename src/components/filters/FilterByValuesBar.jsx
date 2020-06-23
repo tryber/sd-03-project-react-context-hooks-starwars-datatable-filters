@@ -109,7 +109,7 @@ function FilterByValuesBar() {
   const filterColumnsOptions = (filters, value) => !filters.find(({ column }) => column === value);
 
   return (
-    <div>
+    <div className="level-item has-text-centered">
       {renderColumnFilter(
         setFilterByNumeric,
         filterColumnsOptions,

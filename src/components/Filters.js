@@ -43,8 +43,9 @@ function Filters() {
       />
       <button
         onClick={() => handleSelectColumn(filters)}
-        data-testid="button-filter">Filtrar</button
-      >
+        data-testid="button-filter"
+      >Filtrar
+      </button>
     </div>
   );
 }

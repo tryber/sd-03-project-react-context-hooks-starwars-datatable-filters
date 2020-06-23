@@ -23,7 +23,7 @@ function ProviderFilters({ children }) {
           column,
           comparison,
           value,
-        }
+        },
       ],
     }));
   };

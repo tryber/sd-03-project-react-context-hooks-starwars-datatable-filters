@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import StarWarsContext from '../context/StarWarsContext';
+import FiltersContext from '../context/toFilter/FiltersContext';
 
 function TableData({ planets }) {
-  const { filters } = useContext(StarWarsContext);
+  const { filters } = useContext(FiltersContext);
   return (
     planets.filter((planet) => planet.name.includes(filters.filterByName.name)).map((planeta) =>
       <tr key={planeta.name}>

@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import StarWarsContext from '../context/StarWarsContext';
+import StarWarsContext from '../context/toData/StarWarsContext';
 import TableData from './TableData';
 
 function Table() {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import StarWarsContext from './StarWarsContext';
-import fetchPlanets from '../services/starWarsAPI';
+import fetchPlanets from '../../services/starWarsAPI';
 
 function ProviderData({ children }) {
   const [isFetching, setIsFetching] = useState();
@@ -35,23 +35,11 @@ function ProviderData({ children }) {
       .then(handlePlanetsSuccess, handlePlanetsFailure);
   };
 
-  const handleSelectColumn = ({ column, comparison, value }) => {
-    setFilters((currentFilters) => ({
-      ...currentFilters,
-      filterByNumericValues: [{
-        column,
-        comparison,
-        value,
-      }],
-    }));
-  };
-
   const context = {
     getPlanetsData: fetchPlanetsData,
     setFilters,
     setData,
     handleNameFilter,
-    handleSelectColumn,
     data,
     isFetching,
     error,

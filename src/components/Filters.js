@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import StarWarsContext from '../context/StarWarsContext';
+import FiltersContext from '../context/toFilter/FiltersContext';
 
 const renderColumn = () => {
   const columns = [
@@ -40,8 +40,7 @@ const renderFilterBar = () => (
   </div>
 );
 function Filters() {
-  const { handleNameFilter } = useContext(StarWarsContext);
-
+  const { handleNameFilter } = useContext(FiltersContext);
 
   return (
     <form>

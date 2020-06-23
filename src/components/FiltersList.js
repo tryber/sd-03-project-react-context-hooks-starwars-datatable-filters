@@ -1,10 +1,8 @@
+import React, { useContext } from 'react';
+import StarWarsContext from '../context/StarWarsContext';
 
-handleRemove(column) {
-  const { removeFilter } = this.props;
-  removeFilter(column);
-}
-
-renderActiveFilters(filterByNumericValues) {
+const FiltersList = () => {
+  const { filterByNumericValues, removeFilter } = useContext(StarWarsContext);
   if (filterByNumericValues.length === 0 || filterByNumericValues[0].column === '') return false;
   return (
     <div>
@@ -15,7 +13,7 @@ renderActiveFilters(filterByNumericValues) {
             key={column}
             type="button"
             value="X"
-            onClick={() => this.handleRemove(column)}
+            onClick={() => removeFilter(column)}
           >
             X
           </button>
@@ -24,3 +22,5 @@ renderActiveFilters(filterByNumericValues) {
     </div>
   );
 }
+
+export default FiltersList;

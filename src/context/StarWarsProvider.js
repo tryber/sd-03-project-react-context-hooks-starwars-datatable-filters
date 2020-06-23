@@ -6,10 +6,6 @@ const StarWarsProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const [error, setError] = useState([]);
-  const [filters, setFilters] = useState();
-  const [] = useState();
-  const [] = useState();
-  const [] = useState();
 
   const requestAPI = () => setLoading(true);
 
@@ -19,8 +15,6 @@ const StarWarsProvider = ({ children }) => {
     setData(data)
     setLoading(false)
   };
-
-
   const receiveFailure = (error) => {
     setError(error);
     setLoading(false);
@@ -35,55 +29,61 @@ const StarWarsProvider = ({ children }) => {
       );
   }
 
-  const INICIAL_FILTERS = {
-    filterByName: {
-      name: '',
+  const [filterByName, setFilterByName] = useState({
+    name: '',
+  });
+
+  const [filterByNumericValues, setFilterByNumericValues] = useState([
+    {
+      column: '',
+      comparison: '',
+      value: '',
     },
-    filterByNumericValues: [
-      {
-        column: '',
-        comparison: '',
-        value: '',
-      },
-    ],
-    order: {
-      column: 'Name',
-      sort: 'ASC',
-    },
-    options: ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'],
-  };
+  ]);
 
 
-  const filters = (state = INICIAL_STATE, action) => {
-    switch (action.type) {
-      case types.FILTER_NAMES:
-        return filterNames(state, action.name);
-      case types.ADD_FILTER_VALUE:
-        return addFilter(state, action.column, action.comparison, action.value);
-      case types.REMOVE_FILTER_VALUE:
-        return removeFilter(state, action.column);
-      case types.SORT_FILTER:
-        return sortFilter(state, action.order);
-      default:
-        return state;
+  const addFilter = (column, comparison, value) => {
+    if (filterByNumericValues[0].column === '') {
+      return setFilterByNumericValues([{
+        column, comparison, value,
+      }])
+    } else {
+      return setFilterByNumericValues([...filterByNumericValues, { column, comparison, value }])
     }
   };
 
+  const removeFilter = (column) => {
+    const newArray = [...filterByNumericValues].filter((item) => item.column !== column);
+    if (filterByNumericValues.length === 1) {
+      return setFilterByNumericValues([])
+    }
+    return setFilterByNumericValues(newArray)
+  };
 
+  const [filterOrder, setFilterOrder] = useState({
+    order: {
+      column: 'Name',
+      sort: 'ASC',
+    }
+  });
 
+  const sortFilter = (order) => {
+    setFilterOrder(order)
+  };
 
-
-
-  const filterNames = (name) => {
-
-    name,
-});
 
   const context = {
     loading,
     data,
     error,
-    fetchPlanets: () => fetchPlanets,
+    fetchPlanets,
+    filterByName,
+    setFilterByName,
+    filterByNumericValues,
+    addFilter,
+    removeFilter,
+    filterOrder,
+    sortFilter,
   }
 
   return (

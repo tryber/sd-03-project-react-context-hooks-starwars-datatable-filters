@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
+import StarWarsContext from '../context/StarWarsContext';
 
+const DataTable = () => {
 
-export class DataTable extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
+  const { filterOrder: { order: { sort } } } = useContext(StarWarsContext);
+  let { filterOrder: { order: { column } } } = useContext(StarWarsContext);
+  const { filterByName } = useContext(StarWarsContext);
+  const { filterByNumericValues } = useContext(StarWarsContext);
+  const { data } = useContext(StarWarsContext);
 
-  filterComparison(column, comparison, value, planet) {
-    console.log(this.state);
+  const filterComparison = (column, comparison, value, planet) => {
     switch (comparison) {
       case 'maior que':
         return Number(planet[column]) > Number(value);
@@ -22,8 +22,7 @@ export class DataTable extends Component {
     }
   }
 
-  orderASC(numberValues, column, data) {
-    console.log(this.state);
+  const order = (numberValues, column, data) => {
     let sorted = data;
     if (numberValues.includes(column)) {
       sorted = data.sort(function (a, b) {
@@ -49,59 +48,27 @@ export class DataTable extends Component {
     return sorted;
   }
 
-  orderDESC(numberValues, column, data) {
-    console.log(this.state);
-    let sorted = data;
-    if (numberValues.includes(column)) {
-      sorted = data.sort(function (a, b) {
-        if (Number(a[column]) < Number(b[column])) {
-          return 1;
-        }
-        if (Number(a[column]) > Number(b[column])) {
-          return -1;
-        }
-        return 0;
-      });
-    } else {
-      sorted = data.sort(function (a, b) {
-        if ((a[column]) < (b[column])) {
-          return 1;
-        }
-        if ((a[column]) > (b[column])) {
-          return -1;
-        }
-        return 0;
-      });
-    }
-    return sorted;
-  }
-
-  orderPlanets(filteredData) {
-    const { order: { sort } } = this.props;
-    let { order: { column } } = this.props;
+  const orderPlanets = (filteredData) => {
     column = (column === 'Name') ? 'name' : column;
     const numberValues = ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
     const newData = (sort === 'ASC')
-      ? this.orderASC(numberValues, column, filteredData)
-      : this.orderDESC(numberValues, column, filteredData);
+      ? order(numberValues, column, filteredData)
+      : order(numberValues, column, filteredData).reverse();
     return newData;
   }
 
-  filterNames(filteredData) {
-    const { filterByName } = this.props;
+  const filterNames = (filteredData) => {
     return filteredData.filter(({ name }) => name.match(new RegExp(filterByName.name, 'i')));
   }
 
-  filterNumeric(filteredData) {
-    const { filterByNumericValues } = this.props;
+  const filterNumeric = (filteredData) => {
+
     return filterByNumericValues.reduce((acc, { column, comparison, value }) => {
-      console.log('teste');
-      return acc.filter((planet) => this.filterComparison(column, comparison, value, planet));
+      return acc.filter((planet) => filterComparison(column, comparison, value, planet));
     }, filteredData);
   }
 
-  renderTableHead() {
-    const { data } = this.props;
+  const renderTableHead = (data) => {
     return (
       <thead>
         <tr>
@@ -115,12 +82,11 @@ export class DataTable extends Component {
     );
   }
 
-  renderTableBody() {
-    const { data } = this.props;
+  const renderTableBody = (data) => {
     let filteredData = data;
-    filteredData = this.orderPlanets(filteredData);
-    filteredData = this.filterNames(filteredData);
-    filteredData = this.filterNumeric(filteredData);
+    filteredData = orderPlanets(filteredData);
+    filteredData = filterNames(filteredData);
+    filteredData = filterNumeric(filteredData);
     return (
       <tbody>
         {filteredData.map((planet) => (
@@ -133,45 +99,21 @@ export class DataTable extends Component {
     );
   }
 
-  renderTable() {
+  const renderTable = (data) => {
     return (
       <table border="1px">
-        {this.renderTableHead()}
-        {this.renderTableBody()}
+        {renderTableHead(data)}
+        {renderTableBody(data)}
       </table>
     );
   }
 
-  render() {
-    return (
-      <div>
-        {this.renderTable()}
-      </div>
-    );
-  }
+  return (
+    <div>
+      {renderTable(data)}
+    </div>
+  );
 }
-
-const mapStateToProps = ({
-  reducerFetchPlanets: { data },
-  filters: { filterByName, filterByNumericValues, order },
-}) => ({
-  data,
-  filterByName,
-  filterByNumericValues,
-  order,
-});
-
-DataTable.propTypes = {
-  data: PropTypes.instanceOf(Array),
-  filterByName: PropTypes.shape({
-    name: PropTypes.string,
-  }),
-  filterByNumericValues: PropTypes.instanceOf(Array),
-  order: PropTypes.shape({
-    column: PropTypes.string,
-    sort: PropTypes.string,
-  }),
-};
 
 DataTable.defaultProps = {
   data: [],
@@ -180,4 +122,4 @@ DataTable.defaultProps = {
   order: {},
 };
 
-export default connect(mapStateToProps)(DataTable);
+export default DataTable;

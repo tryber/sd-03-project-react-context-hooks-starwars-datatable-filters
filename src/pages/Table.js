@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
-import DataTable from './components/DataTable';
-import Filters from '../components/FiltersTable';
+import DataTable from '../components/DataTable';
+import Filters from '../components/Filters';
+
 
 const Table = () => {
 
@@ -21,8 +22,7 @@ const Table = () => {
     );
   }
   if (error) { return <div>{error}</div>; }
-  return <div>Loading...</div>;
-
+  return <div>Carregando...</div>
 }
 
 Table.defaultProps = {

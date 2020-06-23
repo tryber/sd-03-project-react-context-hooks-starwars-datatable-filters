@@ -1,13 +1,13 @@
 import React from 'react';
 
-const ComparisonSelector = () => {
+const ComparisonSelector = ({ setComparison }) => {
   return (
     <div>
       <span className="selector-label">Choose a comparison:</span>
       <select
         name="comparison"
         data-testid="comparison-filter"
-        onChange={(e) => this.handleChange(e)}
+        onChange={({ target: { value } }) => setComparison(value)}
         required
       >
         <option value="" />

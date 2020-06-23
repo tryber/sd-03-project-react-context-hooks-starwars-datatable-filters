@@ -1,20 +1,17 @@
-import React from 'react';
-
-
-handleChange(e) {
-  const { name, value } = e.target;
-  this.setState({ [name]: value });
-}
+import React, { useContext } from 'react';
+import StarWarsContext from '../context/StarWarsContext';
 
 const InputName = () => {
-  const { filterNames } = this.props;
+  const { setFilterByName } = useContext(StarWarsContext);
   return (
     <div>
       <input
-        data-testid="name-filter"
         type="text"
-        onChange={(e) => filterNames(e.target.value)}
+        data-testid="name-filter"
+        id="search-bar"
+        onChange={({ target: { name, value } }) => setFilterByName({ [name]: value })}
       />
+      <label htmlFor="search-bar">Search by planet name:</label>
     </div>
   );
 }

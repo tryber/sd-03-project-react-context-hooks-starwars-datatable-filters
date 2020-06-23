@@ -21,16 +21,16 @@ export default function Table({ children }) {
   const { data } = useContext(DataContext);
   const { nameFilter, filterByNumericValues, order } = useContext(FilterContext);
 
-  function sortAsc(a, b) {
-    return Number(a[order.column]) - Number(b[order.column]);
+  function sortColumns() {
+    function sortAsc(a, b) {
+      return Number(a[order.column]) - Number(b[order.column]);
+    }
+    function sortDesc(a, b) {
+      return Number(b[order.column]) - Number(a[order.column]);
+    }
+    if (order.sort === 'ASC') { data.sort(sortAsc); }
+    if (order.sort === 'DESC') { data.sort(sortDesc); }
   }
-
-  function sortDesc(a, b) {
-    return Number(b[order.column]) - Number(a[order.column]);
-  }
-
-  if (order.sort === 'ASC') { data.sort(sortAsc); }
-  if (order.sort === 'DESC') { data.sort(sortDesc); }
 
   function renderTableheaders() {
     return (
@@ -57,7 +57,10 @@ export default function Table({ children }) {
 
       !nameFilter && (filterByNumericValues.length === 0) && data.map((e) => (
         <tr key={e.name}>
-          {header.map((el) => <td key={e.name + el}>{e[el]}</td>)}
+          {header.map((el) => {
+            if (el === 'name') return <td data-testid="planet-name" key={e.name + el}>{e[el]}</td>;
+            return <td key={e.name + el}>{e[el]}</td>;
+          })}
         </tr>
       ))
     );
@@ -68,7 +71,10 @@ export default function Table({ children }) {
       nameFilter && data.filter((e) => e.name.toLowerCase()
         .includes(nameFilter.toLowerCase())).map((e) => (
           <tr key={e.name}>
-            {header.map((el) => <td key={e.name + el}>{e[el]}</td>)}
+            {header.map((el) => {
+              if (el === 'name') return <td data-testid="planet-name" key={e.name + el}>{e[el]}</td>;
+              return <td key={e.name + el}>{e[el]}</td>;
+            })}
           </tr>
       ))
     );
@@ -78,7 +84,10 @@ export default function Table({ children }) {
     return (
       filterByNumericValues.length > 0 && filterData().map((e) => (
         <tr key={e.name}>
-          {header.map((el) => <td key={e.name + el}>{e[el]}</td>)}
+          {header.map((el) => {
+            if (el === 'name') return <td data-testid="planet-name" key={e.name + el}>{e[el]}</td>;
+            return <td key={e.name + el}>{e[el]}</td>;
+          })}
         </tr>
       ))
     );
@@ -88,6 +97,7 @@ export default function Table({ children }) {
     <div>
       <table>
         {renderTableheaders()}
+        {sortColumns()}
         <tbody>
           {renderTableData()}
           {renderFilteredDataByName()}
@@ -102,5 +112,5 @@ export default function Table({ children }) {
 }
 
 Table.propTypes = {
-  children: proptypes.objectOf(proptypes.object).isRequired,
+  children: proptypes.element.isRequired,
 };

@@ -326,7 +326,7 @@ describe('Cada filtro de valores numéricos deve ter um ícone de `X` que, ao se
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(3);
 
     const filters = await screen.getAllByTestId(REMOVE_FILTER_SELECTOR);
-    filters.map(filter => {
+    filters.reverse().map(filter => {
       fireEvent.click(filter.querySelector('button'));
     });
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(11);

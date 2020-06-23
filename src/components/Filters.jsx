@@ -54,7 +54,7 @@ export default function Filters({ children }) {
 
   function renderSelectedFilters() {
     return (numericFilter.map((e) => (
-      <div data-testid="filter">
+      <div key={e} data-testid="filter">
         <span>{`Coluna: ${e.column}   `}</span>
         <span>{`Coluna: ${e.comparison}   `}</span>
         <span>{`Coluna: ${e.value}`}</span>
@@ -72,7 +72,7 @@ export default function Filters({ children }) {
           value="ASC"
           id="asc"
           checked={asc}
-          onClick={() => {
+          onChange={() => {
             setAsc(() => !asc);
             setDesc(() => !desc);
           }}
@@ -91,7 +91,7 @@ export default function Filters({ children }) {
           id="desc"
           value="DESC"
           checked={desc}
-          onClick={() => {
+          onChange={() => {
             setAsc(() => !asc);
             setDesc(() => !desc);
           }}
@@ -111,7 +111,7 @@ export default function Filters({ children }) {
             data-testid="column-sort"
             onChange={(e) => setOrderColumn(e.target.value)}
           >
-            {header.map((e) => <option value={e}>{e}</option>)}
+            {header.map((e) => <option key={e} value={e}>{e}</option>)}
           </select>
           {renderASCButton()}
           {renderDESCButton()}
@@ -136,14 +136,14 @@ export default function Filters({ children }) {
           data-testid="column-filter"
           onChange={(e) => setColumn(e.target.value)}
         >
-          {getColumns().map((e) => <option value={e}>{e}</option>)}
+          {getColumns().map((e) => <option key={e} value={e}>{e}</option>)}
         </select>
         <select
           value={comparison}
           data-testid="comparison-filter"
           onChange={(e) => setComparison(e.target.value)}
         >
-          {comparisonOptions.map((e) => <option value={e}>{e}</option>)}
+          {comparisonOptions.map((e) => <option key={e} value={e}>{e}</option>)}
         </select>
         <input
           value={value}
@@ -177,5 +177,5 @@ export default function Filters({ children }) {
 }
 
 Filters.propTypes = {
-  children: proptypes.objectOf(proptypes.object).isRequired,
+  children: proptypes.element.isRequired,
 };

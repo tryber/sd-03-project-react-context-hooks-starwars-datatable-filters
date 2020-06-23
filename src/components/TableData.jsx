@@ -6,7 +6,7 @@ const DataContext = React.createContext();
 
 function TableData({ children }) {
   const [tableData, setTableData] = useState([]);
-  useEffect(() => getinfo().then((data) => setTableData(data.results)), []);
+  useEffect(() => { getinfo().then((data) => setTableData(data.results)); }, []);
 
   tableData.sort((a, b) => {
     if (a.name > b.name) return 1;
@@ -26,5 +26,5 @@ function TableData({ children }) {
 export { TableData, DataContext };
 
 TableData.propTypes = {
-  children: proptypes.objectOf(proptypes.object).isRequired,
+  children: proptypes.element.isRequired,
 };

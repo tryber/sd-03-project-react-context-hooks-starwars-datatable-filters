@@ -30,7 +30,6 @@ function Table() {
     );
   }
   return <p>{error}</p>;
-
 }
 
 export default Table;

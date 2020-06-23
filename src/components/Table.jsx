@@ -30,17 +30,15 @@ const orderByStringProperties = (list, col, direction) => {
 
 const renderBody = (planets, properties, isMultiHeader) => (
   <tbody>
-    {planets
-      .map((planet, index) => (
-        <TableRow
-          key={planet.name}
-          planet={planet}
-          properties={properties}
-          isMultiHeader={isMultiHeader}
-          index={index}
-        />
-      ))
-    }
+    {planets.map((planet, index) => (
+      <TableRow
+        key={planet.name}
+        planet={planet}
+        properties={properties}
+        isMultiHeader={isMultiHeader}
+        index={index}
+      />
+    ))}
   </tbody>
 );
 

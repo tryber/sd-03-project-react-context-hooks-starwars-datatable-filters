@@ -5,7 +5,11 @@ import { planetShape } from '../services/constants';
 const TableRow = ({ planet, properties, isMultiHeader, index }) => (
   <tr style={{ backgroundColor: index % 2 === 0 ? 'red' : 'blue' }}>
     {properties.map((feature) => (
-      <td className={isMultiHeader ? 'td-multi-headers' : ''} key={`${planet.name}-${feature}`}>
+      <td
+        className={isMultiHeader ? 'td-multi-headers' : ''}
+        data-testid={`planet-${feature}`}
+        key={`${planet.name}-${feature}`}
+      >
         {planet[feature]}
       </td>
     ))}

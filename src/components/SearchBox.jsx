@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import { filtersContext } from '../context/Filters';
-import typeName from '../actions/SearchTextAction';
+import { typeName } from '../actions/filterActions';
 
 function SearchBox() {
   const [{ filterByName: { name: searchText } }, dispatch] = useContext(filtersContext);

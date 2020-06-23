@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { filtersContext } from '../context/Filters';
-import { removeFilter } from '../actions/NumFilterActions';
+import { removeFilter } from '../actions/filterActions';
 
 function FilterSetted({ id, obj }) {
   const [, dispatch] = useContext(filtersContext);

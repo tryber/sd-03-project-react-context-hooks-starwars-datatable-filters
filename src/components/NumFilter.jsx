@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { filtersContext } from '../context/Filters';
-import * as actions from '../actions/NumFilterActions';
+import { createFilter } from '../actions/filterActions';
 import * as constants from '../services/constants';
 
 const comparisonOptions = ['maior que', 'menor que', 'igual a'];
 
-const renderSelectOf = (name, value, optionsList, dispatch) => (
+const renderSelectOf = (name, value, optionsList, set) => (
   <label htmlFor={name} className="container">
     {name}
     <select
@@ -16,38 +16,44 @@ const renderSelectOf = (name, value, optionsList, dispatch) => (
       value={value}
       id={name}
       name={name}
-      onChange={({ target }) => dispatch(actions.changeValue(name, target.value))}
+      onChange={({ target }) => set(target.value)}
     >
       {constants.renderOptions(optionsList)}
     </select>
   </label>
 );
 
+const allValuesSetted = (...arr) => arr.every((value) => value !== '');
+
 function NumFilter({ columnOptions }) {
-  const [{ inProgress: { column, value, comparison } }, dispatch] = useContext(filtersContext);
+  const [column, setColumn] = useState('');
+  const [value, setValue] = useState('');
+  const [comparison, setComparison] = useState('');
+  const [, dispatch] = useContext(filtersContext);
 
   return (
     <fieldset className="container">
       <span>Filter by Numeric Params</span>
-      {renderSelectOf('column', column, columnOptions, dispatch)}
-      {renderSelectOf('comparison', comparison, comparisonOptions, dispatch)}
+      {renderSelectOf('column', column, columnOptions, setColumn)}
+      {renderSelectOf('comparison', comparison, comparisonOptions, setComparison)}
       <label htmlFor="value-filter" className="container">
-        number
+        Number
         <input
           className="radius-border"
           data-testid="value-filter"
           value={value}
           id="value-filter"
           name="value-filter"
-          onChange={({ target }) => dispatch(actions.changeValue('value', target.value))}
+          onChange={({ target }) => setValue(target.value)}
           type="number"
         />
       </label>
       <button
         className="radius-border filter-button"
+        disabled={!allValuesSetted(column, comparison, value)}
         data-testid="button-filter"
         type="button"
-        onClick={() => dispatch(actions.createFilter())}
+        onClick={() => dispatch(createFilter({ column, comparison, value }))}
       >
         Activate
       </button>

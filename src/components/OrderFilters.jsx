@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { dataPlanetsContext } from '../context/DataPlanets';
 import { filtersContext } from '../context/Filters';
-import { activateOrder, changeOrder } from '../actions/orderActions';
+import { activateOrder } from '../actions/filterActions';
 import { renderOptions } from '../services/constants';
 
-const renderRadio = (value, text, dispatch) => (
+const renderRadio = (value, text, setSort) => (
   <label htmlFor={`sort-radio-${value}`}>
     {text}
     <input
@@ -13,7 +13,7 @@ const renderRadio = (value, text, dispatch) => (
       data-testid={`column-sort-input-${value.toLowerCase()}`}
       id={`sort-radio-${value}`}
       name="sort-filter-radio"
-      onChange={() => dispatch(changeOrder('sort', value))}
+      onChange={() => setSort(value)}
       type="radio"
       value={value}
     />
@@ -21,15 +21,17 @@ const renderRadio = (value, text, dispatch) => (
 );
 
 function OrderFilters() {
+  const [column, setColumn] = useState('Name');
+  const [sort, setSort] = useState('ASC');
   const [{ headers }] = useContext(dataPlanetsContext);
-  const [{ order: { column } }, dispatch] = useContext(filtersContext);
+  const [, dispatch] = useContext(filtersContext);
 
   return (
     <fieldset className="container">
       <span>Order By Column</span>
       <div>
-        {renderRadio('ASC', 'Ascendent', dispatch)}
-        {renderRadio('DESC', 'Descendent', dispatch)}
+        {renderRadio('ASC', 'Ascendent', setSort)}
+        {renderRadio('DESC', 'Descendent', setSort)}
         <label htmlFor="column-order" className="container">
           column
           <select
@@ -38,7 +40,7 @@ function OrderFilters() {
             defaultValue={column}
             id="column-order"
             name="column-order"
-            onChange={({ target }) => dispatch(changeOrder('column', target.value))}
+            onChange={({ target }) => setColumn(target.value)}
           >
             {renderOptions(headers)}
           </select>
@@ -46,7 +48,7 @@ function OrderFilters() {
         <button
           className="radius-border filter-button"
           data-testid="column-sort-button"
-          onClick={() => dispatch(activateOrder())}
+          onClick={() => dispatch(activateOrder({ column, sort }))}
           type="button"
         >
           Apply Order

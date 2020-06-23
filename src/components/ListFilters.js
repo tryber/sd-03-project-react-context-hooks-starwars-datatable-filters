@@ -3,12 +3,13 @@ import StarWarsContext from '../context/StarWarsContext';
 
 const ListFilters = () => {
   const { filters, setColumn, setComparison, setValue } = useContext(StarWarsContext);
-  const { filterByNumericValues, clearFilter } = filters;
+  const { filterByNumericValues } = filters;
 
   const clearFilter = (arrayIndex) => {
     setColumn('');
     setComparison('');
     setValue('');
+    console.log(index);
   };
 
   return (

@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 
+import { Button } from '@material-ui/core';
 import SearchBox from './SearchBox';
 import NumFilter from './NumFilter';
 import FilterSetted from './FilterSetted';
 import OrderFilters from './OrderFilters';
-import { Button } from '@material-ui/core';
 
 import { filtersContext } from '../context/Filters';
 import { formatContext } from '../context/Format';

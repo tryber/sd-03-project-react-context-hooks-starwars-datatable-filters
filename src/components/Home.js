@@ -1,42 +1,22 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import Table from './Table';
-import RemoveFilter from './RemoveFilter';
-import Input from './Input';
-import { requestFetch } from '../action';
+import React, { useEffect, useContext } from 'react';
+import Table from './Table/Table';
+import Filters from './Filters/Filters';
+import StarWarsContext from '../context/StarWarsContext';
 
-class Home extends React.Component {
+function Home() {
+  const { requestFetch, isFetching } = useContext(StarWarsContext);
+  useEffect(() => {
+    requestFetch();
+  }, []);
 
-  componentDidMount() {
-    const { getPlanets } = this.props;
-    getPlanets();
-  }
-
-  render() {
-    if (this.props.loading) return <p>Loading...</p>;
-    return (
-      <div>
-        <h1>StarWars Datatable with Filters</h1>
-        <Input />
-        <RemoveFilter />
-        <Table />
-      </div>
-    );
-  }
+  if (isFetching) return <h1>Loading...</h1>;
+  return (
+    <div>
+      <h1>StarWars Datatable with Filters</h1>
+      <Filters />
+      <Table />
+    </div>
+  );
 }
 
-const mapStateToProps = (state) => ({
-  loading: state.ReducerPlanets.isFetching,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  getPlanets: () => dispatch(requestFetch()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
-
-Home.propTypes = {
-  getPlanets: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
-};
+export default Home;

@@ -10,6 +10,7 @@ function Body({
   const data = sort === 'ASC'
     ? orderFuncAsc(planets, name, numericValues, columnSort)
     : orderFuncDesc(planets, name, numericValues, columnSort);
+  console.log('data aqui', data);
   return (
     <tbody>
       {data.map((planet) => (

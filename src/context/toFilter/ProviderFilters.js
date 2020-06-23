@@ -23,7 +23,7 @@ function ProviderFilters({ children }) {
         value,
       }],
     }));
-  }
+  };
 
   const context = {
     filters,

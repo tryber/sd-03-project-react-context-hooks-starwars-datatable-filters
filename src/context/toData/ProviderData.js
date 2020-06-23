@@ -7,10 +7,6 @@ function ProviderData({ children }) {
   const [isFetching, setIsFetching] = useState();
   const [error, setError] = useState(null);
   const [data, setData] = useState([]);
-  const [filters, setFilters] = useState({
-    filterByName: { name: '' },
-    filterByNumericValues: [{ column: '', comparison: '', value: '' }],
-  });
 
   const handleNameFilter = (value) => {
     setFilters((currentFilters) => ({
@@ -37,13 +33,11 @@ function ProviderData({ children }) {
 
   const context = {
     getPlanetsData: fetchPlanetsData,
-    setFilters,
     setData,
     handleNameFilter,
     data,
     isFetching,
     error,
-    filters,
   };
   return (
     <StarWarsContext.Provider value={context}>

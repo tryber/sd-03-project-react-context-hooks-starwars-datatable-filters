@@ -23,7 +23,7 @@ function FilterBar() {
     <section className="filter-bar">
       <div className="filters">
         <SearchBox />
-        <NumFilter columnOptions={takeUnused(constants.numColumn, filterByNumericValues)} />
+        <NumFilter columnOptions={takeUnused(constants.numericColumn, filterByNumericValues)} />
         <OrderFilters />
       </div>
       <div>

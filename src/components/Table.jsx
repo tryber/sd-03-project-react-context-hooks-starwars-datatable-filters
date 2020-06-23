@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 
 import TableHeader from './TableHeader';
-import TableRow from './TableRow';
-import * as constants from '../services/constants';
+import TableBody from './TableBody';
+import { numericColumn, frendlyUser } from '../services/constants';
 
 import { dataPlanetsContext } from '../context/DataPlanets';
 import { filtersContext } from '../context/Filters';
@@ -20,27 +20,13 @@ const filterByNumProperties = (list, { value, column, comparison }) => {
 };
 
 const orderByStringProperties = (list, col, direction) => {
-  const sortedList = (constants.numColumn.some((option) => option === col))
-    ? list.sort((elemA, elemB) => elemA[col] - elemB[col])
-    : list.sort((elemA, elemB) => elemA[col].localeCompare(elemB[col]));
+  const sortedList = numericColumn
+    .some((option) => option === col) ? list.sort((A, B) => A[col] - B[col])
+    : list.sort((A, B) => A[col].localeCompare(B[col]));
 
   if (direction === 'DESC') sortedList.reverse();
   return sortedList;
 };
-
-const renderBody = (planets, properties, isMultiHeader) => (
-  <tbody>
-    {planets.map((planet, index) => (
-      <TableRow
-        key={planet.name}
-        planet={planet}
-        properties={properties}
-        isMultiHeader={isMultiHeader}
-        index={index}
-      />
-    ))}
-  </tbody>
-);
 
 const makeHeadersInMultiHeadersTable = (headers) => {
   const extraStyle = (`
@@ -56,7 +42,7 @@ const makeHeadersInMultiHeadersTable = (headers) => {
   return (
     <style>
       {extraStyle + headers.reduce((string, prop, index) => (
-          string.concat(nthOfTypeBefore(index + 1, constants.frendlyUser(prop)))
+        string.concat(nthOfTypeBefore(index + 1, frendlyUser(prop)))
       ), '')}
     </style>
   );
@@ -83,11 +69,8 @@ function Table() {
     <React.Fragment>
       {isMultiHeader && makeHeadersInMultiHeadersTable(headers)}
       <table className={isMultiHeader ? 'table-multi-headers' : ''}>
-        <TableHeader
-          headers={headers}
-          isMultiHeader={isMultiHeader}
-        />
-        {renderBody(planetsToShow, headers, isMultiHeader)}
+        <TableHeader headers={headers} isMultiHeader={isMultiHeader} />
+        <TableBody items={planetsToShow} properties={headers} isMultiHeader={isMultiHeader} />
       </table>
     </React.Fragment>
   );

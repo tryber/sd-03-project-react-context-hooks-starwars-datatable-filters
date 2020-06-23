@@ -23,7 +23,7 @@ function Table() {
   const filterPlanets = () => {
     const filterName = data.filter((planet) => (planet.name.toLowerCase()).includes(name));
 
-    return(filterName);
+    return (filterName);
   };
 
   if (isFetching) { return <p>Loading...</p>; }

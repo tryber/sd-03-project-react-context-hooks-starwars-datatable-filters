@@ -39,7 +39,14 @@ class SearchBar extends Component {
   }
 
   render() {
-    const columns = ['', 'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
+    const columns = [
+      '', 
+      'population', 
+      'orbital_period', 
+      'diameter', 
+      'rotation_period', 
+      'surface_water'
+    ];
     const comparison = ['', 'maior que', 'igual a', 'menor que'];
     const { valueFilters } = this.props;
     return (

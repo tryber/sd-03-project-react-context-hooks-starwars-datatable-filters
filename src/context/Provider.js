@@ -30,6 +30,10 @@ const Provider = ({ children }) => {
   const [isFetching, setIsFetching] = useState(false);
   const [planets, setPlanets] = useState([]);
   const [error, setError] = useState('');
+  const [name, setName] = useState('');
+  const [column, setColumn] = useState('');
+  const [comparison, setComparison] = useState('');
+  const [value, setValue] = useState('');
 
   const receivePlanetsSuccess = (data) => {
     setIsFetching(false);
@@ -63,17 +67,21 @@ const Provider = ({ children }) => {
     },
     filters: {
       filterByName: {
-        name: '',
+        name,
       },
       filterByNumericValues: [
         {
-          column: '',
-          comparison: '',
-          value: '',
+          column,
+          comparison,
+          value,
         },
       ],
-      clearFilter: (index) => console.log(index),
     },
+    clearFilter: (index) => console.log(index),
+    setName,
+    setColumn,
+    setComparison,
+    setValue,
   };
 
   return (

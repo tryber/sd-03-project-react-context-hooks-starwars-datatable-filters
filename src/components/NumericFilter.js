@@ -29,13 +29,8 @@ const verifyColumns = (obj) => {
   }
 };
 
-const filterMenu = () => {
-  // Thanks for topic
-  // https://stackoverflow.com/
-  // questions/14515382/javascript-compare-two-arrays-return-differences-but
-  const { filters } = useContext(StarWarsContext);
-  const { filterByNumericValues } = filters;
-  const filterColumnArray = filterByNumericValues.map(({ column }) => column);
+const filterMenu = (numericValuesFilter) => {
+  const filterColumnArray = numericValuesFilter.map(({ column }) => column);
   newColumnOptions = [...columnOptions];
   let index;
   for (let i = 0; i < filterColumnArray.length; i += 1) {
@@ -46,24 +41,17 @@ const filterMenu = () => {
   }
 };
 
-const handleChange = (type, passedValue) => {
+const NumericFilter = () => {
   const [stateColumn, setStateColumn] = useState('');
   const [stateComparison, setStateComparison] = useState('');
   const [stateValue, setStateValue] = useState(0);
+  const { filters, setColumn, setComparison, setValue } = useContext(StarWarsContext);
+  const { filterByNumericValues } = filters;
 
-  if (type === 'column') { setStateColumn(passedValue); }
-  if (type === 'comparison') { setStateComparison(passedValue); }
-  if (type === 'value') { setStateValue(passedValue); }
-};
-
-const NumericFilter = () => {
-  const getFilters = () => {
-    const filter = {
-      stateColumn,
-      stateComparison,
-      stateValue,
-    };
-    return filter;
+  const handleChange = () => {
+    setColumn(stateColumn);
+    setComparison(stateComparison);
+    setValue(stateValue);
   };
 
   const filterForms = () =>
@@ -71,28 +59,28 @@ const NumericFilter = () => {
       <label htmlFor="column-filter">Filtre por coluna</label>
       <select
         data-testid="column-filter" name="column-filter"
-        onChange={(e) => handleChange('column', e.target.value)}
+        onChange={(e) => setStateColumn(e.target.value)}
       >
         {newColumnOptions.map((e) => <option key={e} value={e}>{e}</option>)}
       </select>
       <label htmlFor="comparison-filter">Condição</label>
       <select
         data-testid="comparison-filter" name="comparison-filter"
-        onChange={(e) => handleChange('comparison', e.target.value)}
+        onChange={(e) => setStateComparison(e.target.value)}
       >
         {comparisonOptions.map((e) => <option key={e} value={e}>{e}</option>)}
       </select>
       <label htmlFor="value-filter">Valor</label>
       <input
         data-testid="value-filter" type="number" maxLength="12"
-        onChange={(e) => handleChange('value', e.target.value)}
+        onChange={(e) => setStateValue(e.target.value)}
       />
       <button
-        data-testid="button-filter" onClick={() => getFilters()}
+        data-testid="button-filter" onClick={() => handleChange()}
       >Filtrar</button>
     </div>;
 
-  filterMenu();
+  filterMenu(filterByNumericValues);
   verifyColumns(columnOptions);
   return (
     <div>

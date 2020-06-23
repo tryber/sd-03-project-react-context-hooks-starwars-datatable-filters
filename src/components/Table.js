@@ -60,7 +60,7 @@ const Table = () => {
   if (dataReceived) {
     dataKeys = [...Object.keys(planets[0])];
     const cutData = dataKeys.indexOf('residents');
-    regex = new RegExp(`${filterByName}`, 'i');
+    regex = new RegExp(`${filterByName.name}`, 'i');
     dataKeys.splice(cutData, 1);
     dataReady = true;
     planetoides = [...filteredPlanets(filterByNumericValues, planets)];

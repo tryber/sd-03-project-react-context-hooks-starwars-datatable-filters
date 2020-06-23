@@ -49,7 +49,7 @@ const numericFilter = (planet, column, comparison, value) => {
 export const SWProvider = ({ children }) => {
   const [data, setData] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
-  const [fetchError, setfetchError] = useState('');
+  // const [fetchError, setfetchError] = useState('');
   const [filters, setFilters] = useState(initalFilterState);
   const [filteredData, setFilteredData] = useState(data);
 
@@ -62,7 +62,7 @@ export const SWProvider = ({ children }) => {
         setFilteredData(json.results);
         setIsFetching(false);
       } catch (e) {
-        setfetchError(e);
+        // setfetchError(e);
         setIsFetching(false);
       }
     });
@@ -137,7 +137,7 @@ export const SWProvider = ({ children }) => {
     selectedFilters,
     submitNumericFilter,
     fetchData,
-    fetchError,
+    // fetchError,
     filteredData,
     isFetching,
     filters,

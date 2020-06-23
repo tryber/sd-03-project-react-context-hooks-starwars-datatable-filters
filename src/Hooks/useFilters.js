@@ -8,8 +8,8 @@ const initialFilters = {
   order: {
     column: 'Name',
     sort: 'ASC',
-  }
-}
+  },
+};
 
 function useFilters() {
   const [filters, setFilters] = useState({ ...initialFilters });
@@ -24,7 +24,7 @@ function useFilters() {
 
     setfilterByNumericValues: (allValues) => setFilters((prevFilters) => ({
       ...prevFilters,
-      filterByNumericValues: [...filters.filterByNumericValues, allValues]
+      filterByNumericValues: [...filters.filterByNumericValues, allValues],
     })),
 
     removeFilter: (item) => setFilters((prevState) => ({

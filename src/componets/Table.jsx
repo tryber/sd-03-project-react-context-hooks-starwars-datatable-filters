@@ -25,7 +25,7 @@ const Table = () => {
   const filteredPlanet = (planets) => {
     console.log('name', name)
     if (name !== '') {
-      return planets.filter((e) => e.name?.toLowerCase().includes(name?.toLowerCase()));
+      return planets.filter((e) => e.name.toLowerCase().includes(name.toLowerCase()));
     }
     return planets;
   };

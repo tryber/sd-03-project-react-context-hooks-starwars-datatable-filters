@@ -13,13 +13,13 @@ const FilterByNumeric = () => {
   const { allFilters: { setfilterByNumericValues } } = useContext(starWarsContext);
   const { allFilters: { filters: { filterByNumericValues } } } = useContext(starWarsContext);
 
-  function filterColumn(filterByNumericValues, option) {
-    return !filterByNumericValues.find(({ column }) => column === option);
+  function filterColumn(option) {
+    return !filterByNumericValues.find((column) => column === option);
   }
 
   const onClick = () => {
-    setfilterByNumericValues({ value, column, comparison })
-  }
+    setfilterByNumericValues({ value, column, comparison });
+  };
 
   const columns = ['population', 'orbital_period', 'diameter',
     'rotation_period', 'surface_water'];

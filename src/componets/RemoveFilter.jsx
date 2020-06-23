@@ -2,17 +2,14 @@ import React from 'react';
 import { useContext } from 'react';
 import { starWarsContext } from '../context/starWarsContext';
 
-
 const RemoveFilter = () => {
-
-  const { 
+  const {
     allFilters: {
-    filters: { filterByNumericValues },
-    removeFilter }
+      filters: { filterByNumericValues },
+      removeFilter }
   } = useContext(starWarsContext);
 
   const remove = (lista) => {
-    // const { removed } = this.props;
     return (
       <p
         data-testid="filter"
@@ -28,7 +25,7 @@ const RemoveFilter = () => {
         </button>
       </p>
     );
-  }
+  };
 
   const infoFilters = filterByNumericValues.filter((e) => e.column !== '');
 
@@ -38,6 +35,6 @@ const RemoveFilter = () => {
       {infoFilters.map((e) => remove(e))}
     </div>
   );
-}
+};
 
 export default RemoveFilter;

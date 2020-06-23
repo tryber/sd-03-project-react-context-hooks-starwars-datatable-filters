@@ -19,7 +19,6 @@ const App = () => {
         <RenderTHead />
         <RenderTBody
           filteredTable={store.dataTable}
-          isRequesting={store.isRequesting}
         />
       </table>
     </div>

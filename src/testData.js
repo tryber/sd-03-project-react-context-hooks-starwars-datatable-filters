@@ -224,7 +224,7 @@ const reponse = {
           "surface_water": "100",
           "population": "1000000000",
           "residents": [
-              "https://swapi-trybe.herokuapp.com/api/people/22/", 
+              "https://swapi-trybe.herokuapp.com/api/people/22/",
               "https://swapi-trybe.herokuapp.com/api/people/72/",
               "https://swapi-trybe.herokuapp.com/api/people/73/"
           ],

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Table from './components/Table';
 import ProviderData from './context/ProviderData';
 import Filters from './components/Filters';
@@ -7,8 +7,8 @@ import Filters from './components/Filters';
 function App() {
   return (
     <ProviderData>
-        <Filters />
-        <Table />
+      <Filters />
+      <Table />
     </ProviderData>
   );
 }

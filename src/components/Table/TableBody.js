@@ -14,14 +14,13 @@ function TableBody() {
     },
   } = useContext(StarWarsContext);
 
+  console.log(planets);
   useEffect(() => {
-    const filtered =
-      sort === 'ASC'
-        ? orderFuncAsc(data, name, numericValues, columnSort)
-        : orderFuncDesc(data, name, numericValues, columnSort);
+    const filtered = sort === 'ASC'
+      ? orderFuncAsc(data, name, numericValues, columnSort)
+      : orderFuncDesc(data, name, numericValues, columnSort);
     setPlanets(filtered);
   }, [name, numericValues, columnSort, sort]);
-
   return (
     <tbody>
       {planets.map((planet) => (

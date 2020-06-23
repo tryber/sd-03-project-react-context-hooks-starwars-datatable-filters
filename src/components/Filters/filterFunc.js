@@ -1,8 +1,6 @@
 const filterFunc = (planets, name, numericValues = []) => {
-  console.log('planets', planets);
   if (numericValues.length === 0) {
     const filtroPlanets = planets.filter((planet) => planet.name.includes(name));
-    console.log('filtroPlanets:', filtroPlanets);
     return filtroPlanets;
   }
   return numericValues.reduce(

@@ -17,22 +17,25 @@ function doCompare(e, el) {
   }
 }
 
+function renderTableheaders() {
+  return (
+    <thead>
+      <tr>
+        {header.map((e) => <th>{e}</th>)}
+      </tr>
+    </thead>
+  );
+}
+
+function sortColumns(data, order) {
+  if (order.sort === 'ASC') { data.sort(function (a, b) { return Number(a[order.column]) - Number(b[order.column]); }); }
+  if (order.sort === 'DESC') { data.sort(function (a, b) { return Number(b[order.column]) - Number(a[order.column]); }); }
+}
+
 export default function Table({ children }) {
   const { data } = useContext(DataContext);
   const { nameFilter, filterByNumericValues, order } = useContext(FilterContext);
-  // if (order.sort === 'ASC') { data.sort(function (a, b) { return Number(a[order.column]) - Number(b[order.column]); }); }
-  // if (order.sort === 'DESC') { data.sort(function (a, b) { return Number(b[order.column]) - Number(a[order.column]); }); }
-
-  function renderTableheaders() {
-    return (
-      <thead>
-        <tr>
-          {header.map((e) => <th>{e}</th>)}
-        </tr>
-      </thead>
-    );
-  }
-
+  sortColumns(data, order);
   function filterData() {
     if (filterByNumericValues) {
       const filteredData = filterByNumericValues
@@ -45,7 +48,6 @@ export default function Table({ children }) {
 
   function renderTableData() {
     return (
-
       !nameFilter && (filterByNumericValues.length === 0) && data.map((e) => (
         <tr key={e.name}>
           {header.map((el) => {

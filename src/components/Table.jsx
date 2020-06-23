@@ -32,19 +32,20 @@ function sortColumns(data, order) {
   if (order.sort === 'DESC') { data.sort(function (a, b) { return Number(b[order.column]) - Number(a[order.column]); }); }
 }
 
+function filterData(filterByNumericValues, data) {
+  if (filterByNumericValues) {
+    const filteredData = filterByNumericValues
+      .reduce((acc, el) => acc.filter((e) => doCompare(e, el)), data);
+    if (filteredData) return filteredData;
+    return [];
+  }
+  return [];
+}
+
 export default function Table({ children }) {
   const { data } = useContext(DataContext);
   const { nameFilter, filterByNumericValues, order } = useContext(FilterContext);
   sortColumns(data, order);
-  function filterData() {
-    if (filterByNumericValues) {
-      const filteredData = filterByNumericValues
-        .reduce((acc, el) => acc.filter((e) => doCompare(e, el)), data);
-      if (filteredData) return filteredData;
-      return [];
-    }
-    return [];
-  }
 
   function renderTableData() {
     return (
@@ -75,7 +76,7 @@ export default function Table({ children }) {
 
   function renderFilteredDataByNumeric() {
     return (
-      filterByNumericValues.length > 0 && filterData().map((e) => (
+      filterByNumericValues.length > 0 && filterData(filterByNumericValues, data).map((e) => (
         <tr key={e.name}>
           {header.map((el) => {
             if (el === 'name') return <td data-testid="planet-name" key={e.name + el}>{e[el]}</td>;

@@ -4,19 +4,11 @@ import FilterList from './FilterList';
 import { StarWarsContext } from './StarWarsContext';
 
 function SearchBar() {
-
-  const [column, setColumn] = useState('');
+  const [selColumn, setselColumn] = useState('');
   const [comparison, setComparison] = useState('');
   const [value, setValue] = useState('');
 
-  const columnsArray = [
-    '',
-    'population',
-    'orbital_period',
-    'diameter',
-    'rotation_period',
-    'surface_water'
-  ];
+  const columnsArray = ['', 'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
   const comparisonArray = ['', 'maior que', 'igual a', 'menor que'];
   const { 
     updateNumericFilters,
@@ -26,15 +18,11 @@ function SearchBar() {
   } = useContext(StarWarsContext);
 
   const handleClick = () => {
-    const searchFilters = {
-      column,
-      comparison,
-      value,
-    };
+    const searchFilters = { selColumn, comparison, value };
     updateNumericFilters(searchFilters);
-  }
+  };
 
-  const filterColumnsOptions = (filters, value) => !filters.find(({ column }) => column === value);
+  const filterColumnsOptions = (filters, columnValue) => !filters.find(({ column }) => column === columnValue);
 
   return (
     <div className="filters-div">
@@ -42,7 +30,7 @@ function SearchBar() {
       <select
         id="column-filter"
         data-testid="column-filter"
-        onChange={(event) => setColumn(event.target.value)}
+        onChange={(event) => setselColumn(event.target.value)}
       >
         {columnsArray.map((column) => (filterColumnsOptions(numericFilters, column) &&
           (<option value={column} key={column}>{column}</option>)

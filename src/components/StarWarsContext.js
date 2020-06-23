@@ -9,7 +9,7 @@ const StarWarsProvider = ({ children }) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [name, setName] = useState('');
-  const [numericFilters, setnumericFilters]= useState([]);
+  const [numericFilters, setnumericFilters] = useState([]);
 
   const handleListSuccess = (response) => {
     const { results } = response;
@@ -39,15 +39,15 @@ const StarWarsProvider = ({ children }) => {
   };
 
   const updateNumericFilters = (newFilter) => {
-    setnumericFilters([...numericFilters, newFilter])
-  }
+    setnumericFilters([...numericFilters, newFilter]);
+  };
 
   const removeSelectedFilter = (deletedFilter) => {
     const updatedFilters = numericFilters.filter(
       (filter) => filter !== deletedFilter,
-    )
+    );
     setnumericFilters(updatedFilters);
-  }
+  };
 
   const context = {
     isFetching,

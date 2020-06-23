@@ -39,7 +39,7 @@ function PlanetTableProvider({ children }) {
 
   const setFilterByName = (name) => setFilters({
     ...filters,
-    filterByName: name,
+    filterByName: { name },
   });
 
   const setFilterByNumericValues = (...params) => setFilters({

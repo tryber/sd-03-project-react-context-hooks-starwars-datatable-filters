@@ -19,7 +19,7 @@ const columns = [
 
 const initialState = {
   column: 'name',
-  order: '',
+  sort: '',
 };
 
 function SortColumnsFilter() {
@@ -47,10 +47,10 @@ function SortColumnsFilter() {
         <input
           name="sort_radio"
           type="radio"
-          data-testid="column-sort-input"
+          data-testid="column-sort-input-asc"
           value="ASC"
           defaultChecked
-          onChange={(event) => setSortFilter({ ...sortFilter, order: event.target.value })}
+          onChange={(event) => setSortFilter({ ...sortFilter, sort: event.target.value })}
         />
       </label>
       <label htmlFor="DESC">
@@ -58,9 +58,9 @@ function SortColumnsFilter() {
         <input
           name="sort_radio"
           type="radio"
-          data-testid="column-sort-input"
+          data-testid="column-sort-input-desc"
           value="DESC"
-          onChange={(event) => setSortFilter({ ...sortFilter, order: event.target.value })}
+          onChange={(event) => setSortFilter({ ...sortFilter, sort: event.target.value })}
         />
       </label>
     </div>

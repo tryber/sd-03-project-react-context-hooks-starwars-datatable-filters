@@ -7,7 +7,6 @@ function App() {
     <StarWarsProvider>
       <Home />
     </StarWarsProvider>
-    
   );
 }
 

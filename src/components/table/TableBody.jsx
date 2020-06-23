@@ -1,16 +1,15 @@
 import React, { useContext } from 'react';
 import PlanetTableContext from '../../context/context';
 import filterDataByNumericValue from '../../helpers/index';
+import NoResultsTableBody from './NoResultsTableBody';
 
 const TableBody = () => {
   const { data, filters } = useContext(PlanetTableContext);
-
   const {
     filterByName: { name },
     filterByNumericValues,
     order: { column, sort },
   } = filters;
-
   const filteredData = filterDataByNumericValue(
     data,
     name,
@@ -18,13 +17,8 @@ const TableBody = () => {
     sort,
     filterByNumericValues,
   );
-
   return filteredData.length === 0 ? (
-    <tbody>
-      <tr>
-        <td>Nenhum Planeta Encontrado</td>
-      </tr>
-    </tbody>
+    <NoResultsTableBody />
   ) : (
     <tbody>
       {filteredData.map((planet) => (
@@ -40,12 +34,7 @@ const TableBody = () => {
           <td>{planet.population}</td>
           <td>
             {planet.films.map((film) => (
-              <a
-                href={film}
-                target="_blank"
-                rel="noopener noreferrer"
-                key={film}
-              >
+              <a href={film} target="_blank" rel="noopener noreferrer" key={film}>
                 {film}
               </a>
             ))}

@@ -10,7 +10,7 @@ function SearchBar() {
 
   const columnsArray = ['', 'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
   const comparisonArray = ['', 'maior que', 'igual a', 'menor que'];
-  const { 
+  const {
     updateNumericFilters,
     filters: {
       filterByNumericValues: numericFilters,
@@ -22,7 +22,7 @@ function SearchBar() {
     updateNumericFilters(searchFilters);
   };
 
-  const filterColumnsOptions = (filters, columnValue) => !filters.find(({ column }) => column === columnValue);
+  const filterColumnsOptions = (filters, columnV) => !filters.find(({ column }) => column === columnV);
 
   return (
     <div className="filters-div">

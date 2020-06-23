@@ -11,12 +11,12 @@ function Home() {
   const [isFetching, setIsFetching] = React.useState(true);
 
   const context = {
-    setNameFunc: (name) => setName(name),
+    setNameFunc: (nameInput) => setName(nameInput),
     data,
     filterByName: {
       name,
-    }
-  }
+    },
+  };
 
   React.useEffect(() => {
     starWarsApi('planets').then((res) => {

@@ -6,13 +6,10 @@ import './App.css';
 
 function App() {
   return (
-    
-     <StarWarsContext.Provider>
-       <Home />
-     </StarWarsContext.Provider>
-   
+    <div>
+      <Home />
+    </div>
   );
 }
-
 
 export default App;

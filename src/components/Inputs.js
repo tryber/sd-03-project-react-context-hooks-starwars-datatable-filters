@@ -1,6 +1,5 @@
 import React from 'react';
 import StarWarsContext from '../context/StarWarsContext';
-import Table from './Table';
 
 function Inputs() {
   const context = React.useContext(StarWarsContext);

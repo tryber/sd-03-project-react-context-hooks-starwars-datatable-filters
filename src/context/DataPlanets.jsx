@@ -1,46 +1,22 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
-export const REQUEST_PLANETS = 'REQUEST_PLANETS';
-export const FETCH_PLANETS_SUCESS = 'FETCH_PLANETS_SUCESS';
-export const FETCH_PLANETS_FAILURE = 'FETCH_PLANETS_FAILURE';
-
-const INITIAL_STATE = {
+export const dataPlanetsContext = createContext({
   isFetching: true,
-  data: [],
   error: '',
-  headers: [],
-};
-
-export const dataPlanetsContext = createContext(INITIAL_STATE);
-
-function dataReducer(state = INITIAL_STATE, action) {
-  switch (action.type) {
-    case REQUEST_PLANETS:
-      return ({ ...state, isFetching: true });
-
-    case FETCH_PLANETS_SUCESS:
-      return ({
-        ...state,
-        isFetching: false,
-        data: [...action.planets],
-        headers: [...action.headers],
-      });
-
-    case FETCH_PLANETS_FAILURE:
-      return ({
-        ...state,
-        isFetching: false,
-        error: action.error,
-      });
-
-    default:
-      return state;
-  }
-}
+  data: '',
+  headers: '',
+});
 
 function DataPlanetsProvider({ children }) {
-  const [state, dispatch] = useReducer(dataReducer, INITIAL_STATE);
+  const [isFetching, setIsFetching] = useState(true);
+  const [error, setError] = useState('');
+  const [data, setData] = useState([]);
+  const [headers, setHeaders] = useState([]);
+
+  const state = { isFetching, data, error, headers };
+
+  const dispatch = { setIsFetching, setData, setError, setHeaders };
 
   return (
     <dataPlanetsContext.Provider value={[state, dispatch]}>

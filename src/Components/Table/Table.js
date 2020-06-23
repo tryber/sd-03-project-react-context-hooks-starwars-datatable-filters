@@ -20,6 +20,25 @@ function switchComparison(column, comparison, value, planet) {
   }
 }
 
+const filterSelectedValues = (planetFiltered, nameInput, inputFilter) => {
+  if (inputFilter) {
+    return inputFilter.reduce(
+      (acc, { column, comparison, value }) =>
+        acc.filter((planet) => switchComparison(column, comparison, value, planet),
+        ),
+      filteredPlanet(planetFiltered, nameInput),
+    );
+  }
+  return filteredPlanet(planetFiltered, nameInput);
+};
+
+const filteredPlanet = (planets, nameInput) => {
+  if (nameInput !== undefined) {
+    return planets.filter(({ name }) => name.toLowerCase().includes(nameInput.toLowerCase()));
+  }
+  return planets;
+};
+
 function Table() {
   const { fetchAPI, loading, data, filterSelect } = useContext(APIcontext);
   const nameInput = filterSelect.filters.filterByName.name;
@@ -28,25 +47,6 @@ function Table() {
   useEffect(() => {
     fetchAPI();
   }, []);
-
-  const filteredPlanet = (planets) => {
-    if (nameInput !== undefined) {
-      return planets.filter(({ name }) => name.toLowerCase().includes(nameInput.toLowerCase()));
-    }
-    return planets;
-  };
-
-  const filterSelectedValues = (planetFiltered) => {
-    if (inputFilter) {
-      return inputFilter.reduce(
-        (acc, { column, comparison, value }) =>
-          acc.filter((planet) => switchComparison(column, comparison, value, planet),
-          ),
-        filteredPlanet(planetFiltered),
-      );
-    }
-    return filteredPlanet(planetFiltered);
-  };
 
   return (
     <div>
@@ -61,7 +61,7 @@ function Table() {
         {/* <RemoveFilters /> */}
       </div>
       <div className="TabelaProdutos">
-        {data && <CreateTable data={filterSelectedValues(data)} />}
+        {data && <CreateTable data={filterSelectedValues(data, nameInput, inputFilter)} />}
       </div>
       {loading && <h1>Loading...</h1>}
     </div>

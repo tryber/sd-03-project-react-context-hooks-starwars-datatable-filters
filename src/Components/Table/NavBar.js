@@ -68,7 +68,7 @@ function NavBar() {
 
   return (
     <div>
-      {sideBar(handleChangeInput, handleFormSubmit)}
+      {sideBar(handleChangeInput)}
       <div>
         <button
           type="button"

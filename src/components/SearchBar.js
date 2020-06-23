@@ -1,82 +1,68 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import NameFilter from './NameFilter';
-// import FilterList from './FilterList';
+import FilterList from './FilterList';
+import { StarWarsContext } from './StarWarsContext';
 
 function SearchBar() {
+
+  const [column, setColumn] = useState('');
+  const [comparison, setComparison] = useState('');
+  const [value, setValue] = useState('');
+
+  const columnsArray = [
+    '',
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water'
+  ];
+  const comparisonArray = ['', 'maior que', 'igual a', 'menor que'];
+  const { 
+    updateNumericFilters,
+    filters: {
+      filterByNumericValues: numericFilters,
+    },
+  } = useContext(StarWarsContext);
+
+  const handleClick = () => {
+    const searchFilters = {
+      column,
+      comparison,
+      value,
+    };
+    updateNumericFilters(searchFilters);
+  }
+
+  const filterColumnsOptions = (filters, value) => !filters.find(({ column }) => column === value);
+
   return (
-    <NameFilter />
+    <div className="filters-div">
+      <NameFilter />
+      <select
+        id="column-filter"
+        data-testid="column-filter"
+        onChange={(event) => setColumn(event.target.value)}
+      >
+        {columnsArray.map((column) => (filterColumnsOptions(numericFilters, column) &&
+          (<option value={column} key={column}>{column}</option>)
+        ))}
+      </select>
+      <select
+        onChange={(event) => setComparison(event.target.value)}
+        data-testid="comparison-filter"
+      >
+        {comparisonArray.map((option) => <option value={option} key={option}>{option}</option>)}
+      </select>
+      <input
+        type="number"
+        data-testid="value-filter"
+        onChange={(event) => setValue(event.target.value)}
+      />
+      <button data-testid="button-filter" onClick={handleClick}>Filter</button>
+      <FilterList />
+    </div>
   );
 }
-
-/* const filterColumnsOptions = (filters, value) => !filters.find(({ column }) => column === value);
-
-class SearchBar extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      column: '',
-      comparison: '',
-      value: '',
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleChange(event, key) {
-    this.setState({
-      [key]: event.target.value,
-    });
-  }
-
-  handleClick() {
-    const searchFilters = {
-      column: this.state.column,
-      comparison: this.state.comparison,
-      value: this.state.value,
-    };
-    this.props.filtersParams(searchFilters);
-  }
-
-  render() {
-    const columns = [
-      '',
-      'population',
-      'orbital_period',
-      'diameter',
-      'rotation_period',
-      'surface_water'
-    ];
-    const comparison = ['', 'maior que', 'igual a', 'menor que'];
-    const { valueFilters } = this.props;
-    return (
-      <div className="filters-div">
-        <NameFilter />
-        <select
-          id="column-filter"
-          data-testid="column-filter"
-          onChange={(event) => this.handleChange(event, 'column')}
-        >
-          {columns.map((column) => (filterColumnsOptions(valueFilters, column) &&
-            (<option value={column} key={column}>{column}</option>)
-          ))}
-        </select>
-        <select
-          onChange={(event) => this.handleChange(event, 'comparison')}
-          data-testid="comparison-filter"
-        >
-          {comparison.map((option) => <option value={option} key={option}>{option}</option>)}
-        </select>
-        <input
-          type="number"
-          data-testid="value-filter"
-          onChange={(event) => this.handleChange(event, 'value')}
-        />
-        <button data-testid="button-filter" onClick={this.handleClick}>Filter</button>
-        <FilterList />
-      </div>
-    );
-  }
-} */
 
 export default SearchBar;

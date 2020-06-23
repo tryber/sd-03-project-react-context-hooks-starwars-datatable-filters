@@ -20,6 +20,13 @@ function switchComparison(column, comparison, value, planet) {
   }
 }
 
+const filteredPlanet = (planets, nameInput) => {
+  if (nameInput !== undefined) {
+    return planets.filter(({ name }) => name.toLowerCase().includes(nameInput.toLowerCase()));
+  }
+  return planets;
+};
+
 const filterSelectedValues = (planetFiltered, nameInput, inputFilter) => {
   if (inputFilter) {
     return inputFilter.reduce(
@@ -30,13 +37,6 @@ const filterSelectedValues = (planetFiltered, nameInput, inputFilter) => {
     );
   }
   return filteredPlanet(planetFiltered, nameInput);
-};
-
-const filteredPlanet = (planets, nameInput) => {
-  if (nameInput !== undefined) {
-    return planets.filter(({ name }) => name.toLowerCase().includes(nameInput.toLowerCase()));
-  }
-  return planets;
 };
 
 function Table() {

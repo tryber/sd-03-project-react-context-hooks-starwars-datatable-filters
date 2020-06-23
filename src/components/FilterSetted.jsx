@@ -22,7 +22,9 @@ function FilterSetted({ id, obj }) {
 
 FilterSetted.propTypes = {
   obj: PropTypes.objectOf(
-    PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.number.isRequired]).isRequired,
+    PropTypes.oneOfType(
+      [PropTypes.string, PropTypes.number]
+    ).isRequired,
   ).isRequired,
   id: PropTypes.number.isRequired,
 };

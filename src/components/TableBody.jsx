@@ -7,7 +7,7 @@ const TableBody = ({ properties, isMultiHeader, items }) => (
     {items.map((item, index) => (
       <tr
         key={item.name}
-        style={{ backgroundColor: index % 2 === 0 ? 'red' : 'blue' }}
+        style={{ backgroundColor: index % 2 === 0 ? '#c00' : '#00c' }}
       >
         {properties.map((feature) => (
           <td

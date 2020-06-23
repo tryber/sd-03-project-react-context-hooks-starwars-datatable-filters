@@ -11,7 +11,7 @@ const renderRadio = (value, text, dispatch) => (
     <input
       className="radius-border"
       data-testid="column-sort-input"
-      id={`sort-radio-${value}`}
+      id={`column-sort-input-${value.toLowerCase()}`}
       name="sort-filter-radio"
       onChange={() => dispatch(actions.changeOrder('sort', value))}
       type="radio"

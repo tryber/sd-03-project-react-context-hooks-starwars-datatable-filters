@@ -9,7 +9,7 @@ function Table() {
         <Head />
         <Body />
       </table>
-    </div >
+    </div>
   );
 }
 

@@ -14,7 +14,7 @@ const App = () =>
       <NumericFilter />
       <ListFilters />
       <Table />
-  </div>
+    </div>
   </Provider>;
 
 export default App;

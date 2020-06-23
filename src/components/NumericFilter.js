@@ -50,7 +50,8 @@ const NumericFilter = () => {
 
   const handleChange = () => {
     setFilterByNumericValues([
-      ...filterByNumericValues, { column: stateColumn, comparison: stateComparison, value: stateValue },
+      ...filterByNumericValues,
+      { column: stateColumn, comparison: stateComparison, value: stateValue },
     ]);
     setStateColumn(''); setStateComparison(''); setStateValue('');
   };

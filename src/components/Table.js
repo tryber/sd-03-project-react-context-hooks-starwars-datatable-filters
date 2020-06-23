@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Table({ planets }){
+function Table({ planets }) {
   return (
     planets.map((planeta) =>
       <tr key={planeta.name}>

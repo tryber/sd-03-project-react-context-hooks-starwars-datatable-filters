@@ -3,7 +3,7 @@ import StarWarsContext from '../context/StarWarsContext';
 import Table from './Table';
 
 function TableData() {
-  const  { getPlanetsData, data }  = useContext(StarWarsContext);
+  const  { getPlanetsData, data } = useContext(StarWarsContext);
 
   useEffect(() => getPlanetsData(), []);
 
@@ -28,7 +28,7 @@ function TableData() {
           </tr>
         </thead>
         <tbody>
-          {data && <Table planets={data}/>}
+          {data && <Table planets={data} />}
         </tbody>
       </table>
     </div>

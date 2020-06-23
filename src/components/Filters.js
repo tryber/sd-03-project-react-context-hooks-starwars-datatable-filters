@@ -1,7 +1,5 @@
-import React from 'react';
-
 function Filters() {
-  return({});
+  return ({});
 }
 
 export default Filters;

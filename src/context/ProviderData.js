@@ -1,39 +1,45 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import StarWarsContext from './StarWarsContext';
 import fetchPlanets from '../services/starWarsAPI';
 
 function ProviderData({ children }) {
-  const [ isFetching, setIsFetching ] = useState();
-  const [ error, setError ] = useState(null);
-  const [ data, setData ] = useState();
+  const [isFetching, setIsFetching] = useState();
+  const [error, setError] = useState(null);
+  const [data, setData] = useState();
+
+  const handlePlanetsFailure = (error) => {
+    setIsFetching(false);
+    setError(error.message);
+  };
+
+  const handlePlanetsSuccess = (response) => {
+    const { results } = response;
+    setIsFetching(false);
+    setData(results);
+  };
   const fetchPlanetsData = () => {
     if (isFetching) return;
     setIsFetching(true);
     fetchPlanets()
       .then(handlePlanetsSuccess, handlePlanetsFailure);
-  }
-
-  const handlePlanetsFailure = (error) => {
-    setIsFetching(false);
-    setError(error.message);
-  }
-
-  const handlePlanetsSuccess = (response) => {
-    const { results  } = response;
-    setIsFetching(false);
-    setData(results);
-  }
+  };
 
   const context = {
     getPlanetsData: fetchPlanetsData,
     data,
     isFetching,
-  }
-  return(
+    error,
+  };
+  return (
     <StarWarsContext.Provider value={context}>
       {children}
     </StarWarsContext.Provider>
   );
 }
+
+ProviderData.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default ProviderData;

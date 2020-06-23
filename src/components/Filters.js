@@ -7,14 +7,12 @@ function Filters() {
   const columns = ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
   return (
     <div>
-      <form>
-        <input
-          onChange={(event) => handleNameFilter(event.target.value)}
-          data-testid="name-filter"
-          type="text"
-          placeholder="Filtro"
-        />
-      </form>
+      <input
+        onChange={(event) => handleNameFilter(event.target.value)}
+        data-testid="name-filter"
+        type="text"
+        placeholder="Filtro"
+      />
       <select
         onChange={(e) => setFilters(({ ...filters, column: e.target.value }))}
         data-testid="column-filter"

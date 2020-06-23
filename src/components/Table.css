@@ -5,10 +5,10 @@ table , thead , tbody , td , tr {
 
 table {
   display: inline-block;
-  font-size: 1.3em;
   flex-basis: 50%;
+  font-size: 1.3em;
+  max-height: 150vh;
   overflow: scroll;
-  max-height: 100vh;
   text-align: center;
 }
 

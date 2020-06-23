@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
+import { Button } from '@material-ui/core';
+
 import { filtersContext } from '../context/Filters';
 import { removeFilter } from '../actions/filterActions';
-import { Button } from '@material-ui/core';
 import ButtonStyle from '../styles/Button';
 
 function FilterSetted({ id, obj }) {

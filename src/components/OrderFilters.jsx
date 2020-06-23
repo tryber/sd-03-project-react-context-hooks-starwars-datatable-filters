@@ -1,14 +1,12 @@
 import React, { useContext, useState } from 'react';
 
 import Button from '@material-ui/core/Button';
-import { Select } from '@material-ui/core';
 
 import { dataPlanetsContext } from '../context/DataPlanets';
 import { filtersContext } from '../context/Filters';
 import { activateOrder } from '../actions/filterActions';
 import { renderOptions, allValuesSetted } from '../services/constants';
 import ButtonStyle from '../styles/Button';
-import SelectStyle from '../styles/Select';
 
 const renderRadio = (value, text, setSort) => (
   <label htmlFor={`sort-radio-${value}`} className="container">
@@ -31,7 +29,6 @@ function OrderFilters() {
   const [{ headers }] = useContext(dataPlanetsContext);
   const [, dispatch] = useContext(filtersContext);
   const { root } = ButtonStyle();
-  const { root: classesSelect } = SelectStyle();
 
   return (
     <fieldset className="container">

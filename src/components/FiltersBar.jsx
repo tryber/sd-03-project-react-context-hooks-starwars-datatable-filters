@@ -24,7 +24,7 @@ function FilterBar() {
   const [isMultiHeader, setIMultiHeader] = useContext(formatContext);
 
   return (
-    <section>
+    <section className="filter-bar">
       <h2 className="container"><span>Filters</span></h2>
       <div className="filters">
         <SearchBox />

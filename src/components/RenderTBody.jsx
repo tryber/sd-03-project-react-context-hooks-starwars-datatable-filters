@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const RenderTBody = ({ filteredTable, isRequesting }) => {
-  if (isRequesting) return <h1>Loading ...</h1>;
+const RenderTBody = ({ filteredTable }) => {
   return (
     <tbody>
       {filteredTable.map((planet) => (
@@ -24,5 +24,9 @@ const RenderTBody = ({ filteredTable, isRequesting }) => {
     </tbody>
   );
 };
+
+RenderTBody.propTypes = {
+  filteredTable: PropTypes.arrayOf(PropTypes.object).isRequired,
+}
 
 export default RenderTBody;

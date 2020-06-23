@@ -1,7 +1,6 @@
 import React from 'react';
 
-const RenderTHead = () => {
-  return (
+const RenderTHead = () => (
     <thead>
       <tr>
         <th>Name</th>
@@ -20,6 +19,5 @@ const RenderTHead = () => {
       </tr>
     </thead>
   );
-};
 
 export default RenderTHead;

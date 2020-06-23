@@ -1,11 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { StarWarsContext } from './context/StarWarsContext';
-import RenderTHead from './components/RenderTHead'
-import RenderTBody from './components/RenderTBody'
+import RenderTHead from './components/RenderTHead';
+import RenderTBody from './components/RenderTBody';
 import './App.css';
 
 const App = () => {
   const store = useContext(StarWarsContext);
+
+  useEffect(() => {
+    store.requestDataTable();
+  }, []);
 
   if (store.isRequesting) return <h1>Loading ...</h1>;
 
@@ -20,6 +24,6 @@ const App = () => {
       </table>
     </div>
   );
-}
+};
 
 export default App;

@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import requestData from '../services/Request';
 
 const StarWarsContext = createContext();
@@ -7,10 +8,6 @@ const StarWarsProvider = ({ children }) => {
   const [dataTable, setDataTable] = useState([]);
   const [errData, setErrData] = useState('');
   const [isRequesting, setIsRequesting] = useState(false);
-
-  useEffect(() => {
-    requestDataTable();
-  }, [])
 
   // Make request to endpoint and handles isRequesting
   const requestDataTable = () => {
@@ -29,7 +26,7 @@ const StarWarsProvider = ({ children }) => {
       },
     );
   };
-  
+
   const STContext = {
     dataTable,
     errData,
@@ -42,6 +39,10 @@ const StarWarsProvider = ({ children }) => {
       {children}
     </StarWarsContext.Provider>
   );
-}
+};
+
+StarWarsProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export { StarWarsContext, StarWarsProvider };

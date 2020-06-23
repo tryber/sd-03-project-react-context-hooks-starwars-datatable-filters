@@ -7,6 +7,13 @@ const initialState = {
   filterByName: {
     name: '',
   },
+  filterByNumericValues: [
+    {
+      column: '',
+      comparison: '',
+      value: '',
+    },
+  ],
 };
 
 const StarWarsContextProvider = ({ children }) => {
@@ -25,6 +32,14 @@ const StarWarsContextProvider = ({ children }) => {
     setFilters({ ...filters, filterByName: { name } })
   );
 
+  const filterByNumericValues = (value) => {
+    setFilters({
+      ...filters,
+      filterByNumericValues:
+        filterByNumericValues.filter((filtereds) => filtereds.column !== value)
+    })
+  }  
+
   const updateData = (info) => {
     setData([...info]);
   };
@@ -40,7 +55,9 @@ const StarWarsContextProvider = ({ children }) => {
     updateError,
     error,
     filterByName,
+    filterByNumericValues,
     filters,
+    optionData: ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'],
   };
 
   return (

@@ -27,20 +27,13 @@ function FilterBar() {
         <OrderFilters />
       </div>
       <div>
-        {filterByNumericValues.map(({ column, comparison, value }, id) => (
-          <FilterSetted
-            id={id}
-            key={column}
-            column={column}
-            comparison={comparison}
-            value={value}
-          />
+        {filterByNumericValues.map((obj, id) => (
+          <FilterSetted id={id} key={obj.column} obj={obj} />
         ))}
       </div>
       <div>
         <button
           className="radius-border filter-button"
-          type="button"
           onClick={() => setIMultiHeader(!isMultiHeader)}
         >
           Change Table Format

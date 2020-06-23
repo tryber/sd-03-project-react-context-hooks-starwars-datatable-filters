@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { filtersContext } from '../context/Filters';
 import * as actions from '../actions/NumFilterActions';
 
-function FilterSetted({ id, column, comparison, value }) {
+function FilterSetted({ id, obj }) {
   const [, dispatch] = useContext(filtersContext);
   return (
     <div data-testid="filter" className="filters container">
-      <span>{column} | {comparison} | {value}</span>
+      <span>{Object.values(obj).map((value) => `${value} | `)}</span>
       <button
         className="radius-border filter-button"
         type="button"
@@ -21,10 +21,10 @@ function FilterSetted({ id, column, comparison, value }) {
 }
 
 FilterSetted.propTypes = {
+  obj: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.number.isRequired]).isRequired,
+  ).isRequired,
   id: PropTypes.number.isRequired,
-  column: PropTypes.string.isRequired,
-  comparison: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
 };
 
 export default FilterSetted;

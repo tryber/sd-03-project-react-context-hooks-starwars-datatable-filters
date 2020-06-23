@@ -9,11 +9,22 @@ function Table() {
     data,
     error,
     fetchPlanetList,
+    filters: {
+      filterByName: {
+        name,
+      },
+    },
   } = useContext(StarWarsContext);
 
   useEffect(() => {
     fetchPlanetList();
   }, []);
+
+  const filterPlanets = () => {
+    const filterName = data.filter((planet) => (planet.name.toLowerCase()).includes(name));
+
+    return(filterName);
+  };
 
   if (isFetching) { return <p>Loading...</p>; }
 
@@ -24,7 +35,7 @@ function Table() {
           <TableHeader />
         </thead>
         <tbody>
-          {data.map((planet) => <PlanetLine planet={planet} key={planet.name} />)}
+          {filterPlanets().map((planet) => <PlanetLine planet={planet} key={planet.name} />)}
         </tbody>
       </table>
     );

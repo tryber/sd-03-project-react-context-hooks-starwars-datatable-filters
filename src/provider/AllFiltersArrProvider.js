@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import AllFiltersArrContext from '../context/AllFiltersArrContext';
 import PropTypes from 'prop-types';
+import AllFiltersArrContext from '../context/AllFiltersArrContext';
 
 const AllFiltersArrProvider = ({ children }) => {
   const allFilters = [
@@ -30,4 +30,4 @@ AllFiltersArrProvider.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
-}
+};

@@ -87,9 +87,9 @@ const NumericFilterButton = () => {
 
   const DisplayFilterName = () => {
     const index = allFiltersArr.indexOf(column);
-    const newArr = [...allFiltersArr];
-    newArr.splice(index, 1);
-    setAllFiltersFunc(newArr);
+    const newFiltersArr = [...allFiltersArr];
+    newFiltersArr.splice(index, 1);
+    setAllFiltersFunc(newFiltersArr);
   };
 
   const NumericFilter = () => {
@@ -136,7 +136,7 @@ const RadioDescAsc = () => {
         <input
           data-testid="column-sort-input"
           value="DESC"
-          onClick={() => setSortTypeFunc("DESC")}
+          onClick={() => setSortTypeFunc('DESC')}
           type="radio"
           name="sortType"
           id="desc"
@@ -147,7 +147,7 @@ const RadioDescAsc = () => {
         <input
           data-testid="column-sort-input"
           value="ASC"
-          onClick={() => setSortTypeFunc("ASC")}
+          onClick={() => setSortTypeFunc('ASC')}
           type="radio"
           name="sortType"
           id="asc"
@@ -167,24 +167,22 @@ const SortButton = () => {
   );
 };
 
-const Inputs = () => {
-  return (
+const Inputs = () => (
+  <div>
     <div>
-      <div>
-        {Searchbar()}
-        {NumericSearchCol()}
-        {NumericSearchGreat()}
-        {NumericSearchValue()}
-        {NumericFilterButton()}
-      </div>
-      <div>
-        {ColToSort()}
-        {RadioDescAsc()}
-        {SortButton()}
-      </div>
+      {Searchbar()}
+      {NumericSearchCol()}
+      {NumericSearchGreat()}
+      {NumericSearchValue()}
+      {NumericFilterButton()}
     </div>
-  );
-};
+    <div>
+      {ColToSort()}
+      {RadioDescAsc()}
+      {SortButton()}
+    </div>
+  </div>
+);
 
 export default Inputs;
 

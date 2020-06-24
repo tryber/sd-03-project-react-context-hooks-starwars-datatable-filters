@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import FiltersContext from '../context/FiltersContext';
 import PropTypes from 'prop-types';
+import FiltersContext from '../context/FiltersContext';
 
 const FiltersProvider = ({ children }) => {
   const [column, setColumn] = useState('all');
@@ -68,4 +68,4 @@ FiltersContext.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
-}
+};

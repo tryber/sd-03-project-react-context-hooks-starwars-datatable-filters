@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 // import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 import FiltersContext from '../context/FiltersContext';

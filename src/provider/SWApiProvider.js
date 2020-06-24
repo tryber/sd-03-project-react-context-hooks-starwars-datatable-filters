@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import SWApiContext from '../context/SWApiContext';
 import apiSWRequest from '../service/apiSWRequest';
-import PropTypes from 'prop-types';
 
 const SWApiProvider = ({ children }) => {
   const [data, setData] = useState([]);
@@ -45,4 +45,4 @@ SWApiProvider.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
-}
+};

@@ -8,15 +8,6 @@ const SWApiProvider = ({ children }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const apiSWRequestFunction = () => {
-      setIsLoading(true);
-      apiSWRequest()
-        .then(apiRequestSucceed, apiRequestFailure);
-    };
-    apiSWRequestFunction();
-  }, []);
-
   const apiRequestSucceed = ({ results }) => {
     setData(results);
     setIsLoading(false);
@@ -26,6 +17,15 @@ const SWApiProvider = ({ children }) => {
     setErrorMessage(message);
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    const apiSWRequestFunction = () => {
+      setIsLoading(true);
+      apiSWRequest()
+        .then(apiRequestSucceed, apiRequestFailure);
+    };
+    apiSWRequestFunction();
+  }, []);
 
   const apiSwContext = {
     data,

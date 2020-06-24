@@ -49,21 +49,29 @@ const filteredPlanets = (filters, planets) => {
   return result;
 };
 
+const sortAscending = (obj, column) => {
+  obj.sort((a, b) => {
+    if (b[column] - a[column] > 0) {
+      return 1;
+    }
+    return -1;
+  });
+};
+
+const sortDescending = (obj, column) => {
+  obj.sort((a, b) => {
+    if (b[column] - a[column] > 0) {
+      return -1;
+    }
+    return 1;
+  });
+};
+
 const sortPlanets = (obj, column, sort) => {
   if (sort === 'ASC') {
-    obj.sort((a, b) => {
-      if (b[column] - a[column] > 0) {
-        return 1;
-      }
-      return -1;
-    });
+    sortAscending(obj, column);
   } else {
-    obj.sort((a, b) => {
-      if (b[column] - a[column] > 0) {
-        return -1;
-      }
-      return 1;
-    });
+    sortDescending(obj, column);
   }
 };
 

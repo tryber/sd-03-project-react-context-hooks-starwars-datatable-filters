@@ -22,9 +22,9 @@ const SelectedFilters = () => {
 
   if (filterByNumericValues.length === 0) return <div />;
   return (
-    <div data-testid="filter">
+    <div>
       {filterByNumericValues.map((e) => (
-        <div key={e.column}>
+        <div data-testid="filter" key={e.column}>
           <div>{e.column}</div>
           <div>{e.comparison}</div>
           <div>{e.numericValue}</div>

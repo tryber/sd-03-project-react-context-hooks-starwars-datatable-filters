@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import SWApiContext from '../context/SWApiContext';
 import apiSWRequest from '../service/apiSWRequest';
@@ -7,6 +7,15 @@ const SWApiProvider = ({ children }) => {
   const [data, setData] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const apiSWRequestFunction = () => {
+      setIsLoading(true);
+      apiSWRequest()
+        .then(apiRequestSucceed, apiRequestFailure);
+    };
+    apiSWRequestFunction();
+  }, []);
 
   const apiRequestSucceed = ({ results }) => {
     setData(results);
@@ -18,17 +27,10 @@ const SWApiProvider = ({ children }) => {
     setIsLoading(false);
   };
 
-  const apiSWRequestFunction = () => {
-    setIsLoading(true);
-    apiSWRequest()
-      .then(apiRequestSucceed, apiRequestFailure);
-  };
-
   const apiSwContext = {
     data,
     isLoading,
     errorMessage,
-    apiSWRequestFunction,
   };
 
   return (

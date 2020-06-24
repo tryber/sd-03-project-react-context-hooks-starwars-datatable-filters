@@ -1,18 +1,8 @@
 import React, { useContext } from 'react';
 import FiltersContext from '../context/FiltersContext';
 import AllFiltersArrContext from '../context/AllFiltersArrContext';
-// import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
-// import { filtersNameAction } from '../actions/filtersNameAction';
-// import { removeFilterDisplayAction } from '../actions/removeFilterDisplayAction';
 
 const SelectedFilters = () => {
-  // const {
-  //   numericSearched,
-  //   allFiltersArr,
-  //   changeFiltersDisplay,
-  //   removeFilterDisplay,
-  // } = props;
   const {
     filters: { filterByNumericValues }, filterByNumericValuesFunc,
   } = useContext(FiltersContext);
@@ -53,27 +43,4 @@ const SelectedFilters = () => {
   );
 };
 
-// const mapStateToProps = (state) => ({
-//   numericSearched: state.filters.filterByNumericValues,
-//   allFiltersArr: state.filtersArrReducer.allFilters,
-// });
-
-// const mapDispatchToProps = (dispatch) => ({
-//   changeFiltersDisplay: (arr) => dispatch(filtersNameAction(arr)),
-//   removeFilterDisplay: (arr) => dispatch(removeFilterDisplayAction(arr)),
-// });
-
 export default SelectedFilters;
-
-// SelectedFilters.propTypes = {
-//   numericSearched: PropTypes.arrayOf(PropTypes.any),
-//   allFiltersArr: PropTypes.arrayOf(PropTypes.string).isRequired,
-//   changeFiltersDisplay: PropTypes.func,
-//   removeFilterDisplay: PropTypes.func,
-// };
-
-// SelectedFilters.defaultProps = {
-//   numericSearched: [],
-//   changeFiltersDisplay: () => {},
-//   removeFilterDisplay: () => {},
-// };

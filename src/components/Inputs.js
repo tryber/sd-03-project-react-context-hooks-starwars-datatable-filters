@@ -134,7 +134,7 @@ const RadioDescAsc = () => {
       <label htmlFor="desc">
         Descendente
         <input
-          data-testid="column-sort-input"
+          data-testid="column-sort-input-desc"
           value="DESC"
           onClick={() => setSortTypeFunc('DESC')}
           type="radio"
@@ -145,7 +145,7 @@ const RadioDescAsc = () => {
       <label htmlFor="asc">
         Ascendente
         <input
-          data-testid="column-sort-input"
+          data-testid="column-sort-input-asc"
           value="ASC"
           onClick={() => setSortTypeFunc('ASC')}
           type="radio"

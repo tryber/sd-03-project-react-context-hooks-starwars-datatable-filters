@@ -4,7 +4,6 @@ import StarWarsContext from '../context/StarWarsContext';
 
 function filteredOptions({ filterByNumericValues }) {
   const options = [
-    { value: '', text: '' },
     { value: 'population', text: 'population' },
     { value: 'orbital_period', text: 'orbital period' },
     { value: 'diameter', text: 'diameter' },
@@ -49,7 +48,7 @@ function selectFilter(optionsParam, setColumn) {
             key={item.value}
             value={item.value}
           >
-            {item.text}
+            {item.value}
           </option>)
       }
     </select>

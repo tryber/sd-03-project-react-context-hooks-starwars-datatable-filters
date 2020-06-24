@@ -16,7 +16,6 @@ const FilterByNameInput = () => {
       />
     </div>
   );
-}
-
+};
 
 export default FilterByNameInput;

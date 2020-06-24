@@ -10,7 +10,7 @@ const options = [
   { value: 'surface_water', text: 'surface_water' },
 ];
 
-const inputNamePlanet = (context) => {
+function inputNamePlanet(context) {
   return (
     <label htmlFor="namePlanet">
       Nome do Planeta:
@@ -22,9 +22,9 @@ const inputNamePlanet = (context) => {
       />
     </label>
   );
-}
+};
 
-const selectFilter = (optionsParam, setColumn) => {
+function selectFilter(optionsParam, setColumn) {
   return (
     <select
       data-testid="column-filter"
@@ -41,9 +41,9 @@ const selectFilter = (optionsParam, setColumn) => {
       }
     </select>
   );
-}
+};
 
-const selectComparison = (setComparison) => {
+function selectComparison(setComparison) {
   return (
     <select
       data-testid="comparison-filter"
@@ -55,9 +55,9 @@ const selectComparison = (setComparison) => {
       <option value="igual a">igual a</option>
     </select>
   );
-}
+};
 
-const valueFilterInput = (setValue) => {
+function valueFilterInput(setValue) {
   return (
     <label htmlFor="valueFilter">
       Valor:
@@ -69,9 +69,9 @@ const valueFilterInput = (setValue) => {
       />
     </label>
   );
-}
+};
 
-const buttonFilter = (column, comparison, value, context) => {
+function buttonFilter(column, comparison, value, context) {
   const filters = {
     column,
     comparison,
@@ -87,7 +87,7 @@ const buttonFilter = (column, comparison, value, context) => {
       </button>
     </div>
   );
-}
+};
 
 function Inputs() {
   const context = React.useContext(StarWarsContext);

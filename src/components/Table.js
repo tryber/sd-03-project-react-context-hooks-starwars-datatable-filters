@@ -2,7 +2,7 @@ import React from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 import '../App.css';
 
-const filterPlanetsFunc = (data, filters) => {
+function filterPlanetsFunc(data, filters) {
   let dataParam = [...data];
   let filterPlanets;
   filters.forEach((item) => {
@@ -19,7 +19,7 @@ const filterPlanetsFunc = (data, filters) => {
     dataParam = filterPlanets;
   });
   return filterPlanets;
-}
+};
 
 const tbody = (data, name) => {
   return (

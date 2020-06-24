@@ -1,9 +1,6 @@
 import React, { useContext } from 'react';
-import proptypes from 'prop-types';
 import { DataContext } from './TableData';
 import { FilterContext } from './Filters';
-
-const TableContext = React.createContext();
 
 const header = ['name', 'population', 'climate', 'diameter', 'created', 'gravity', 'orbital_period', 'rotation_period',
   'surface_water', 'terrain', 'films', 'edited', 'url'];
@@ -42,9 +39,10 @@ function filterData(filterByNumericValues, data) {
   return [];
 }
 
-export default function Table({ children }) {
+export default function Table() {
   const { data } = useContext(DataContext);
   const { nameFilter, filterByNumericValues, order } = useContext(FilterContext);
+
   sortColumns(data, order);
 
   function renderTableData() {
@@ -70,7 +68,7 @@ export default function Table({ children }) {
               return <td key={e.name + el}>{e[el]}</td>;
             })}
           </tr>
-      ))
+        ))
     );
   }
 
@@ -97,13 +95,6 @@ export default function Table({ children }) {
           {renderFilteredDataByNumeric()}
         </tbody>
       </table>
-      <TableContext.Provider>
-        {children}
-      </TableContext.Provider>
     </div>
   );
 }
-
-Table.propTypes = {
-  children: proptypes.element.isRequired,
-};

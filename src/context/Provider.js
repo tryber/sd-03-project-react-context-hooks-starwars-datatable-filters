@@ -13,7 +13,7 @@ const Provider = ({ children }) => {
     comparison: '',
     value: '',
   }]);
-
+  const [order, setOrder] = useState({ column: 'name', sort: 'ASC' });
   const receivePlanetsSuccess = (data) => {
     setPlanets(data.results);
     setIsFetching(false);
@@ -49,10 +49,11 @@ const Provider = ({ children }) => {
         name,
       },
       filterByNumericValues,
+      order,
     },
-    clearFilter: (index) => console.log(index),
     setName,
     setFilterByNumericValues,
+    setOrder,
   };
 
   return (

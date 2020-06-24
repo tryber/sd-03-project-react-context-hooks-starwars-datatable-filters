@@ -27,6 +27,7 @@ const tableCreator = (obj) =>
 
 const filteredPlanets = (filters, planets) => {
   let result = [...planets];
+  
   filters.forEach(
     ({ column, comparison, value }) => {
       if (Number(value) === 0) { return planets; }
@@ -48,10 +49,37 @@ const filteredPlanets = (filters, planets) => {
   return result;
 };
 
+const sortPlanets = (obj, column, sort) => {
+  if (sort === 'ASC') {
+    obj.sort(function (a, b) {
+      if (a[column] > b[column]) {
+        return 1;
+      }
+      if (a[column] < b[column]) {
+        return -1;
+      }
+      // a must be equal to b
+      return 0;
+    });
+  } else if (sort === 'DESC') {
+    obj.sort(function (a, b) {
+      if (a[column] > b[column]) {
+        return -1;
+      }
+      if (a[column] < b[column]) {
+        return 1;
+      }
+      // a must be equal to b
+      return 0;
+    });
+  }
+  
+};
+
 const Table = () => {
   const { data, filters } = useContext(StarWarsContext);
   const { planets, isFetching } = data;
-  const { filterByName, filterByNumericValues } = filters;
+  const { filterByName, filterByNumericValues, order } = filters;
   const dataReceived = planets.length;
   let planetoides = [];
   let dataReady = false;
@@ -65,6 +93,7 @@ const Table = () => {
     dataReady = true;
     planetoides = [...filteredPlanets(filterByNumericValues, planets)];
   }
+  sortPlanets(planetoides, order.column, order.sort);
   return (
     <div>
       {dataReady && !isFetching &&

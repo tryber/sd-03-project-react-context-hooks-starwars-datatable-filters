@@ -4,6 +4,7 @@ import Table from './components/Table';
 import Filter from './components/Filter';
 import NumericFilter from './components/NumericFilter';
 import ListFilters from './components/ListFilters';
+import OrderTable from './components/OrderTable';
 import './App.css';
 
 const App = () =>
@@ -13,6 +14,7 @@ const App = () =>
       <Filter />
       <NumericFilter />
       <ListFilters />
+      <OrderTable />
       <Table />
     </div>
   </Provider>;

@@ -1,16 +1,28 @@
 import React from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
-const options = [
-  { value: '', text: '' },
-  { value: 'population', text: 'population' },
-  { value: 'orbital_period', text: 'orbital_period' },
-  { value: 'diameter', text: 'diameter' },
-  { value: 'rotation_period', text: 'rotation_period' },
-  { value: 'surface_water', text: 'surface_water' },
-];
+function filteredOptions({filterByNumericValues}) {
+  const options = [
+    { value: '', text: '' },
+    { value: 'population', text: 'population' },
+    { value: 'orbital_period', text: 'orbital period' },
+    { value: 'diameter', text: 'diameter' },
+    { value: 'rotation_period', text: 'rotation period' },
+    { value: 'surface_water', text: 'surface water' },
+  ];
+  if (filterByNumericValues.length === 0) {
+    return options;
+  }
+  let optionsParam = [...options];
+  let newOptions = [];
+  filterByNumericValues.forEach((item) => {
+    newOptions = optionsParam.filter((option) => option.value !== item.column);
+    optionsParam = newOptions;
+  });
+  return newOptions;
+}
 
-function inputNamePlanet(context) {
+function inputNamePlanet({setNameFunc}) {
   return (
     <label htmlFor="namePlanet">
       Nome do Planeta:
@@ -18,7 +30,7 @@ function inputNamePlanet(context) {
         data-testid="name-filter"
         name="namePlanet"
         type="text"
-        onChange={(event) => context.setNameFunc(event.target.value)}
+        onChange={(event) => setNameFunc(event.target.value)}
       />
     </label>
   );
@@ -71,20 +83,50 @@ function valueFilterInput(setValue) {
   );
 }
 
-function buttonFilter(column, comparison, value, context) {
+function buttonFilter(column, comparison, value, {setFilterByNumericValuesFunc}) {
   const filters = {
     column,
     comparison,
     value,
   };
+  let isDisabled = true;
+  if (column && comparison && value) isDisabled = false;
   return (
     <div>
       <button
+        disabled={isDisabled}
         data-testid="button-filter"
-        onClick={() => context.setFilterByNumericValuesFunc(filters)}
+        onClick={() => setFilterByNumericValuesFunc(filters)}
       >
         Filtrar
       </button>
+    </div>
+  );
+}
+
+function removeFilter(option, filters) {
+  const newFilters = filters.filter((item) => item.column !== option);
+  return newFilters;
+}
+
+function filteredList({filterByNumericValues, removeFilterByNumericValues}) {
+  return (
+    <div>
+      {
+        filterByNumericValues.map((item) =>
+          <div
+            data-testid="filter"
+            key={item.column}
+          >
+            {item.column}
+            <button
+              value={item.column}
+              onClick={(event) =>
+                removeFilterByNumericValues(removeFilter(event.target.value, filterByNumericValues))}
+            >
+              X
+            </button>
+          </div>)}
     </div>
   );
 }
@@ -98,10 +140,11 @@ function Inputs() {
   return (
     <div>
       {inputNamePlanet(context)}
-      {selectFilter(options, setColumn)}
+      {selectFilter(filteredOptions(context), setColumn)}
       {selectComparison(setComparison)}
       {valueFilterInput(setValue)}
       {buttonFilter(column, comparison, value, context)}
+      {filteredList(context)}
     </div>
   );
 }

@@ -14,6 +14,8 @@ function Home() {
   const context = {
     setFilterByNumericValuesFunc: (filters) =>
       setFilterByNumericValues([...filterByNumericValues, filters]),
+    removeFilterByNumericValues: (removedFilter) =>
+      setFilterByNumericValues(removedFilter),
     setNameFunc: (nameInput) => setName(nameInput),
     data,
     filterByName: {

@@ -51,27 +51,9 @@ const filteredPlanets = (filters, planets) => {
 
 const sortPlanets = (obj, column, sort) => {
   if (sort === 'ASC') {
-    obj.sort(function (a, b) {
-      if (a[column] > b[column]) {
-        return 1;
-      }
-      if (a[column] < b[column]) {
-        return -1;
-      }
-      // a must be equal to b
-      return 0;
-    });
+    obj.sort(function(a, b){return b[column]-a[column]});
   } else {
-    obj.sort(function (a, b) {
-      if (a[column] > b[column]) {
-        return -1;
-      }
-      if (a[column] < b[column]) {
-        return 1;
-      }
-      // a must be equal to b
-      return 0;
-    });
+    obj.sort(function(a, b){return a[column]-b[column]});;
   }
 };
 

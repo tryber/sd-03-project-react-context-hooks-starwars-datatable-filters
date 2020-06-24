@@ -39,7 +39,8 @@ const OrderTable = () => {
         type="radio" name="adesc" onClick={() => setStateSort('DESC')}
         defaultChecked={!radioChecked}
       /><span>DESC</span>
-      <button data-testid="column-sort-button"
+      <button
+        data-testid="column-sort-button"
         onClick={() => setOrder({ column: stateColumn, sort: stateSort })}
       >Ordenar</button>
     </div>

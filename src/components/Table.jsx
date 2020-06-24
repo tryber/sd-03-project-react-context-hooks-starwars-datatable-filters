@@ -39,60 +39,60 @@ function filterData(filterByNumericValues, data) {
   return [];
 }
 
+function renderTableData(nameFilter, filterByNumericValues, data) {
+  return (
+    !nameFilter && (filterByNumericValues.length === 0) && data.map((e) => (
+      <tr key={e.name}>
+        {header.map((el) => {
+          if (el === 'name') return <td data-testid="planet-name" key={e.name + el}>{e[el]}</td>;
+          return <td key={e.name + el}>{e[el]}</td>;
+        })}
+      </tr>
+    ))
+  );
+}
+
+function renderFilteredDataByName(nameFilter, data) {
+  return (
+    nameFilter && data.filter((e) => e.name.toLowerCase()
+      .includes(nameFilter.toLowerCase())).map((e) => (
+        <tr key={e.name}>
+          {header.map((el) => {
+            if (el === 'name') return <td data-testid="planet-name" key={e.name + el}>{e[el]}</td>;
+            return <td key={e.name + el}>{e[el]}</td>;
+          })}
+        </tr>
+    ))
+  );
+}
+
+function renderFilteredDataByNumeric(filterByNumericValues, data) {
+  return (
+    filterByNumericValues.length > 0 && filterData(filterByNumericValues, data).map((e) => (
+      <tr key={e.name}>
+        {header.map((el) => {
+          if (el === 'name') return <td data-testid="planet-name" key={e.name + el}>{e[el]}</td>;
+          return <td key={e.name + el}>{e[el]}</td>;
+        })}
+      </tr>
+    ))
+  );
+}
+
 export default function Table() {
   const { data } = useContext(DataContext);
   const { nameFilter, filterByNumericValues, order } = useContext(FilterContext);
 
   sortColumns(data, order);
 
-  function renderTableData() {
-    return (
-      !nameFilter && (filterByNumericValues.length === 0) && data.map((e) => (
-        <tr key={e.name}>
-          {header.map((el) => {
-            if (el === 'name') return <td data-testid="planet-name" key={e.name + el}>{e[el]}</td>;
-            return <td key={e.name + el}>{e[el]}</td>;
-          })}
-        </tr>
-      ))
-    );
-  }
-
-  function renderFilteredDataByName() {
-    return (
-      nameFilter && data.filter((e) => e.name.toLowerCase()
-        .includes(nameFilter.toLowerCase())).map((e) => (
-          <tr key={e.name}>
-            {header.map((el) => {
-              if (el === 'name') return <td data-testid="planet-name" key={e.name + el}>{e[el]}</td>;
-              return <td key={e.name + el}>{e[el]}</td>;
-            })}
-          </tr>
-        ))
-    );
-  }
-
-  function renderFilteredDataByNumeric() {
-    return (
-      filterByNumericValues.length > 0 && filterData(filterByNumericValues, data).map((e) => (
-        <tr key={e.name}>
-          {header.map((el) => {
-            if (el === 'name') return <td data-testid="planet-name" key={e.name + el}>{e[el]}</td>;
-            return <td key={e.name + el}>{e[el]}</td>;
-          })}
-        </tr>
-      ))
-    );
-  }
-
   return (
     <div>
       <table>
         {renderTableheaders()}
         <tbody>
-          {renderTableData()}
-          {renderFilteredDataByName()}
-          {renderFilteredDataByNumeric()}
+          {renderTableData(nameFilter, filterByNumericValues, data)}
+          {renderFilteredDataByName(nameFilter, data)}
+          {renderFilteredDataByNumeric(filterByNumericValues, data)}
         </tbody>
       </table>
     </div>

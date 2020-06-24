@@ -4,7 +4,7 @@ import './Table.css';
 
 const tableCreator = (obj) =>
   <tr key={obj.name}>
-    <td>{obj.name}</td>
+    <td data-testid="planet-name">{obj.name}</td>
     <td>{obj.rotation_period}</td>
     <td>{obj.orbital_period}</td>
     <td>{obj.diameter}</td>
@@ -51,26 +51,33 @@ const filteredPlanets = (filters, planets) => {
 
 const sortAscending = (obj, column) => {
   obj.sort((a, b) => {
-    if (b[column] - a[column] > 0) {
-      return 1;
+    if ((a[column] - 0) > 0 ) {
+      return a[column] - b[column];
     }
-    return -1;
-  });
-};
-
-const sortDescending = (obj, column) => {
-  obj.sort((a, b) => {
-    if (b[column] - a[column] > 0) {
+    if (b[column] > a[column]) {
       return -1;
     }
     return 1;
   });
 };
 
+const sortDescending = (obj, column) => {
+  obj.sort((a, b) => {
+    if ((a[column] - 0) > 0 ) {
+      return b[column] - a[column];
+    }
+    if (b[column] > a[column]) {
+      return 1;
+    }
+    return -1;
+  });
+};
+
 const sortPlanets = (obj, column, sort) => {
   if (sort === 'ASC') {
     sortAscending(obj, column);
-  } else {
+  }
+  if (sort === 'DESC') {
     sortDescending(obj, column);
   }
 };

@@ -22,7 +22,7 @@ function inputNamePlanet(context) {
       />
     </label>
   );
-};
+}
 
 function selectFilter(optionsParam, setColumn) {
   return (
@@ -41,7 +41,7 @@ function selectFilter(optionsParam, setColumn) {
       }
     </select>
   );
-};
+}
 
 function selectComparison(setComparison) {
   return (
@@ -55,7 +55,7 @@ function selectComparison(setComparison) {
       <option value="igual a">igual a</option>
     </select>
   );
-};
+}
 
 function valueFilterInput(setValue) {
   return (
@@ -69,7 +69,7 @@ function valueFilterInput(setValue) {
       />
     </label>
   );
-};
+}
 
 function buttonFilter(column, comparison, value, context) {
   const filters = {
@@ -87,7 +87,7 @@ function buttonFilter(column, comparison, value, context) {
       </button>
     </div>
   );
-};
+}
 
 function Inputs() {
   const context = React.useContext(StarWarsContext);

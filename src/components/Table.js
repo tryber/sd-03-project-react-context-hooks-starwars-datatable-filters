@@ -19,9 +19,9 @@ function filterPlanetsFunc(data, filters) {
     dataParam = filterPlanets;
   });
   return filterPlanets;
-};
+}
 
-const tbody = (data, name) => {
+function tbody(data, name) {
   return (
     <tbody>
       {data.filter((item) => item.name.includes(name))
@@ -61,9 +61,9 @@ const titlesFunc = () => {
     { id: 13, title: 'terrain' },
   ];
   return titles;
-}
+};
 
-const tableTag = (data, filterByName) => {
+function tableTag(data, filterByName) {
   return (
     <table>
       <thead>

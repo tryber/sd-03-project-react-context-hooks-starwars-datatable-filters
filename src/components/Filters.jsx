@@ -2,16 +2,14 @@ import React, { useContext, useState } from 'react';
 import Option from './Option';
 import { FiltersContext } from '../context/FiltersContext';
 
-const selectColumn = (handleChange, avaliableFilters) => {
-  return (
-    <select data-testid="column-filter" id="column" onChange={(e) => handleChange(e)}>
-      {avaliableFilters.columnFilters.reduce((acc, { name, avaliable }) => {
-        if (avaliable) acc.push(<Option key={name} name={name} />);
-        return acc;
-      }, [])}
-    </select>
-  );
-};
+const selectColumn = (handleChange, avaliableFilters) => (
+  <select data-testid="column-filter" id="column" onChange={(e) => handleChange(e)}>
+    {avaliableFilters.columnFilters.reduce((acc, { name, avaliable }) => {
+      if (avaliable) acc.push(<Option key={name} name={name} />);
+      return acc;
+    }, [])}
+  </select>
+);
 
 const selectComparison = (handleChange, avaliableFilters) => (
   <select data-testid="comparison-filter" id="comparison" onChange={(e) => handleChange(e)}>

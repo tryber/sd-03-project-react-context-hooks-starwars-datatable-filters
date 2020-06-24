@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { useContext, useEffect } from 'react';
 import Table from './components/Table';
 import './App.css';
@@ -41,12 +41,12 @@ const App = () => {
 
 export default App;
 
-App.propTypes = {
-  apiSWRequestFunction: PropTypes.func,
-  isLoading: PropTypes.bool,
-};
+// App.propTypes = {
+//   apiSWRequestFunction: PropTypes.func,
+//   isLoading: PropTypes.bool,
+// };
 
-App.defaultProps = {
-  apiSWRequestFunction: () => {},
-  isLoading: true,
-};
+// App.defaultProps = {
+//   apiSWRequestFunction: () => {},
+//   isLoading: true,
+// };

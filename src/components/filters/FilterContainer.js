@@ -1,17 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import FilterByNameInput from './FilterByNameInput';
+import FilterByValuesBar from './FilterByValuesBar';
+import SortColumnsFilter from './SortColumnsFilter';
+import SelectedFilters from './SelectedFilters';
 
-function FilterContainer({ onChange }) {
+function FilterContainer() {
   return (
     <div>
-      <FilterByNameInput onChange={onChange} />
+      <FilterByNameInput />
+      <div>
+        <FilterByValuesBar />
+      </div>
+      <div>
+        <SortColumnsFilter />
+      </div>
+      <div>
+        <SelectedFilters />
+      </div>
     </div>
   );
 }
-
-FilterContainer.propTypes = {
-  onChange: PropTypes.func.isRequired,
-};
 
 export default FilterContainer;

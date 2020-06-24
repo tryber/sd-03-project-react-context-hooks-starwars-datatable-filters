@@ -51,7 +51,7 @@ const filteredPlanets = (filters, planets) => {
 
 const sortAscending = (obj, column) => {
   obj.sort((a, b) => {
-    if ((a[column] - 0) > 0 ) {
+    if ((a[column] - 0) > 0) {
       return a[column] - b[column];
     }
     if (b[column] > a[column]) {
@@ -63,7 +63,7 @@ const sortAscending = (obj, column) => {
 
 const sortDescending = (obj, column) => {
   obj.sort((a, b) => {
-    if ((a[column] - 0) > 0 ) {
+    if ((a[column] - 0) > 0) {
       return b[column] - a[column];
     }
     if (b[column] > a[column]) {

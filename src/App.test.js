@@ -44,7 +44,7 @@ describe('Fazer uma requisição para o endpoint `/planets` da API de Star Wars 
       render(<App />);
     });
     const planets = testData.results;
-    for(let planetIndex in planets) {
+    for (let planetIndex in planets) {
       const name = await screen.findByText(planets[planetIndex].name);
       const rotationPeriod = await screen.findAllByText(planets[planetIndex].rotation_period);
       const orbitalPeriod = await screen.findAllByText(planets[planetIndex].orbital_period);
@@ -213,9 +213,9 @@ describe('Sua página deve ter um filtro para valores numéricos', () => {
       render(<App />);
     });
 
-    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'surface_water' }});
-    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'menor que' }});
-    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '40' }});
+    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'surface_water' } });
+    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'menor que' } });
+    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '40' } });
     fireEvent.click(await screen.findByTestId(BUTTON_FILTER_SELECTOR));
 
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(7);
@@ -226,9 +226,9 @@ describe('Sua página deve ter um filtro para valores numéricos', () => {
       render(<App />);
     });
 
-    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'diameter' }});
-    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'maior que' }});
-    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '8900' }});
+    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'diameter' } });
+    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'maior que' } });
+    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '8900' } });
     fireEvent.click(await screen.findByTestId(BUTTON_FILTER_SELECTOR));
 
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(8);
@@ -239,9 +239,9 @@ describe('Sua página deve ter um filtro para valores numéricos', () => {
       render(<App />);
     });
 
-    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'population' }});
-    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'igual a' }});
-    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '200000' }});
+    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'population' } });
+    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'igual a' } });
+    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '200000' } });
     fireEvent.click(await screen.findByTestId(BUTTON_FILTER_SELECTOR));
 
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(2);
@@ -268,9 +268,9 @@ describe('Sua página não deve utilizar filtros repetidos', () => {
     });
     expect(foundColumnFilter).toEqual(expect.arrayContaining(['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water']));
 
-    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'population' }});
-    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'maior que' }});
-    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '8000' }});
+    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'population' } });
+    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'maior que' } });
+    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '8000' } });
     fireEvent.click(await screen.findByTestId(BUTTON_FILTER_SELECTOR));
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(8);
 
@@ -299,9 +299,9 @@ describe('Cada filtro de valores numéricos deve ter um ícone de `X` que, ao se
     });
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(11);
 
-    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'diameter' }});
-    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'maior que' }});
-    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '8900' }});
+    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'diameter' } });
+    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'maior que' } });
+    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '8900' } });
     fireEvent.click(await screen.findByTestId(BUTTON_FILTER_SELECTOR));
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(8);
 
@@ -316,15 +316,15 @@ describe('Cada filtro de valores numéricos deve ter um ícone de `X` que, ao se
     });
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(11);
 
-    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'diameter' }});
-    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'maior que' }});
-    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '8900' }});
+    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'diameter' } });
+    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'maior que' } });
+    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '8900' } });
     fireEvent.click(await screen.findByTestId(BUTTON_FILTER_SELECTOR));
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(8);
 
-    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'population' }});
-    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'menor que' }});
-    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '1000000' }});
+    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'population' } });
+    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'menor que' } });
+    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '1000000' } });
     fireEvent.click(await screen.findByTestId(BUTTON_FILTER_SELECTOR));
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(3);
 
@@ -344,7 +344,7 @@ describe('As colunas da tabela devem ser ordenáveis de forma ascendente ou desc
     await act(async () => {
       render(<App />);
     });
-    const expected = ['Alderaan', 'Bespin', 'Coruscant', 'Dagobah', 'Endor', 'Hoth', 'Kamino', 'Naboo', 'Tatooine', 'Yavin IV' ];
+    const expected = ['Alderaan', 'Bespin', 'Coruscant', 'Dagobah', 'Endor', 'Hoth', 'Kamino', 'Naboo', 'Tatooine', 'Yavin IV'];
     const planets = await screen.findAllByTestId(PLANET_NAME_SELECTOR);
     const actual = planets.map(planet => planet.innerHTML);
     expect(actual).toEqual(expected);
@@ -354,7 +354,7 @@ describe('As colunas da tabela devem ser ordenáveis de forma ascendente ou desc
     await act(async () => {
       render(<App />);
     });
-    fireEvent.change(await screen.findByTestId(SORT_COLUMN_SELECTOR), { target: { value: 'orbital_period' }});
+    fireEvent.change(await screen.findByTestId(SORT_COLUMN_SELECTOR), { target: { value: 'orbital_period' } });
     fireEvent.click(await screen.findByTestId(SORT_ORDER_DESC_SELECTOR));
     fireEvent.click(await screen.findByTestId(SORT_APPLY_SELECTOR));
     const expected = ['Bespin', 'Yavin IV', 'Hoth', 'Kamino', 'Endor', 'Coruscant', 'Alderaan', 'Dagobah', 'Naboo', 'Tatooine'];

@@ -32,7 +32,15 @@ const StarWarsContextProvider = ({ children }) => {
       filterByNumericValues:
         [...filters.filterByNumericValues, ...values]
     })
-  }  
+  }
+
+  const setDeleteFilter = (payload) => {
+    setFilters({
+      ...filters,
+      filterByNumericValues:
+        filters.filterByNumericValues.filter((filtereds) => filtereds.column !== payload),
+    })
+  }
 
   const updateData = (info) => {
     setData([...info]);
@@ -50,6 +58,7 @@ const StarWarsContextProvider = ({ children }) => {
     error,
     filterByName,
     setFilterByNumericValues,
+    setDeleteFilter,
     filters,
     optionData: ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'],
   };

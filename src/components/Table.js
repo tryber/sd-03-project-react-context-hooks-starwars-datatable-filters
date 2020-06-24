@@ -17,13 +17,12 @@ const Table = () => {
   return (
     <div>
       <h1>Star Wars Datatable With Hooks</h1>
-        <table>
+      <table>
         <Thead />
         <Tbody data={filterDataByText(data)} />
       </table>
     </div>
   );
-
-}
+};
 
 export default Table;

@@ -5,15 +5,15 @@ const FilterByNameInput = () => {
   const { filterByText } = useContext(StarWarsContext);
   return (
     <div>
-    <h2>Pesquisar um planeta</h2>
-    <input
-    type="text"
-    name="filter-by-name"
-    id="filter-by-name"
-    data-testid="name-filter"
-    placeholder="Nome do planeta"
-    onChange={(event) => filterByText(event.target.value)}
-    />
+      <h2>Pesquisar um planeta</h2>
+      <input
+        type="text"
+        name="filter-by-name"
+        id="filter-by-name"
+        data-testid="name-filter"
+        placeholder="Nome do planeta"
+        onChange={(event) => filterByText(event.target.value)}
+      />
     </div>
   );
 }

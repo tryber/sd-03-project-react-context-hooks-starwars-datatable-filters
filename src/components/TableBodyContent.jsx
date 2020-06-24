@@ -32,6 +32,6 @@ function TableBodyContent(props) {
 
 export default TableBodyContent;
 
-TableBodyContent.propType = {
+TableBodyContent.propTypes = {
   planets: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

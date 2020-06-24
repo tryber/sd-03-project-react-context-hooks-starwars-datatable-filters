@@ -38,7 +38,7 @@ function TableBody() {
     return arrFiltered;
   };
   const filteredPlanets = filterByParams(data, filterByNumericValues);
-  return <TableBodyContent planets={filteredPlanets} />
+  return <TableBodyContent planets={filteredPlanets} />;
 }
 
 export default TableBody;

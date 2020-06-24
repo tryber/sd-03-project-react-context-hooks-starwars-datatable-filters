@@ -25,4 +25,4 @@ export default SelectComparison;
 
 SelectComparison.propTypes = {
   updateComparison: PropTypes.func.isRequired,
-}
+};

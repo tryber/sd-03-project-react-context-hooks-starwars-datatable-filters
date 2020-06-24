@@ -30,17 +30,17 @@ const StarWarsContextProvider = ({ children }) => {
     setFilters({
       ...filters,
       filterByNumericValues:
-        [...filters.filterByNumericValues, ...values]
-    })
-  }
+        [...filters.filterByNumericValues, ...values],
+    });
+  };
 
   const setDeleteFilter = (payload) => {
     setFilters({
       ...filters,
       filterByNumericValues:
         filters.filterByNumericValues.filter((filtereds) => filtereds.column !== payload),
-    })
-  }
+    });
+  };
 
   const updateData = (info) => {
     setData([...info]);

@@ -11,7 +11,7 @@ function InputByNumber(props) {
           type="number"
           placeholder="Informe um número"
           data-testid="value-filter"
-          onChange={(e) => updateNumber(parseInt(e.target.value))}
+          onChange={(e) => updateNumber(parseInt(e.target.value, 10))}
         />
       </p>
     </div>
@@ -22,4 +22,4 @@ export default InputByNumber;
 
 InputByNumber.propTypes = {
   updateNumber: PropTypes.func.isRequired,
-}
+};

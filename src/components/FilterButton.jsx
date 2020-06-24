@@ -27,4 +27,4 @@ FilterButton.propTypes = {
   column: PropTypes.string.isRequired,
   comparison: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
-}
+};

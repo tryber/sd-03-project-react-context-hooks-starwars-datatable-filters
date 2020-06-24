@@ -12,7 +12,7 @@ function SelectColumn(props) {
   const verifyAvaliableFilters = () => {
     const avaliableOptions = [];
     const shouldNotBeAvaliable = filterByNumericValues.map(
-      ({ column }) => column
+      ({ column }) => column,
     );
     optionData.forEach((option) => {
       if (shouldNotBeAvaliable.every((notAoption) => notAoption !== option)) {
@@ -40,7 +40,7 @@ function SelectColumn(props) {
       </div>
     </div>
   );
-};
+}
 
 export default SelectColumn;
 

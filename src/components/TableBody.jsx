@@ -13,17 +13,17 @@ function TableBody() {
     planets.filter((planet) => planet.name.includes(searched));
   const filterByInputs = (planets, { column, comparison, value }) => {
     switch (comparison) {
-      case "maior que":
+      case 'maior que':
         return planets.filter(
-          (planet) => Number(planet[column]) > Number(value)
+          (planet) => Number(planet[column]) > Number(value),
         );
-      case "menor que":
+      case 'menor que':
         return planets.filter(
-          (planet) => Number(planet[column]) < Number(value)
+          (planet) => Number(planet[column]) < Number(value),
         );
-      case "igual a":
+      case 'igual a':
         return planets.filter(
-          (planet) => Number(planet[column]) === Number(value)
+          (planet) => Number(planet[column]) === Number(value),
         );
       default:
         return planets;
@@ -32,7 +32,7 @@ function TableBody() {
   const filterByParams = (arrPlanets, numericValues) => {
     let arrFiltered = filterByName(arrPlanets, name);
     numericValues.forEach(
-      (filtro) => (arrFiltered = filterByInputs(arrFiltered, filtro))
+      (filtro) => (arrFiltered = filterByInputs(arrFiltered, filtro)),
     );
     return arrFiltered;
   };

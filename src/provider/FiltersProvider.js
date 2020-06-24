@@ -5,8 +5,10 @@ const FiltersProvider = ({ children }) => {
   const [column, setColumn] = useState('all');
   const [comparison, setComparison] = useState('');
   const [name, setName] = useState('');
-  // const [sortType, setSortType] = useState('');
-  // const [sortColumn, setSortColumn] = useState('');
+
+  const [sortType, setSortType] = useState('ASC');
+  const [sortColumn, setSortColumn] = useState('Name');
+
   const [numericValue, setNumericValue] = useState('');
   const [filterByNumericValues, setFilterByNumericValues] = useState([]);
   const [order, setOrder] = useState({ column: 'Name', sort: 'ASC' });
@@ -22,8 +24,10 @@ const FiltersProvider = ({ children }) => {
   const filterByNumericValuesFunc = (array) => {
     setFilterByNumericValues(array);
   };
-  // const setSortColumnFunc = (columnSelected) => setSortColumn(columnSelected);
-  // const setSortTypeFunc = (type) => setSortType(type);
+
+  const setSortColumnFunc = (columnSelected) => setSortColumn(columnSelected);
+  const setSortTypeFunc = (type) => setSortType(type);
+
   const setOrderFunc = (newObj) => setOrder(newObj);
 
   const filtersContextObj = {
@@ -43,6 +47,10 @@ const FiltersProvider = ({ children }) => {
     numericValue,
     filterByNumericValuesFunc,
     setOrderFunc,
+    sortType,
+    setSortTypeFunc,
+    sortColumn,
+    setSortColumnFunc,
   };
 
   return (

@@ -110,7 +110,7 @@ function rmFilter(option, filters) {
   return newFilters;
 }
 
-function filteredList({filterByNumericValues, removeFilterByNumericValues}) {
+function filteredList({ filterByNumericValues, removeFilterByNumericValues }) {
   return (
     <div>
       {
@@ -153,11 +153,15 @@ function Inputs() {
 
 inputNamePlanet.defaultProps = {
   setNameFunc: () => '',
-}
+};
 
 inputNamePlanet.propTypes = {
   setNameFunc: PropTypes.func.isRequired,
-  
-}
+};
+
+filteredList.propTypes = {
+  filterByNumericValues: PropTypes.arrayOf(PropTypes.object).isRequired,
+  removeFilterByNumericValues: PropTypes.func.isRequired,
+};
 
 export default Inputs;

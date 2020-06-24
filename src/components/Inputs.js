@@ -151,11 +151,11 @@ function Inputs() {
 }
 
 
-Inputs.defaultProps = {
+inputNamePlanet.defaultProps = {
   setNameFunc: () => '',
 }
 
-Inputs.propTypes = {
+inputNamePlanet.propTypes = {
   setNameFunc: PropTypes.func.isRequired,
   
 }

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { StarWarsContext } from '../context/StarWarsContext';
 
-const RenderFilters = () => {
+const RenderFilterByName = () => {
   const {
     filterData: { filters, setFilterByName },
   } = useContext(StarWarsContext);
@@ -21,4 +21,4 @@ const RenderFilters = () => {
   );
 };
 
-export default RenderFilters;
+export default RenderFilterByName;

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import FiltersContext from '../context/FiltersContext';
 import AllFiltersArrContext from '../context/AllFiltersArrContext';
 // import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 // import { filtersNameAction } from '../actions/filtersNameAction';
 // import { removeFilterDisplayAction } from '../actions/removeFilterDisplayAction';
 

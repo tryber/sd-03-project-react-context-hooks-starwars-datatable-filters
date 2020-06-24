@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 const TableData = (props) => {
   const { dataSw } = props;
@@ -32,10 +32,10 @@ const TableData = (props) => {
 
 export default TableData;
 
-// TableData.propTypes = {
-//   dataSw: PropTypes.arrayOf(PropTypes.object),
-// };
+TableData.propTypes = {
+  dataSw: PropTypes.arrayOf(PropTypes.object),
+};
 
-// TableData.defaultProps = {
-//   dataSw: [],
-// };
+TableData.defaultProps = {
+  dataSw: [],
+};

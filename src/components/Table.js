@@ -39,6 +39,26 @@ const GreaterLessEqual = (operator, column, value, obj) => {
   }
 };
 
+const helperFunction = (obj, filterByNumericValues, name) => {
+  if (!obj.name.toLowerCase().includes(name.toLowerCase()) && name !== '') return false;
+  for (let i = 0; i < filterByNumericValues.length; i += 1) {
+    const { column, numericValue, comparison } = filterByNumericValues[i];
+    if (!GreaterLessEqual(comparison, column, numericValue, obj)) return false;
+  }
+  return true;
+};
+
+const dataFilterFunction = (data, filterByNumericValues, name) => {
+  const newArrToFilter = [...data];
+  if (name !== '' || filterByNumericValues.length > 0) {
+    return newArrToFilter.reduce((acc, planetObj) => {
+      if (helperFunction(planetObj, filterByNumericValues, name)) acc.push(planetObj);
+      return acc;
+    }, []);
+  }
+  return data;
+};
+
 const sortDescColName = (columnLowerCase, data, filterByNumericValues, name) => {
   const dataFiltered = dataFilterFunction(data, filterByNumericValues, name);
   return dataFiltered.sort((a, b) => {
@@ -90,26 +110,6 @@ const dataSortFunction = (data, filterByNumericValues, order, name) => {
   const { sort } = order;
   if (sort === 'DESC') return sortDescCol(data, filterByNumericValues, order, name);
   return sortAscCol(data, filterByNumericValues, order, name);
-};
-
-const helperFunction = (obj, filterByNumericValues, name) => {
-  if (!obj.name.toLowerCase().includes(name.toLowerCase()) && name !== '') return false;
-  for (let i = 0; i < filterByNumericValues.length; i += 1) {
-    const { column, numericValue, comparison } = filterByNumericValues[i];
-    if (!GreaterLessEqual(comparison, column, numericValue, obj)) return false;
-  }
-  return true;
-};
-
-const dataFilterFunction = (data, filterByNumericValues, name) => {
-  const newArrToFilter = [...data];
-  if (name !== '' || filterByNumericValues.length > 0) {
-    return newArrToFilter.reduce((acc, planetObj) => {
-      if (helperFunction(planetObj, filterByNumericValues, name)) acc.push(planetObj);
-      return acc;
-    }, []);
-  }
-  return data;
 };
 
 const Table = () => {

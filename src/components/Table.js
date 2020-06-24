@@ -2,7 +2,7 @@ import React from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 import '../App.css';
 
-/* function filterPlanetsFunc(data, filters) {
+const filterPlanetsFunc = (data, filters) => {
   let dataParam = [...data];
   let filterPlanets;
   filters.forEach((item) => {
@@ -19,9 +19,9 @@ import '../App.css';
     dataParam = filterPlanets;
   });
   return filterPlanets;
-} */
+}
 
-function tbody(data, name) {
+const tbody = (data, name) => {
   return (
     <tbody>
       {data.filter((item) => item.name.includes(name))
@@ -44,8 +44,8 @@ function tbody(data, name) {
   );
 }
 
-function Table() {
-  const [titles] = React.useState([
+const titlesFunc = () => {
+  const titles = [
     { id: 1, title: 'name' },
     { id: 2, title: 'climate' },
     { id: 3, title: 'created' },
@@ -59,18 +59,32 @@ function Table() {
     { id: 11, title: 'rotation period' },
     { id: 12, title: 'surface water' },
     { id: 13, title: 'terrain' },
-  ]);
-  const { data, filterByName } = React.useContext(StarWarsContext);
+  ];
+  return titles;
+}
+
+const tableTag = (data, filterByName) => {
+  return (
+    <table>
+      <thead>
+        <tr>
+          {titlesFunc().map((item) => <th key={item.id}>{item.title}</th>)}
+        </tr>
+      </thead>
+      {tbody(data, filterByName.name)}
+    </table>
+  );
+}
+
+function Table() {
+  const { filterByName, filterByNumericValues } = React.useContext(StarWarsContext);
+  let { data } = React.useContext(StarWarsContext);
+  if (filterByNumericValues.length > 0) {
+    data = filterPlanetsFunc(data, filterByNumericValues);
+  }
   return (
     <div>
-      <table>
-        <thead>
-          <tr>
-            {titles.map((item) => <th key={item.id}>{item.title}</th>)}
-          </tr>
-        </thead>
-        {tbody(data, filterByName.name)}
-      </table>
+      {tableTag(data, filterByName)}
     </div>
   );
 }

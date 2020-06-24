@@ -9,13 +9,17 @@ function Home() {
   const [name, setName] = React.useState('');
   const [data, setData] = React.useState([]);
   const [isFetching, setIsFetching] = React.useState(true);
+  const [filterByNumericValues, setFilterByNumericValues] = React.useState([]);
 
   const context = {
+    setFilterByNumericValuesFunc: (filters) =>
+      setFilterByNumericValues([...filterByNumericValues, filters]),
     setNameFunc: (nameInput) => setName(nameInput),
     data,
     filterByName: {
       name,
     },
+    filterByNumericValues,
   };
 
   React.useEffect(() => {

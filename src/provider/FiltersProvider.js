@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import FiltersContext from '../context/FiltersContext';
+import PropTypes from 'prop-types';
 
 const FiltersProvider = ({ children }) => {
   const [column, setColumn] = useState('all');
@@ -61,3 +62,10 @@ const FiltersProvider = ({ children }) => {
 };
 
 export default FiltersProvider;
+
+FiltersContext.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+}

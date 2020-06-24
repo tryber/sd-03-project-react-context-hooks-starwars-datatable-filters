@@ -1,6 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import FiltersContext from '../context/FiltersContext';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import AllFiltersArrContext from '../context/AllFiltersArrContext';
 
 const Searchbar = () => {
@@ -78,13 +78,13 @@ const NumericSearchValue = () => {
 const NumericFilterButton = () => {
   const {
     column, numericValue, comparison, filters,
-    filterByNumericValuesFunc, setColumnFunc, setNumericValueFunc, setComparisonFunc
+    filterByNumericValuesFunc, setColumnFunc, setNumericValueFunc, setComparisonFunc,
   } = useContext(FiltersContext);
   const { filterByNumericValues } = filters;
   const newArr = [...filterByNumericValues, { column, numericValue, comparison }];
 
   const { allFiltersArr, setAllFiltersFunc } = useContext(AllFiltersArrContext);
-  
+
   const DisplayFilterName = () => {
     const index = allFiltersArr.indexOf(column);
     const newArr = [...allFiltersArr];
@@ -185,21 +185,6 @@ const Inputs = () => {
     </div>
   );
 };
-
-// const mapDispatchToProps = (dispatch) => ({
-//   filterByName: (text) => dispatch(filterByNameAction(text)),
-//   filterByNumericValues: (obj) => dispatch(filterByNumericValuesAction(obj)),
-//   changeFiltersDisplay: (arr) => dispatch(filtersNameAction(arr)),
-//   choosedCol: (obj) => dispatch(choosedColToSortAction(obj)),
-// });
-
-// const mapStateToProps = (state) => ({
-//   dataSw: state.apiSWReducer.data,
-//   isLoading: state.apiSWReducer.loading,
-//   typedText: state.filters.filterByName.name,
-//   numericSearched: state.filters.filterByNumericValues,
-//   allFiltersArr: state.filtersArrReducer.allFilters,
-// });
 
 export default Inputs;
 

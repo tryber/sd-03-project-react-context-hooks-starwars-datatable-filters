@@ -2,27 +2,45 @@ import React, { useContext } from 'react';
 import { StarWarsContext } from '../context/StarWarsContext';
 
 function TableBody() {
-  const { data, filters: { filterByName: { name } } } = useContext(StarWarsContext);
+  const { data, filters: { filterByName: { name }, filterByNumericValues } } = useContext(StarWarsContext);
+
 
   const filterByName = (planets, searched) => (
     planets.filter((planet) => planet.name.includes(searched))
   );
 
-  const filterByParams = (arrPlanets) => {
-    // const { planets, numericValues, selectedOrder } = this.props;
+  const filterByInputs = (planets, { column, comparison, value }) => {
+    switch (comparison) {
+      case 'maior que':
+        return planets.filter(
+          (planet) => Number(planet[column]) > Number(value)
+        );
+      case 'menor que':
+        return planets.filter(
+          (planet) => Number(planet[column]) < Number(value)
+        );
+      case 'igual a':
+        return planets.filter(
+          (planet) => Number(planet[column]) === Number(value)
+        );
+      default:
+        return planets;
+    }
+  }
 
-    const arrFiltered = filterByName(arrPlanets, name);
-    // this.sortBySelectedOrder(arrFiltered, selectedOrder);
+  const filterByParams = (arrPlanets, numericValues) => {
 
-    // numericValues.forEach(
-    //   (filtro) =>
-    //     (arrFiltered = Table.filterByNumericValues(arrFiltered, filtro))
-    // );
+    let arrFiltered = filterByName(arrPlanets, name);
+
+    numericValues.forEach(
+      (filtro) =>
+        (arrFiltered = filterByInputs(arrFiltered, filtro))
+    );
 
     return arrFiltered;
   };
 
-  const planets = filterByParams(data);
+  const planets = filterByParams(data, filterByNumericValues);
 
   return (
     <tbody>

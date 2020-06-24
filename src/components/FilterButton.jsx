@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from 'react';
+import { StarWarsContext } from '../context/StarWarsContext';
 
 function FilterButton(props) {
-  const { clickParam: { column, comparison, value } } = props;
-  
+  const { column, comparison, value } = props;
+  const { setFilterByNumericValues } = useContext(StarWarsContext);
   return (
     <div className="field">
       <div className="control">
@@ -10,7 +11,7 @@ function FilterButton(props) {
           className="button is-info"
           type="button"
           data-testid="button-filter"
-          onClick={() => console.log(column, comparison, value)}
+          onClick={() => setFilterByNumericValues({column, comparison, value})}
         >
           Filtrar
         </button>

@@ -22,7 +22,7 @@ function Filters() {
         </div>
       </div>
     </div>
-    <FilterButton clickParam={column, comparison, value} />
+    <FilterButton column={column} comparison={comparison} value={value} />
     </div>
   );
 }

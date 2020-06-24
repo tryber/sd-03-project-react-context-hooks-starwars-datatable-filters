@@ -27,7 +27,7 @@ const tableCreator = (obj) =>
 
 const filteredPlanets = (filters, planets) => {
   let result = [...planets];
-  
+
   filters.forEach(
     ({ column, comparison, value }) => {
       if (Number(value) === 0) { return planets; }
@@ -61,7 +61,7 @@ const sortPlanets = (obj, column, sort) => {
       // a must be equal to b
       return 0;
     });
-  } else if (sort === 'DESC') {
+  } else {
     obj.sort(function (a, b) {
       if (a[column] > b[column]) {
         return -1;
@@ -73,7 +73,6 @@ const sortPlanets = (obj, column, sort) => {
       return 0;
     });
   }
-  
 };
 
 const Table = () => {

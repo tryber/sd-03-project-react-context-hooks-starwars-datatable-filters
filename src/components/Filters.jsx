@@ -9,9 +9,9 @@ import FilterButton from './FilterButton';
 import SelectedFilters from './SelectedFilters';
 
 function Filters() {
-  const  [column, setColumn] = useState('');
-  const  [comparison, setComparison] = useState('');
-  const  [value, setValue] = useState(0);
+  const [column, setColumn] = useState('');
+  const [comparison, setComparison] = useState('');
+  const [value, setValue] = useState(0);
   const { filters: { filterByNumericValues } } = useContext(StarWarsContext);
 
   const renderFilters = () => {
@@ -20,20 +20,20 @@ function Filters() {
     }
 
     return null;
-  }
+  };
 
   return (
     <div>
       <InputByName />
       <div className="field is-horizontal">
-      <div className="field-body">
-        <div className="field is-grouped">
-          <SelectColumn updateColumn={setColumn} />
-          <SelectComparison updateComparison={setComparison} />
-          <InputByNumber updateNumber={setValue} />
+        <div className="field-body">
+          <div className="field is-grouped">
+            <SelectColumn updateColumn={setColumn} />
+            <SelectComparison updateComparison={setComparison} />
+            <InputByNumber updateNumber={setValue} />
+          </div>
         </div>
       </div>
-    </div>
       <FilterButton column={column} comparison={comparison} value={value} />
       {renderFilters()}
     </div>

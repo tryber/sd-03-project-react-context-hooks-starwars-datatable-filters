@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function InputByNumber(props) {
   const { updateNumber } = props;
@@ -10,7 +11,7 @@ function InputByNumber(props) {
           type="number"
           placeholder="Informe um número"
           data-testid="value-filter"
-          onChange={(e) => updateNumber(e.target.value)}
+          onChange={(e) => updateNumber(parseInt(e.target.value))}
         />
       </p>
     </div>
@@ -18,3 +19,7 @@ function InputByNumber(props) {
 }
 
 export default InputByNumber;
+
+InputByNumber.propTypes = {
+  updateNumber: PropTypes.func.isRequired,
+}

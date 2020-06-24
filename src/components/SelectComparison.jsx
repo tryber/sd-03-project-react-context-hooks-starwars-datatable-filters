@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function SelectComparison(props) {
   const { updateComparison } = props;
@@ -21,3 +22,7 @@ function SelectComparison(props) {
 }
 
 export default SelectComparison;
+
+SelectComparison.propTypes = {
+  updateComparison: PropTypes.func.isRequired,
+}

@@ -2,46 +2,41 @@ import React, { useContext } from 'react';
 import { StarWarsContext } from '../context/StarWarsContext';
 
 function TableBody() {
-  const { data, filters: { filterByName: { name }, filterByNumericValues } } = useContext(StarWarsContext);
-
-
-  const filterByName = (planets, searched) => (
-    planets.filter((planet) => planet.name.includes(searched))
-  );
-
+  const {
+    data,
+    filters: {
+      filterByName: { name },
+      filterByNumericValues,
+    },
+  } = useContext(StarWarsContext);
+  const filterByName = (planets, searched) =>
+    planets.filter((planet) => planet.name.includes(searched));
   const filterByInputs = (planets, { column, comparison, value }) => {
     switch (comparison) {
-      case 'maior que':
+      case "maior que":
         return planets.filter(
           (planet) => Number(planet[column]) > Number(value)
         );
-      case 'menor que':
+      case "menor que":
         return planets.filter(
           (planet) => Number(planet[column]) < Number(value)
         );
-      case 'igual a':
+      case "igual a":
         return planets.filter(
           (planet) => Number(planet[column]) === Number(value)
         );
       default:
         return planets;
     }
-  }
-
+  };
   const filterByParams = (arrPlanets, numericValues) => {
-
     let arrFiltered = filterByName(arrPlanets, name);
-
     numericValues.forEach(
-      (filtro) =>
-        (arrFiltered = filterByInputs(arrFiltered, filtro))
+      (filtro) => (arrFiltered = filterByInputs(arrFiltered, filtro))
     );
-
     return arrFiltered;
   };
-
   const planets = filterByParams(data, filterByNumericValues);
-
   return (
     <tbody>
       {planets.map((planet) => (

@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import StarWarsContext from '../context/StarWarsContext';
 
-function filteredOptions({filterByNumericValues}) {
+function filteredOptions({ filterByNumericValues }) {
   const options = [
     { value: '', text: '' },
     { value: 'population', text: 'population' },
@@ -22,7 +23,7 @@ function filteredOptions({filterByNumericValues}) {
   return newOptions;
 }
 
-function inputNamePlanet({setNameFunc}) {
+function inputNamePlanet({ setNameFunc }) {
   return (
     <label htmlFor="namePlanet">
       Nome do Planeta:
@@ -83,7 +84,7 @@ function valueFilterInput(setValue) {
   );
 }
 
-function buttonFilter(column, comparison, value, {setFilterByNumericValuesFunc}) {
+function buttonFilter(column, comparison, value, { setFilterByNumericValuesFunc }) {
   const filters = {
     column,
     comparison,
@@ -104,7 +105,7 @@ function buttonFilter(column, comparison, value, {setFilterByNumericValuesFunc})
   );
 }
 
-function removeFilter(option, filters) {
+function rmFilter(option, filters) {
   const newFilters = filters.filter((item) => item.column !== option);
   return newFilters;
 }
@@ -122,7 +123,7 @@ function filteredList({filterByNumericValues, removeFilterByNumericValues}) {
             <button
               value={item.column}
               onClick={(event) =>
-                removeFilterByNumericValues(removeFilter(event.target.value, filterByNumericValues))}
+                removeFilterByNumericValues(rmFilter(event.target.value, filterByNumericValues))}
             >
               X
             </button>
@@ -147,6 +148,16 @@ function Inputs() {
       {filteredList(context)}
     </div>
   );
+}
+
+
+Inputs.defaultProps = {
+  setNameFunc: () => '',
+}
+
+Inputs.propTypes = {
+  setNameFunc: PropTypes.func.isRequired,
+  
 }
 
 export default Inputs;

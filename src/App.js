@@ -1,26 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
+import Provider from './context/Provider';
+import Table from './components/Table';
+import Filter from './components/Filter';
+import NumericFilter from './components/NumericFilter';
+import ListFilters from './components/ListFilters';
+import OrderTable from './components/OrderTable';
 import './App.css';
 
-function App() {
-  return (
+const App = () =>
+  <Provider>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <span>StarWars Datatable with Filters</span>
+      <Filter />
+      <NumericFilter />
+      <ListFilters />
+      <OrderTable />
+      <Table />
     </div>
-  );
-}
+  </Provider>;
 
 export default App;

@@ -90,12 +90,9 @@ function buttonFilter(column, comparison, value, { setFilterByNumericValuesFunc 
     comparison,
     value,
   };
-  let isDisabled = true;
-  if (column && comparison && value) isDisabled = false;
   return (
     <div>
       <button
-        disabled={isDisabled}
         data-testid="button-filter"
         onClick={() => setFilterByNumericValuesFunc(filters)}
       >

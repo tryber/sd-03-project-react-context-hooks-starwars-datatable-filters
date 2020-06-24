@@ -248,7 +248,7 @@ describe('Sua página deve ter um filtro para valores numéricos', () => {
   });
 });
 
-describe.skip('Sua página não deve utilizar filtros repetidos', () => {
+describe('Sua página não deve utilizar filtros repetidos', () => {
   beforeAll(mockFetch);
   beforeEach(cleanup);
 
@@ -284,7 +284,7 @@ describe.skip('Sua página não deve utilizar filtros repetidos', () => {
   });
 });
 
-describe.skip('Cada filtro de valores numéricos deve ter um ícone de `X` que, ao ser clicado, o apaga e desfaz suas filtragens dos dados da tabela', () => {
+describe('Cada filtro de valores numéricos deve ter um ícone de `X` que, ao ser clicado, o apaga e desfaz suas filtragens dos dados da tabela', () => {
   beforeAll(mockFetch);
   beforeEach(cleanup);
 

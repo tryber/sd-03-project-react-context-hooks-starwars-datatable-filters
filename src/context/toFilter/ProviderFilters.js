@@ -28,11 +28,22 @@ function ProviderFilters({ children }) {
     }));
   };
 
+  const handleExcludeFilter = (column) => {
+    console.log(column);
+    setFilters((currentFilters) => ({
+      ...currentFilters,
+      filterByNumericValues:
+        filters.filterByNumericValues
+          .filter((filter) => filter.column !== column),
+    }));
+  };
+
   const context = {
     filters,
     setFilters,
     handleNameFilter,
     handleSelectColumn,
+    handleExcludeFilter,
   };
   return (
     <FiltersContext.Provider value={context}>

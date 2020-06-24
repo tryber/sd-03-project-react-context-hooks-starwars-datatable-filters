@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import FiltersContext from '../context/toFilter/FiltersContext';
+import FilterList from './FilterList';
 
 function Filters() {
   const [filters, setFilters] = useState({ column: '', comparison: '', value: '' });
@@ -44,6 +45,7 @@ function Filters() {
         data-testid="button-filter"
       >Filtrar
       </button>
+      <FilterList />
     </div>
   );
 }

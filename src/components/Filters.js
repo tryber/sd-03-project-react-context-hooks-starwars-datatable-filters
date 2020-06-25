@@ -1,12 +1,85 @@
-import React, {
-  useContext,
-  useReducer,
-  useState,
-  useEffect,
-} from 'react';
+import React, { useContext, useReducer, useState, useEffect } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 import SortFilters from './SortFilters';
 import './Filters.css';
+
+const renderInputName = (dispatch, filterNames) => {
+  return (
+    <div>
+      <input
+        data-testid='name-filter'
+        type='text'
+        onChange={(e) => dispatch(filterNames(e.target.value))}
+      />
+    </div>
+  );
+};
+
+const renderOptionsFilter = (handleChange, options) => {
+  return (
+    <div>
+      <select data-testid='column-filter' name='column' onChange={(e) => handleChange(e)}>
+        <option value='' />
+        {options.map((column) => (
+          <option value={column} key={column}>
+            {column}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+};
+
+const renderComparisonFilter = (handleChange) => {
+  return (
+    <div>
+      <select data-testid='comparison-filter' name='comparison' onChange={(e) => handleChange(e)}>
+        <option value='' />
+        <option value='maior que'>maior que</option>
+        <option value='menor que'>menor que</option>
+        <option value='igual a'>igual a</option>
+      </select>
+    </div>
+  );
+};
+
+const renderValueFilter = (handleChange, value) => {
+  return (
+    <div>
+      <input
+        data-testid='value-filter'
+        type='number'
+        name='value'
+        onChange={(e) => handleChange(e)}
+        value={value}
+      />
+    </div>
+  );
+};
+
+const renderSubmitButton = (handleSubmit) => {
+  return (
+    <button data-testid='button-filter' type='button' onClick={() => handleSubmit()}>
+      Adicionar Filtro
+    </button>
+  );
+};
+
+const renderActiveFilters = (filterByNumericValues, handleRemove) => {
+  if (filterByNumericValues.length === 0 || filterByNumericValues[0].column === '') return false;
+  return (
+    <div>
+      {filterByNumericValues.map(({ column, comparison, value }) => (
+        <p data-testid='filter'>
+          {`Filtro aplicado: ${column} | ${comparison} | ${value} `}
+          <button key={column} type='button' value='X' onClick={() => handleRemove(column)}>
+            X
+          </button>
+        </p>
+      ))}
+    </div>
+  );
+};
 
 export function Filters() {
   const [state, setState] = useState({
@@ -16,10 +89,7 @@ export function Filters() {
   });
 
   const {
-    stateFilters: {
-      options,
-      filterByNumericValues,
-    },
+    stateFilters: { options, filterByNumericValues },
     addFilter,
     removeFilter,
     filterNames,
@@ -35,19 +105,9 @@ export function Filters() {
   };
 
   const handleSubmit = () => {
-    const {
-      column,
-      comparison,
-      value,
-    } = state;
+    const { column, comparison, value } = state;
     if (value === '') return false;
-    dispatch(
-      addFilter(
-        column,
-        comparison,
-        value,
-      ),
-    );
+    dispatch(addFilter(column, comparison, value));
     setState({
       column: '',
       comparison: '',
@@ -60,153 +120,17 @@ export function Filters() {
     dispatch(removeFilter(column));
   };
 
-  const renderInputName = () => {
-    return (
-      <div>
-        <input
-          data-testid='name-filter'
-          type='text'
-          onChange={(e) =>
-            dispatch(
-              filterNames(
-                e.target.value,
-              ),
-            )
-          }
-        />
-      </div>
-    );
-  };
-
-  const renderOptionsFilter = () => {
-    return (
-      <div>
-        <select
-          data-testid='column-filter'
-          name='column'
-          onChange={(e) =>
-            handleChange(e)
-          }
-        >
-          <option value='' />
-          {options.map((column) => (
-            <option
-              value={column}
-              key={column}
-            >
-              {column}
-            </option>
-          ))}
-        </select>
-      </div>
-    );
-  };
-
-  const renderComparisonFilter = () => {
-    return (
-      <div>
-        <select
-          data-testid='comparison-filter'
-          name='comparison'
-          onChange={(e) =>
-            handleChange(e)
-          }
-        >
-          <option value='' />
-          <option value='maior que'>
-            maior que
-          </option>
-          <option value='menor que'>
-            menor que
-          </option>
-          <option value='igual a'>
-            igual a
-          </option>
-        </select>
-      </div>
-    );
-  };
-
-  const renderValueFilter = () => {
-    const { value } = state;
-    return (
-      <div>
-        <input
-          data-testid='value-filter'
-          type='number'
-          name='value'
-          onChange={(e) =>
-            handleChange(e)
-          }
-          value={value}
-        />
-      </div>
-    );
-  };
-
-  const renderSubmitButton = () => {
-    return (
-      <button
-        data-testid='button-filter'
-        type='button'
-        onClick={() => handleSubmit()}
-      >
-        Adicionar Filtro
-      </button>
-    );
-  };
-
-  const renderActiveFilters = (
-    filterByNumericValues,
-  ) => {
-    if (
-      filterByNumericValues.length ===
-        0 ||
-      filterByNumericValues[0]
-        .column === ''
-    )
-      return false;
-    return (
-      <div>
-        {filterByNumericValues.map(
-          ({
-            column,
-            comparison,
-            value,
-          }) => (
-            <p data-testid='filter'>
-              {`Filtro aplicado: ${column} | ${comparison} | ${value} `}
-              <button
-                key={column}
-                type='button'
-                value='X'
-                onClick={() =>
-                  handleRemove(column)
-                }
-              >
-                X
-              </button>
-            </p>
-          ),
-        )}
-      </div>
-    );
-  };
   return (
     <div>
       <div className='filterBox'>
-        {renderInputName()}
-        {renderOptionsFilter()}
-        {renderComparisonFilter()}
-        {renderValueFilter()}
-        {renderSubmitButton()}
+        {renderInputName(dispatch, filterNames)}
+        {renderOptionsFilter(handleChange, options)}
+        {renderComparisonFilter(handleChange)}
+        {renderValueFilter(handleChange, state.value)}
+        {renderSubmitButton(handleSubmit)}
       </div>
       <SortFilters />
-      <div>
-        {renderActiveFilters(
-          filterByNumericValues,
-        )}
-      </div>
+      <div>{renderActiveFilters(filterByNumericValues, handleRemove)}</div>
     </div>
   );
 }

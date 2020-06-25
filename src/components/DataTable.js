@@ -1,6 +1,4 @@
-import React, {
-  useContext,
-} from 'react';
+import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 import FilterData from './FilterData';
 
@@ -12,20 +10,16 @@ function DataTable() {
     return (
       <thead>
         <tr>
-          {Object.keys(data[0]).map(
-            (key) => (
-              <th key={key}>{key}</th>
-            ),
-          )}
+          {Object.keys(data[0]).map((key) => (
+            <th key={key}>{key}</th>
+          ))}
         </tr>
       </thead>
     );
   };
 
   const renderTable = () => {
-    const filteredData = FilterData(
-      data
-    );
+    const filteredData = FilterData(data);
     return (
       <table border='1px'>
         {renderTableHead(data)}

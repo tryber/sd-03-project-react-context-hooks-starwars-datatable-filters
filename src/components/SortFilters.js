@@ -1,18 +1,13 @@
-import React, {
-  useContext,
-  useState,
-} from 'react';
+import React, { useContext, useState } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 function SortFilters() {
-  const { sortFilter, dispatch } = useContext(
-    StarWarsContext,
-  );
+  const { sortFilter, dispatch } = useContext(StarWarsContext);
 
   const [order, setOrder] = useState({
     column: '',
     sort: '',
-  });  
+  });
 
   const handleOrder = (e) => {
     const { name, value } = e.target;
@@ -25,11 +20,7 @@ function SortFilters() {
   };
 
   const handleSubmitOrder = () => {
-    if (
-      order.column === '' ||
-      order.sort === ''
-    )
-      return false;
+    if (order.column === '' || order.sort === '') return false;
     dispatch(sortFilter(order));
     return true;
   };
@@ -41,34 +32,19 @@ function SortFilters() {
       'diameter',
       'rotation_period',
       'surface_water',
-    ]
+    ];
     return (
       <div>
-        <select
-          data-testid='column-sort'
-          name='column'
-          onChange={(e) =>
-            handleOrder(e)
-          }
-        >
+        <select data-testid='column-sort' name='column' onChange={(e) => handleOrder(e)}>
           <option value='' />
           {options.map((column) => (
-            <option
-              value={column}
-              key={column}
-            >
+            <option value={column} key={column}>
               {column}
             </option>
           ))}
         </select>
         {renderSortButtons()}
-        <button
-          type='button'
-          data-testid='column-sort-button'
-          onClick={() =>
-            handleSubmitOrder()
-          }
-        >
+        <button type='button' data-testid='column-sort-button' onClick={() => handleSubmitOrder()}>
           Ordenar
         </button>
       </div>
@@ -84,33 +60,23 @@ function SortFilters() {
           value='ASC'
           id='ASC'
           data-testid='column-sort-input'
-          onChange={(e) =>
-            handleOrder(e)
-          }
+          onChange={(e) => handleOrder(e)}
         />
-        <label htmlFor='ASC'>
-          Crescente
-        </label>
+        <label htmlFor='ASC'>Crescente</label>
         <input
           type='radio'
           name='sort'
           value='DESC'
           id='DESC'
           data-testid='column-sort-input'
-          onChange={(e) =>
-            handleOrder(e)
-          }
+          onChange={(e) => handleOrder(e)}
         />
-        <label htmlFor='DESC'>
-          Decrescente
-        </label>
+        <label htmlFor='DESC'>Decrescente</label>
       </div>
     );
   };
 
-  return (
-    <div>{renderSortFilter()}</div>
-  );
+  return <div>{renderSortFilter()}</div>;
 }
 
 export default SortFilters;

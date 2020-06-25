@@ -1,7 +1,4 @@
-import React, {
-  useReducer,
-  useState,
-} from 'react';
+import React, { useReducer, useState } from 'react';
 import StarWarsContext from './StarWarsContext';
 import SW_API from '../services/swAPI';
 import filters from '../reducers/filters';
@@ -11,10 +8,7 @@ import actionRemoveFilterValues from '../store/actions/actionRemoveFilterValues'
 import actionSortFilter from '../store/actions/actionSortFilter';
 
 const Provider = ({ children }) => {
-  const [
-    stateFetch,
-    setStateFetch,
-  ] = useState({
+  const [stateFetch, setStateFetch] = useState({
     loading: false,
     data: [],
     error: '',
@@ -56,15 +50,11 @@ const Provider = ({ children }) => {
     await requestAPI();
     return SW_API().then(
       (json) => receiveSuccess(json),
-      (error) =>
-        receiveFailure(error.message),
+      (error) => receiveFailure(error.message),
     );
   };
 
-  const [
-    stateFilters,
-    dispatch,
-  ] = useReducer(filters, {
+  const [stateFilters, dispatch] = useReducer(filters, {
     filterByName: {
       name: '',
     },
@@ -79,35 +69,19 @@ const Provider = ({ children }) => {
       column: 'name',
       sort: 'ASC',
     },
-    options: [
-      'population',
-      'orbital_period',
-      'diameter',
-      'rotation_period',
-      'surface_water',
-    ],
+    options: ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'],
   });
 
   const filterNames = (name) => {
     return actionFilterNames(name);
   };
 
-  const addFilter = (
-    column,
-    comparison,
-    value,
-  ) => {
-    return actionAddFilterValues(
-      column,
-      comparison,
-      value,
-    );
+  const addFilter = (column, comparison, value) => {
+    return actionAddFilterValues(column, comparison, value);
   };
 
   const removeFilter = (column) => {
-    return actionRemoveFilterValues(
-      column,
-    );
+    return actionRemoveFilterValues(column);
   };
 
   const sortFilter = (order) => {
@@ -124,13 +98,7 @@ const Provider = ({ children }) => {
     sortFilter,
     dispatch,
   };
-  return (
-    <StarWarsContext.Provider
-      value={context}
-    >
-      {children}
-    </StarWarsContext.Provider>
-  );
+  return <StarWarsContext.Provider value={context}>{children}</StarWarsContext.Provider>;
 };
 
 export default Provider;

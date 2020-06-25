@@ -1,6 +1,5 @@
 import * as types from '../store/actions/actionTypes';
 
-
 const filterNames = (state, name) => ({
   filterByName: {
     name,
@@ -15,10 +14,14 @@ const addFilter = (state, column, comparison, value) => ({
     ...state.filterByName,
   },
   filterByNumericValues:
-    (state.filterByNumericValues[0].column === '')
-      ? [{
-        column, comparison, value,
-      }]
+    state.filterByNumericValues[0].column === ''
+      ? [
+          {
+            column,
+            comparison,
+            value,
+          },
+        ]
       : [...state.filterByNumericValues, { column, comparison, value }],
   order: { ...state.order },
   options: [...state.options].filter((option) => option !== column),
@@ -31,10 +34,7 @@ const removeFilter = (state, column) => {
     filterByName: {
       ...state.filterByName,
     },
-    filterByNumericValues:
-      (state.filterByNumericValues.length === 1)
-        ? []
-        : newArray,
+    filterByNumericValues: state.filterByNumericValues.length === 1 ? [] : newArray,
     order: { ...state.order },
     options: [...state.options, column],
   };

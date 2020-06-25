@@ -44,8 +44,7 @@ const Table = () => {
     <button data-testid="button-filter" > Filtrar </button>
   </div>;
 
-  return (typeof planetsAPIreq === 'object' &&
-  <div>
+  return (typeof planetsAPIreq === 'object' && <div>
     <input
       data-testid="name-filter"
       placeholder="Digite o nome de um planeta..."

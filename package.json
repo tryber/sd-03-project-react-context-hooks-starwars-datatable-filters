@@ -42,6 +42,7 @@
     ]
   },
   "devDependencies": {
-    "@sheerun/mutationobserver-shim": "^0.3.3"
+    "@sheerun/mutationobserver-shim": "^0.3.3",
+    "eslint": "^7.3.1"
   }
 }

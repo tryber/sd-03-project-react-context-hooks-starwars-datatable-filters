@@ -14,36 +14,29 @@ const Provider = ({ children }) => {
     error: '',
   });
 
-  const requestAPI = () =>
-    setStateFetch((state) => {
-      return {
-        ...state,
-        loading: true,
-      };
-    });
+  const requestAPI = () => setStateFetch((state) => ({
+    ...state,
+    loading: true,
+  }));
 
   const receiveSuccess = (json) => {
     const data = json.results;
     data.forEach((planet, index) => {
       delete data[index].residents;
     });
-    setStateFetch((state) => {
-      return {
-        ...state,
-        data,
-        loading: false,
-      };
-    });
+    setStateFetch((state) => ({
+      ...state,
+      data,
+      loading: false,
+    }));
   };
 
   const receiveFailure = (error) => {
-    setStateFetch((state) => {
-      return {
-        ...state,
-        error,
-        loading: false,
-      };
-    });
+    setStateFetch((state) => ({
+      ...state,
+      error,
+      loading: false,
+    }));
   };
 
   const fetchPlanets = async () => {
@@ -72,21 +65,13 @@ const Provider = ({ children }) => {
     options: ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'],
   });
 
-  const filterNames = (name) => {
-    return actionFilterNames(name);
-  };
+  const filterNames = (name) => actionFilterNames(name);
 
-  const addFilter = (column, comparison, value) => {
-    return actionAddFilterValues(column, comparison, value);
-  };
+  const addFilter = (column, comparison, value) => actionAddFilterValues(column, comparison, value);
 
-  const removeFilter = (column) => {
-    return actionRemoveFilterValues(column);
-  };
+  const removeFilter = (column) => actionRemoveFilterValues(column);
 
-  const sortFilter = (order) => {
-    return actionSortFilter(order);
-  };
+  const sortFilter = (order) => actionSortFilter(order);
 
   const context = {
     stateFetch,

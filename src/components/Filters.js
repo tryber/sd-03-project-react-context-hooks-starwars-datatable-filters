@@ -4,7 +4,6 @@ import React, {
   useState,
   useEffect,
 } from 'react';
-import PropTypes from 'prop-types';
 import StarWarsContext from '../context/StarWarsContext';
 import SortFilters from './SortFilters';
 import './Filters.css';

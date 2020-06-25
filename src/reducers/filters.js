@@ -16,12 +16,12 @@ const addFilter = (state, column, comparison, value) => ({
   filterByNumericValues:
     state.filterByNumericValues[0].column === ''
       ? [
-          {
-            column,
-            comparison,
-            value,
-          },
-        ]
+        {
+          column,
+          comparison,
+          value,
+        },
+      ]
       : [...state.filterByNumericValues, { column, comparison, value }],
   order: { ...state.order },
   options: [...state.options].filter((option) => option !== column),

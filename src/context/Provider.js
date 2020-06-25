@@ -1,6 +1,7 @@
 import React, { useReducer, useState } from 'react';
 import StarWarsContext from './StarWarsContext';
 import SW_API from '../services/swAPI';
+import PropTypes from 'prop-types';
 import filters from '../reducers/filters';
 import actionFilterNames from '../store/actions/actionFilterNames';
 import actionAddFilterValues from '../store/actions/actionAddFilterValues';
@@ -14,10 +15,11 @@ const Provider = ({ children }) => {
     error: '',
   });
 
-  const requestAPI = () => setStateFetch((state) => ({
-    ...state,
-    loading: true,
-  }));
+  const requestAPI = () =>
+    setStateFetch((state) => ({
+      ...state,
+      loading: true,
+    }));
 
   const receiveSuccess = (json) => {
     const data = json.results;
@@ -84,6 +86,10 @@ const Provider = ({ children }) => {
     dispatch,
   };
   return <StarWarsContext.Provider value={context}>{children}</StarWarsContext.Provider>;
+};
+
+Provider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default Provider;

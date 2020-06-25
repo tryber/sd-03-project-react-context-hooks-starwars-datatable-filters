@@ -90,7 +90,7 @@ export function Filters() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setState((state) => ({ ...state, [name]: value }));
+    setState(() => ({ ...state, [name]: value }));
   };
 
   const handleSubmit = () => {

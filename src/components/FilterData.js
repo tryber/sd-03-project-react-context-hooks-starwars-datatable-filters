@@ -55,16 +55,15 @@ const orderPlanets = (filteredData, sort, column) => {
   return newData;
 };
 
-const filterNames = (filteredData, filterByName) => {
+function filterNames(filteredData, filterByName) {
   return filteredData.filter(({ name }) => name.match(new RegExp(filterByName.name, 'i')));
-};
-
-const filterNumeric = (filteredData, filterByNumericValues) => {
-  return filterByNumericValues.reduce((acc, { column, comparison, value }) => {
-    return acc.filter((planet) => filterComparison(column, comparison, value, planet));
-  }, filteredData);
-};
-
+}
+function filterNumeric(filteredData, filterByNumericValues) {
+  return filterByNumericValues.reduce(
+    (acc, { column, comparison, value }) => acc.filter((planet) => filterComparison(column, comparison, value, planet)),
+    filteredData,
+  );
+}
 const FilterData = (data) => {
   const { stateFilters } = useContext(StarWarsContext);
   const {

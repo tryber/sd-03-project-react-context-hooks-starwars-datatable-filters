@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import useContextAPIPlanets from "../hooks/useContextAPIPlanets";
+import useContextAPIPlanets from '../hooks/useContextAPIPlanets';
 import NameFilterfunc from './NameFilterfunc';
-import Header from "./Header";
+import Header from './Header';
 
 const Table = () => {
   const planetsAPIreq = useContextAPIPlanets('');
@@ -13,15 +13,15 @@ const Table = () => {
   const dropDownComparisonFilter = ['', 'maior que', 'menor que' , 'igual a'];
 
   const onInputValueChange = (event) => {
-    switch(comparisonFilter){
+    switch (comparisonFilter) {
       case 'maior que':
-        return event.filter(el=>Number(el[columnFilter])>valueFilter)
+        return event.filter((el) => Number(el[columnFilter]) > valueFilter);
       case 'menor que':
-        return event.filter(el=>Number(el[columnFilter])<valueFilter)
+        return event.filter((el) => Number(el[columnFilter]) < valueFilter);
       case 'igual a':
-        return event.filter(el=>Number(el[columnFilter])===valueFilter)
+        return event.filter((el) => Number(el[columnFilter]) === valueFilter);
       default:
-        return event
+        return event;
     }
   };
 
@@ -30,37 +30,42 @@ const Table = () => {
   };
 
   const selectOption = (datatest, funcToChange, dropDown) => <select
-  data-testid={datatest}
-    onChange={e=>funcToChange(e.target.value)}>
-          {dropDown.map(el=> <option>{el}</option>)}
-    </select>
+    data-testid={datatest}
+    onChange={(e) => funcToChange(e.target.value)}
+  >
+    {dropDown.map((el) => <option>{el}</option>)}
+  </select>;
 
-  return (typeof planetsAPIreq === 'object'&& 
+  const inputAndButtonToFilter = (setValueFilter) => <div>
+    <input
+      type="number"
+      data-testid="value-filter"
+      placeholder="Digite um Numero"
+      onChange={(e) => setValueFilter(Number(e.target.value))}
+    />
+    <button
+    data-testid="button-filter"
+    >
+      Filtrar
+    </button>
+  </div>
+
+  return (typeof planetsAPIreq === 'object' &&
   <div>
     <input
-      data-testid='name-filter'
-      placeholder='Digite o nome de um planeta...'
+      data-testid="name-filter"
+      placeholder="Digite o nome de um planeta..."
       type="text"
       value={text}
-      onChange={e => onTextChange(e)} />
+      onChange={(e) => onTextChange(e)} />
     {selectOption('column-filter', setColumnFilter, dropDownColumnFilter)}
     {selectOption('comparison-filter', setComparisonFilter, dropDownComparisonFilter)}
-    <input
-      type='number'
-      data-testid='value-filter'
-      placeholder='Digite um Numero'
-      onChange={e => setValueFilter(Number(e.target.value))}/>
-      <button
-      data-testid='button-filter'
-      onClick={() => onInputValueChange(planetsAPIreq.results)}
-      >
-        Filtrar
-      </button>
+    {inputAndButtonToFilter(setValueFilter)}
     <table>
-      <Header/>
+      <Header />
       {NameFilterfunc(onInputValueChange(planetsAPIreq.results), text)}
     </table>
-  </div>)
-};
+  </div>);
+}
 
-export default Table
+export default Table;

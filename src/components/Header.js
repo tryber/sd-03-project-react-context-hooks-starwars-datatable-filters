@@ -23,6 +23,5 @@ export default function Header() {
       </tr>
     </thead>
   );
-  
-  return (typeof planetsAPIreq=== 'object' && tHead())
+  return (typeof planetsAPIreq === 'object' && tHead());
 }

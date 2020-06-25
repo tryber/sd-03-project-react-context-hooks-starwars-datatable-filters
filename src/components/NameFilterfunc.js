@@ -19,7 +19,7 @@ const NameFilterfunc = (value, names) => value.filter(
         <td>{row.url}</td>
       </tr>
     </tbody>
-  )
+  ),
 );
 
-export default NameFilterfunc
+export default NameFilterfunc;

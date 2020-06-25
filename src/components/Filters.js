@@ -1,190 +1,215 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, {
+  useContext,
+  useReducer,
+  useState,
+  useEffect,
+} from 'react';
 import PropTypes from 'prop-types';
+import StarWarsContext from '../context/StarWarsContext';
 import SortFilters from './SortFilters';
-import actionFilterNames from '../store/actions/actionFilterNames';
-import actionAddFilterValues from '../store/actions/actionAddFilterValues';
-import actionRemoveFilterValues from '../store/actions/actionRemoveFilterValues';
-import actionSortFilter from '../store/actions/actionSortFilter';
 import './Filters.css';
 
-export class Filters extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      column: '',
-      comparison: '',
-      value: '',
-    };
-  }
+export function Filters() {
+  const [state, setState] = useState({
+    column: '',
+    comparison: '',
+    value: '',
+  });
 
-  handleChange(e) {
+  const {
+    stateFilters: {
+      options,
+      filterByNumericValues,
+    },
+    addFilter,
+    removeFilter,
+    filterNames,
+    dispatch,
+  } = useContext(StarWarsContext);
+
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    this.setState({ [name]: value });
-  }
+    setState((state) => ({
+      ...state,
+      [name]: value,
+    }));
+  };
 
-  handleSubmit() {
+  const handleSubmit = () => {
     const {
-      column, comparison, value,
-    } = this.state;
-    const { addFilter } = this.props;
+      column,
+      comparison,
+      value,
+    } = state;
     if (value === '') return false;
-    addFilter(column, comparison, value);
-    this.setState({
+    dispatch(
+      addFilter(
+        column,
+        comparison,
+        value,
+      ),
+    );
+    setState({
       column: '',
       comparison: '',
       value: '',
     });
     return true;
-  }
+  };
 
-  handleRemove(column) {
-    const { removeFilter } = this.props;
-    removeFilter(column);
-  }
+  const handleRemove = (column) => {
+    dispatch(removeFilter(column));
+  };
 
-  renderInputName() {
-    const { filterNames } = this.props;
+  const renderInputName = () => {
     return (
       <div>
         <input
-          data-testid="name-filter"
-          type="text"
-          onChange={(e) => filterNames(e.target.value)}
+          data-testid='name-filter'
+          type='text'
+          onChange={(e) =>
+            dispatch(
+              filterNames(
+                e.target.value,
+              ),
+            )
+          }
         />
       </div>
     );
-  }
+  };
 
-  renderOptionsFilter() {
-    const { options } = this.props;
-    return (
-      <div>
-        <select data-testid="column-filter" name="column" onChange={(e) => this.handleChange(e)}>
-          <option value="" />
-          {options.map((column) => <option value={column} key={column}>{column}</option>)}
-        </select>
-      </div>
-    );
-  }
-
-  renderComparisonFilter() {
+  const renderOptionsFilter = () => {
     return (
       <div>
         <select
-          data-testid="comparison-filter"
-          name="comparison"
-          onChange={(e) => this.handleChange(e)}
+          data-testid='column-filter'
+          name='column'
+          onChange={(e) =>
+            handleChange(e)
+          }
         >
-          <option value="" />
-          <option value="maior que">maior que</option>
-          <option value="menor que">menor que</option>
-          <option value="igual a">igual a</option>
+          <option value='' />
+          {options.map((column) => (
+            <option
+              value={column}
+              key={column}
+            >
+              {column}
+            </option>
+          ))}
         </select>
       </div>
     );
-  }
+  };
 
-  renderValueFilter() {
-    const { value } = this.state;
+  const renderComparisonFilter = () => {
+    return (
+      <div>
+        <select
+          data-testid='comparison-filter'
+          name='comparison'
+          onChange={(e) =>
+            handleChange(e)
+          }
+        >
+          <option value='' />
+          <option value='maior que'>
+            maior que
+          </option>
+          <option value='menor que'>
+            menor que
+          </option>
+          <option value='igual a'>
+            igual a
+          </option>
+        </select>
+      </div>
+    );
+  };
+
+  const renderValueFilter = () => {
+    const { value } = state;
     return (
       <div>
         <input
-          data-testid="value-filter"
-          type="number"
-          name="value"
-          onChange={(e) => this.handleChange(e)}
+          data-testid='value-filter'
+          type='number'
+          name='value'
+          onChange={(e) =>
+            handleChange(e)
+          }
           value={value}
         />
       </div>
     );
-  }
+  };
 
-  renderSubmitButton() {
+  const renderSubmitButton = () => {
     return (
       <button
-        data-testid="button-filter"
-        type="button"
-        onClick={() => this.handleSubmit()}
+        data-testid='button-filter'
+        type='button'
+        onClick={() => handleSubmit()}
       >
         Adicionar Filtro
       </button>
     );
-  }
+  };
 
-  renderActiveFilters(filterByNumericValues) {
-    if (filterByNumericValues.length === 0 || filterByNumericValues[0].column === '') return false;
+  const renderActiveFilters = (
+    filterByNumericValues,
+  ) => {
+    if (
+      filterByNumericValues.length ===
+        0 ||
+      filterByNumericValues[0]
+        .column === ''
+    )
+      return false;
     return (
       <div>
-        {filterByNumericValues.map(({ column, comparison, value }) => (
-          <p data-testid="filter">
-            {`Filtro aplicado: ${column} | ${comparison} | ${value} `}
-            <button
-              key={column}
-              type="button"
-              value="X"
-              onClick={() => this.handleRemove(column)}
-            >
-              X
-            </button>
-          </p>
-        ))}
+        {filterByNumericValues.map(
+          ({
+            column,
+            comparison,
+            value,
+          }) => (
+            <p data-testid='filter'>
+              {`Filtro aplicado: ${column} | ${comparison} | ${value} `}
+              <button
+                key={column}
+                type='button'
+                value='X'
+                onClick={() =>
+                  handleRemove(column)
+                }
+              >
+                X
+              </button>
+            </p>
+          ),
+        )}
       </div>
     );
-  }
-
-  render() {
-    const { filterByNumericValues } = this.props;
-    return (
+  };
+  return (
+    <div>
+      <div className='filterBox'>
+        {renderInputName()}
+        {renderOptionsFilter()}
+        {renderComparisonFilter()}
+        {renderValueFilter()}
+        {renderSubmitButton()}
+      </div>
+      <SortFilters />
       <div>
-        <div className="filterBox">
-          {this.renderInputName()}
-          {this.renderOptionsFilter()}
-          {this.renderComparisonFilter()}
-          {this.renderValueFilter()}
-          {this.renderSubmitButton()}
-        </div>
-        <SortFilters />
-        <div>
-          {this.renderActiveFilters(filterByNumericValues)}
-        </div>
+        {renderActiveFilters(
+          filterByNumericValues,
+        )}
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-const mapStateToProps = ({
-  filters: { filterByNumericValues, options },
-}) => ({
-  filterByNumericValues,
-  options,
-});
-
-const mapDispatchToProps = (dispatch) => bindActionCreators(
-  {
-    filterNames: actionFilterNames,
-    addFilter: actionAddFilterValues,
-    removeFilter: actionRemoveFilterValues,
-    sortFilter: actionSortFilter,
-  }, dispatch,
-);
-
-Filters.propTypes = {
-  filterNames: PropTypes.func.isRequired,
-  addFilter: PropTypes.func.isRequired,
-  removeFilter: PropTypes.func.isRequired,
-  filterByNumericValues: PropTypes.instanceOf(Array),
-  options: PropTypes.instanceOf(Array),
-};
-
-Filters.defaultProps = {
-  filterByNumericValues: [{
-    column: '',
-    comparison: '',
-    value: '',
-  }],
-  options: ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'],
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Filters);
+export default Filters;

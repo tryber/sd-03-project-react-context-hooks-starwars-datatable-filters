@@ -1,8 +1,6 @@
 import * as types from '../store/actions/actionTypes';
 
-const INICIAL_STATE = { loading: false };
-
-const reducerFetchPlanets = (state = INICIAL_STATE, action) => {
+const reducerFetchPlanets = (state, action) => {
   switch (action.type) {
     case types.REQUEST_API:
       return { ...state, loading: true };

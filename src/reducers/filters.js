@@ -1,23 +1,5 @@
 import * as types from '../store/actions/actionTypes';
 
-const INICIAL_STATE = {
-  filterByName: {
-    name: '',
-  },
-  filterByNumericValues: [
-    {
-      column: '',
-      comparison: '',
-      value: '',
-    },
-  ],
-  order: {
-    column: 'Name',
-    sort: 'ASC',
-  },
-  options: ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'],
-};
-
 
 const filterNames = (state, name) => ({
   filterByName: {
@@ -67,7 +49,7 @@ const sortFilter = (state, order) => ({
   options: [...state.options],
 });
 
-const filters = (state = INICIAL_STATE, action) => {
+const filters = (state, action) => {
   switch (action.type) {
     case types.FILTER_NAMES:
       return filterNames(state, action.name);

@@ -16,8 +16,8 @@ const Table = () => {
   const [columnFilter, setColumnFilter] = useState('');
   const [comparisonFilter, setComparisonFilter] = useState('');
   const [valueFilter, setValueFilter] = useState(0);
-  const dropDownColumnFilter = ['all', 'population', 'orbital_period', 'diameter', 'rotation_period' , 'surface_water'];
-  const dropDownComparisonFilter = ['all', 'maior que', 'menor que' , 'igual a'];
+  const dropDownColumnFilter = ['all', 'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
+  const dropDownComparisonFilter = ['all', 'maior que', 'menor que', 'igual a'];
 
   const onInputValueChange = (event) => {
     switch (comparisonFilter) {

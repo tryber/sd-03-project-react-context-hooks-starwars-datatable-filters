@@ -3,14 +3,21 @@ import useContextAPIPlanets from '../hooks/useContextAPIPlanets';
 import NameFilterfunc from './NameFilterfunc';
 import Header from './Header';
 
+const selectOption = (datatest, funcToChange, dropDown) => <select
+  data-testid={datatest}
+  onChange={(e) => funcToChange(e.target.value)}
+>
+  {dropDown.map((el) => <option>{el}</option>)}
+</select>;
+
 const Table = () => {
   const planetsAPIreq = useContextAPIPlanets('');
   const [text, setText] = useState('');
   const [columnFilter, setColumnFilter] = useState('');
   const [comparisonFilter, setComparisonFilter] = useState('');
   const [valueFilter, setValueFilter] = useState(0);
-  const dropDownColumnFilter = [' ', 'population', 'orbital_period', 'diameter', 'rotation_period' , 'surface_water'];
-  const dropDownComparisonFilter = [' ', 'maior que', 'menor que' , 'igual a'];
+  const dropDownColumnFilter = ['all', 'population', 'orbital_period', 'diameter', 'rotation_period' , 'surface_water'];
+  const dropDownComparisonFilter = ['all', 'maior que', 'menor que' , 'igual a'];
 
   const onInputValueChange = (event) => {
     switch (comparisonFilter) {
@@ -26,13 +33,6 @@ const Table = () => {
   };
 
   const onTextChange = (event) => setText(event.target.value);
-
-  const selectOption = (datatest, funcToChange, dropDown) => <select
-    data-testid={datatest}
-    onChange={(e) => funcToChange(e.target.value)}
-  >
-    {dropDown.map((el) => <option>{el}</option>)}
-  </select>;
 
   const inputAndButtonToFilter = () => <div>
     <input

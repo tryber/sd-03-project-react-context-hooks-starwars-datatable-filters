@@ -9,8 +9,8 @@ const Table = () => {
   const [columnFilter, setColumnFilter] = useState('');
   const [comparisonFilter, setComparisonFilter] = useState('');
   const [valueFilter, setValueFilter] = useState(0);
-  const dropDownColumnFilter = ['', 'population', 'orbital_period', 'diameter', 'rotation_period' , 'surface_water'];
-  const dropDownComparisonFilter = ['', 'maior que', 'menor que' , 'igual a'];
+  const dropDownColumnFilter = [' ', 'population', 'orbital_period', 'diameter', 'rotation_period' , 'surface_water'];
+  const dropDownComparisonFilter = [' ', 'maior que', 'menor que' , 'igual a'];
 
   const onInputValueChange = (event) => {
     switch (comparisonFilter) {
@@ -25,9 +25,7 @@ const Table = () => {
     }
   };
 
-  const onTextChange = (event) => {
-    setText(event.target.value);
-  };
+  const onTextChange = (event) => setText(event.target.value);
 
   const selectOption = (datatest, funcToChange, dropDown) => <select
     data-testid={datatest}
@@ -36,19 +34,15 @@ const Table = () => {
     {dropDown.map((el) => <option>{el}</option>)}
   </select>;
 
-  const inputAndButtonToFilter = (setValueFilter) => <div>
+  const inputAndButtonToFilter = () => <div>
     <input
       type="number"
       data-testid="value-filter"
       placeholder="Digite um Numero"
       onChange={(e) => setValueFilter(Number(e.target.value))}
     />
-    <button
-    data-testid="button-filter"
-    >
-      Filtrar
-    </button>
-  </div>
+    <button data-testid="button-filter" > Filtrar </button>
+  </div>;
 
   return (typeof planetsAPIreq === 'object' &&
   <div>
@@ -57,7 +51,8 @@ const Table = () => {
       placeholder="Digite o nome de um planeta..."
       type="text"
       value={text}
-      onChange={(e) => onTextChange(e)} />
+      onChange={(e) => onTextChange(e)}
+    />
     {selectOption('column-filter', setColumnFilter, dropDownColumnFilter)}
     {selectOption('comparison-filter', setComparisonFilter, dropDownComparisonFilter)}
     {inputAndButtonToFilter(setValueFilter)}
@@ -66,6 +61,6 @@ const Table = () => {
       {NameFilterfunc(onInputValueChange(planetsAPIreq.results), text)}
     </table>
   </div>);
-}
+};
 
 export default Table;

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
-const filterComparison = (column, comparison, value, planet) => {
+const filterComparison = ({ column, comparison, value }, planet) => {
   switch (comparison) {
     case 'maior que':
       return Number(planet[column]) > Number(value);
@@ -59,8 +59,9 @@ function filterNames(filteredData, filterByName) {
   return filteredData.filter(({ name }) => name.match(new RegExp(filterByName.name, 'i')));
 }
 function filterNumeric(filteredData, filterByNumericValues) {
+  const toReduce = (acc, cur) => acc.filter((planet) => filterComparison(cur, planet));
   return filterByNumericValues.reduce(
-    (acc, { column, comparison, value }) => acc.filter((planet) => filterComparison(column, comparison, value, planet)),
+    (acc, cur) => toReduce(acc, cur),
     filteredData,
   );
 }

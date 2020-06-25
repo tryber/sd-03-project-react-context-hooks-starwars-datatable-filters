@@ -1,7 +1,7 @@
 import React, { useReducer, useState } from 'react';
+import PropTypes from 'prop-types';
 import StarWarsContext from './StarWarsContext';
 import SW_API from '../services/swAPI';
-import PropTypes from 'prop-types';
 import filters from '../reducers/filters';
 import actionFilterNames from '../store/actions/actionFilterNames';
 import actionAddFilterValues from '../store/actions/actionAddFilterValues';

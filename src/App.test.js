@@ -247,12 +247,6 @@ describe('3 - Sua página deve ter um filtro para valores numéricos', () => {
     fireEvent.change(valueFilter, {target: { value: '200000' }})
     fireEvent.click(buttonFilter);
 
-    const tableRows = await findAllByRole('row')
-
-    expect(tableRows).toHaveLength(2);
-    expect(await findByText('Tatooine')).toBeInTheDocument();
-  })
-
   test('should change store filter values', async () => {
     const expectedFilters = [
       { column: 'surface_water', comparison: 'menor que', value: '40' },

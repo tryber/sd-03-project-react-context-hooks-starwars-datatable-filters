@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import StarWarsContext from './StarWarsContext';
 import apiPlanets from '../services/required';
 
-const StarWarsProvider = ({ children }) => {
+function StarWarsProvider({ children }) {
   const [data, setData] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const [error, setError] = useState('');

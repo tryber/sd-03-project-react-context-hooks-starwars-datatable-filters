@@ -1,6 +1,7 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { getAllPlanetsFromAPI } from '../services/planetsAPI';
+import FilterHooks from '../hooks/FilterHooks';
 
 const StarWarsContext = createContext();
 
@@ -14,6 +15,8 @@ const Provider = ({ children }) => {
   const [data, setData] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const [textFilter, setTextFilter] = useState(initialFilterState);
+
+  const filterMethods = FilterHooks();
 
   const filterByText = (name) => {
     setTextFilter({ filterByName: { name } });
@@ -38,7 +41,14 @@ const Provider = ({ children }) => {
     .then(handleFetchSuccess, handleFetchError);
   };
 
-  const context = { data, isFetching, fetchPlanets, filterByText, textFilter };
+  const context = {
+    data,
+    isFetching,
+    fetchPlanets,
+    filterByText,
+    textFilter,
+    filterMethods,
+  };
 
   return (
     <StarWarsContext.Provider value={context}>

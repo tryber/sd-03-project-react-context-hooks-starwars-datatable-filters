@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { StarWarsContext } from '../../context/StarWarsContext';
 
 const FilterByNameInput = () => {
-  const { filterByText } = useContext(StarWarsContext);
+  const { filterMethods: { setFilterByName } } = useContext(StarWarsContext);
   return (
     <div>
       <h2>Pesquisar um planeta</h2>
@@ -12,7 +12,7 @@ const FilterByNameInput = () => {
         id="filter-by-name"
         data-testid="name-filter"
         placeholder="Nome do planeta"
-        onChange={(event) => filterByText(event.target.value)}
+        onChange={(event) => setFilterByName(event.target.value)}
       />
     </div>
   );

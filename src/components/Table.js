@@ -1,25 +1,31 @@
 import React, { useContext } from 'react';
 import Tbody from './Tbody';
 import Thead from './Thead';
+import filterDataByNumericValue from '../functions/';
 import { StarWarsContext } from '../context/StarWarsContext';
 
 const Table = () => {
-  const { data, textFilter } = useContext(StarWarsContext);
+  const { data, filterMethods } = useContext(StarWarsContext);
 
-  const filterDataByText = (dataSent) => {
-    if (textFilter.filterByName.name !== '') {
-      return dataSent.filter(({ name }) =>
-      name.toLowerCase().includes(textFilter.filterByName.name.toLowerCase()));
-    }
-    return dataSent;
-  };
+  const {
+    filterByName: { name },
+    filterByNumericValues,
+    order: { column, sort },
+  } = filterMethods.filters;
+  const filteredData = filterDataByNumericValue(
+    data,
+    name,
+    column,
+    sort,
+    filterByNumericValues,
+  );
 
   return (
     <div>
       <h1>Star Wars Datatable With Hooks</h1>
       <table>
         <Thead />
-        <Tbody data={filterDataByText(data)} />
+        <Tbody data={filteredData} />
       </table>
     </div>
   );

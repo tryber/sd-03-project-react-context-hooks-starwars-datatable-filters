@@ -1,26 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
+
+import DataPlanetsProvider from './context/DataPlanets';
+import FiltersProvider from './context/Filters';
+import FormatProvider from './context/Format';
+
+import { FetchData, Table, FiltersBar } from './components/';
+
 import './App.css';
 
-function App() {
-  return (
+const App = () => (
+  <div className="App-wrapper">
+    <h1>Star Wars</h1>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <DataPlanetsProvider>
+        <FetchData />
+        <FiltersProvider>
+          <FormatProvider>
+            <FiltersBar />
+            <Table />
+          </FormatProvider>
+        </FiltersProvider>
+      </DataPlanetsProvider>,
     </div>
-  );
-}
+  </div>
+);
 
 export default App;

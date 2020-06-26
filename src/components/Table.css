@@ -1,0 +1,51 @@
+table , thead , tbody , td , tr {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+}
+
+table {
+  display: inline-block;
+  flex-basis: 50%;
+  font-size: 1.3em;
+  max-height: 150vh;
+  overflow: scroll;
+  text-align: center;
+}
+
+caption {
+  font-size: 1.5em;
+  position: relative;
+}
+
+.table-multi-headers {
+  overflow: scroll;
+}
+
+.td-multi-headers {
+  display: block;
+  padding: 10px 0 0 50%;
+  position: relative;
+}
+
+td {
+  padding: 0 20px;
+  word-wrap: break-word;
+}
+
+tr {
+  min-width: 100%;
+}
+
+.tr-multi-headers {
+  display: inline-block;
+  flex-basis: 60%;
+  left: -9999px;
+  position: absolute;
+  top: -9999px;
+}
+
+.th-multi-headers {
+  left: -9999px;
+  position: absolute;
+  top: -999;
+}

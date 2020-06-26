@@ -1,26 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// import { bindActionCreators } from 'redux';
+// import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
+// import planetsFetch from './actions/planetsFetch';
+// import apiFetch from './services/apiFetch';
+import Home from './components/Home';
+import StarWarsProvider from './context/StarWarsProvider';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StarWarsProvider>
+      <center>
+        <Home />
+      </center>
+    </StarWarsProvider>
   );
 }
 
 export default App;
+
+
+// first we will make a new context
+// const MyContext = createContext();
+
+// Then create a provider Component

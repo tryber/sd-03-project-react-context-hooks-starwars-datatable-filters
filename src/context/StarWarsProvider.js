@@ -88,7 +88,7 @@ function StarWarsProvider({ children }) {
       {children}
     </StarWarsContext.Provider>
   );
-};
+}
 
 StarWarsProvider.propTypes = {
   children: PropTypes.node.isRequired,

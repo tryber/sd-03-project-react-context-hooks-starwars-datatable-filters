@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const TableBody = (props) => {
-    const { planets } = props;
+  const { planets } = props;
   return (
     <tbody>
       {planets.map((planet) => (

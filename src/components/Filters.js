@@ -8,7 +8,7 @@ const renderOptions = (array, state) => (
 );
 
 const handle = (event, func) => {
-  func(event.target.value );
+  func(event.target.value);
 };
 
 const Filters = () => {
@@ -31,9 +31,9 @@ const Filters = () => {
   return (
     <div className="filters">
       <label htmlFor="name-in">Filtrar por nome</label>
-      <input 
-        id="name-in" data-testid="name-filter" 
-        type="text" onChange={(e) => setNameFilters({ name: e.target.value })} 
+      <input
+        id="name-in" data-testid="name-filter"
+        type="text" onChange={(e) => setNameFilters({ name: e.target.value })}
       />
       <select
         data-testid="column-filter"

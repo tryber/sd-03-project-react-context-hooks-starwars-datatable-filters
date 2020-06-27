@@ -13,7 +13,7 @@ const MyProvider = ({ children }) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
 
-  const context = { 
+  const context = {
     numericValues,
     setNumericValues,
     nameFilters,

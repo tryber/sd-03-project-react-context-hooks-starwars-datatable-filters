@@ -6,14 +6,15 @@ const PlanetsContext = createContext();
 const PlanetsProvider = ({ children }) => {
   const [data, setData] = useState(null);
   const [nameFilter, setNameFilter] = useState('');
+  const [filterByNumericValue, setFilterByNumericValue] = useState([]);
   const url = 'https://swapi-trybe.herokuapp.com/api/planets';
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log('fetching...');
       fetch(url)
         .then((response) => response.json())
         .then((json) => {
-          console.log(json.results);
           setData(json.results);
         });
     };
@@ -26,9 +27,11 @@ const PlanetsProvider = ({ children }) => {
       filterByName: {
         name: nameFilter,
       },
+      filterByNumericValue,
     },
     handlers: {
       setNameFilter,
+      setFilterByNumericValue,
     },
   };
 

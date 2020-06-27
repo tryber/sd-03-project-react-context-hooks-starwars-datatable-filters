@@ -6,18 +6,18 @@ export const MyContext = createContext();
 MyContext.displayName = 'MyContext';
 
 const MyProvider = ({ children }) => {
-  const [numericValues, setNumericValues] = useState([]);
-  const [nameFilters, setNameFilters] = useState({ name: '' });
+  const [filters, setFilters] = useState({
+    filterByName: { name: '' },
+    filterByNumericValues: [],
+  });
   const [usedFilters, setUsedFilters] = useState([]);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
 
   const context = {
-    numericValues,
-    setNumericValues,
-    nameFilters,
-    setNameFilters,
+    filters,
+    setFilters,
     usedFilters,
     setUsedFilters,
     loading,

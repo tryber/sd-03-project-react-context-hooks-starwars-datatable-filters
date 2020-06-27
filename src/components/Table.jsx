@@ -12,10 +12,9 @@ const handleFilter = (list, { column, comparison, value }) => {
   }
 };
 const Table = () => {
-  const { data, nameFilters, numericValues } = useContext(MyContext);
-  let sortedList = data.filter((planet) => planet.name.includes(nameFilters.name));
-  numericValues.forEach((e) => { sortedList = handleFilter(sortedList, e); });
-  console.log(sortedList);
+  const { data, filters: { filterByName: { name }, filterByNumericValues }, } = useContext(MyContext);
+  let sortedList = data.filter((planet) => planet.name.includes(name));
+  filterByNumericValues.forEach((e) => { sortedList = handleFilter(sortedList, e); });
   return (
     <table>
       <TableHeader />

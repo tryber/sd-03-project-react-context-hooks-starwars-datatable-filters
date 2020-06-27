@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-// import PropTypes from 'prop-types';
 import { FilterContext } from '../context/filterProvider';
 
 const columns = [
@@ -54,7 +53,7 @@ const numericFilterPanel = (evtHandler, filterByNumericValues) => (
 );
 
 // Estava o numericFilter do state
-const filtersList = (numericFilters, rmFilter) => {
+ function filtersList(numericFilters, rmFilter) {
   return (numericFilters.map((filter) => (
     <div
       key={filter.column}
@@ -113,12 +112,5 @@ function SearchBar() {
     </div>
   );
 }
-
-// SearchBar.propTypes = {
-//   setNameFilter: PropTypes.func,
-//   filterByNumericValues: PropTypes.arrayOf(PropTypes.object),
-//   addNumericFilter: PropTypes.func,
-//   removeNumericFilter: PropTypes.func,
-// };
 
 export default SearchBar;

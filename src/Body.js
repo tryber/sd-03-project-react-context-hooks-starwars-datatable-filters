@@ -1,5 +1,4 @@
 import React, { useEffect, useContext } from 'react';
-// import PropTypes from 'prop-types';
 import Table from './components/Table';
 import { DataContext } from './context/dataProvider';
 import { FilterContext } from './context/filterProvider';
@@ -44,19 +43,9 @@ Body.defaultProps = {
   planets: [],
   nameFilter: {},
   nextPageURL: '',
-  numericFilter: {},
   filterByName: {},
+  numericFilter: {},
   filterByNumericValues: [],
 };
-
-// Body.propTypes = {
-//   planets: PropTypes.arrayOf(PropTypes.object.isRequired),
-//   loading: PropTypes.bool.isRequired,
-//   count: PropTypes.number,
-//   fetchPlanets: PropTypes.func.isRequired,
-//   next: PropTypes.string,
-//   filterByName: PropTypes.objectOf((PropTypes.string.isRequired)),
-//   filterByNumericValues: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string.isRequired)),
-// };
 
 export default Body;

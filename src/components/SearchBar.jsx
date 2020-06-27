@@ -10,44 +10,27 @@ const columns = [
   'surface_water',
 ];
 
-// Estava o numericFilter do state
-const filtersList = (numericFilters, rmFilter) => {
-  numericFilters.map((filter) => (
-    <div
-      key={filter.column}
-      data-testid="filter"
-    >
-      {filter.column} {filter.comparison} {filter.value}
-      <button
-        onClick={() => { rmFilter(filter); }}
-      >
-      X</button>
-    </div>
-  ));
-}
-
 const renderSelectCol = (evtHandler, numericFilter) => (
   <select
-    name="column"
-    data-testid="column-filter"
-    onChange={(evt) => evtHandler(evt)}
-    // value={this.state.column}
+  name="column"
+  data-testid="column-filter"
+  onChange={(evt) => evtHandler(evt)}
   >
-  <option key="1" value="" />
-  { columns.map((column) => (!numericFilter.find(
-    (filter) => filter.column === column)) && (
-      <option key={column} value={column}>{column}</option>
-      ),
-    )}
+    <option key="1" value="" />
+    { columns.map((column) => (!numericFilter.find(
+      (filter) => filter.column === column)) && (
+        <option key={column} value={column}>{column}</option>
+        ),
+        )}
   </select>
 );
 
 const renderSelectComp = (evtHandler) => (
   <select
-    name="comparison"
-    data-testid="comparison-filter"
-    onChange={(evt) => evtHandler(evt)}
-    // value={this.state.comparison}
+  name="comparison"
+  data-testid="comparison-filter"
+  onChange={(evt) => evtHandler(evt)}
+  // value={this.state.comparison}
   >
     <option />
     <option key=">" value="maior que">maior que</option>
@@ -68,9 +51,25 @@ const numericFilterPanel = (evtHandler, filterByNumericValues) => (
       data-testid="value-filter"
       onChange={(evt) => evtHandler(evt)}
       // value={this.state.value}
-    />
+      />
   </div>
 );
+
+// Estava o numericFilter do state
+const filtersList = (numericFilters, rmFilter) => {
+  return numericFilters.map((filter) => (
+    <div
+      key={filter.column}
+      data-testid="filter"
+    >
+      {filter.column} {filter.comparison} {filter.value}
+      <button
+        onClick={() => { rmFilter(filter); }}
+      >
+      X</button>
+    </div>
+  ));
+};
 
 function SearchBar() {
   const {
@@ -81,7 +80,7 @@ function SearchBar() {
   } = useContext(FilterContext);
 
   // Hook de estado - substituto ao state dos componentes de classe
-  const [ state, setState ] = useState({
+  const [state, setState] = useState({
     column: 'population',
     comparison: 'maior que',
     value: 0,
@@ -91,7 +90,7 @@ function SearchBar() {
     setState({
       ...state, [evt.target.name]: evt.target.value,
     });
-  }
+  };
 
   return (
     <div className="filterBar">
@@ -118,10 +117,10 @@ function SearchBar() {
 }
 
 SearchBar.propTypes = {
-  filterByName: PropTypes.func.isRequired,
-  numericFilter: PropTypes.arrayOf(PropTypes.object).isRequired,
-  addNumFilter: PropTypes.func.isRequired,
-  rmFilter: PropTypes.func.isRequired,
+  setNameFilter: PropTypes.func,
+  filterByNumericValues: PropTypes.arrayOf(PropTypes.object),
+  addNumericFilter: PropTypes.func,
+  removeNumericFilter: PropTypes.func,
 };
 
 export default SearchBar;

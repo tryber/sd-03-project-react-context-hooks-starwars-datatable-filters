@@ -7,51 +7,38 @@ import fetchPlanets from './services/fetchAPI';
 import './App.css';
 
 function Body() {
-  const { planets, setPlanets, loading, setLoading } = useContext(DataContext);
+  const { data, setData, url, setUrl, loading, setLoading } = useContext(DataContext);
   const { filter } = useContext(FilterContext);
+  const { count, next, previous, results } = data;
+  const { filterByName, filterByNumericValues } = filter;
 
   // Hook de ciclo de vida, executa apenas na inicialização do componente
   useEffect(() => {
-    fetchPlanets('https://swapi-trybe.herokuapp.com/api/planets/')
+    fetchPlanets(url)
       .then((data) => {
-        setPlanets(data);
+        setData(data);
         setLoading(false);
-      });
-  }, []);
+      })
+      .catch((err) => alert(err));
+  }, [url]);
 
-    const { count, next, previous, results } = planets;
-    const { filterByName, filterByNumericValues } = filter;
-
-    if (loading) return (<p>Carregamento...</p>);
-    return (
-      <div className="Body">
-        {Table(results, filterByName, filterByNumericValues)}
-        <p>A pesquisa retornou {count} resultados.</p>
-        {previous ? (
-          <button onClick={() => (fetchPlanets(previous))}>Página anterior</button>) :
-          <button disabled>Voltar uma</button>}
-        {next ? (
-          <button onClick={() => (fetchPlanets(next))}>Próxima página</button>) :
-          <button
-            onClick={() => (fetchPlanets('https://swapi-trybe.herokuapp.com/api/planets/'))}
-          >
-          Voltar p/ primeira</button>}
-      </div>
-    );
-  }
-
-// const mapStateToProps = (state) => ({
-//   // numResults: state.planetReducer.count,
-//   // nextPageURL: state.planetReducer.next,
-//   nameFilter: state.filters.filterByName,
-//   numericFilter: state.filters.filterByNumericValues,
-// });
-
-// const mapDispatchToProps = (dispatch) => (
-//   {
-//     fetchPlanets: (u) => dispatch(fetchPlanet(u)),
-//   }
-// );
+  if (loading) return (<p>Carregamento...</p>);
+  return (
+    <div className="Body">
+      {Table(results, filterByName, filterByNumericValues)}
+      <p>A pesquisa retornou {count} resultados.</p>
+      {previous ? (
+        <button onClick={() => (setUrl(previous))}>Página anterior</button>) :
+        <button disabled>Voltar uma</button>}
+      {next ? (
+        <button onClick={() => (setUrl(next))}>Próxima página</button>) :
+        <button
+          onClick={() => (setUrl('https://swapi-trybe.herokuapp.com/api/planets/'))}
+        >
+        Voltar p/ primeira</button>}
+    </div>
+  );
+}
 
 Body.defaultProps = {
   nameFilter: {},
@@ -61,13 +48,13 @@ Body.defaultProps = {
 };
 
 Body.propTypes = {
-  planets: PropTypes.arrayOf(PropTypes.object.isRequired),
-  loading: PropTypes.bool.isRequired,
-  // numResults: PropTypes.number.isRequired,
-  fetchPlanets: PropTypes.func.isRequired,
-  nextPageURL: PropTypes.string,
-  nameFilter: PropTypes.objectOf((PropTypes.string.isRequired)),
-  numericFilter: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string.isRequired)),
+  // planets: PropTypes.arrayOf(PropTypes.object.isRequired),
+  // loading: PropTypes.bool.isRequired,
+  count: PropTypes.number,
+  // fetchPlanets: PropTypes.func.isRequired,
+  next: PropTypes.string,
+  filterByName: PropTypes.objectOf((PropTypes.string.isRequired)),
+  filterByNumericValues: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string.isRequired)),
 };
 
 export default Body;

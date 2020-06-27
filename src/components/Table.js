@@ -19,10 +19,9 @@ const numericFilter = (ftPlanets, numFilters) => {
   return numFilters.reduce((acc, {
     column, comparison, value,
   }) => acc.filter((planet) => returnComparator(planet, column, comparison, value)), ftPlanets);
-}
+};
 
 function Table(planets, nameFilter, numFilter) {
-  console.log(planets, nameFilter, numFilter);
   const filteredByName = planets.filter((pl) => (
     pl.name.toLowerCase()).includes(nameFilter.name));
   const filteredByBoth = numericFilter(filteredByName, numFilter);
@@ -54,14 +53,12 @@ function Table(planets, nameFilter, numFilter) {
 }
 
 Table.defaultProps = {
-  nameFilter: {},
-  numFilter: [],
+  numFilters: [],
 };
 
 Table.propTypes = {
-  planets: PropTypes.arrayOf(PropTypes.object).isRequired,
-  nameFilter: PropTypes.objectOf((PropTypes.string.isRequired)),
-  numFilter: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string.isRequired)),
+  ftPlanets: PropTypes.arrayOf(PropTypes.object).isRequired,
+  numFilters: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string.isRequired)),
 };
 
 export default Table;

@@ -246,12 +246,54 @@ describe('3 - Sua página deve ter um filtro para valores numéricos', () => {
     fireEvent.change(comparisonFilter, {target: { value: "igual a" }});
     fireEvent.change(valueFilter, {target: { value: '200000' }})
     fireEvent.click(buttonFilter);
+    
+  const removeFilter = async () => {
+    const filters = await screen.findAllByTestId(REMOVE_FILTER_SELECTOR);
+    fireEvent.click(filters[0].querySelector('button'));
+  };
 
-    const tableRows = await findAllByRole('row')
+  it('adiciona e remove um filtro', async () => {
+    await act(async () => {
+      render(<App />);
+    });
+    expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(11);
 
-    expect(tableRows).toHaveLength(2);
-    expect(await findByText('Tatooine')).toBeInTheDocument();
-  })
+    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'diameter' }});
+    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'maior que' }});
+    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '8900' }});
+    fireEvent.click(await screen.findByTestId(BUTTON_FILTER_SELECTOR));
+    expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(8);
+
+    await removeFilter();
+
+    expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(11);
+  });
+
+  it('adiciona e remove dois filtros', async () => {
+    await act(async () => {
+      render(<App />);
+    });
+    expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(11);
+
+    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'diameter' }});
+    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'maior que' }});
+    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '8900' }});
+    fireEvent.click(await screen.findByTestId(BUTTON_FILTER_SELECTOR));
+    expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(8);
+
+    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'population' }});
+    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'menor que' }});
+    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '1000000' }});
+    fireEvent.click(await screen.findByTestId(BUTTON_FILTER_SELECTOR));
+    expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(3);
+
+    await removeFilter();
+
+    await removeFilter();
+
+    expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(11);
+  });
+});
 
   test('should change store filter values', async () => {
     const expectedFilters = [

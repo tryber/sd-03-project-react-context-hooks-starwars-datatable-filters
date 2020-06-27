@@ -14,12 +14,18 @@ const MyProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   const context = { 
-    numericValues, setNumericValues, 
-    nameFilters, setNameFilters, 
-    usedFilters, setUsedFilters,
-    loading, setLoading,
-    data, setData,
-    error, setError,
+    numericValues,
+    setNumericValues,
+    nameFilters,
+    setNameFilters,
+    usedFilters,
+    setUsedFilters,
+    loading,
+    setLoading,
+    data,
+    setData,
+    error,
+    setError,
   };
 
   return <MyContext.Provider value={context}>{children}</MyContext.Provider>;

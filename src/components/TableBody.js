@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const TableBody = (props) => {
-  
     const { planets } = props;
-    return (
-      <tbody>
+  return (
+    <tbody>
       {planets.map((planet) => (
         <tr key={planet.name}>
           <td>{planet.name}</td>
@@ -27,7 +26,7 @@ const TableBody = (props) => {
       ))}
     </tbody>
   );
-}
+};
 
 TableBody.propTypes = {
   planets: PropTypes.arrayOf(PropTypes.object).isRequired,

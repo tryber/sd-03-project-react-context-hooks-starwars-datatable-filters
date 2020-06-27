@@ -11,17 +11,16 @@ const App = () => {
     fetchAPI()
       .then(
         (payload) => {
-          setData(payload.results)
-        }
-      )
-
-  }, [])
+          setData(payload.results);
+        },
+      );
+  }, []);
   return (
     <div className="App">
       <Filters />
       <Table />
     </div>
   );
-}
+};
 
 export default App;

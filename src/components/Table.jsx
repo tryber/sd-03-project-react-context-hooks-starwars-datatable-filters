@@ -10,18 +10,18 @@ const handleFilter = (list, { column, comparison, value }) => {
     case 'igual a': return list.filter(((planet) => Number(planet[column]) === Number(value)));
     default: return list;
   }
-}
+};
 const Table = () => {
-    const { data, nameFilters, numericValues } = useContext(MyContext);
-    let sortedList = data.filter((planet) => planet.name.includes(nameFilters.name));
-    numericValues.forEach((e) => { sortedList = handleFilter(sortedList, e); });
-    console.log(sortedList);
-    return (
+  const { data, nameFilters, numericValues } = useContext(MyContext);
+  let sortedList = data.filter((planet) => planet.name.includes(nameFilters.name));
+  numericValues.forEach((e) => { sortedList = handleFilter(sortedList, e); });
+  console.log(sortedList);
+  return (
     <table>
       <TableHeader />
       <TableBody planets={sortedList} />
     </table>
   );
-}
+};
 
 export default Table;

@@ -12,8 +12,8 @@ const handleFilter = (list, { column, comparison, value }) => {
   }
 };
 const Table = () => {
-  const { data, filters: { filterByName: { name }, filterByNumericValues }, } = useContext(MyContext);
-  let sortedList = data.filter((planet) => planet.name.includes(name));
+  const { data, filters: { filterByName, filterByNumericValues } } = useContext(MyContext);
+  let sortedList = data.filter((planet) => planet.name.includes(filterByName.name));
   filterByNumericValues.forEach((e) => { sortedList = handleFilter(sortedList, e); });
   return (
     <table>

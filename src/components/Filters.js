@@ -12,9 +12,7 @@ const handle = (event, func) => {
 };
 
 const Filters = () => {
-  const {
-    filters, setFilters, usedFilters, setUsedFilters,
-  } = useContext(MyContext);
+  const { filters, setFilters, usedFilters, setUsedFilters, } = useContext(MyContext);
   const [columnSelector, setColumnSelector] = useState('population');
   const [comparisonSelector, setComparisonSelector] = useState('maior que');
   const [valueFilter, setValueFilter] = useState(0);
@@ -24,7 +22,7 @@ const Filters = () => {
       ...filters,
       filterByNumericValues: [
         ...filters.filterByNumericValues,
-        { column: columnSelector, comparison: comparisonSelector, value: valueFilter, }
+        { column: columnSelector, comparison: comparisonSelector, value: valueFilter },
       ],
     });
     setUsedFilters([...usedFilters, columnSelector]);
@@ -36,7 +34,8 @@ const Filters = () => {
       <label htmlFor="name-in">Filtrar por nome</label>
       <input
         id="name-in" data-testid="name-filter"
-        type="text" onChange={(e) => setFilters({...filters, filterByName: { name: e.target.value}})}
+        type="text" 
+        onChange={(e) => setFilters({ ...filters, filterByName: { name: e.target.value } })}
       />
       <select
         data-testid="column-filter"

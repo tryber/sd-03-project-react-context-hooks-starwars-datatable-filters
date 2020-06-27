@@ -1,26 +1,12 @@
-import React, { useEffect, useContext } from 'react';
+import React from 'react';
 import './App.css';
-import Table from './components/Table';
-import Filters from './components/Filters';
-import fetchAPI from './services/fetchAPI';
-import { MyContext } from './context/context';
+import Fix from './Fix';
+import MyProvider from './context/context';
 
-const App = () => {
-  const { setData } = useContext(MyContext);
-  useEffect(() => {
-    fetchAPI()
-      .then(
-        (payload) => {
-          setData(payload.results);
-        },
-      );
-  }, [setData]);
-  return (
-    <div className="App">
-      <Filters />
-      <Table />
-    </div>
-  );
-};
+const App = () => (
+  <MyProvider>
+    <Fix />
+  </MyProvider>
+)
 
 export default App;

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { PlanetsContext } from '../context/PlanetsContext';
 
 const nameFilter = (handler) => (
-  <input type="text" onChange={(e) => handler(e.target.value)} />
+  <input data-testid="name-filter" type="text" onChange={(e) => handler(e.target.value)} />
 );
 
 const comparisonSelector = () => (

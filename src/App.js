@@ -14,7 +14,7 @@ const App = () => {
           setData(payload.results);
         },
       );
-  }, []);
+  }, [setData]);
   return (
     <div className="App">
       <Filters />

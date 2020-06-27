@@ -53,7 +53,7 @@ const numericFilterPanel = (evtHandler, filterByNumericValues) => (
 );
 
 // Estava o numericFilter do state
- function filtersList(numericFilters, rmFilter) {
+function filtersList(numericFilters, rmFilter) {
   return (numericFilters.map((filter) => (
     <div
       key={filter.column}
@@ -66,7 +66,7 @@ const numericFilterPanel = (evtHandler, filterByNumericValues) => (
       X</button>
     </div>
   )));
-};
+}
 
 function SearchBar() {
   const {

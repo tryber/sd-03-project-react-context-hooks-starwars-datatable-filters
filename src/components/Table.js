@@ -18,7 +18,7 @@ function numericFilter(ftPlanets, numFilters) {
   return (numFilters.reduce((acc, {
     column, comparison, value,
   }) => acc.filter((planet) => returnComparator(planet, column, comparison, value)), ftPlanets));
-};
+}
 
 function Table(planets, nameFilter, numFilter) {
   const filteredByName = planets.filter((pl) => (

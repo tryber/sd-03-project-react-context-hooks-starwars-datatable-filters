@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Table from './components/Table';
 import { DataContext } from './context/dataProvider';
 import { FilterContext } from './context/filterProvider';
@@ -15,8 +15,8 @@ function Body() {
   // Hook de ciclo de vida, executa apenas na inicialização do componente
   useEffect(() => {
     fetchPlanets(url)
-      .then((data) => {
-        setData(data);
+      .then((retrieved) => {
+        setData(retrieved);
         setLoading(false);
       })
       .catch((err) => alert(err));
@@ -41,20 +41,22 @@ function Body() {
 }
 
 Body.defaultProps = {
+  planets: [],
   nameFilter: {},
   nextPageURL: '',
   numericFilter: {},
-  planets: [],
+  filterByName: {},
+  filterByNumericValues: [],
 };
 
-Body.propTypes = {
-  // planets: PropTypes.arrayOf(PropTypes.object.isRequired),
-  // loading: PropTypes.bool.isRequired,
-  count: PropTypes.number,
-  // fetchPlanets: PropTypes.func.isRequired,
-  next: PropTypes.string,
-  filterByName: PropTypes.objectOf((PropTypes.string.isRequired)),
-  filterByNumericValues: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string.isRequired)),
-};
+// Body.propTypes = {
+//   planets: PropTypes.arrayOf(PropTypes.object.isRequired),
+//   loading: PropTypes.bool.isRequired,
+//   count: PropTypes.number,
+//   fetchPlanets: PropTypes.func.isRequired,
+//   next: PropTypes.string,
+//   filterByName: PropTypes.objectOf((PropTypes.string.isRequired)),
+//   filterByNumericValues: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string.isRequired)),
+// };
 
 export default Body;

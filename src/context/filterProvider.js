@@ -11,7 +11,7 @@ function FilterProvider({ children }) {
   });
 
   const setNameFilter = (search) => setFilter(
-    { ...filter, filterByName: { name: search }, }
+    { ...filter, filterByName: { name: search } },
     );
 
   const addNumericFilter = (params) => setFilter({
@@ -40,7 +40,7 @@ function FilterProvider({ children }) {
 }
 
 FilterProvider.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export default FilterProvider;

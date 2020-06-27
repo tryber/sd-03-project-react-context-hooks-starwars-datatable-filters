@@ -7,7 +7,7 @@ export const DataContext = createContext(null);
 function DataProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [url, setUrl] = useState('https://swapi-trybe.herokuapp.com/api/planets/')
+  const [url, setUrl] = useState('https://swapi-trybe.herokuapp.com/api/planets/');
   const [error, setError] = useState('');
 
   const dataContext = {
@@ -18,18 +18,18 @@ function DataProvider({ children }) {
     url,
     setUrl,
     error,
-    setError
+    setError,
   };
 
   return (
     <DataContext.Provider value={dataContext}>
       {children}
     </DataContext.Provider>
-  )
-};
+  );
+}
 
 DataProvider.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export default DataProvider;

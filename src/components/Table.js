@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import TableRow from './TableRow';
 
 const returnComparator = (elem, col, comp, val) => {
@@ -16,9 +16,9 @@ const returnComparator = (elem, col, comp, val) => {
 };
 
 const numericFilter = (ftPlanets, numFilters) => {
-  return numFilters.reduce((acc, {
+  return (numFilters.reduce((acc, {
     column, comparison, value,
-  }) => acc.filter((planet) => returnComparator(planet, column, comparison, value)), ftPlanets);
+  }) => acc.filter((planet) => returnComparator(planet, column, comparison, value)), ftPlanets));
 };
 
 function Table(planets, nameFilter, numFilter) {
@@ -56,9 +56,9 @@ Table.defaultProps = {
   numFilters: [],
 };
 
-Table.propTypes = {
-  ftPlanets: PropTypes.arrayOf(PropTypes.object).isRequired,
-  numFilters: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string.isRequired)),
-};
+// Table.propTypes = {
+//   ftPlanets: PropTypes.arrayOf(PropTypes.object).isRequired,
+//   numFilters: PropTypes.arrayOf(PropTypes.object.isRequired),
+// };
 
 export default Table;

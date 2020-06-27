@@ -13,7 +13,7 @@ function App() {
           <header>
             <h2>Projeto Bloco 18</h2>
             <SearchBar />
-            <h2>StarWars Datatable with Filters 'n' Hooks</h2>
+            <h2>StarWars Datatable with Filters and Hooks</h2>
           </header>
           <Body />
         </div>

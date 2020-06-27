@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { FilterContext } from '../context/filterProvider';
 
 const columns = [
@@ -12,9 +12,9 @@ const columns = [
 
 const renderSelectCol = (evtHandler, numericFilter) => (
   <select
-  name="column"
-  data-testid="column-filter"
-  onChange={(evt) => evtHandler(evt)}
+    name="column"
+    data-testid="column-filter"
+    onChange={(evt) => evtHandler(evt)}
   >
     <option key="1" value="" />
     { columns.map((column) => (!numericFilter.find(
@@ -27,10 +27,9 @@ const renderSelectCol = (evtHandler, numericFilter) => (
 
 const renderSelectComp = (evtHandler) => (
   <select
-  name="comparison"
-  data-testid="comparison-filter"
-  onChange={(evt) => evtHandler(evt)}
-  // value={this.state.comparison}
+    name="comparison"
+    data-testid="comparison-filter"
+    onChange={(evt) => evtHandler(evt)}
   >
     <option />
     <option key=">" value="maior que">maior que</option>
@@ -50,14 +49,13 @@ const numericFilterPanel = (evtHandler, filterByNumericValues) => (
       maxLength="15"
       data-testid="value-filter"
       onChange={(evt) => evtHandler(evt)}
-      // value={this.state.value}
-      />
+    />
   </div>
 );
 
 // Estava o numericFilter do state
 const filtersList = (numericFilters, rmFilter) => {
-  return numericFilters.map((filter) => (
+  return (numericFilters.map((filter) => (
     <div
       key={filter.column}
       data-testid="filter"
@@ -68,7 +66,7 @@ const filtersList = (numericFilters, rmFilter) => {
       >
       X</button>
     </div>
-  ));
+  )));
 };
 
 function SearchBar() {
@@ -116,11 +114,11 @@ function SearchBar() {
   );
 }
 
-SearchBar.propTypes = {
-  setNameFilter: PropTypes.func,
-  filterByNumericValues: PropTypes.arrayOf(PropTypes.object),
-  addNumericFilter: PropTypes.func,
-  removeNumericFilter: PropTypes.func,
-};
+// SearchBar.propTypes = {
+//   setNameFilter: PropTypes.func,
+//   filterByNumericValues: PropTypes.arrayOf(PropTypes.object),
+//   addNumericFilter: PropTypes.func,
+//   removeNumericFilter: PropTypes.func,
+// };
 
 export default SearchBar;

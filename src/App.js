@@ -7,6 +7,6 @@ const App = () => (
   <MyProvider>
     <Fix />
   </MyProvider>
-)
+);
 
 export default App;

@@ -12,7 +12,7 @@ const handle = (event, func) => {
 };
 
 const Filters = () => {
-  const { filters, setFilters, usedFilters, setUsedFilters, } = useContext(MyContext);
+  const { filters, setFilters, usedFilters, setUsedFilters } = useContext(MyContext);
   const [columnSelector, setColumnSelector] = useState('population');
   const [comparisonSelector, setComparisonSelector] = useState('maior que');
   const [valueFilter, setValueFilter] = useState(0);
@@ -34,7 +34,7 @@ const Filters = () => {
       <label htmlFor="name-in">Filtrar por nome</label>
       <input
         id="name-in" data-testid="name-filter"
-        type="text" 
+        type="text"
         onChange={(e) => setFilters({ ...filters, filterByName: { name: e.target.value } })}
       />
       <select

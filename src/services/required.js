@@ -6,5 +6,5 @@ export default async function apiPlanets() {
       .then((json) => (response.ok ? Promise.resolve(json) : Promise.reject(json))));
 }
 
-const api = 'https://swapi-trybe.herokuapp.com/api/planets/';
+// const api = 'https://swapi-trybe.herokuapp.com/api/planets/';
 

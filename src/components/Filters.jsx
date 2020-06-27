@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
+// import React, { createContext, useState, useEffect, useContext } from 'react';
 // import { bindActionCreators } from 'redux';
 // import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
@@ -13,9 +13,9 @@ import FilterName from './FilterName';
 import FilterValues from './FilterValues';
 import FilterOrder from './FilterOrder';
 import RemoveFilter from './RemoveFilter';
-//import StarWarsContext from '../context/StarWarsContext';
-//import updateColumn from './updateColumn';
-//import { getRadios, getColumns, getComparation } from './getSelects';
+// import StarWarsContext from '../context/StarWarsContext';
+// import updateColumn from './updateColumn';
+// import { getRadios, getColumns, getComparation } from './getSelects';
 
 
 function Filters() {

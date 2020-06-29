@@ -288,11 +288,6 @@ describe('Cada filtro de valores numéricos deve ter um ícone de `X` que, ao se
   beforeAll(mockFetch);
   beforeEach(cleanup);
 
-  const removeFilter = async () => {
-    const filters = await screen.findAllByTestId(REMOVE_FILTER_SELECTOR);
-    fireEvent.click(filters[0].querySelector('button'));
-  };
-
   it('adiciona e remove um filtro', async () => {
     await act(async () => {
       render(<App />);
@@ -305,8 +300,10 @@ describe('Cada filtro de valores numéricos deve ter um ícone de `X` que, ao se
     fireEvent.click(await screen.findByTestId(BUTTON_FILTER_SELECTOR));
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(8);
 
-    await removeFilter();
-
+    const filters = await screen.getAllByTestId(REMOVE_FILTER_SELECTOR);
+    filters.map(filter => {
+      fireEvent.click(filter.querySelector('button'));
+    });
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(11);
   });
 
@@ -328,10 +325,10 @@ describe('Cada filtro de valores numéricos deve ter um ícone de `X` que, ao se
     fireEvent.click(await screen.findByTestId(BUTTON_FILTER_SELECTOR));
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(3);
 
-    await removeFilter();
-
-    await removeFilter();
-
+    const filters = await screen.getAllByTestId(REMOVE_FILTER_SELECTOR);
+    filters.map(filter => {
+      fireEvent.click(filter.querySelector('button'));
+    });
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(11);
   });
 });

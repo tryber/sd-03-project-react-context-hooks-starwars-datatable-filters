@@ -52,7 +52,7 @@ const RenderValue = (setFunc, val) => (
       data-testid="value-filter"
       id="value-filter"
       onChange={({ target: { value } }) => setFunc(value)}
-      type="text"
+      type="number"
       value={val}
     />
   </label>
@@ -82,8 +82,8 @@ const RenderActiveFilters = (activeFilters, func, func2) => (
         <p>{`${column} ${comparison} ${value}`}</p>
         <button
           onClick={() => {
-            func2({ column, comparison, value });
             func(column);
+            func2({ column, comparison, value });
           }}
           type="button"
         >

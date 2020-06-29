@@ -16,8 +16,25 @@ const filters = {
   ],
 };
 
+const handleNumericFilter = (search, helper, activeFilter, setActiveFIlter) => {
+  if (helper === 'add') {
+    setActiveFIlter({
+      ...activeFilter,
+      filterByNumericValues: [...activeFilter.filterByNumericValues, search],
+    });
+  }
+  if (helper === 'remove') {
+    setActiveFIlter({
+      ...activeFilter,
+      filterByNumericValues: activeFilter.filterByNumericValues
+        .filter((elem) => elem.column !== search.column),
+    });
+  }
+};
+
 function Provider({ children }) {
   const [activeFilter, setActiveFIlter] = useState(filters);
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({ results: [] });
 
@@ -26,19 +43,7 @@ function Provider({ children }) {
   };
 
   const changeFilterNumeric = (search, helper) => {
-    if (helper === 'add') {
-      setActiveFIlter({
-        ...activeFilter,
-        filterByNumericValues: [...activeFilter.filterByNumericValues, search],
-      });
-    }
-    if (helper === 'remove') {
-      setActiveFIlter({
-        ...activeFilter,
-        filterByNumericValues: activeFilter.filterByNumericValues
-          .filter((elem) => elem.column !== search.column),
-      });
-    }
+    handleNumericFilter(search, helper, activeFilter, setActiveFIlter);
   };
 
   const APISuccess = (elem) => {
@@ -46,15 +51,22 @@ function Provider({ children }) {
     setLoading(false);
   };
 
+  const APIFailure = (elem) => {
+    setError(elem.message);
+    setLoading(false);
+  };
+
   const callAPI = () => {
     if (loading) return;
     setLoading(true);
-    RootAPI().then((elem) => APISuccess(elem));
+    RootAPI().then((elem) => APISuccess(elem), (wrong) => APIFailure(wrong));
   };
 
   const contextSearch = {
     activeFilter,
     setActiveFIlter,
+    error,
+    setError,
     loading,
     setLoading,
     data,

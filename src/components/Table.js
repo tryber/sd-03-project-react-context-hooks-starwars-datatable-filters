@@ -4,6 +4,7 @@ import TableBody from './TableBody';
 import SearchImputs from './SearchImputs';
 import NavigationBar from './NavigationBar';
 import contextAPI from '../context/contextAPI';
+import Remover from './Remover';
 
 function comparasionChosed(column, comparison, value, planet) {
   switch (comparison) {
@@ -20,15 +21,15 @@ function comparasionChosed(column, comparison, value, planet) {
 
 const planetFilter = (data, textSearch) => {
   if (textSearch !== undefined) {
-    return data.filter(({ name }) => name.toLowerCase().includes(textSearch.toLowerCase()));
+    return data.results.filter(({ name }) => name.toLowerCase().includes(textSearch.toLowerCase()));
   }
   return data;
 };
 
 const selectedFilters = (data, numberSearch, textSearch) => {
-  if (numberSearch) {
+  if (numberSearch.column === '') {
     return numberSearch.reduce((acc, { column, comparison, value }) => acc
-      .filter((planet) => comparasionChosed(column, comparison, value, planet)),
+      .results.filter((planet) => comparasionChosed(column, comparison, value, planet)),
     planetFilter(data, textSearch));
   }
   return planetFilter(data, textSearch);
@@ -53,7 +54,7 @@ function Table() {
       <div>
         <SearchImputs />
         <NavigationBar />
-        {/* <Remover /> */}
+        <Remover />
       </div>
       <div>
         <table>

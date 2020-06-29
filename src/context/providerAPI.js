@@ -20,7 +20,7 @@ function Provider({ children }) {
   const [activeFilter, setActiveFIlter] = useState(filters);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState();
+  const [data, setData] = useState({ results: [] });
 
   const changeFilterName = (search) => {
     setActiveFIlter({ ...activeFilter, filterByName: { name: search } });
@@ -55,7 +55,7 @@ function Provider({ children }) {
   const callAPI = () => {
     if (loading) return;
     setLoading(true);
-    RootAPI().then(APISuccess, APIFailure);
+    RootAPI().then((elem) => APISuccess(elem), (wrong) => APIFailure(wrong));
   };
 
   const contextSearch = {

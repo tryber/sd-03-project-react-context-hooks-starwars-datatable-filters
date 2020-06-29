@@ -18,7 +18,6 @@ const filters = {
 
 function Provider({ children }) {
   const [activeFilter, setActiveFIlter] = useState(filters);
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({ results: [] });
 
@@ -47,22 +46,15 @@ function Provider({ children }) {
     setLoading(false);
   };
 
-  const APIFailure = (elem) => {
-    setError(elem.message);
-    setLoading(false);
-  };
-
   const callAPI = () => {
     if (loading) return;
     setLoading(true);
-    RootAPI().then((elem) => APISuccess(elem), (wrong) => APIFailure(wrong));
+    RootAPI().then((elem) => APISuccess(elem));
   };
 
   const contextSearch = {
     activeFilter,
     setActiveFIlter,
-    error,
-    setError,
     loading,
     setLoading,
     data,

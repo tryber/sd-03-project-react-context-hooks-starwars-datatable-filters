@@ -4,24 +4,22 @@ import contextAPI from '../context/contextAPI';
 function Remove() {
   const { activeFilter, changeFilterNumeric } = useContext(contextAPI);
 
-  const display = (list) => {
-    return (
-      <p
-        key={list.column}
-        data-testid="filter"
+  const display = (list) => (
+    <p
+      key={list.column}
+      data-testid="filter"
+    >
+      <span>{list.column}</span>
+      <span>{list.comparison}</span>
+      <span>{list.value}</span>
+      <button
+        type="button"
+        onClick={() => changeFilterNumeric(list, 'remove')}
       >
-        <span>{list.column}</span>
-        <span>{list.comparison}</span>
-        <span>{list.value}</span>
-        <button
-          type="button"
-          onClick={() => changeFilterNumeric(list, 'remove')}
-        >
-          X
-        </button>
-      </p>
-    );
-  };
+        X
+      </button>
+    </p>
+  );
 
   const infoFilters = activeFilter.filterByNumericValues.filter((elem) => elem.column !== '');
   return (

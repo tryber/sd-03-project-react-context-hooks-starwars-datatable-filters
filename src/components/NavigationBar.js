@@ -9,36 +9,34 @@ function columnFilter(filterValue, option) {
   return !filterValue.find(({ column }) => column === option);
 }
 
-const sideBar = (handleChange) => {
-  return (
-    <header>
-      <nav>
-        <select
-          data-testid="column-filter"
-          onChange={(elem) => handleChange('column', elem.target.value)}
-        >
-          <option value="" />
-          {columns.map((column) => (columnFilter(columns, column)
-            && (<option key={column}>{column}</option>)
-          ))}
-        </select>
-        <select
-          data-testid="comparison-filter"
-          onChange={(elem) => handleChange('comparison', elem.target.value)}
-        >
-          {comparisons.map((comparison) => (
-            <option key={comparison}>{comparison}</option>
-          ))}
-        </select>
-        <input
-          type="number"
-          data-testid="value-filter"
-          onChange={(elem) => handleChange('value', elem.target.value)}
-        />
-      </nav>
-    </header>
-  );
-};
+const sideBar = (handleChange) => (
+  <header>
+    <nav>
+      <select
+        data-testid="column-filter"
+        onChange={(elem) => handleChange('column', elem.target.value)}
+      >
+        <option value="" />
+        {columns.map((column) => (columnFilter(columns, column)
+          && (<option key={column}>{column}</option>)
+        ))}
+      </select>
+      <select
+        data-testid="comparison-filter"
+        onChange={(elem) => handleChange('comparison', elem.target.value)}
+      >
+        {comparisons.map((comparison) => (
+          <option key={comparison}>{comparison}</option>
+        ))}
+      </select>
+      <input
+        type="number"
+        data-testid="value-filter"
+        onChange={(elem) => handleChange('value', elem.target.value)}
+      />
+    </nav>
+  </header>
+);
 
 function NavigationBar() {
   const { changeFilterNumeric } = useContext(contextAPI);

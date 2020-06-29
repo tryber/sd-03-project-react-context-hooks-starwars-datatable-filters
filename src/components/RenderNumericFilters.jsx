@@ -1,34 +1,51 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { StarWarsContext } from '../context/StarWarsContext';
 
-const RenderColumn = (Val, setFunc) => (
+const columns = [
+  'population',
+  'orbital_period',
+  'diameter',
+  'rotation_period',
+  'surface_water',
+];
+
+const comparisons = [
+  'maior que',
+  'igual a',
+  'menor que',
+];
+
+const RenderColumn = (columnSelect, setFunc, val) => (
   <label htmlFor="column-filter">
     Coluna:&nbsp;
     <select
       data-testid="column-filter"
       id="column-filter"
       onChange={({ target: { value } }) => setFunc(value)}
+      value={val}
     >
-      <option value="" />
-      {columnFilter.map((item) => <option key={item} value={item}>{item}</option>)}
+      <option value="">Choose a column</option>
+      {columnSelect.map((item) => <option key={item} value={item}>{item}</option>)}
     </select>
   </label>
 );
 
-const RenderComparison = (val, setFunc) => (
+const RenderComparison = (setFunc, val) => (
   <label htmlFor="comparison-filter">
     &nbsp;Comparação:&nbsp;
     <select
       id="comparison-filter"
       data-testid="comparison-filter"
       onChange={({ target: { value } }) => setFunc(value)}
+      value={val}
     >
-      <option value="" />
-      {comparisonFilter.map((item) => <option key={item} value={item}>{item}</option>)}
+      <option value="">Choose a comparison</option>
+      {comparisons.map((item) => <option key={item} value={item}>{item}</option>)}
     </select>
   </label>
 );
 
-const RenderValue = (val, setFunc) => (
+const RenderValue = (setFunc, val) => (
   <label htmlFor="value-filter">
     &nbsp;Valor:&nbsp;
     <input
@@ -36,19 +53,43 @@ const RenderValue = (val, setFunc) => (
       id="value-filter"
       onChange={({ target: { value } }) => setFunc(value)}
       type="text"
+      value={val}
     />
   </label>
 );
 
+const RenderButton = (func, func2, { column, comparison, value }) => (
+  <button
+    data-testid="button-filter"
+    disabled={column === '' || comparison === '' || value === 0}
+    onClick={() => { func({ column, comparison, value }); func2(column); }}
+    type="button"
+  >
+    Submit filter
+  </button>
+);
+
 const RenderNumericFilters = () => {
   const [column, setColumn] = useState('');
+  const [columnSelect, setColumnSelect] = useState(columns);
   const [comparison, setComparison] = useState('');
   const [value, setValue] = useState(0);
+
+  const { filterData: { setFilterByNumericValues } } = useContext(StarWarsContext);
+  const filterSelect = (col) => setColumnSelect(columnSelect.filter((select) => select !== col));
+
   return (
     <div>
-      {RenderColumn(column, setColumn)}
-      {RenderComparison(comparison, setComparison)}
-      {RenderValue(value, setValue)}
+      {RenderColumn(columnSelect, setColumn, column)}
+      {RenderComparison(setComparison, comparison)}
+      {RenderValue(setValue, value)}
+      {RenderButton(
+        setFilterByNumericValues,
+        filterSelect,
+        { column, comparison, value },
+      )}
     </div>
   );
 };
+
+export default RenderNumericFilters;

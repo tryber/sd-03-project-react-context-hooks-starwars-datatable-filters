@@ -69,14 +69,42 @@ const RenderButton = (func, func2, { column, comparison, value }) => (
   </button>
 );
 
+const RenderSomeText = (activeFilters, func, func2) => (
+  <div>
+    {activeFilters.map(({ column, comparison, value }) => (
+      <div
+        data-testid="filter"
+        key={column}
+      >
+        <p>{`${column} ${comparison} ${value}`}</p>
+        <button
+          onClick={() => { func(column); func2({ column, comparison, value }); }}
+          type="button"
+        >
+          X
+        </button>
+      </div>
+    ))}
+  </div>
+);
+
 const RenderNumericFilters = () => {
   const [column, setColumn] = useState('');
   const [columnSelect, setColumnSelect] = useState(columns);
   const [comparison, setComparison] = useState('');
   const [value, setValue] = useState(0);
 
-  const { filterData: { setFilterByNumericValues } } = useContext(StarWarsContext);
+  const {
+    filterData: {
+      filters: {
+        filterByNumericValues,
+      },
+      setFilterByNumericValues,
+      setRemoveFilters,
+    },
+  } = useContext(StarWarsContext);
   const filterSelect = (col) => setColumnSelect(columnSelect.filter((select) => select !== col));
+  const addSelect = (col) => setColumnSelect([...columnSelect, col]);
 
   return (
     <div>
@@ -87,6 +115,12 @@ const RenderNumericFilters = () => {
         setFilterByNumericValues,
         filterSelect,
         { column, comparison, value },
+      )}
+      {filterByNumericValues.length > 0
+      && RenderSomeText(
+        filterByNumericValues,
+        addSelect,
+        setRemoveFilters,
       )}
     </div>
   );

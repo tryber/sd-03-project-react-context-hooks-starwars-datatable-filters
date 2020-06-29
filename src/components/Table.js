@@ -23,13 +23,13 @@ const planetFilter = (data, textSearch) => {
   if (textSearch !== undefined) {
     return data.results.filter(({ name }) => name.toLowerCase().includes(textSearch.toLowerCase()));
   }
-  return data;
+  return data.results;
 };
 
 const selectedFilters = (data, numberSearch, textSearch) => {
-  if (numberSearch.column) {
+  if (numberSearch) {
     return numberSearch.reduce((acc, { column, comparison, value }) => acc
-      .results.filter((planet) => comparasionChosed(column, comparison, value, planet)),
+      .filter((planet) => comparasionChosed(column, comparison, value, planet)),
     planetFilter(data, textSearch));
   }
   return planetFilter(data, textSearch);

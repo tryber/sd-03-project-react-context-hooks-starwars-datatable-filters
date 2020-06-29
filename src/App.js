@@ -19,7 +19,6 @@ function App() {
 
 export default App;
 
-
 // first we will make a new context
 // const MyContext = createContext();
 

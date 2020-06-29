@@ -23,7 +23,7 @@ const useFilterHandler = () => {
   const setRemoveFilters = (value) => setFilters({
     ...filters,
     filterByNumericValues: [
-      ...filters.filterByNumericValues.filter((filter) => filter !== value),
+      ...filters.filterByNumericValues.filter((filter) => filter.column !== value.column),
     ],
   });
 

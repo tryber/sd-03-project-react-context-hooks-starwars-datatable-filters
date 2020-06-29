@@ -27,7 +27,7 @@ const planetFilter = (data, textSearch) => {
 };
 
 const selectedFilters = (data, numberSearch, textSearch) => {
-  if (numberSearch.column === '') {
+  if (numberSearch.column) {
     return numberSearch.reduce((acc, { column, comparison, value }) => acc
       .results.filter((planet) => comparasionChosed(column, comparison, value, planet)),
     planetFilter(data, textSearch));

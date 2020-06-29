@@ -19,7 +19,7 @@ const filters = {
 function Provider({ children }) {
   const [activeFilter, setActiveFIlter] = useState(filters);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
 
   const changeFilterName = (search) => {

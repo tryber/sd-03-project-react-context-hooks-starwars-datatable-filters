@@ -1,7 +1,7 @@
 import React from 'react';
 import Table from './components/Table';
 
-import Provider from './Context/APIProvider';
+import Provider from './context/providerAPI';
 
 class App extends React.Component {
   render() {

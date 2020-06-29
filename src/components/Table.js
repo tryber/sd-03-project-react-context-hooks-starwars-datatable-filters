@@ -19,7 +19,7 @@ function comparasionChosed(column, comparison, value, planet) {
 }
 
 const planetFilter = (data, textSearch) => {
-  if (textSearch !== '') {
+  if (textSearch !== undefined) {
     return data.filter(({ name }) => name.toLowerCase().includes(textSearch.toLowerCase()));
   }
   return data;

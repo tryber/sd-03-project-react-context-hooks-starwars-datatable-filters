@@ -1,15 +1,16 @@
 import React from 'react';
-import Home from './components/Home';
+import { PlanetTableProvider as Provider } from './context';
+import Home from './pages/Home';
+import { Header } from './components';
 import './App.css';
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className="App">
-        <Home />
-      </div>
-    );
-  }
-}
+const App = () => (
+  <Provider>
+    <div className="App">
+      <Header />
+      <Home />
+    </div>
+  </Provider>
+);
 
 export default App;

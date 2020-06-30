@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { StarWarsContext } from '../Hooks/starWarsContext';
+import { StarWarsContext } from './StarWarsContext';
 
 function FilterList() {
   const {

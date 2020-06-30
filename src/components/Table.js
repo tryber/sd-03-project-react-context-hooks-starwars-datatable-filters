@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { StarWarsContext } from '../Hooks/starWarsContext';
+import { StarWarsContext } from './StarWarsContext';
 import PlanetLine from './PlanetLine';
 import TableHeader from './TableHeader';
 

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import NameFilter from './NameFilter';
 import FilterList from './FilterList';
-import { StarWarsContext } from '../Hooks/starWarsContext';
+import { StarWarsContext } from './StarWarsContext';
 
 function SearchBar() {
   const [selColumn, setselColumn] = useState('');

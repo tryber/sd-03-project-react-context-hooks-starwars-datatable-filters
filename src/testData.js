@@ -1,4 +1,4 @@
-const reponse = {
+const response = {
   count: 60,
   next: 'https://swapi-trybe.herokuapp.com/api/planets/?page=2',
   previous: null,
@@ -70,7 +70,9 @@ const reponse = {
       surface_water: '8',
       population: '1000',
       residents: [],
-      films: ['https://swapi-trybe.herokuapp.com/api/films/1/'],
+      films: [
+        'https://swapi-trybe.herokuapp.com/api/films/1/',
+      ],
       created: '2014-12-10T11:37:19.144000Z',
       edited: '2014-12-20T20:58:18.421000Z',
       url: 'https://swapi-trybe.herokuapp.com/api/planets/3/',
@@ -86,7 +88,9 @@ const reponse = {
       surface_water: '100',
       population: 'unknown',
       residents: [],
-      films: ['https://swapi-trybe.herokuapp.com/api/films/2/'],
+      films: [
+        'https://swapi-trybe.herokuapp.com/api/films/2/',
+      ],
       created: '2014-12-10T11:39:13.934000Z',
       edited: '2014-12-20T20:58:18.423000Z',
       url: 'https://swapi-trybe.herokuapp.com/api/planets/4/',
@@ -121,8 +125,12 @@ const reponse = {
       terrain: 'gas giant',
       surface_water: '0',
       population: '6000000',
-      residents: ['https://swapi-trybe.herokuapp.com/api/people/26/'],
-      films: ['https://swapi-trybe.herokuapp.com/api/films/2/'],
+      residents: [
+        'https://swapi-trybe.herokuapp.com/api/people/26/',
+      ],
+      films: [
+        'https://swapi-trybe.herokuapp.com/api/films/2/',
+      ],
       created: '2014-12-10T11:43:55.240000Z',
       edited: '2014-12-20T20:58:18.427000Z',
       url: 'https://swapi-trybe.herokuapp.com/api/planets/6/',
@@ -137,8 +145,12 @@ const reponse = {
       terrain: 'forests, mountains, lakes',
       surface_water: '8',
       population: '30000000',
-      residents: ['https://swapi-trybe.herokuapp.com/api/people/30/'],
-      films: ['https://swapi-trybe.herokuapp.com/api/films/3/'],
+      residents: [
+        'https://swapi-trybe.herokuapp.com/api/people/30/',
+      ],
+      films: [
+        'https://swapi-trybe.herokuapp.com/api/films/3/',
+      ],
       created: '2014-12-10T11:50:29.349000Z',
       edited: '2014-12-20T20:58:18.429000Z',
       url: 'https://swapi-trybe.herokuapp.com/api/planets/7/',
@@ -216,7 +228,9 @@ const reponse = {
         'https://swapi-trybe.herokuapp.com/api/people/72/',
         'https://swapi-trybe.herokuapp.com/api/people/73/',
       ],
-      films: ['https://swapi-trybe.herokuapp.com/api/films/5/'],
+      films: [
+        'https://swapi-trybe.herokuapp.com/api/films/5/',
+      ],
       created: '2014-12-10T12:45:06.577000Z',
       edited: '2014-12-20T20:58:18.434000Z',
       url: 'https://swapi-trybe.herokuapp.com/api/planets/10/',
@@ -224,4 +238,4 @@ const reponse = {
   ],
 };
 
-module.exports = reponse;
+module.exports = response;

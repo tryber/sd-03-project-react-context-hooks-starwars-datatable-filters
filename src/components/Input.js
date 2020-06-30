@@ -28,7 +28,6 @@ const getColumns = (columnSort, onColumnChange) => {
 };
 
 function Input() {
-
   const [text, setText] = useState('');
   const [columnSort, setColumnSort] = useState('Name');
   const [inputSort, setInputSort] = useState('ASC');
@@ -39,10 +38,10 @@ function Input() {
     setText(event.target.value);
     filterByName(event.target.value);
   };
-  
+
   const onInputChange = (event) => setInputSort(event.target.value);
   const onColumnChange = (event) => setColumnSort(event.target.value);
-  
+
   return (
     <div>
       <input
@@ -64,7 +63,6 @@ function Input() {
         </button>
     </div>
   );
-
 }
 
 export default Input;

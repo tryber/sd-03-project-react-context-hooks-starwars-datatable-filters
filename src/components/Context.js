@@ -1,5 +1,7 @@
 import React, { createContext, useState } from 'react';
+import PropTypes from 'prop-types';
 import apiPlanets from '../services/api';
+
 const StarContext = createContext();
 
 const StarProvider = ({ children }) => {
@@ -87,7 +89,10 @@ const StarProvider = ({ children }) => {
       {children}
     </StarContext.Provider>
   );
-}
+};
 
+StarProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export { StarContext, StarProvider as Provider };

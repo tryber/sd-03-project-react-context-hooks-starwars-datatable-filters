@@ -1,4 +1,4 @@
-const reponse = {
+/* const reponse = {
   'count': 60,
   'next': 'https://swapi-trybe.herokuapp.com/api/planets/?page=2',
   'previous': null,
@@ -239,3 +239,4 @@ const reponse = {
 }
 
 module.exports = reponse;
+ */

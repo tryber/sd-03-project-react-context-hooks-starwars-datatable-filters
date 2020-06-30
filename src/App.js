@@ -1,10 +1,12 @@
 import React from 'react';
+import { Provider } from './components/Context';
+import Home from './components/Home';
 
 function App() {
   return (
-    <div className="App">
-      <p>/Sim</p>
-    </div>
+    <Provider>
+      <Home />
+    </Provider>
   );
 }
 

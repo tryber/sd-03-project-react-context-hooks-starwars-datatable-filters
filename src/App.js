@@ -1,16 +1,13 @@
 import React from 'react';
-import { PlanetTableProvider as Provider } from './context';
-import Home from './pages/Home';
-import { Header } from './components';
-import './App.css';
+import Inicio from './pages/Inicio';
+import StarWarsProvider from './context/StarWarsProvider';
 
-const App = () => (
-  <Provider>
-    <div className="App">
-      <Header />
-      <Home />
-    </div>
-  </Provider>
-);
+function App() {
+  return (
+    <StarWarsProvider>
+      <Inicio />
+    </StarWarsProvider>
+  );
+}
 
 export default App;

@@ -331,7 +331,6 @@ describe('Cada filtro de valores numéricos deve ter um ícone de `X` que, ao se
     await removeFilter();
 
     await removeFilter();
-
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(11);
   });
 });

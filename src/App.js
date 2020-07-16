@@ -2,12 +2,18 @@ import React, { useContext, useEffect, useState } from 'react';
 import ProviderStarWars from './context/providerStarWars';
 import Table from './components/Table';
 import InputFilter from './components/InputFilter';
+import FilterNumeric from './components/FilterNumeric';
+import OrderComponent from './components/OrderComponent';
+import TagNumericFilters from './components/TagNumericFilters';
 
 function App() {
 
   return (
   <ProviderStarWars>
       <InputFilter />
+      <FilterNumeric/>
+      <TagNumericFilters />
+      <OrderComponent />
       <Table />    
   </ProviderStarWars>   
   

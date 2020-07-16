@@ -9,10 +9,9 @@ function InputFilter() {
     const { filter } = props;
     filter(event.target.value);
   }
-  
+
   return (
     <div>
-    placeholder inpultfilter
     <input
       id="filter_name"
       placeholder="Filtro por nome de Planeta"

@@ -1,3 +1,58 @@
+import React, { useContext, useEffect, useState } from 'react';
+import ContextStarWars from '../context/contextStarWars';
+
+function FilterNumeric(props) {
+/* 
+  function translateStateToArray(state) {
+  
+    const finalArray = [];
+      state.map((option) => finalArray.push(option.column));
+    return finalArray; 
+  } */
+/* 
+  function filterOptions() {
+    const {filterByNumericValues  } = useContext(ContextStarWars);
+    const  numericValues  = filterByNumericValues;
+    const optionList = ['Selecione uma Opção', 'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
+    const arrayColumState = translateStateToArray(numericValues);
+    const filteredOptions = optionList.filter((option) => !arrayColumState.includes(option));
+    return filteredOptions;
+  } */
+  /* const optionListToRender = filterOptions(); */
+  const optionList = ['Selecione uma Opção', 'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
+  return (
+    <div>
+       <div>
+        <select data-testid="column-filter" id="filter">
+          {optionList.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+        <select data-testid="comparison-filter" id="comparation">
+          <option value=" ">Selecione Uma Opção </option>
+          <option value="maior que">maior que</option>
+          <option value="menor que">menor que</option>
+          <option value="igual a">igual a</option>
+        </select>
+
+         <input type="number" placeholder="numeros" id="input-value" data-testid="value-filter" />
+        <button
+          type="button"
+          onClick={(e) => this.filterNumbers(e)}
+          data-testid="button-filter"
+        >
+        Filtrar
+        </button> 
+      </div>
+    </div>
+  )
+}
+
+export default FilterNumeric
+
+
 /* import React, { Component } from 'react';
  import PropTypes from 'prop-types';
 import { connect } from 'react-redux'; 
@@ -48,13 +103,13 @@ export class FilterNumeric extends Component {
     const optionListToRender = this.filterOptions();
     return (
       <div>
-     {    <select data-testid="column-filter" id="filter">
+        <select data-testid="column-filter" id="filter">
           {optionListToRender.map((option) => (
             <option key={option} value={option}>
               {option}
             </option>
           ))}
-        </select> }
+        </select>
         placeholder FilterNumeric
         <select data-testid="comparison-filter" id="comparation">
           <option value=" ">Selecione Uma Opção </option>
@@ -63,14 +118,14 @@ export class FilterNumeric extends Component {
           <option value="igual a">igual a</option>
         </select>
 
-        { <input type="number" placeholder="numeros" id="input-value" data-testid="value-filter" />
+         <input type="number" placeholder="numeros" id="input-value" data-testid="value-filter" />
         <button
           type="button"
           onClick={(e) => this.filterNumbers(e)}
           data-testid="button-filter"
         >
         Filtrar
-        </button> }
+        </button> 
       </div>
     );
   }

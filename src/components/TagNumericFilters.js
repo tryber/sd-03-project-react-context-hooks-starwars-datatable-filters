@@ -4,9 +4,23 @@ import { removeNumericFilter } from '../action/index';
 
 
 function TagNumericFilters() {
+  const  filters = [{column: 'test1'}]
   return (
     <div>
-      
+      {filters.map((element) => (
+        <div data-testid="filter" key={element.column}>
+          {element.column}
+          <button
+            name={element.column}
+            data-testid="filter"
+            onClick={(event) => removeFilter(event.target.name)}
+            type="button"
+          >
+                x
+          </button> 
+        </div>
+      )
+      ) }
     </div>
   )
 }

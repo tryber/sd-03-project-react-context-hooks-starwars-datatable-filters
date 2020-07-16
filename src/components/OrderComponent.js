@@ -1,3 +1,77 @@
+import React from 'react'
+
+function OrderComponent() {
+  
+  function changeOrder() {
+    const { orderer } = this.props;
+    const { column, sort } = this.state;
+
+    orderer(column, sort);
+  }
+ 
+
+ function  renderRadioButton() {
+    return (
+      <div 
+       // onChange={changeRadioValue}
+       >
+        <input
+          type="radio"
+          id="ASC"
+          name="order"
+          value="ASC"
+          data-testid="column-sort-input"
+        />
+        <label htmlFor="ASC">ASC</label>
+        <input
+          type="radio"
+          id="DESC"
+          name="order"
+          value="DESC"
+          data-testid="column-sort-input"
+        />
+        <label htmlFor="DESC">DESC</label>
+      </div>
+    );
+  }
+
+ function renderComponent(options) {
+    return (
+      <fieldset>
+        <label htmlFor="seletion">
+          Column Select
+        </label>
+        <select
+         // onChange={(event) => changeSelectValue(event)}
+          name="seletion"
+          data-testid="column-sort"
+        >
+          {options.map((element) => (<option>{element}</option>))}
+        </select>
+
+        {renderRadioButton()}
+        <button
+          type="button"
+          data-testid="column-sort-button"
+         // onClick={() => changeOrder()}
+        >
+               set order
+        </button>
+
+      </fieldset>
+    );
+  } 
+  const options = ['Name', 'rotation_period', 'orbital_period', 'diameter', 'climate'];
+  return (
+    <div>
+    { renderComponent(options) }
+   </div>
+  )
+}
+
+export default OrderComponent
+
+
 /* import React from 'react';
  import Proptypes from 'prop-types';
 import { connect } from 'react-redux'; 

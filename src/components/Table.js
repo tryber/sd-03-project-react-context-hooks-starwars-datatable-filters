@@ -1,8 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import ContextStarWars from '../context/contextStarWars';
+import OrderColumn from '../helpers/functions';
 
 function Table() {
-  const {data, requestFetch} = useContext(ContextStarWars);
+  const {data, requestFetch,
+    filters: {
+      filterByName: { name },
+      filterByNumericValues: numericValues,
+      order: { sort, column: columnSort },
+    },
+  }  = useContext(ContextStarWars);
   useEffect(() => {
     requestFetch();
   }, []);
@@ -26,7 +33,9 @@ function Table() {
       </tr>
     );
   }
-
+  const planets = OrderColumn(data,
+    name,
+    numericValues, columnSort);
   const headers = ['name', 'rotation_period', 'orbital_period', 'diameter', 'climate', 'gravity', 'terrain', 'surface_water', 'population', 'films', 'created', 'edited', 'url'];
     return (
     <div>
@@ -38,8 +47,8 @@ function Table() {
             </tr>
           </thead>
           <tbody>
-            {data !== undefined
-              ? data.map((element) => (
+            {planets !== undefined
+              ? planets.map((element) => (
                 renderizaTableBody(element)))
               : <h1>Placeholder Table </h1> }
           </tbody>

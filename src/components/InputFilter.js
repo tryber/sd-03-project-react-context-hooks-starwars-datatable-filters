@@ -3,11 +3,10 @@ import ContextStarWars from '../context/contextStarWars';
 
 function InputFilter() {
   const [text, setText] = useState('');
-  const { filterByName } = useContext(ContextStarWars);
+  const { SetfilterByName } = useContext(ContextStarWars);
  
   function filterByNameInput(event) {
-    const { filter } = props;
-    filter(event.target.value);
+    SetfilterByName(event.target.value);
   }
 
   return (

@@ -36,12 +36,23 @@ const ProviderStarWars = ({ children }) => {
       (erro) => failurePlanets(erro),
     );
   };
+  
+  const SetfilterByName = (name) => (
+    setFilters((state) => ({
+      ...state,
+      filterByName: { name },
+    }))   
+  );
+
+    
 
   const context = {
     data,
     isFetching,
     error,
-    requestFetch,  
+    requestFetch,
+    SetfilterByName,
+    filters,  
   };
 
   return (

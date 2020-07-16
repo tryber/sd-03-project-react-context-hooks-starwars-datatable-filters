@@ -2,7 +2,28 @@ import React, { useContext, useEffect, useState } from 'react';
 import ContextStarWars from '../context/contextStarWars';
 
 function FilterNumeric(props) {
-/* 
+  const { SetfilterByNumericValues } = useContext(ContextStarWars);
+
+  function filterNumbers() {
+   //  const { filterNumber } = this.props;
+    const textInput = document.getElementById('filter_name');
+  const column = document.getElementById('filter');
+  const comparation = document.getElementById('comparation');
+  const value = document.getElementById('input-value');
+  if (column.selectedIndex > 0 && comparation.selectedIndex > 0 && value.value !== '') {
+    const SelectionColumn = column.options[column.selectedIndex].value;
+
+    const selectioncomparation = comparation.options[comparation.selectedIndex].value;
+
+    const selectionValue = value.value;
+
+    SetfilterByNumericValues(SelectionColumn, selectioncomparation, selectionValue);
+  } else {
+    alert('Preencha Todos os campos para filtrar !');
+  } 
+}
+
+  /* 
   function translateStateToArray(state) {
   
     const finalArray = [];
@@ -40,7 +61,7 @@ function FilterNumeric(props) {
          <input type="number" placeholder="numeros" id="input-value" data-testid="value-filter" />
         <button
           type="button"
-          onClick={(e) => this.filterNumbers(e)}
+          onClick={(e) => filterNumbers(e)}
           data-testid="button-filter"
         >
         Filtrar

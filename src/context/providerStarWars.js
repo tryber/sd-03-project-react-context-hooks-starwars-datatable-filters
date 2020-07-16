@@ -44,7 +44,16 @@ const ProviderStarWars = ({ children }) => {
     }))   
   );
 
-    
+  const SetfilterByNumericValues = (column, comparison, value) => (
+    setFilters((state) => ({
+      ...state,
+      filterByNumericValues: [...state.filterByNumericValues, {
+        column,
+        comparison,
+        value,
+      }],
+    }))
+  );  
 
   const context = {
     data,
@@ -52,6 +61,7 @@ const ProviderStarWars = ({ children }) => {
     error,
     requestFetch,
     SetfilterByName,
+    SetfilterByNumericValues,
     filters,  
   };
 

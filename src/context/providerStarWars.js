@@ -58,7 +58,7 @@ const ProviderStarWars = ({ children }) => {
     setFilters((state) => ({
       ...state,
       filterByNumericValues: [
-        ...state.filterByNumericValues.filter((filter) => filter !== obj),
+        ...state.filterByNumericValues.filter((filter) => filter.column !== obj),
       ],
     }))
   );

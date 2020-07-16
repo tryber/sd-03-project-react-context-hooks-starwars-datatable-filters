@@ -13,6 +13,7 @@ function TagNumericFilters() {
   const  filters = numericValues;
 
   function removeButton(e) {
+    console.log(e.target.name);
     removeFilterNumeric(e.target.name)
   }
 

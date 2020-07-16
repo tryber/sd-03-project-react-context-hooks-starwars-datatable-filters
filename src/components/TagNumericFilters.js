@@ -1,10 +1,21 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { removeNumericFilter } from '../action/index';
-
+import React, { useContext } from 'react';
+/* import { connect } from 'react-redux';
+import { removeNumericFilter } from '../action/index'; */
+import ContextStarWars from '../context/contextStarWars';
 
 function TagNumericFilters() {
-  const  filters = [{column: 'test1'}]
+  const { removeFilterNumeric,
+    filters: {
+      filterByName: { name },
+      filterByNumericValues: numericValues,
+      order: { sort, column: columnSort },
+    },   } = useContext(ContextStarWars);
+  const  filters = numericValues;
+
+  function removeButton(e) {
+    removeFilterNumeric(e.target.name)
+  }
+
   return (
     <div>
       {filters.map((element) => (
@@ -13,7 +24,7 @@ function TagNumericFilters() {
           <button
             name={element.column}
             data-testid="filter"
-            onClick={(event) => removeFilter(event.target.name)}
+            onClick={(event) => removeButton(event)}
             type="button"
           >
                 x

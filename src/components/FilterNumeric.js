@@ -2,7 +2,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import ContextStarWars from '../context/contextStarWars';
 
 function FilterNumeric(props) {
-  const { SetfilterByNumericValues } = useContext(ContextStarWars);
+  const { SetfilterByNumericValues,
+    filters: {
+      filterByName: { name },
+      filterByNumericValues: numericValues,
+      order: { sort, column: columnSort },
+    },   } = useContext(ContextStarWars);
 
   function filterNumbers() {
    //  const { filterNumber } = this.props;
@@ -23,29 +28,30 @@ function FilterNumeric(props) {
   } 
 }
 
-  /* 
+ 
   function translateStateToArray(state) {
   
     const finalArray = [];
       state.map((option) => finalArray.push(option.column));
     return finalArray; 
-  } */
-/* 
+  } 
+ 
   function filterOptions() {
-    const {filterByNumericValues  } = useContext(ContextStarWars);
-    const  numericValues  = filterByNumericValues;
+   // const {filterByNumericValues  } = useContext(ContextStarWars);
+    // const  numericValues  = numericValues;
     const optionList = ['Selecione uma Opção', 'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
     const arrayColumState = translateStateToArray(numericValues);
     const filteredOptions = optionList.filter((option) => !arrayColumState.includes(option));
     return filteredOptions;
-  } */
+  } 
   /* const optionListToRender = filterOptions(); */
-  const optionList = ['Selecione uma Opção', 'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
+ // const optionList = ['Selecione uma Opção', 'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
+  const optionListToRender = filterOptions();
   return (
     <div>
        <div>
         <select data-testid="column-filter" id="filter">
-          {optionList.map((option) => (
+          {optionListToRender.map((option) => (
             <option key={option} value={option}>
               {option}
             </option>

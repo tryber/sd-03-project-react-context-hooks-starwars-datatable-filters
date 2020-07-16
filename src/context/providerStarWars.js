@@ -54,7 +54,14 @@ const ProviderStarWars = ({ children }) => {
       }],
     }))
   );  
-
+  const removeFilterNumeric = (obj) => (
+    setFilters((state) => ({
+      ...state,
+      filterByNumericValues: [
+        ...state.filterByNumericValues.filter((filter) => filter !== obj),
+      ],
+    }))
+  );
   const context = {
     data,
     isFetching,
@@ -62,6 +69,7 @@ const ProviderStarWars = ({ children }) => {
     requestFetch,
     SetfilterByName,
     SetfilterByNumericValues,
+    removeFilterNumeric,
     filters,  
   };
 

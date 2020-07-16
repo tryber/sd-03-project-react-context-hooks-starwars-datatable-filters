@@ -1,24 +1,24 @@
-import React, { Component } from 'react';
-/* import PropTypes from 'prop-types';
-import { connect } from 'react-redux'; */
+/* import React, { Component } from 'react';
+ import PropTypes from 'prop-types';
+import { connect } from 'react-redux'; 
 import { filterNumeric } from '../action/index';
 
 export class FilterNumeric extends Component {
   static translateStateToArray(state) {
     const finalArray = [];
-   /*  state.map((option) => finalArray.push(option.column));
-    return finalArray; */
+      state.map((option) => finalArray.push(option.column));
+    return finalArray; 
   }
 
   constructor(props) {
     super(props);
-   /*  this.filterNumbers = this.filterNumbers.bind(this);
-    this.filterOptions = this.filterOptions.bind(this); */
+     this.filterNumbers = this.filterNumbers.bind(this);
+    this.filterOptions = this.filterOptions.bind(this); 
   }
 
   filterNumbers() {
-    /* const { filterNumber } = this.props;
-    // const textInput = document.getElementById('filter_name');
+      const { filterNumber } = this.props;
+      const textInput = document.getElementById('filter_name');
     const column = document.getElementById('filter');
     const comparation = document.getElementById('comparation');
     const value = document.getElementById('input-value');
@@ -32,29 +32,29 @@ export class FilterNumeric extends Component {
       filterNumber(SelectionColumn, selectioncomparation, selectionValue);
     } else {
       alert('Preencha Todos os campos para filtrar !');
-    } */
+    } 
   }
 
 
-  /* filterOptions() {
+   filterOptions() {
     const { numericValues } = this.props;
     const optionList = ['Selecione uma Opção', 'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
     const arrayColumState = FilterNumeric.translateStateToArray(numericValues);
     const filteredOptions = optionList.filter((option) => !arrayColumState.includes(option));
     return filteredOptions;
   }
- */
+ 
   render() {
-   // const optionListToRender = this.filterOptions();
+    const optionListToRender = this.filterOptions();
     return (
       <div>
-     {/*    <select data-testid="column-filter" id="filter">
+     {    <select data-testid="column-filter" id="filter">
           {optionListToRender.map((option) => (
             <option key={option} value={option}>
               {option}
             </option>
           ))}
-        </select> */}
+        </select> }
         placeholder FilterNumeric
         <select data-testid="comparison-filter" id="comparation">
           <option value=" ">Selecione Uma Opção </option>
@@ -63,19 +63,19 @@ export class FilterNumeric extends Component {
           <option value="igual a">igual a</option>
         </select>
 
-        {/* <input type="number" placeholder="numeros" id="input-value" data-testid="value-filter" />
+        { <input type="number" placeholder="numeros" id="input-value" data-testid="value-filter" />
         <button
           type="button"
           onClick={(e) => this.filterNumbers(e)}
           data-testid="button-filter"
         >
         Filtrar
-        </button> */}
+        </button> }
       </div>
     );
   }
 }
-/* const mapStateToProps = (state) => ({
+ const mapStateToProps = (state) => ({
   numericValues: state.filters.filterByNumericValues,
 });
 
@@ -91,7 +91,7 @@ FilterNumeric.propTypes = {
 FilterNumeric.defaultProps = {
   filterNumber: '',
   numericValues: [],
-}; */
-/* export default connect(mapStateToProps, mapDispatchToProps)(FilterNumeric);
- */
-export default FilterNumeric;
+}; 
+ export default connect(mapStateToProps, mapDispatchToProps)(FilterNumeric);
+ 
+export default FilterNumeric; */

@@ -1,21 +1,21 @@
-import React from 'react';
-/* import Proptypes from 'prop-types';
-import { connect } from 'react-redux'; */
+/* import React from 'react';
+ import Proptypes from 'prop-types';
+import { connect } from 'react-redux'; 
 import { columnOrder } from '../action/index';
 
 export class OrderComponent extends React.Component {
   constructor(props) {
     super(props);
-/*     this.changeOrder = this.changeOrder.bind(this);
+     this.changeOrder = this.changeOrder.bind(this);
     this.changeSelectValue = this.changeSelectValue.bind(this);
-    this.changeRadioValue = this.changeRadioValue.bind(this); */
+    this.changeRadioValue = this.changeRadioValue.bind(this); 
     this.state = {
       column: 'Name',
       sort: 'ASC',
     };
   }
 
- /*  changeRadioValue(event) {
+   changeRadioValue(event) {
     console.log('clicou no 1', event.target.value);
     this.setState({ sort: event.target.value });
   }
@@ -31,8 +31,8 @@ export class OrderComponent extends React.Component {
 
     orderer(column, sort);
   }
- */
- /*  renderRadioButton() {
+ 
+   renderRadioButton() {
     return (
       <div onChange={this.changeRadioValue}>
         <input
@@ -54,8 +54,8 @@ export class OrderComponent extends React.Component {
       </div>
     );
   }
- */
-  /* renderComponent(options) {
+ 
+   renderComponent(options) {
     return (
       <fieldset>
         <label htmlFor="seletion">
@@ -80,17 +80,17 @@ export class OrderComponent extends React.Component {
 
       </fieldset>
     );
-  } */
+  } 
 
   render() {
     const options = ['Name', 'rotation_period', 'orbital_period', 'diameter', 'climate'];
     return (
       <div>
-       {/*  {this.renderComponent(options)} */} Placeholder OrderComponent
+       { {this.renderComponent(options)} } Placeholder OrderComponent
       </div>
     );
   }
-}
+}*/
 
 /* const mapStateToProps = (state) => ({
   values: state,
@@ -106,6 +106,7 @@ OrderComponent.propTypes = {
 
 OrderComponent.defaultProps = {
   orderer: '',
-}; */
-// export default connect(mapStateToProps, mapDispatchToProps)(OrderComponent);
+}; 
+ export default connect(mapStateToProps, mapDispatchToProps)(OrderComponent);
 export default OrderComponent;
+*/

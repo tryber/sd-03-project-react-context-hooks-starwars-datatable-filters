@@ -1,15 +1,44 @@
-import React, { Component } from 'react';
+import React, {useState, useContext} from 'react'
+import ContextStarWars from '../context/contextStarWars';
+
+function InputFilter() {
+  const [text, setText] = useState('');
+  const { filterByName } = useContext(ContextStarWars);
+ 
+  function filterByNameInput(event) {
+    const { filter } = props;
+    filter(event.target.value);
+  }
+  
+  return (
+    <div>
+    placeholder inpultfilter
+    <input
+      id="filter_name"
+      placeholder="Filtro por nome de Planeta"
+      onChange={(e) => filterByNameInput(e)}
+      data-testid="name-filter"
+      size="50"
+    />
+   </div>
+  )
+}
+
+export default InputFilter
+
+
+/* import React, { Component } from 'react';
 
 export class InputFilter extends Component {
-/*   constructor(props) {
+  constructor(props) {
     super(props);
-    /*  this.filterByName = this.filterByName.bind(this); */
-  /* }
-  /*
+      this.filterByName = this.filterByName.bind(this);
+   }
+  
   filterByName(event) {
     const { filter } = this.props;
     filter(event.target.value);
-  } */
+  } 
 
   render() {
     return (
@@ -26,7 +55,7 @@ export class InputFilter extends Component {
     );
   }
 }
-/*
+
 const mapDispatchToProps = (dispatch) => ({
   filter: (e) => dispatch(filterPlanet(e)),
 });
@@ -38,7 +67,8 @@ InputFilter.propTypes = {
 InputFilter.defaultProps = {
   filter: '',
 };
- */
-/* export default connect(null, mapDispatchToProps)(InputFilter);
- */
+ 
+ export default connect(null, mapDispatchToProps)(InputFilter);
+ 
 export default InputFilter;
+*/

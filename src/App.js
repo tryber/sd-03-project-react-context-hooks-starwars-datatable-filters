@@ -1,5 +1,24 @@
-import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+import React, { useContext, useEffect, useState } from 'react';
+import ProviderStarWars from './context/providerStarWars';
+import Table from './components/Table';
+import InputFilter from './components/InputFilter';
+
+function App() {
+
+  return (
+  <ProviderStarWars>
+      <InputFilter />
+      <Table />    
+  </ProviderStarWars>   
+  
+  )
+}
+
+export default App
+
+
+/* import ReactApp f, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Table from './components/Table';
 import InputFilter from './components/InputFilter';
@@ -11,30 +30,30 @@ import { fetchData } from './action/index';
 class App extends Component {
   constructor(props) {
     super(props);
-   // this.fetchUrl = this.fetchUrl.bind(this); 
+    this.fetchUrl = this.fetchUrl.bind(this); 
   }
 
   componentDidMount() {
-/*     this.fetchUrl();
- */  }
+     this.fetchUrl();
+   }
 
-/*   fetchUrl() {
+   fetchUrl() {
     const { request } = this.props;
     request();
-  } */
+  } 
 
   render() {
-   /*  const { value } = this.props;
-    const { isLoading } = value; */
+     const { value } = this.props;
+    const { isLoading } = value; 
     return (
       <div>
         <InputFilter />
         <FilterNumeric />
         <TagNumericFilters />
         <OrderComponent />
-      {/*   {isLoading
+         {isLoading
           ? <h1>Loading....</h1>
-          : <Table />} */}
+          : <Table />} 
 
       </div>
 
@@ -42,12 +61,12 @@ class App extends Component {
   }
 }
 
-/* const mapDispatchToProps = (dispatch) => ({
+ const mapDispatchToProps = (dispatch) => ({
   request: (e) => dispatch(fetchData(e)),
 });
 
-const mapStateToProps = (state) => ({ value: state }); */
-/* 
+const mapStateToProps = (state) => ({ value: state }); 
+
 App.propTypes = {
   request: PropTypes.func,
   value: PropTypes.instanceOf(Object),
@@ -56,7 +75,6 @@ App.propTypes = {
 App.defaultProps = {
   request: PropTypes.func,
   value: {},
-}; */
-
-/* export default connect(mapStateToProps, mapDispatchToProps)(App); */
-export default App;
+}; 
+ export default connect(mapStateToProps, mapDispatchToProps)(App); 
+export default App; */

@@ -1,7 +1,61 @@
-import PropTypes from 'prop-types';
+import React, { useContext, useEffect, useState } from 'react';
+import ContextStarWars from '../context/contextStarWars';
+
+function Table() {
+  const {data, requestFetch} = useContext(ContextStarWars);
+  useEffect(() => {
+    requestFetch();
+  }, []);
+  
+  function renderizaTableBody(element) {
+    return (
+      <tr key={element.name}>
+        <td>{element.name}</td>
+        <td>{element.rotation_period}</td>
+        <td>{element.orbital_period}</td>
+        <td>{element.diameter}</td>
+        <td>{element.climate}</td>
+        <td>{element.gravity}</td>
+        <td>{element.terrain}</td>
+        <td>{element.surface_water}</td>
+        <td>{element.population}</td>
+        <td>{element.films}</td>
+        <td>{element.created}</td>
+        <td>{element.edited}</td>
+        <td>{element.url}</td>
+      </tr>
+    );
+  }
+
+  const headers = ['name', 'rotation_period', 'orbital_period', 'diameter', 'climate', 'gravity', 'terrain', 'surface_water', 'population', 'films', 'created', 'edited', 'url'];
+    return (
+    <div>
+    <div>
+        <table>
+          <thead data-testid="column-sort">
+            <tr>
+              {headers.map((element) => <th key={element}>{element}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {data !== undefined
+              ? data.map((element) => (
+                renderizaTableBody(element)))
+              : <h1>Placeholder Table </h1> }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+}
+
+export default Table
+
+
+/* import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-/* import { connect } from 'react-redux'; */
-/* import { fetchData } from '../action/index'; */
+ import { connect } from 'react-redux'; 
+ import { fetchData } from '../action/index'; 
 import OrderColumn from '../helpers/functions';
 
 export class Table extends Component {
@@ -54,7 +108,7 @@ export class Table extends Component {
   }
 }
 
-/* const mapStateToProps = (state) => ({ value: state });
+ const mapStateToProps = (state) => ({ value: state });
 
 const mapDispatchToProps = (dispatch) => ({
   request: (e) => dispatch(fetchData(e)),
@@ -66,8 +120,8 @@ Table.propTypes = {
 
 Table.defaultProps = {
   value: {},
-}; */
+}; 
 
-/* export default connect(mapStateToProps, mapDispatchToProps)(Table);
- */
-export default Table;
+ export default connect(mapStateToProps, mapDispatchToProps)(Table);
+ 
+export default Table;*/

@@ -1,15 +1,27 @@
 import React from 'react';
-/* import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { removeNumericFilter } from '../action/index';
 
-export class TagNumericFilters extends React.Component {
+
+function TagNumericFilters() {
+  return (
+    <div>
+      
+    </div>
+  )
+}
+
+export default TagNumericFilters
+
+
+/* export class TagNumericFilters extends React.Component {
   render() {
-/*     const { filters } = this.props;
+    const { filters } = this.props;
     const { removeFilter } = this.props;
- */
+
     return (
       <div>
-      {/*   {filters.map((element) => (
+      {  {filters.map((element) => (
           <div data-testid="filter" key={element.column}>
             {element.column}
             <button
@@ -19,14 +31,14 @@ export class TagNumericFilters extends React.Component {
               type="button"
             >
                   x
-            </button> */}
+            </button> }
             PLACEHOLDER TAGNUMERICFILTER
           </div>
         )
-        //)
-      //}
-     // </div>
-    //);
+        )
+      }
+      </div>
+    );
   }
 }
 
@@ -47,6 +59,6 @@ TagNumericFilters.defaultProps = {
   filters: '',
   removeFilter: '',
 };
- */
+ 
 //export default connect(mapStateToProps, mapDispatchToProps)(TagNumericFilters);
-export default TagNumericFilters;
+export default TagNumericFilters; */

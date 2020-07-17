@@ -33,9 +33,7 @@ function FilterNumeric() {
       const selectioncomparation = comparation.options[comparation.selectedIndex].value;
       const selectionValue = value.value;
       SetfilterByNumericValues(SelectionColumn, selectioncomparation, selectionValue);
-    } else {
-      alert('Preencha Todos os campos para filtrar !');
-    }
+    } else { alert('Preencha Todos os campos para filtrar !'); }
   }
   function filterOptions() {
     const optionList = ['Selecione uma Opção', 'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];

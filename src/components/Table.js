@@ -1,19 +1,20 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import ContextStarWars from '../context/contextStarWars';
 import OrderColumn from '../helpers/functions';
 
 function Table() {
-  const {data, requestFetch,
+  const {
+    data, requestFetch,
     filters: {
       filterByName: { name },
       filterByNumericValues: numericValues,
-      order: { sort, column: columnSort },
+      order: { column: columnSort },
     },
-  }  = useContext(ContextStarWars);
+  } = useContext(ContextStarWars);
   useEffect(() => {
     requestFetch();
   }, []);
-  
+
   function renderizaTableBody(element) {
     return (
       <tr key={element.name}>
@@ -37,9 +38,9 @@ function Table() {
     name,
     numericValues, columnSort);
   const headers = ['name', 'rotation_period', 'orbital_period', 'diameter', 'climate', 'gravity', 'terrain', 'surface_water', 'population', 'films', 'created', 'edited', 'url'];
-    return (
+  return (
     <div>
-    <div>
+      <div>
         <table>
           <thead data-testid="column-sort">
             <tr>
@@ -55,16 +56,15 @@ function Table() {
         </table>
       </div>
     </div>
-  )
+  );
 }
 
-export default Table
-
+export default Table;
 
 /* import PropTypes from 'prop-types';
 import React, { Component } from 'react';
- import { connect } from 'react-redux'; 
- import { fetchData } from '../action/index'; 
+ import { connect } from 'react-redux';
+ import { fetchData } from '../action/index';
 import OrderColumn from '../helpers/functions';
 
 export class Table extends Component {
@@ -96,7 +96,9 @@ export class Table extends Component {
     const planets = OrderColumn(data.results,
       filterByName.name,
       filterByNumericValues, order);
-    const headers = ['name', 'rotation_period', 'orbital_period', 'diameter', 'climate', 'gravity', 'terrain', 'surface_water', 'population', 'films', 'created', 'edited', 'url'];
+    const headers = ['name', 'rotation_period',
+    'orbital_period', 'diameter', 'climate',
+    'gravity', 'terrain', 'surface_water', 'population', 'films', 'created', 'edited', 'url'];
     return (
       <div>
         <table>
@@ -129,8 +131,8 @@ Table.propTypes = {
 
 Table.defaultProps = {
   value: {},
-}; 
+};
 
  export default connect(mapStateToProps, mapDispatchToProps)(Table);
- 
-export default Table;*/
+
+export default Table; */

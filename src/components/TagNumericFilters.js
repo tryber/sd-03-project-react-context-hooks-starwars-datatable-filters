@@ -4,17 +4,17 @@ import { removeNumericFilter } from '../action/index'; */
 import ContextStarWars from '../context/contextStarWars';
 
 function TagNumericFilters() {
-  const { removeFilterNumeric,
+  const {
+    removeFilterNumeric,
     filters: {
-      filterByName: { name },
       filterByNumericValues: numericValues,
-      order: { sort, column: columnSort },
-    },   } = useContext(ContextStarWars);
-  const  filters = numericValues;
+    },
+  } = useContext(ContextStarWars);
+  const filters = numericValues;
 
   function removeButton(e) {
     console.log(e.target.name);
-    removeFilterNumeric(e.target.name)
+    removeFilterNumeric(e.target.name);
   }
 
   return (
@@ -28,17 +28,15 @@ function TagNumericFilters() {
             onClick={(event) => removeButton(event)}
             type="button"
           >
-                x
-          </button> 
+            x
+          </button>
         </div>
-      )
-      ) }
+      )) }
     </div>
-  )
+  );
 }
 
-export default TagNumericFilters
-
+export default TagNumericFilters;
 
 /* export class TagNumericFilters extends React.Component {
   render() {
@@ -85,6 +83,6 @@ TagNumericFilters.defaultProps = {
   filters: '',
   removeFilter: '',
 };
- 
+
 //export default connect(mapStateToProps, mapDispatchToProps)(TagNumericFilters);
 export default TagNumericFilters; */

@@ -36,12 +36,12 @@ const ProviderStarWars = ({ children }) => {
       (erro) => failurePlanets(erro),
     );
   };
-  
+
   const SetfilterByName = (name) => (
     setFilters((state) => ({
       ...state,
       filterByName: { name },
-    }))   
+    }))
   );
 
   const SetfilterByNumericValues = (column, comparison, value) => (
@@ -53,7 +53,7 @@ const ProviderStarWars = ({ children }) => {
         value,
       }],
     }))
-  );  
+  );
   const removeFilterNumeric = (obj) => (
     setFilters((state) => ({
       ...state,
@@ -77,7 +77,7 @@ const ProviderStarWars = ({ children }) => {
     SetfilterByNumericValues,
     removeFilterNumeric,
     filters,
-    orderColumns,  
+    orderColumns,
   };
 
   return (

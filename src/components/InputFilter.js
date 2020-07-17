@@ -1,29 +1,27 @@
-import React, {useState, useContext} from 'react'
+import React, { useContext } from 'react';
 import ContextStarWars from '../context/contextStarWars';
 
 function InputFilter() {
-  const [text, setText] = useState('');
   const { SetfilterByName } = useContext(ContextStarWars);
- 
+
   function filterByNameInput(event) {
     SetfilterByName(event.target.value);
   }
 
   return (
     <div>
-    <input
-      id="filter_name"
-      placeholder="Filtro por nome de Planeta"
-      onChange={(e) => filterByNameInput(e)}
-      data-testid="name-filter"
-      size="50"
-    />
-   </div>
-  )
+      <input
+        id="filter_name"
+        placeholder="Filtro por nome de Planeta"
+        onChange={(e) => filterByNameInput(e)}
+        data-testid="name-filter"
+        size="50"
+      />
+    </div>
+  );
 }
 
-export default InputFilter
-
+export default InputFilter;
 
 /* import React, { Component } from 'react';
 
@@ -32,11 +30,11 @@ export class InputFilter extends Component {
     super(props);
       this.filterByName = this.filterByName.bind(this);
    }
-  
+
   filterByName(event) {
     const { filter } = this.props;
     filter(event.target.value);
-  } 
+  }
 
   render() {
     return (
@@ -65,8 +63,8 @@ InputFilter.propTypes = {
 InputFilter.defaultProps = {
   filter: '',
 };
- 
+
  export default connect(null, mapDispatchToProps)(InputFilter);
- 
+
 export default InputFilter;
 */

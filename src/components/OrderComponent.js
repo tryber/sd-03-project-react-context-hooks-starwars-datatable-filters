@@ -1,8 +1,9 @@
-import React, {useContext, useState } from 'react'
+import React, { useContext, useState } from 'react';
 import ContextStarWars from '../context/contextStarWars';
+
 function OrderComponent() {
-  const [sort, setSort ] = useState();
-  const [column, setColumn ] = useState();
+  const [sort, setSort] = useState();
+  const [column, setColumn] = useState();
 
   const { orderColumns } = useContext(ContextStarWars);
 
@@ -15,20 +16,19 @@ function OrderComponent() {
     console.log('clicou no 1', event.target.value);
     setColumn({ column: event.target.value });
   }
- 
-  
+
   function changeOrder() {
-   // const { orderer } = this.props;
-   // const { column, sort } = this.state;
+    // const { orderer } = this.props;
+    // const { column, sort } = this.state;
 
     orderColumns(column, sort);
   }
- 
- function  renderRadioButton() {
+
+  function renderRadioButton() {
     return (
-      <div 
-       onChange={changeRadioValue}
-       >
+      <div
+        onChange={changeRadioValue}
+      >
         <input
           type="radio"
           id="ASC"
@@ -49,7 +49,7 @@ function OrderComponent() {
     );
   }
 
- function renderComponent(options) {
+  function renderComponent(options) {
     return (
       <fieldset>
         <label htmlFor="seletion">
@@ -69,26 +69,25 @@ function OrderComponent() {
           data-testid="column-sort-button"
           onClick={() => changeOrder()}
         >
-               set order
+          set order
         </button>
 
       </fieldset>
     );
-  } 
+  }
   const options = ['Name', 'rotation_period', 'orbital_period', 'diameter', 'climate'];
   return (
     <div>
-    { renderComponent(options) }
-   </div>
-  )
+      { renderComponent(options) }
+    </div>
+  );
 }
 
-export default OrderComponent
-
+export default OrderComponent;
 
 /* import React from 'react';
  import Proptypes from 'prop-types';
-import { connect } from 'react-redux'; 
+import { connect } from 'react-redux';
 import { columnOrder } from '../action/index';
 
 export class OrderComponent extends React.Component {
@@ -96,7 +95,7 @@ export class OrderComponent extends React.Component {
     super(props);
      this.changeOrder = this.changeOrder.bind(this);
     this.changeSelectValue = this.changeSelectValue.bind(this);
-    this.changeRadioValue = this.changeRadioValue.bind(this); 
+    this.changeRadioValue = this.changeRadioValue.bind(this);
     this.state = {
       column: 'Name',
       sort: 'ASC',
@@ -119,7 +118,7 @@ export class OrderComponent extends React.Component {
 
     orderer(column, sort);
   }
- 
+
    renderRadioButton() {
     return (
       <div onChange={this.changeRadioValue}>
@@ -142,7 +141,7 @@ export class OrderComponent extends React.Component {
       </div>
     );
   }
- 
+
    renderComponent(options) {
     return (
       <fieldset>
@@ -168,7 +167,7 @@ export class OrderComponent extends React.Component {
 
       </fieldset>
     );
-  } 
+  }
 
   render() {
     const options = ['Name', 'rotation_period', 'orbital_period', 'diameter', 'climate'];
@@ -178,7 +177,7 @@ export class OrderComponent extends React.Component {
       </div>
     );
   }
-}*/
+} */
 
 /* const mapStateToProps = (state) => ({
   values: state,
@@ -194,7 +193,7 @@ OrderComponent.propTypes = {
 
 OrderComponent.defaultProps = {
   orderer: '',
-}; 
+};
  export default connect(mapStateToProps, mapDispatchToProps)(OrderComponent);
 export default OrderComponent;
 */

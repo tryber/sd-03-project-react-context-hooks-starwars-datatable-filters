@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 import ProviderStarWars from './context/providerStarWars';
 import Table from './components/Table';
 import InputFilter from './components/InputFilter';
@@ -7,21 +7,19 @@ import OrderComponent from './components/OrderComponent';
 import TagNumericFilters from './components/TagNumericFilters';
 
 function App() {
-
   return (
-  <ProviderStarWars>
+    <ProviderStarWars>
       <InputFilter />
-      <FilterNumeric/>
+      <FilterNumeric />
       <TagNumericFilters />
       <OrderComponent />
-      <Table />    
-  </ProviderStarWars>   
-  
-  )
+      <Table />
+    </ProviderStarWars>
+
+  );
 }
 
-export default App
-
+export default App;
 
 /* import ReactApp f, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -36,7 +34,7 @@ import { fetchData } from './action/index';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.fetchUrl = this.fetchUrl.bind(this); 
+    this.fetchUrl = this.fetchUrl.bind(this);
   }
 
   componentDidMount() {
@@ -46,11 +44,11 @@ class App extends Component {
    fetchUrl() {
     const { request } = this.props;
     request();
-  } 
+  }
 
   render() {
      const { value } = this.props;
-    const { isLoading } = value; 
+    const { isLoading } = value;
     return (
       <div>
         <InputFilter />
@@ -59,7 +57,7 @@ class App extends Component {
         <OrderComponent />
          {isLoading
           ? <h1>Loading....</h1>
-          : <Table />} 
+          : <Table />}
 
       </div>
 
@@ -71,7 +69,7 @@ class App extends Component {
   request: (e) => dispatch(fetchData(e)),
 });
 
-const mapStateToProps = (state) => ({ value: state }); 
+const mapStateToProps = (state) => ({ value: state });
 
 App.propTypes = {
   request: PropTypes.func,
@@ -81,6 +79,6 @@ App.propTypes = {
 App.defaultProps = {
   request: PropTypes.func,
   value: {},
-}; 
- export default connect(mapStateToProps, mapDispatchToProps)(App); 
+};
+ export default connect(mapStateToProps, mapDispatchToProps)(App);
 export default App; */

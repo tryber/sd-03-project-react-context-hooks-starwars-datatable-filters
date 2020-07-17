@@ -2,6 +2,26 @@ import React, { useContext, useEffect } from 'react';
 import ContextStarWars from '../context/contextStarWars';
 import OrderColumn from '../helpers/functions';
 
+function renderizaTableBody(element) {
+  return (
+    <tr key={element.name}>
+      <td>{element.name}</td>
+      <td>{element.rotation_period}</td>
+      <td>{element.orbital_period}</td>
+      <td>{element.diameter}</td>
+      <td>{element.climate}</td>
+      <td>{element.gravity}</td>
+      <td>{element.terrain}</td>
+      <td>{element.surface_water}</td>
+      <td>{element.population}</td>
+      <td>{element.films}</td>
+      <td>{element.created}</td>
+      <td>{element.edited}</td>
+      <td>{element.url}</td>
+    </tr>
+  );
+}
+
 function Table() {
   const {
     data, requestFetch,
@@ -15,25 +35,6 @@ function Table() {
     requestFetch();
   }, []);
 
-  function renderizaTableBody(element) {
-    return (
-      <tr key={element.name}>
-        <td>{element.name}</td>
-        <td>{element.rotation_period}</td>
-        <td>{element.orbital_period}</td>
-        <td>{element.diameter}</td>
-        <td>{element.climate}</td>
-        <td>{element.gravity}</td>
-        <td>{element.terrain}</td>
-        <td>{element.surface_water}</td>
-        <td>{element.population}</td>
-        <td>{element.films}</td>
-        <td>{element.created}</td>
-        <td>{element.edited}</td>
-        <td>{element.url}</td>
-      </tr>
-    );
-  }
   const planets = OrderColumn(data,
     name,
     numericValues, columnSort);

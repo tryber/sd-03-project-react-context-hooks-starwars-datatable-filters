@@ -42,7 +42,8 @@ function FilterNumeric() {
     return filteredOptions;
   }
   /* const optionListToRender = filterOptions(); */
-  // const optionList = ['Selecione uma Opção', 'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
+  // const optionList = ['Selecione uma Opção', 'population',
+  // 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
   const optionListToRender = filterOptions();
   return (
     <div>
@@ -115,7 +116,9 @@ export class FilterNumeric extends Component {
 
    filterOptions() {
     const { numericValues } = this.props;
-    const optionList = ['Selecione uma Opção', 'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
+    const optionList =
+    ['Selecione uma Opção',
+    'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
     const arrayColumState = FilterNumeric.translateStateToArray(numericValues);
     const filteredOptions = optionList.filter((option) => !arrayColumState.includes(option));
     return filteredOptions;

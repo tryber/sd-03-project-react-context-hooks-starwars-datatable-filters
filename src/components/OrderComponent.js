@@ -27,16 +27,9 @@ function OrderComponent() {
   const [sort, setSort] = useState();
   const [column, setColumn] = useState();
   const { orderColumns } = useContext(ContextStarWars);
-  function changeRadioValue(event) {
-    setSort(event.target.value);
-    console.log('change Radio VALUE FUNCTION ', column, sort);
-  }
-  function changeSelectValue(event) {
-    setColumn(event.target.value);
-    console.log('change SELECT VALUE FUNCTION ', column, sort);
-  }
+  function changeRadioValue(event) { setSort(event.target.value); }
+  function changeSelectValue(event) { setColumn(event.target.value); }
   function changeOrder() {
-    console.log('change context', column, sort);
     orderColumns(column, sort);
   }
   function renderRadioButton() {

@@ -7,6 +7,16 @@ function translateStateToArray(state) {
   return finalArray;
 }
 
+function renderSelect() {
+  return (
+    <select data-testid="comparison-filter" id="comparation">
+      <option value=" ">Selecione Uma Opção </option>
+      <option value="maior que">maior que</option>
+      <option value="menor que">menor que</option>
+      <option value="igual a">igual a</option>
+    </select>
+  );
+}
 function FilterNumeric() {
   const {
     SetfilterByNumericValues,
@@ -37,29 +47,22 @@ function FilterNumeric() {
   const optionListToRender = filterOptions();
   return (
     <div>
-      <div>
-        <select data-testid="column-filter" id="filter">
-          {optionListToRender.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-        <select data-testid="comparison-filter" id="comparation">
-          <option value=" ">Selecione Uma Opção </option>
-          <option value="maior que">maior que</option>
-          <option value="menor que">menor que</option>
-          <option value="igual a">igual a</option>
-        </select>
-        <input type="number" placeholder="numeros" id="input-value" data-testid="value-filter" />
-        <button
-          type="button"
-          onClick={(e) => filterNumbers(e)}
-          data-testid="button-filter"
-        >
-          Filtrar
-        </button>
-      </div>
+      <select data-testid="column-filter" id="filter">
+        {optionListToRender.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+      {renderSelect()}
+      <input type="number" placeholder="numeros" id="input-value" data-testid="value-filter" />
+      <button
+        type="button"
+        onClick={(e) => filterNumbers(e)}
+        data-testid="button-filter"
+      >
+        Filtrar
+      </button>
     </div>
   );
 }

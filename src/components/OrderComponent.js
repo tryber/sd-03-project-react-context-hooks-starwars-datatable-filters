@@ -1,6 +1,28 @@
 import React, { useContext, useState } from 'react';
 import ContextStarWars from '../context/contextStarWars';
 
+function renderInputs() {
+  return (
+    <div>
+      <input
+        type="radio"
+        id="ASC"
+        name="order"
+        value="ASC"
+        data-testid="column-sort-input"
+      />
+      <label htmlFor="ASC">ASC</label>
+      <input
+        type="radio"
+        id="DESC"
+        name="order"
+        value="DESC"
+        data-testid="column-sort-input"
+      />
+      <label htmlFor="DESC">DESC</label>
+    </div>
+  );
+}
 function OrderComponent() {
   const [sort, setSort] = useState();
   const [column, setColumn] = useState();
@@ -29,22 +51,7 @@ function OrderComponent() {
       <div
         onChange={changeRadioValue}
       >
-        <input
-          type="radio"
-          id="ASC"
-          name="order"
-          value="ASC"
-          data-testid="column-sort-input"
-        />
-        <label htmlFor="ASC">ASC</label>
-        <input
-          type="radio"
-          id="DESC"
-          name="order"
-          value="DESC"
-          data-testid="column-sort-input"
-        />
-        <label htmlFor="DESC">DESC</label>
+        { renderInputs()}
       </div>
     );
   }

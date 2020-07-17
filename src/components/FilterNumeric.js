@@ -24,7 +24,6 @@ function FilterNumeric() {
       filterByNumericValues: numericValues,
     },
   } = useContext(ContextStarWars);
-
   function filterNumbers() {
     const column = document.getElementById('filter');
     const comparation = document.getElementById('comparation');

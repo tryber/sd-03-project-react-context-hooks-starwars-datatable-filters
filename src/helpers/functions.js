@@ -5,7 +5,6 @@ const filtraData = (planets, name, numericValues) => (
       (acc, { column, comparison, value }) => acc.filter((planet) => {
         switch (comparison) {
           case 'maior que':
-            console.log('apenas no  maior que');
             return (
               planet.name.includes(name)
                     && parseFloat(planet[column]) > parseFloat(value)
@@ -41,10 +40,8 @@ const compareDesc = (a, b) => {
 
 function orderNumeric(order, results) {
   if (order.sort === 'DESC') {
-    console.log('acessou desc !');
     results.sort((a, b) => Number(b[order.column]) - Number(a[order.column]));
   } else {
-    console.log('acessou asc !');
     results.sort((a, b) => Number(a[order.column]) - Number(b[order.column]));
   }
 }

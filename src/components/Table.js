@@ -5,7 +5,7 @@ import OrderColumn from '../helpers/functions';
 function renderizaTableBody(element) {
   return (
     <tr key={element.name}>
-      <td>{element.name}</td>
+      <td data-testid="planet-name">{element.name}</td>
       <td>{element.rotation_period}</td>
       <td>{element.orbital_period}</td>
       <td>{element.diameter}</td>

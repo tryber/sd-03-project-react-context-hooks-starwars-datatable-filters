@@ -1,6 +1,12 @@
 import React, { useContext } from 'react';
 import ContextStarWars from '../context/contextStarWars';
 
+function translateStateToArray(state) {
+  const finalArray = [];
+  state.map((option) => finalArray.push(option.column));
+  return finalArray;
+}
+
 function FilterNumeric() {
   const {
     SetfilterByNumericValues,
@@ -22,13 +28,6 @@ function FilterNumeric() {
       alert('Preencha Todos os campos para filtrar !');
     }
   }
-
-  function translateStateToArray(state) {
-    const finalArray = [];
-    state.map((option) => finalArray.push(option.column));
-    return finalArray;
-  }
-
   function filterOptions() {
     const optionList = ['Selecione uma Opção', 'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
     const arrayColumState = translateStateToArray(numericValues);

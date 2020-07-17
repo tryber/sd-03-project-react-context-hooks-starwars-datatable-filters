@@ -28,22 +28,18 @@ function Table() {
     filters: {
       filterByName: { name },
       filterByNumericValues: numericValues,
-      order: { column: columnSort },
+      order,
     },
   } = useContext(ContextStarWars);
-  useEffect(() => {
-    requestFetch();
-  }, []);
+  useEffect(() => { requestFetch(); }, []);
 
-  const planets = OrderColumn(data,
-    name,
-    numericValues, columnSort);
+  const planets = OrderColumn(data, name, numericValues, order);
   const headers = ['name', 'rotation_period', 'orbital_period', 'diameter', 'climate', 'gravity', 'terrain', 'surface_water', 'population', 'films', 'created', 'edited', 'url'];
   return (
     <div>
       <div>
         <table>
-          <thead data-testid="column-sort">
+          <thead>
             <tr>
               {headers.map((element) => <th key={element}>{element}</th>)}
             </tr>

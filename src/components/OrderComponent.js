@@ -9,7 +9,7 @@ function renderInputs() {
         id="ASC"
         name="order"
         value="ASC"
-        data-testid="column-sort-input"
+        data-testid="'column-sort-input-asc"
       />
       <label htmlFor="ASC">ASC</label>
       <input
@@ -17,7 +17,7 @@ function renderInputs() {
         id="DESC"
         name="order"
         value="DESC"
-        data-testid="column-sort-input"
+        data-testid="column-sort-input-desc"
       />
       <label htmlFor="DESC">DESC</label>
     </div>
@@ -27,12 +27,18 @@ function OrderComponent() {
   const [sort, setSort] = useState();
   const [column, setColumn] = useState();
   const { orderColumns } = useContext(ContextStarWars);
-  function changeRadioValue(event) { setSort({ sort: event.target.value }); }
-  function changeSelectValue(event) {
-    console.log('clicou no 1', event.target.value);
-    setColumn({ column: event.target.value });
+  function changeRadioValue(event) {
+    setSort(event.target.value);
+    console.log('change Radio VALUE FUNCTION ', column, sort);
   }
-  function changeOrder() { orderColumns(column, sort); }
+  function changeSelectValue(event) {
+    setColumn(event.target.value);
+    console.log('change SELECT VALUE FUNCTION ', column, sort);
+  }
+  function changeOrder() {
+    console.log('change context', column, sort);
+    orderColumns(column, sort);
+  }
   function renderRadioButton() {
     return (
       <div onChange={changeRadioValue}>
@@ -62,7 +68,7 @@ function OrderComponent() {
       </fieldset>
     );
   }
-  const options = ['Name', 'rotation_period', 'orbital_period', 'diameter', 'climate'];
+  const options = ['Name', 'rotation_period', 'orbital_period', 'diameter', 'climate', 'population'];
   return (
     <div>
       { renderComponent(options) }

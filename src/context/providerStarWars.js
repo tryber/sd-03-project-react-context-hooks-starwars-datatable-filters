@@ -62,6 +62,12 @@ const ProviderStarWars = ({ children }) => {
       ],
     }))
   );
+  const orderColumns = (column, sort) => (
+    setFilters((state) => ({
+      ...state,
+      order: { column, sort },
+    }))
+  );
   const context = {
     data,
     isFetching,
@@ -70,7 +76,8 @@ const ProviderStarWars = ({ children }) => {
     SetfilterByName,
     SetfilterByNumericValues,
     removeFilterNumeric,
-    filters,  
+    filters,
+    orderColumns,  
   };
 
   return (

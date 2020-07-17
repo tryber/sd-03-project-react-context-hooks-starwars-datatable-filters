@@ -1,19 +1,33 @@
-import React from 'react'
-
+import React, {useContext, useState } from 'react'
+import ContextStarWars from '../context/contextStarWars';
 function OrderComponent() {
-  
-  function changeOrder() {
-    const { orderer } = this.props;
-    const { column, sort } = this.state;
+  const [sort, setSort ] = useState();
+  const [column, setColumn ] = useState();
 
-    orderer(column, sort);
+  const { orderColumns } = useContext(ContextStarWars);
+
+  function changeRadioValue(event) {
+    console.log('clicou no 1', event.target.value);
+    setSort({ sort: event.target.value });
+  }
+
+  function changeSelectValue(event) {
+    console.log('clicou no 1', event.target.value);
+    setColumn({ column: event.target.value });
   }
  
+  
+  function changeOrder() {
+   // const { orderer } = this.props;
+   // const { column, sort } = this.state;
 
+    orderColumns(column, sort);
+  }
+ 
  function  renderRadioButton() {
     return (
       <div 
-       // onChange={changeRadioValue}
+       onChange={changeRadioValue}
        >
         <input
           type="radio"
@@ -42,7 +56,7 @@ function OrderComponent() {
           Column Select
         </label>
         <select
-         // onChange={(event) => changeSelectValue(event)}
+          onChange={(event) => changeSelectValue(event)}
           name="seletion"
           data-testid="column-sort"
         >
@@ -53,7 +67,7 @@ function OrderComponent() {
         <button
           type="button"
           data-testid="column-sort-button"
-         // onClick={() => changeOrder()}
+          onClick={() => changeOrder()}
         >
                set order
         </button>

@@ -26,36 +26,25 @@ function renderInputs() {
 function OrderComponent() {
   const [sort, setSort] = useState();
   const [column, setColumn] = useState();
-
   const { orderColumns } = useContext(ContextStarWars);
-
   function changeRadioValue(event) {
     console.log('clicou no 1', event.target.value);
     setSort({ sort: event.target.value });
   }
-
   function changeSelectValue(event) {
     console.log('clicou no 1', event.target.value);
     setColumn({ column: event.target.value });
   }
-
   function changeOrder() {
-    // const { orderer } = this.props;
-    // const { column, sort } = this.state;
-
     orderColumns(column, sort);
   }
-
   function renderRadioButton() {
     return (
-      <div
-        onChange={changeRadioValue}
-      >
+      <div onChange={changeRadioValue}>
         { renderInputs()}
       </div>
     );
   }
-
   function renderComponent(options) {
     return (
       <fieldset>
@@ -69,7 +58,6 @@ function OrderComponent() {
         >
           {options.map((element) => (<option>{element}</option>))}
         </select>
-
         {renderRadioButton()}
         <button
           type="button"
@@ -78,7 +66,6 @@ function OrderComponent() {
         >
           set order
         </button>
-
       </fieldset>
     );
   }

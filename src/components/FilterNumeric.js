@@ -10,17 +10,13 @@ function FilterNumeric() {
   } = useContext(ContextStarWars);
 
   function filterNumbers() {
-    //  const { filterNumber } = this.props;
     const column = document.getElementById('filter');
     const comparation = document.getElementById('comparation');
     const value = document.getElementById('input-value');
     if (column.selectedIndex > 0 && comparation.selectedIndex > 0 && value.value !== '') {
       const SelectionColumn = column.options[column.selectedIndex].value;
-
       const selectioncomparation = comparation.options[comparation.selectedIndex].value;
-
       const selectionValue = value.value;
-
       SetfilterByNumericValues(SelectionColumn, selectioncomparation, selectionValue);
     } else {
       alert('Preencha Todos os campos para filtrar !');
@@ -34,16 +30,11 @@ function FilterNumeric() {
   }
 
   function filterOptions() {
-    // const {filterByNumericValues  } = useContext(ContextStarWars);
-    // const  numericValues  = numericValues;
     const optionList = ['Selecione uma Opção', 'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
     const arrayColumState = translateStateToArray(numericValues);
     const filteredOptions = optionList.filter((option) => !arrayColumState.includes(option));
     return filteredOptions;
   }
-  /* const optionListToRender = filterOptions(); */
-  // const optionList = ['Selecione uma Opção', 'population',
-  // 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
   const optionListToRender = filterOptions();
   return (
     <div>
@@ -61,7 +52,6 @@ function FilterNumeric() {
           <option value="menor que">menor que</option>
           <option value="igual a">igual a</option>
         </select>
-
         <input type="number" placeholder="numeros" id="input-value" data-testid="value-filter" />
         <button
           type="button"

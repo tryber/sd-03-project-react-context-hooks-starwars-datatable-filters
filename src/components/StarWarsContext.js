@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import getPlanetsList from '../services/swapi';
+import getPlanetsList from '../services/apiSWRequest';
 
 const StarWarsContext = createContext();
 

@@ -1,56 +1,129 @@
-import React, { useContext, useEffect } from 'react';
-import { StarWarsContext } from './StarWarsContext';
-import PlanetLine from './PlanetLine';
-import TableHeader from './TableHeader';
+import React, { useContext } from 'react';
+import FiltersContext from '../context/FiltersContext';
+import SWApiContext from '../context/SWApiContext';
+import Header from './Header';
+import TableHeaders from './TableHeaders';
+import Inputs from './Inputs';
+import SelectedFilters from './SelectedFilters';
+import TableData from './TableData';
 
-function Table() {
-  const {
-    isFetching,
-    data,
-    error,
-    fetchPlanetList,
-    filters: {
-      filterByName: {
-        name,
-      },
-      filterByNumericValues: numericFilters,
-    },
-  } = useContext(StarWarsContext);
+const greaterThan = (column, value, obj) => {
+  if (!(Number(obj[column]) > Number(value))) return false;
+  return true;
+};
 
-  useEffect(() => {
-    fetchPlanetList();
-  }, []);
+const lessThan = (column, value, obj) => {
+  if (!(Number(obj[column]) < Number(value))) return false;
+  return true;
+};
 
-  const filterPlanets = () => {
-    const filterName = data.filter((planet) => (planet.name.toLowerCase()).includes(name));
-    if (numericFilters.length !== 0) {
-      return numericFilters.reduce((newList, { column, comparison, value }) =>
-        newList.filter((planet) => {
-          if (comparison === 'maior que') return Number(planet[column]) > Number(value);
-          if (comparison === 'igual a') return Number(planet[column]) === Number(value);
-          if (comparison === 'menor que') return Number(planet[column]) < Number(value);
-          return planet;
-        })
-        , filterName);
-    }
-    return (filterName);
-  };
+const equal = (column, value, obj) => {
+  if (!(Number(obj[column]) === Number(value))) return false;
+  return true;
+};
 
-  if (isFetching) { return <p>Loading...</p>; }
-
-  if (data.length > 0) {
-    return (
-      <table className="table-div">
-        <thead>
-          <TableHeader />
-        </thead>
-        <tbody>
-          {filterPlanets().map((planet) => <PlanetLine planet={planet} key={planet.name} />)}
-        </tbody>
-      </table>
-    );
+const GreaterLessEqual = (operator, column, value, obj) => {
+  switch (operator) {
+    case 'maior que':
+      return greaterThan(column, value, obj);
+    case 'menor que':
+      return lessThan(column, value, obj);
+    case 'igual a':
+      return equal(column, value, obj);
+    default:
+      return true;
   }
-  return <p>{error}</p>;
-}
+};
+
+const helperFunction = (obj, filterByNumericValues, name) => {
+  if (!obj.name.toLowerCase().includes(name.toLowerCase()) && name !== '') return false;
+  for (let i = 0; i < filterByNumericValues.length; i += 1) {
+    const { column, numericValue, comparison } = filterByNumericValues[i];
+    if (!GreaterLessEqual(comparison, column, numericValue, obj)) return false;
+  }
+  return true;
+};
+
+const dataFilterFunction = (data, filterByNumericValues, name) => {
+  const newArrToFilter = [...data];
+  if (name !== '' || filterByNumericValues.length > 0) {
+    return newArrToFilter.reduce((acc, planetObj) => {
+      if (helperFunction(planetObj, filterByNumericValues, name)) acc.push(planetObj);
+      return acc;
+    }, []);
+  }
+  return data;
+};
+
+const sortDescColName = (columnLowerCase, data, filterByNumericValues, name) => {
+  const dataFiltered = dataFilterFunction(data, filterByNumericValues, name);
+  return dataFiltered.sort((a, b) => {
+    if (a[columnLowerCase] < b[columnLowerCase]) return 1;
+    if (a[columnLowerCase] > b[columnLowerCase]) return -1;
+    return 0;
+  });
+};
+
+const sortDescCol = (data, filterByNumericValues, order, name) => {
+  const { column } = order;
+  const columnLowerCase = column.toLowerCase();
+  const dataFiltered = dataFilterFunction(data, filterByNumericValues, name);
+  if (columnLowerCase === 'name') {
+    return sortDescColName(columnLowerCase, data, filterByNumericValues, name);
+  }
+  return dataFiltered.sort(function (a, b) {
+    if (Number(a[columnLowerCase]) < Number(b[columnLowerCase])) return 1;
+    if (Number(a[columnLowerCase]) > Number(b[columnLowerCase])) return -1;
+    return 0;
+  });
+};
+
+const sortAscColWithoutName = (columnLowerCase, data, filterByNumericValues, name) => {
+  const dataFiltered = dataFilterFunction(data, filterByNumericValues, name);
+  return dataFiltered.sort(function (a, b) {
+    if (Number(a[columnLowerCase]) > Number(b[columnLowerCase])) return 1;
+    if (Number(a[columnLowerCase]) < Number(b[columnLowerCase])) return -1;
+    return 0;
+  });
+};
+
+const sortAscCol = (data, filterByNumericValues, order, name) => {
+  const { column } = order;
+  const columnLowerCase = column.toLowerCase();
+  const dataFiltered = dataFilterFunction(data, filterByNumericValues, name);
+  if (columnLowerCase === 'name') {
+    return dataFiltered.sort(function (a, b) {
+      if (a[columnLowerCase] > b[columnLowerCase]) return 1;
+      if (a[columnLowerCase] < b[columnLowerCase]) return -1;
+      return 0;
+    });
+  }
+  return sortAscColWithoutName(columnLowerCase, data, filterByNumericValues, name);
+};
+
+const dataSortFunction = (data, filterByNumericValues, order, name) => {
+  const { sort } = order;
+  if (sort === 'DESC') return sortDescCol(data, filterByNumericValues, order, name);
+  return sortAscCol(data, filterByNumericValues, order, name);
+};
+
+const Table = () => {
+  const { filters } = useContext(FiltersContext);
+  const { filterByName: { name }, filterByNumericValues, order } = filters;
+
+  const { data } = useContext(SWApiContext);
+
+  return (
+    <div>
+      <Header />
+      <Inputs />
+      <SelectedFilters />
+      <table>
+        <TableHeaders />
+        <TableData dataSw={dataSortFunction(data, filterByNumericValues, order, name)} />
+      </table>
+    </div>
+  );
+};
 
 export default Table;

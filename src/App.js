@@ -1,22 +1,18 @@
 import React from 'react';
 import Table from './components/Table';
-import { StarWarsProvider } from './components/StarWarsContext';
-import SearchBar from './components/SearchBar';
+import AllFiltersArrProvider from './provider/AllFiltersArrProvider';
+import FiltersProvider from './provider/FiltersProvider';
+import SWApiProvider from './provider/SWApiProvider';
 
-class App extends React.Component {
-  render() {
-    return (
-      <StarWarsProvider>
-        <div className="App">
-          <header className="page-header">
-            <h1>StarWars Datatable with Filters</h1>
-          </header>
-          <SearchBar />
-          <Table getPlanetsList={this.fetchPlanetsList} />
-        </div>
-      </StarWarsProvider>
-    );
-  }
-}
+
+const App = () => (
+  <AllFiltersArrProvider>
+    <FiltersProvider>
+      <SWApiProvider>
+        <Table />
+      </SWApiProvider>
+    </FiltersProvider>
+  </AllFiltersArrProvider>
+);
 
 export default App;

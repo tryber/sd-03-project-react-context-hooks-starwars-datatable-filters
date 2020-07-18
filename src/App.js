@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import Table from './components/Table';
 import { StarWarsProvider } from './components/StarWarsContext';
 import SearchBar from './components/SearchBar';

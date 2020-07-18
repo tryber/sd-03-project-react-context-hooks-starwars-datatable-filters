@@ -4,7 +4,7 @@ import FilterList from './FilterList';
 import { StarWarsContext } from './StarWarsContext';
 
 function SearchBar() {
-  const [selColumn, setselColumn] = useState('');
+  const [columnC, setcolumn] = useState('');
   const [comparison, setComparison] = useState('');
   const [value, setValue] = useState('');
 
@@ -18,7 +18,7 @@ function SearchBar() {
   } = useContext(StarWarsContext);
 
   const handleClick = () => {
-    const searchFilters = { selColumn, comparison, value };
+    const searchFilters = { column: columnC, comparison, value };
     updateNumericFilters(searchFilters);
   };
 
@@ -30,7 +30,7 @@ function SearchBar() {
       <select
         id="column-filter"
         data-testid="column-filter"
-        onChange={(event) => setselColumn(event.target.value)}
+        onChange={(event) => setcolumn(event.target.value)}
       >
         {columnsArray.map((column) => (filterOptions(numericFilters, column) &&
           (<option value={column} key={column}>{column}</option>)

@@ -158,9 +158,9 @@ Table.propTypes = {
   ).isRequired,
 };
 
-// Table.defaultProps = {
-//   data: null,
-//   name: null,
-// };
+Table.defaultProps = {
+  data: null,
+  name: null,
+};
 
 export default (Table);

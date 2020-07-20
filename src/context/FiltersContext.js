@@ -26,9 +26,14 @@ const INITIAL_STATE = {
 const FiltersProvider = ({ children }) => {
   const [filters, setFilters] = useState(INITIAL_STATE);
 
+  const setFilterByName = (name) => {
+    setFilters((stateAtual) => ({...stateAtual, filterByName: { name }}))
+  }
+
   const context = {
     filters,
     setFilters,
+    setFilterByName,
   }
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import StarWarsContext from './StarWarsContext';
-import apiPlanets from '../services/requestAPI';
+import apiPlanets from '../services/required';
 
 const StarWarsProvider = ({ children }) => {
   const [data, setData] = useState([]);
@@ -28,7 +28,7 @@ const StarWarsProvider = ({ children }) => {
     setIsFetching(false);
   };
 
-  const requestAPI = () => {
+  const requestFetch = () => {
     resquestPlanets();
 
     return apiPlanets().then(
@@ -76,7 +76,7 @@ const StarWarsProvider = ({ children }) => {
     isFetching,
     error,
     filters,
-    requestAPI,
+    requestFetch,
     filterByName,
     filterByNumericValues,
     removeFilterNumeric,
@@ -88,7 +88,7 @@ const StarWarsProvider = ({ children }) => {
       {children}
     </StarWarsContext.Provider>
   );
-}
+};
 
 StarWarsProvider.propTypes = {
   children: PropTypes.node.isRequired,

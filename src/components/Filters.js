@@ -1,4 +1,4 @@
-import React, { Component, useContext } from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -8,7 +8,7 @@ import { FiltersContext } from '../context/FiltersContext';
 const Filters = () => {
   const {
     filters,
-    setFilters,
+    // setFilters,
     setFilterByName,
   } = useContext(FiltersContext);
 
@@ -175,7 +175,7 @@ const Filters = () => {
       {getOrdered()} */}
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => ({
   filterByNumeric: state.filters.filterByNumericValues,

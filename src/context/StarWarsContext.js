@@ -14,17 +14,17 @@ const StarwarsProvider = ({ children }) => {
     setIsFetching,
     data,
     setData,
-  }
+  };
 
   return (
     <StarWarsContext.Provider value={context}>
       { children }
     </StarWarsContext.Provider>
-  )
-}
+  );
+};
 
 StarwarsProvider.propTypes = {
   children: PropTypes.node.isRequired,
-}
+};
 
 export default StarwarsProvider;

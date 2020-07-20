@@ -40,7 +40,7 @@ function App() {
         edited: '2014-12-20T20:58:18.411000Z',
         url: 'https://swapi-trybe.herokuapp.com/api/planets/1/',
       },
-    ]
+    ],
   };
 
   return (

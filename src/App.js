@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
-import Table2 from './components/Table2';
+import Table from './components/Table';
 import StarWarsContext from './context/StarWarsContext';
+import getStarWarsPlanetsData from './services/starwarsAPI';
 
 // const ShowContext = () => {
 //   return (
@@ -15,42 +16,58 @@ import StarWarsContext from './context/StarWarsContext';
 //   );
 // };
 
-function App() {
-  const contextValue = {
-    isFetching: false,
-    data: [
-      {
-        name: 'Tatooine',
-        rotation_period: '23',
-        orbital_period: '304',
-        diameter: '10465',
-        climate: 'arid',
-        gravity: '1 standard',
-        terrain: 'desert',
-        surface_water: '1',
-        population: '200000',
-        films: [
-          'https://swapi-trybe.herokuapp.com/api/films/1/',
-          'https://swapi-trybe.herokuapp.com/api/films/3/',
-          'https://swapi-trybe.herokuapp.com/api/films/4/',
-          'https://swapi-trybe.herokuapp.com/api/films/5/',
-          'https://swapi-trybe.herokuapp.com/api/films/6/',
-        ],
-        created: '2014-12-09T13:50:49.641000Z',
-        edited: '2014-12-20T20:58:18.411000Z',
-        url: 'https://swapi-trybe.herokuapp.com/api/planets/1/',
-      },
-    ],
-  };
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isFetching: false,
+      data: [],
+    };
 
-  return (
-    <StarWarsContext.Provider value={contextValue}>
-      <div>
-        {/* <ShowContext /> */}
-        <Table2 />
-      </div>
-    </StarWarsContext.Provider>
-  );
+    this.fetchStarWars = this.fetchStarWars.bind(this);
+    this.handleStarWarsSuccess = this.handleStarWarsSuccess.bind(this);
+    this.handleStarWarsFailure = this.handleStarWarsFailure.bind(this);
+  }
+
+  fetchStarWars() {
+    const { isFetching } = this.state;
+
+    if (isFetching) return;
+
+    this.setState({ isFetching: true });
+
+    getStarWarsPlanetsData()
+    .then(this.handleStarWarsSuccess, this.handleStarWarsFailure);
+  }
+
+  handleStarWarsSuccess(response) {
+    const { results: data } = response;
+    this.setState({
+      isFetching: false,
+      data: data,
+    })
+  }
+
+  handleStarWarsFailure(error) {
+    this.setState({
+      isFetching: false,
+      error: error.message,
+    })
+  }
+
+  render() {
+    const contextValue = {
+      ...this.state,
+    }
+    return (
+      <StarWarsContext.Provider value={contextValue}>
+        <div>
+          {/* <ShowContext /> */}
+          <Table getStarWarsPlanetsData={this.fetchStarWars} />
+        </div>
+      </StarWarsContext.Provider>
+    );
+  }
 }
 
 export default App;

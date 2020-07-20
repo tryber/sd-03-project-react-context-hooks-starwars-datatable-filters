@@ -44,21 +44,21 @@ class App extends React.Component {
     const { results: data } = response;
     this.setState({
       isFetching: false,
-      data: data,
-    })
+      data,
+    });
   }
 
   handleStarWarsFailure(error) {
     this.setState({
       isFetching: false,
       error: error.message,
-    })
+    });
   }
 
   render() {
     const contextValue = {
       ...this.state,
-    }
+    };
     return (
       <StarWarsContext.Provider value={contextValue}>
         <div>

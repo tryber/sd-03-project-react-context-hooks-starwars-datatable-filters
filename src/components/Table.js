@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 // import { fetchStarWars } from '../actions';
 import TableHead from './TableHead';
@@ -125,40 +125,40 @@ class Table extends Component {
 //   getStarWarsPlanetsData: () => dispatch(fetchStarWars()),
 // });
 
-// Table2.propTypes = {
-//   getStarWarsPlanetsData: PropTypes.func.isRequired,
-//   data: PropTypes.arrayOf(PropTypes.shape({
-//     name: PropTypes.string.isRequired,
-//     rotation_period: PropTypes.string.isRequired,
-//     orbital_period: PropTypes.string.isRequired,
-//     diameter: PropTypes.string.isRequired,
-//     climate: PropTypes.string.isRequired,
-//     gravity: PropTypes.string.isRequired,
-//     terrain: PropTypes.string.isRequired,
-//     surface_water: PropTypes.string.isRequired,
-//     population: PropTypes.string.isRequired,
-//     films: PropTypes.string.isRequired,
-//     created: PropTypes.string.isRequired,
-//     edited: PropTypes.string.isRequired,
-//     url: PropTypes.string.isRequired,
-//   })),
-//   name: PropTypes.string,
-//   getFilterByNumber: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       column: PropTypes.string,
-//       comparison: PropTypes.string,
-//       value: PropTypes.string,
-//     }),
-//   ).isRequired,
-//   order: PropTypes.objectOf(
-//     PropTypes.shape({
-//       column: PropTypes.string,
-//       sort: PropTypes.string,
-//     }),
-//   ).isRequired,
-// };
+Table.propTypes = {
+  getStarWarsPlanetsData: PropTypes.func.isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    rotation_period: PropTypes.string.isRequired,
+    orbital_period: PropTypes.string.isRequired,
+    diameter: PropTypes.string.isRequired,
+    climate: PropTypes.string.isRequired,
+    gravity: PropTypes.string.isRequired,
+    terrain: PropTypes.string.isRequired,
+    surface_water: PropTypes.string.isRequired,
+    population: PropTypes.string.isRequired,
+    films: PropTypes.string.isRequired,
+    created: PropTypes.string.isRequired,
+    edited: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+  })),
+  name: PropTypes.string,
+  getFilterByNumber: PropTypes.arrayOf(
+    PropTypes.shape({
+      column: PropTypes.string,
+      comparison: PropTypes.string,
+      value: PropTypes.string,
+    }),
+  ).isRequired,
+  order: PropTypes.objectOf(
+    PropTypes.shape({
+      column: PropTypes.string,
+      sort: PropTypes.string,
+    }),
+  ).isRequired,
+};
 
-// Table2.defaultProps = {
+// Table.defaultProps = {
 //   data: null,
 //   name: null,
 // };

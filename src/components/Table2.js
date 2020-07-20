@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { fetchStarWars } from '../actions';
 import TableHead from './TableHead';
-import Filters from './Filters';
+// import Filters from './Filters';
 import StarWarsContext from '../context/StarWarsContext';
 
 function switchComparison(column, comparison, value, planet) {
@@ -30,7 +30,7 @@ function descOrder(columnA, columnB) {
   return -1;
 }
 
-class Table extends Component {
+class Table2 extends Component {
 
   componentDidMount() {
     const { getStarWarsPlanetsData } = this.props;
@@ -79,16 +79,15 @@ class Table extends Component {
     return (
       <StarWarsContext.Consumer>
         {(context) => {
+          const { data } = context;
           return (
             <div>
               <h1 className="table-title" >StarWars Datatable with Filters</h1>
-              <Filters />
+              {/* <Filters /> */}
               <table>
                 <TableHead />
                 <tbody>
-                  {this.getFilteredValues()
-                  .sort((planetA, planetB) => this.sortPlanets(planetA, planetB))
-                  .map((planet) => (
+                  {data.map((planet) => (
                     <tr key={planet.name}>
                       <td>{planet.name}</td>
                       <td>{planet.rotation_period}</td>
@@ -126,7 +125,7 @@ const mapDispatchToProps = (dispatch) => ({
   getStarWarsPlanetsData: () => dispatch(fetchStarWars()),
 });
 
-Table.propTypes = {
+Table2.propTypes = {
   getStarWarsPlanetsData: PropTypes.func.isRequired,
   data: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
@@ -159,9 +158,9 @@ Table.propTypes = {
   ).isRequired,
 };
 
-Table.defaultProps = {
+Table2.defaultProps = {
   data: null,
   name: null,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Table);
+export default connect(mapStateToProps, mapDispatchToProps)(Table2);

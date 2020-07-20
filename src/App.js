@@ -4,18 +4,6 @@ import Table from './components/Table';
 import StarWarsContext from './context/StarWarsContext';
 import getStarWarsPlanetsData from './services/starwarsAPI';
 
-// const ShowContext = () => {
-//   return (
-//     <StarWarsContext.Consumer>
-//       {(context) => {
-//         return (
-//           <span>{`O valor do contexto é ${JSON.stringify(context)}`}</span>
-//         );
-//       }}
-//     </StarWarsContext.Consumer>
-//   );
-// };
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -62,7 +50,6 @@ class App extends React.Component {
     return (
       <StarWarsContext.Provider value={contextValue}>
         <div>
-          {/* <ShowContext /> */}
           <Table getStarWarsPlanetsData={this.fetchStarWars} />
         </div>
       </StarWarsContext.Provider>

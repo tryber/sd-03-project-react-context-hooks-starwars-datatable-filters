@@ -8,7 +8,7 @@ import { FiltersContext } from '../context/FiltersContext';
 const Filters = () => {
   const {
     filters,
-    // setFilters,
+    setFilters,
     setFilterByName,
   } = useContext(FiltersContext);
 

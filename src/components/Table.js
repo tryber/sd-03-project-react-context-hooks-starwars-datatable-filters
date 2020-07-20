@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { fetchStarWars } from '../actions';
 import TableHead from './TableHead';
@@ -22,20 +22,15 @@ function switchComparison(column, comparison, value, planet) {
   }
 }
 
-// function ascOrder(columnA, columnB) {
-//   if (columnA > columnB) return 1;
-//   return -1;
-// }
+function ascOrder(columnA, columnB) {
+  if (columnA > columnB) return 1;
+  return -1;
+}
 
-// function descOrder(columnA, columnB) {
-//   if (columnA < columnB) return 1;
-//   return -1;
-// }
-
-const getFilteredName = (filters, data) => {
-  const { filterByName: { name } } = filters;
-  return data.filter((planet) => planet.name.includes(name));
-};
+function descOrder(columnA, columnB) {
+  if (columnA < columnB) return 1;
+  return -1;
+}
 
 const getFilteredValues = (filters, data) => {
   const { filterByNumericValues } = filters;
@@ -49,40 +44,47 @@ const getFilteredValues = (filters, data) => {
   return getFilteredName(filters, data);
 };
 
-// const sortPlanets = (planetA, planetB) => {
-//   const { order } = this.props;
+const getFilteredName = (filters, data) => {
+  const { filterByName: { name } } = filters;
+  return data.filter((planet) => planet.name.includes(name));
+};
 
-//   let columnA = planetA[order.column.toLowerCase()];
-//   let columnB = planetB[order.column.toLowerCase()];
+const sortPlanets = (planetA, planetB) => {
+  const { order } = this.props;
 
-//   if (order.column.toLowerCase() !== 'name') {
-//     columnA = Number(columnA);
-//     columnB = Number(columnB);
-//   }
+  let columnA = planetA[order.column.toLowerCase()];
+  let columnB = planetB[order.column.toLowerCase()];
 
-//   switch (order.sort) {
-//     case 'ASC':
-//       return ascOrder(columnA, columnB);
-//     case 'DESC':
-//       return descOrder(columnA, columnB);
-//     default:
-//       return 0;
-//   }
-// };
+  if (order.column.toLowerCase() !== 'name') {
+    columnA = Number(columnA);
+    columnB = Number(columnB);
+  }
+
+  switch (order.sort) {
+    case 'ASC':
+      return ascOrder(columnA, columnB);
+    case 'DESC':
+      return descOrder(columnA, columnB);
+    default:
+      return 0;
+  }
+};
 
 const Table = () => {
-  const { filters } = useContext(FiltersContext);
-  const { isFetching, setIsFetching, data, setData } = useContext(StarWarsContext);
+  const { filters, setFilters } = useContext(FiltersContext);
+  const { isFetching, setIsFetching, data, setData, } = useContext(StarWarsContext);
 
   useEffect(() => {
     getStarWarsPlanetsData()
-    .then(() => {
+    .then((data) => {
       setIsFetching(false);
       setData(data.results);
     });
   }, []);
 
-  if (isFetching) { return (<span>Loading...</span>); }
+  if (isFetching) return (
+    <span>Loading...</span>
+  )
   return (
     <div>
       <h1 className="table-title" >StarWars Datatable with Filters</h1>
@@ -126,42 +128,42 @@ const mapDispatchToProps = (dispatch) => ({
   getStarWarsPlanetsData: () => dispatch(fetchStarWars()),
 });
 
-// Table.propTypes = {
-//   getStarWarsPlanetsData: PropTypes.func.isRequired,
-//   data: PropTypes.arrayOf(PropTypes.shape({
-//     name: PropTypes.string.isRequired,
-//     rotation_period: PropTypes.string.isRequired,
-//     orbital_period: PropTypes.string.isRequired,
-//     diameter: PropTypes.string.isRequired,
-//     climate: PropTypes.string.isRequired,
-//     gravity: PropTypes.string.isRequired,
-//     terrain: PropTypes.string.isRequired,
-//     surface_water: PropTypes.string.isRequired,
-//     population: PropTypes.string.isRequired,
-//     films: PropTypes.string.isRequired,
-//     created: PropTypes.string.isRequired,
-//     edited: PropTypes.string.isRequired,
-//     url: PropTypes.string.isRequired,
-//   })),
-//   name: PropTypes.string,
-//   getFilterByNumber: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       column: PropTypes.string,
-//       comparison: PropTypes.string,
-//       value: PropTypes.string,
-//     }),
-//   ).isRequired,
-//   order: PropTypes.objectOf(
-//     PropTypes.shape({
-//       column: PropTypes.string,
-//       sort: PropTypes.string,
-//     }),
-//   ).isRequired,
-// };
+Table.propTypes = {
+  getStarWarsPlanetsData: PropTypes.func.isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    rotation_period: PropTypes.string.isRequired,
+    orbital_period: PropTypes.string.isRequired,
+    diameter: PropTypes.string.isRequired,
+    climate: PropTypes.string.isRequired,
+    gravity: PropTypes.string.isRequired,
+    terrain: PropTypes.string.isRequired,
+    surface_water: PropTypes.string.isRequired,
+    population: PropTypes.string.isRequired,
+    films: PropTypes.string.isRequired,
+    created: PropTypes.string.isRequired,
+    edited: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+  })),
+  name: PropTypes.string,
+  getFilterByNumber: PropTypes.arrayOf(
+    PropTypes.shape({
+      column: PropTypes.string,
+      comparison: PropTypes.string,
+      value: PropTypes.string,
+    }),
+  ).isRequired,
+  order: PropTypes.objectOf(
+    PropTypes.shape({
+      column: PropTypes.string,
+      sort: PropTypes.string,
+    }),
+  ).isRequired,
+};
 
-// Table.defaultProps = {
-//   data: null,
-//   name: null,
-// };
+Table.defaultProps = {
+  data: null,
+  name: null,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);

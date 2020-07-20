@@ -1,5 +1,45 @@
-import { createContext } from 'react';
+import React, { createContext, useState } from 'react';
+import PropTypes from 'prop-types';
 
-const FiltersContext = createContext();
+export const FiltersContext = createContext();
 
-export default FiltersContext;
+FiltersContext.displayName = 'FiltersContext';
+
+const INITIAL_STATE = {
+  filterByName: {
+    name: '',
+  },
+  filterByNumericValues: [],
+  avaliableFilters: [
+    { name: 'population', avaliable: true },
+    { name: 'orbital_period', avaliable: true },
+    { name: 'diameter', avaliable: true },
+    { name: 'rotation_period', avaliable: true },
+    { name: 'surface_water', avaliable: true },
+  ],
+  order: {
+    column: 'Name',
+    sort: 'ASC',
+  },
+};
+
+const FiltersProvider = ({ children }) => {
+  const [filters, setFilters] = useState(INITIAL_STATE);
+
+  const context = {
+    filters,
+    setFilters,
+  }
+
+  return (
+    <FiltersContext.Provider value={context}>
+      { children }
+    </FiltersContext.Provider>
+  )
+}
+
+FiltersProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+}
+
+export default FiltersProvider;

@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+import React, { Component, useContext, useEffect } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-// import { fetchStarWars } from '../actions';
+import { fetchStarWars } from '../actions';
 import TableHead from './TableHead';
 import Filters from './Filters';
-import StarWarsContext from '../context/StarWarsContext';
+import { StarWarsContext } from '../context/StarWarsContext';
+import { FiltersContext } from '../context/FiltersContext';
+import getStarWarsPlanetsData from '../services/starwarsAPI';
 
 function switchComparison(column, comparison, value, planet) {
   switch (comparison) {
@@ -30,100 +32,111 @@ function descOrder(columnA, columnB) {
   return -1;
 }
 
-class Table extends Component {
-
-  componentDidMount() {
-    const { getStarWarsPlanetsData } = this.props;
-    getStarWarsPlanetsData();
-  }
-
-  getFilteredValues() {
-    const { getFilterByNumber } = this.props;
-    if (getFilterByNumber) {
-      return getFilterByNumber.reduce(
-        (acc, { column, comparison, value }) =>
-          acc.filter((planet) => switchComparison(column, comparison, value, planet)),
-        this.getFilteredName(),
-      );
-    }
-    return this.getFilteredName();
-  }
-
-  getFilteredName() {
-    const { data, name } = this.props;
-    return data.filter((planet) => planet.name.includes(name));
-  }
-
-  sortPlanets(planetA, planetB) {
-    const { order } = this.props;
-
-    let columnA = planetA[order.column.toLowerCase()];
-    let columnB = planetB[order.column.toLowerCase()];
-
-    if (order.column.toLowerCase() !== 'name') {
-      columnA = Number(columnA);
-      columnB = Number(columnB);
-    }
-
-    switch (order.sort) {
-      case 'ASC':
-        return ascOrder(columnA, columnB);
-      case 'DESC':
-        return descOrder(columnA, columnB);
-      default:
-        return 0;
-    }
-  }
-
-  render() {
-    return (
-      <StarWarsContext.Consumer>
-        {(context) => {
-          const { data } = context;
-          return (
-            <div>
-              <h1 className="table-title" >StarWars Datatable with Filters</h1>
-              <Filters />
-              <table>
-                <TableHead />
-                <tbody>
-                  {data.map((planet) => (
-                    <tr key={planet.name}>
-                      <td>{planet.name}</td>
-                      <td>{planet.rotation_period}</td>
-                      <td>{planet.orbital_period}</td>
-                      <td>{planet.diameter}</td>
-                      <td>{planet.climate}</td>
-                      <td>{planet.gravity}</td>
-                      <td>{planet.terrain}</td>
-                      <td>{planet.surface_water}</td>
-                      <td>{planet.population}</td>
-                      <td>{planet.films.map((film) => <p key={film}>{film}</p>)}</td>
-                      <td>{planet.created}</td>
-                      <td>{planet.edited}</td>
-                      <td>{planet.url}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          );
-        }}
-      </StarWarsContext.Consumer>
+const getFilteredValues = (filters, data) => {
+  const { filterByNumericValues } = filters;
+  if (filterByNumericValues) {
+    return filterByNumericValues.reduce(
+      (acc, { column, comparison, value }) =>
+        acc.filter((planet) => switchComparison(column, comparison, value, planet)),
+      getFilteredName(filters, data),
     );
+  }
+  return getFilteredName(filters, data);
+}
+
+const getFilteredName = (filters, data) => {
+  const { filterByName: { name } } = filters;
+  return data.filter((planet) => planet.name.includes(name));
+}
+
+const sortPlanets = (planetA, planetB) => {
+  const { order } = this.props;
+
+  let columnA = planetA[order.column.toLowerCase()];
+  let columnB = planetB[order.column.toLowerCase()];
+
+  if (order.column.toLowerCase() !== 'name') {
+    columnA = Number(columnA);
+    columnB = Number(columnB);
+  }
+
+  switch (order.sort) {
+    case 'ASC':
+      return ascOrder(columnA, columnB);
+    case 'DESC':
+      return descOrder(columnA, columnB);
+    default:
+      return 0;
   }
 }
 
-// const mapStateToProps = (state) => ({
-//   data: state.starWars.data,
-//   name: state.filters.filterByName.name,
-//   getFilterByNumber: state.filters.filterByNumericValues,
-//   order: state.filters.order,
-// });
+const Table = () => {
+  const {
+    filters,
+    setFilters,
+  } = useContext(FiltersContext);
 
-// const mapDispatchToProps = (dispatch) => ({
-//   getStarWarsPlanetsData: () => dispatch(fetchStarWars()),
-// });
+  const {
+    isFetching,
+    setIsFetching,
+    data,
+    setData,
+  } = useContext(StarWarsContext);
+
+  useEffect(() => {
+    getStarWarsPlanetsData()
+    .then((data) => {
+      setIsFetching(false);
+      setData(data.results);
+    });
+  }, [])
+
+  if(isFetching) return (
+    <span>Loading...</span>
+  )
+  return (
+    <div>
+      <h1 className="table-title" >StarWars Datatable with Filters</h1>
+      <Filters />
+      <table>
+        <TableHead />
+        <tbody>
+          {getFilteredValues(filters, data)
+          // .sort((planetA, planetB) => this.sortPlanets(planetA, planetB))
+          .map((planet) => (
+            <tr key={planet.name}>
+              <td>{planet.name}</td>
+              <td>{planet.rotation_period}</td>
+              <td>{planet.orbital_period}</td>
+              <td>{planet.diameter}</td>
+              <td>{planet.climate}</td>
+              <td>{planet.gravity}</td>
+              <td>{planet.terrain}</td>
+              <td>{planet.surface_water}</td>
+              <td>{planet.population}</td>
+              <td>{planet.films.map((film) => <p key={film}>{film}</p>)}</td>
+              <td>{planet.created}</td>
+              <td>{planet.edited}</td>
+              <td>{planet.url}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+  
+}
+
+const mapStateToProps = (state) => ({
+  data: state.starWars.data,
+  name: state.filters.filterByName.name,
+  getFilterByNumber: state.filters.filterByNumericValues,
+  order: state.filters.order,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getStarWarsPlanetsData: () => dispatch(fetchStarWars()),
+});
 
 Table.propTypes = {
   getStarWarsPlanetsData: PropTypes.func.isRequired,
@@ -163,4 +176,4 @@ Table.defaultProps = {
   name: null,
 };
 
-export default (Table);
+export default connect(mapStateToProps, mapDispatchToProps)(Table);

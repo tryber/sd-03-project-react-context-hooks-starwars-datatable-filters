@@ -107,7 +107,7 @@ class Table2 extends Component {
                 </tbody>
               </table>
             </div>
-          )
+          );
         }}
       </StarWarsContext.Consumer>
     );

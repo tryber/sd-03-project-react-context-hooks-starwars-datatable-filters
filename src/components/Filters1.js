@@ -2,7 +2,9 @@
 // import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 
-// import { filterName, filterNumValues, deleteFilter, disableColumn, enableColumn, changeOrder } from '../actions';
+// import {
+//   filterName, filterNumValues, deleteFilter, disableColumn, enableColumn, changeOrder
+// } from '../actions';
 
 // class Filters extends Component {
 //   constructor(props) {

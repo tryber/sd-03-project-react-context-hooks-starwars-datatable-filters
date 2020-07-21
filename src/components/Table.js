@@ -71,7 +71,7 @@ const sortPlanets = (planetA, planetB, filters) => {
 
 const Table = () => {
   const { filters } = useContext(FiltersContext);
-  const { isFetching, setIsFetching, data, setData, } = useContext(StarWarsContext);
+  const { isFetching, setIsFetching, data, setData } = useContext(StarWarsContext);
 
   useEffect(() => {
     getStarWarsPlanetsData()
@@ -81,9 +81,7 @@ const Table = () => {
     });
   }, []);
 
-  if (isFetching) return (
-    <span>Loading...</span>
-  )
+  if (isFetching) { return ( <span>Loading...</span> )};
   return (
     <div>
       <h1 className="table-title" >StarWars Datatable with Filters</h1>

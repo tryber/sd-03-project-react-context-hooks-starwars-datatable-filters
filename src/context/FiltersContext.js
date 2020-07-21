@@ -27,26 +27,26 @@ const FiltersProvider = ({ children }) => {
   const [filters, setFilters] = useState(INITIAL_STATE);
 
   const setFilterByName = (name) => {
-    setFilters((stateAtual) => ({...stateAtual, filterByName: { name }}))
+    setFilters((stateAtual) => ({ ...stateAtual, filterByName: { name } }));
   };
 
   const setFilterByNumber = (obj) => {
     setFilters((stateAtual) => ({
       ...stateAtual,
       filterByNumericValues: [...stateAtual.filterByNumericValues, obj],
-    }))
+    }));
   };
 
   const setCol = (columns) => {
-    setFilters((stateAtual) => ({ ...stateAtual, avaliableFilters: [...columns] }))
+    setFilters((stateAtual) => ({ ...stateAtual, avaliableFilters: [...columns] }));
   };
 
   const deleteFil = (filters) => {
-    setFilters((stateAtual) => ({ ...stateAtual, filterByNumericValues: [...filters] }))
+    setFilters((stateAtual) => ({ ...stateAtual, filterByNumericValues: [...filters] }));
   };
 
   const changeOrd = (order) => {
-    setFilters((stateAtual) => ({ ...stateAtual, order: { ...order } }))
+    setFilters((stateAtual) => ({ ...stateAtual, order: { ...order } }));
   };
 
   const context = {

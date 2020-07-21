@@ -2,7 +2,9 @@ import React, { useContext, useState } from 'react';
 // import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 
-// import { filterName, filterNumValues, deleteFilter, disableColumn, enableColumn, changeOrder } from '../actions';
+// import {
+//   filterName, filterNumValues, deleteFilter, disableColumn, enableColumn, changeOrder
+// } from '../actions';
 import { FiltersContext } from '../context/FiltersContext';
 
 const Filters = () => {
@@ -42,7 +44,7 @@ const Filters = () => {
         }, [])}
       </select>
     );
-  }
+  };
 
   const selectACondition = () => {
     const { comparison } = state;
@@ -58,7 +60,7 @@ const Filters = () => {
         <option value="igual a">igual a</option>
       </select>
     );
-  }
+  };
 
   const inputNumber = () => {
     return (
@@ -69,7 +71,7 @@ const Filters = () => {
         onChange={(event) => setState({ ...state, value: event.target.value })}
       />
     );
-  }
+  };
 
   const disableOption = (column) => {
     const { avaliableFilters } = filters;
@@ -77,7 +79,7 @@ const Filters = () => {
 
     response[response.findIndex((filter) => filter.name === column)].avaliable = false;
     setCol(response);
-  }
+  };
 
   const filterBtn = () => {
     const { column, comparison, value } = state;
@@ -92,7 +94,7 @@ const Filters = () => {
         Filtrar
       </button>
     );
-  }
+  };
 
   const enableOption = (column, index) => {
     const { filterByNumericValues, avaliableFilters } = filters;
@@ -104,7 +106,32 @@ const Filters = () => {
     const response2 = filterByNumericValues;
     response2.splice(index, 1);
     deleteFil(response2);
-  }
+  };
+
+  const selectOrder = () => {
+    return (
+      <div>
+        <select
+          data-testid="column-sort" id="orderColumn"
+          onChange={(event) => setState({ ...state, orderColumn: event.target.value })}
+        >
+          <option>name</option>
+          <option>climate</option>
+          <option>created</option>
+          <option>diameter</option>
+          <option>edited</option>
+          <option>films</option>
+          <option>gravity</option>
+          <option>orbital_period</option>
+          <option>population</option>
+          <option>rotation_period</option>
+          <option>surface_water</option>
+          <option>terrain</option>
+          <option>url</option>
+        </select>
+      </div>
+    );
+  };
 
   const getOrdered = () => {
     const { orderColumn, orderSort } = state;
@@ -133,32 +160,7 @@ const Filters = () => {
         </button>
       </div>
     );
-  }
-
-  const selectOrder = () => {
-    return (
-      <div>
-        <select
-          data-testid="column-sort" id="orderColumn"
-          onChange={(event) => setState({ ...state, orderColumn: event.target.value })}
-        >
-          <option>name</option>
-          <option>climate</option>
-          <option>created</option>
-          <option>diameter</option>
-          <option>edited</option>
-          <option>films</option>
-          <option>gravity</option>
-          <option>orbital_period</option>
-          <option>population</option>
-          <option>rotation_period</option>
-          <option>surface_water</option>
-          <option>terrain</option>
-          <option>url</option>
-        </select>
-      </div>
-    );
-  }
+  };
 
   const { filterByNumericValues } = filters;
 

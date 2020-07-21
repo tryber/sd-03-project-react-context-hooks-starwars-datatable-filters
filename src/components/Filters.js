@@ -62,13 +62,13 @@ const Filters = () => {
     );
   };
 
-  const inputNumber = () => 
-      <input
-        data-testid="value-filter"
-        type="number"
-        placeholder="Digit a number"
-        onChange={(event) => setState({ ...state, value: event.target.value })}
-      />;
+  const inputNumber = () =>
+    <input
+      data-testid="value-filter"
+      type="number"
+      placeholder="Digit a number"
+      onChange={(event) => setState({ ...state, value: event.target.value })}
+    />;
 
   const disableOption = (column) => {
     const { avaliableFilters } = filters;
@@ -106,26 +106,26 @@ const Filters = () => {
   };
 
   const selectOrder = () =>
-      <div>
-        <select
-          data-testid="column-sort" id="orderColumn"
-          onChange={(event) => setState({ ...state, orderColumn: event.target.value })}
-        >
-          <option>name</option>
-          <option>climate</option>
-          <option>created</option>
-          <option>diameter</option>
-          <option>edited</option>
-          <option>films</option>
-          <option>gravity</option>
-          <option>orbital_period</option>
-          <option>population</option>
-          <option>rotation_period</option>
-          <option>surface_water</option>
-          <option>terrain</option>
-          <option>url</option>
-        </select>
-      </div>;
+    <div>
+      <select
+        data-testid="column-sort" id="orderColumn"
+        onChange={(event) => setState({ ...state, orderColumn: event.target.value })}
+      >
+        <option>name</option>
+        <option>climate</option>
+        <option>created</option>
+        <option>diameter</option>
+        <option>edited</option>
+        <option>films</option>
+        <option>gravity</option>
+        <option>orbital_period</option>
+        <option>population</option>
+        <option>rotation_period</option>
+        <option>surface_water</option>
+        <option>terrain</option>
+        <option>url</option>
+      </select>
+    </div>;
 
   const getOrdered = () => {
     const { orderColumn, orderSort } = state;

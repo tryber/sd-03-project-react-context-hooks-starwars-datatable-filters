@@ -32,6 +32,11 @@ function descOrder(columnA, columnB) {
   return -1;
 }
 
+const getFilteredName = (filters, data) => {
+  const { filterByName: { name } } = filters;
+  return data.filter((planet) => planet.name.includes(name));
+};
+
 const getFilteredValues = (filters, data) => {
   const { filterByNumericValues } = filters;
   if (filterByNumericValues) {
@@ -42,11 +47,6 @@ const getFilteredValues = (filters, data) => {
     );
   }
   return getFilteredName(filters, data);
-};
-
-const getFilteredName = (filters, data) => {
-  const { filterByName: { name } } = filters;
-  return data.filter((planet) => planet.name.includes(name));
 };
 
 const sortPlanets = (planetA, planetB) => {

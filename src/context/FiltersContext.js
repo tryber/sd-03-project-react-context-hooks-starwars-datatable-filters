@@ -30,10 +30,33 @@ const FiltersProvider = ({ children }) => {
     setFilters((stateAtual) => ({...stateAtual, filterByName: { name }}))
   };
 
+  const setFilterByNumber = (obj) => {
+    setFilters((stateAtual) => ({
+      ...stateAtual,
+      filterByNumericValues: [...stateAtual.filterByNumericValues, obj],
+    }))
+  };
+
+  const setCol = (columns) => {
+    setFilters((stateAtual) => ({ ...stateAtual, avaliableFilters: [...columns] }))
+  };
+
+  const deleteFil = (filters) => {
+    setFilters((stateAtual) => ({ ...stateAtual, filterByNumericValues: [...filters] }))
+  };
+
+  const changeOrd = (order) => {
+    setFilters((stateAtual) => ({ ...stateAtual, order: { ...order } }))
+  };
+
   const context = {
     filters,
     setFilters,
     setFilterByName,
+    setFilterByNumber,
+    setCol,
+    deleteFil,
+    changeOrd,
   };
 
   return (

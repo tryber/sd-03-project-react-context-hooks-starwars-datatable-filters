@@ -113,11 +113,13 @@ const Filters = () => {
       <div>
         <p>Select order:</p>
         {selectOrder()}
+        <p>Asc</p>
         <input
           data-testid="column-sort-input"
           type="radio" name="order" value="ASC"
           onClick={(event) => setState({ ...state, orderSort: event.target.value })}
         />
+        <p>Desc</p>
         <input
           data-testid="column-sort-input"
           type="radio" name="order" value="DESC"

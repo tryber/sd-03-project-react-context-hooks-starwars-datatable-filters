@@ -150,7 +150,7 @@ const Filters = () => {
     orderSort: 'ASC',
   });
 
-  const { filterByNumericValues, column } = filters;
+  const { filterByNumericValues } = filters;
 
   return (
     <div>

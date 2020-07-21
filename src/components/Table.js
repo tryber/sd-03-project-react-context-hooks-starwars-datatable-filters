@@ -9,6 +9,11 @@ import { StarWarsContext } from '../context/StarWarsContext';
 import { FiltersContext } from '../context/FiltersContext';
 import getStarWarsPlanetsData from '../services/starwarsAPI';
 
+const getFilteredName = (filters, data) => {
+  const { filterByName: { name } } = filters;
+  return data.filter((planet) => planet.name.includes(name));
+};
+
 function switchComparison(column, comparison, value, planet) {
   switch (comparison) {
     case 'maior que':
@@ -22,21 +27,6 @@ function switchComparison(column, comparison, value, planet) {
   }
 }
 
-function ascOrder(columnA, columnB) {
-  if (columnA > columnB) return 1;
-  return -1;
-}
-
-function descOrder(columnA, columnB) {
-  if (columnA < columnB) return 1;
-  return -1;
-}
-
-const getFilteredName = (filters, data) => {
-  const { filterByName: { name } } = filters;
-  return data.filter((planet) => planet.name.includes(name));
-};
-
 const getFilteredValues = (filters, data) => {
   const { filterByNumericValues } = filters;
   if (filterByNumericValues) {
@@ -49,8 +39,17 @@ const getFilteredValues = (filters, data) => {
   return getFilteredName(filters, data);
 };
 
-const sortPlanets = (planetA, planetB) => {
-  const { order } = this.props;
+function ascOrder(columnA, columnB) {
+  if (columnA > columnB) return 1;
+  return -1;
+}
+
+function descOrder(columnA, columnB) {
+  if (columnA < columnB) return 1;
+  return -1;
+}
+const sortPlanets = (planetA, planetB, filters) => {
+  const { order } = filters;
 
   let columnA = planetA[order.column.toLowerCase()];
   let columnB = planetB[order.column.toLowerCase()];
@@ -93,7 +92,7 @@ const Table = () => {
         <TableHead />
         <tbody>
           {getFilteredValues(filters, data)
-          // .sort((planetA, planetB) => this.sortPlanets(planetA, planetB))
+          .sort((planetA, planetB) => sortPlanets(planetA, planetB, filters))
           .map((planet) => (
             <tr key={planet.name}>
               <td>{planet.name}</td>

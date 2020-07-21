@@ -53,14 +53,14 @@ const disableOption = (column, filters, setCol) => {
   setCol(response);
 };
 
-const filterBtn = (state, setFilterByNumber) => {
+const filterBtn = (state, setFilterByNumber, filters, setCol) => {
   const { column, comparison, value } = state;
   return (
     <button
       data-testid="button-filter" type="button"
       onClick={() => {
         setFilterByNumber({ column, comparison, value });
-        disableOption(column);
+        disableOption(column, filters, setCol);
       }}
     >
       Filtrar
@@ -165,7 +165,7 @@ const Filters = () => {
       <p>Select a condition:</p>
       {selectACondition(state, setState)}
       {inputNumber(state, setState)}
-      {filterBtn(state, setFilterByNumber)}
+      {filterBtn(state, setFilterByNumber, filters, setCol)}
       {filterByNumericValues.map((filter, index) => (
         <div data-testid="filter">
           {`${filter.column} ${filter.comparison} ${filter.value}`}

@@ -75,9 +75,9 @@ const Table = () => {
 
   useEffect(() => {
     getStarWarsPlanetsData()
-    .then((data) => {
+    .then((getData) => {
       setIsFetching(false);
-      setData(data.results);
+      setData(getData.results);
     });
   }, []);
 

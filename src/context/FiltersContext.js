@@ -41,8 +41,8 @@ const FiltersProvider = ({ children }) => {
     setFilters((stateAtual) => ({ ...stateAtual, avaliableFilters: [...columns] }));
   };
 
-  const deleteFil = (filters) => {
-    setFilters((stateAtual) => ({ ...stateAtual, filterByNumericValues: [...filters] }));
+  const deleteFil = (option) => {
+    setFilters((stateAtual) => ({ ...stateAtual, filterByNumericValues: [...option] }));
   };
 
   const changeOrd = (order) => {

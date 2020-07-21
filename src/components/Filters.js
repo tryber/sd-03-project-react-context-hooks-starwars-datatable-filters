@@ -62,16 +62,13 @@ const Filters = () => {
     );
   };
 
-  const inputNumber = () => {
-    return (
+  const inputNumber = () => 
       <input
         data-testid="value-filter"
         type="number"
         placeholder="Digit a number"
         onChange={(event) => setState({ ...state, value: event.target.value })}
-      />
-    );
-  };
+      />;
 
   const disableOption = (column) => {
     const { avaliableFilters } = filters;
@@ -108,8 +105,7 @@ const Filters = () => {
     deleteFil(response2);
   };
 
-  const selectOrder = () => {
-    return (
+  const selectOrder = () =>
       <div>
         <select
           data-testid="column-sort" id="orderColumn"
@@ -129,9 +125,7 @@ const Filters = () => {
           <option>terrain</option>
           <option>url</option>
         </select>
-      </div>
-    );
-  };
+      </div>;
 
   const getOrdered = () => {
     const { orderColumn, orderSort } = state;
@@ -141,13 +135,13 @@ const Filters = () => {
         {selectOrder()}
         <p>Asc</p>
         <input
-          data-testid="column-sort-input"
+          data-testid="column-sort-input-asc"
           type="radio" name="order" value="ASC"
           onClick={(event) => setState({ ...state, orderSort: event.target.value })}
         />
         <p>Desc</p>
         <input
-          data-testid="column-sort-input"
+          data-testid="column-sort-input-desc"
           type="radio" name="order" value="DESC"
           onClick={(event) => setState({ ...state, orderSort: event.target.value })}
         />
@@ -178,7 +172,6 @@ const Filters = () => {
       {selectACondition()}
       {inputNumber()}
       {filterBtn()}
-      {console.log(filterByNumericValues)}
       {filterByNumericValues.map((filter, index) => (
         <div data-testid="filter">
           {`${filter.column} ${filter.comparison} ${filter.value}`}

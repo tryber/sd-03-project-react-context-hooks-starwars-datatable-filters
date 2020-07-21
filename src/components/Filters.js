@@ -171,7 +171,7 @@ const Filters = () => {
           {`${filter.column} ${filter.comparison} ${filter.value}`}
           <button
             type="button"
-            onClick={() => enableOption(column, index, filters, setCol, deleteFil)}
+            onClick={() => enableOption(filter.column, index, filters, setCol, deleteFil)}
           >
             X
           </button>

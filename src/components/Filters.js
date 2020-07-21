@@ -1,14 +1,13 @@
 import React, { useContext, useState } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+// import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
 
-import { filterName, filterNumValues, deleteFilter, disableColumn, enableColumn, changeOrder } from '../actions';
+// import { filterName, filterNumValues, deleteFilter, disableColumn, enableColumn, changeOrder } from '../actions';
 import { FiltersContext } from '../context/FiltersContext';
 
 const Filters = () => {
   const {
     filters,
-    setFilters,
     setFilterByName,
     setFilterByNumber,
     setCol,
@@ -191,40 +190,41 @@ const Filters = () => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  filterByNumeric: state.filters.filterByNumericValues,
-  avaliableFilters: state.filters.avaliableFilters,
-});
+// const mapStateToProps = (state) => ({
+//   filterByNumeric: state.filters.filterByNumericValues,
+//   avaliableFilters: state.filters.avaliableFilters,
+// });
 
-const mapDispatchToProps = (dispatch) => ({
-  getFilterByName: (name) => dispatch(filterName(name)),
-  getFilterByNumber: (getFilterByNumber) => dispatch(filterNumValues(getFilterByNumber)),
-  deleteFil: (filters) => dispatch(deleteFilter(filters)),
-  disableCol: (column) => dispatch(disableColumn(column)),
-  enableCol: (column) => dispatch(enableColumn(column)),
-  changeOrd: (order) => dispatch(changeOrder(order)),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   getFilterByName: (name) => dispatch(filterName(name)),
+//   getFilterByNumber: (getFilterByNumber) => dispatch(filterNumValues(getFilterByNumber)),
+//   deleteFil: (filters) => dispatch(deleteFilter(filters)),
+//   disableCol: (column) => dispatch(disableColumn(column)),
+//   enableCol: (column) => dispatch(enableColumn(column)),
+//   changeOrd: (order) => dispatch(changeOrder(order)),
+// });
 
-Filters.propTypes = {
-  getFilterByName: PropTypes.func.isRequired,
-  getFilterByNumber: PropTypes.func.isRequired,
-  filterByNumeric: PropTypes.arrayOf(
-    PropTypes.shape({
-      column: PropTypes.string,
-      comparison: PropTypes.string,
-      value: PropTypes.string,
-    }),
-  ).isRequired,
-  avaliableFilters: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string,
-      avaliableFilters: PropTypes.bool,
-    }),
-  ).isRequired,
-  deleteFil: PropTypes.func.isRequired,
-  disableCol: PropTypes.func.isRequired,
-  enableCol: PropTypes.func.isRequired,
-  changeOrd: PropTypes.func.isRequired,
-};
+// Filters.propTypes = {
+//   getFilterByName: PropTypes.func.isRequired,
+//   getFilterByNumber: PropTypes.func.isRequired,
+//   filterByNumeric: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       column: PropTypes.string,
+//       comparison: PropTypes.string,
+//       value: PropTypes.string,
+//     }),
+//   ).isRequired,
+//   avaliableFilters: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       name: PropTypes.string,
+//       avaliableFilters: PropTypes.bool,
+//     }),
+//   ).isRequired,
+//   deleteFil: PropTypes.func.isRequired,
+//   disableCol: PropTypes.func.isRequired,
+//   enableCol: PropTypes.func.isRequired,
+//   changeOrd: PropTypes.func.isRequired,
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Filters);
+// export default connect(mapStateToProps, mapDispatchToProps)(Filters);
+export default Filters;

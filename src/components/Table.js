@@ -81,7 +81,7 @@ const Table = () => {
     });
   }, []);
 
-  if (isFetching) { return ( <span>Loading...</span> )};
+  if (isFetching) { return (<span>Loading...</span>); }
   return (
     <div>
       <h1 className="table-title" >StarWars Datatable with Filters</h1>

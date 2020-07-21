@@ -169,7 +169,9 @@ const Filters = () => {
       {filterByNumericValues.map((filter, index) => (
         <div data-testid="filter">
           {`${filter.column} ${filter.comparison} ${filter.value}`}
-          <button type="button" onClick={() => enableOption(column, index, filters, setCol, deleteFil)} >
+          <button type="button"
+          onClick={() => enableOption(column, index, filters, setCol, deleteFil)}
+          >
             X
           </button>
         </div>

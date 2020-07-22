@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { FiltersContext } from '../context/FiltersContext';
 
+const columns = ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
+
 const selectAnOption = (state, setState, filters) => {
   const { column } = state;
   const { avaliableFilters } = filters;
@@ -16,7 +18,7 @@ const selectAnOption = (state, setState, filters) => {
           acc.push(<option value={filter.name} key={filter.name}>{filter.name}</option>);
         }
         return acc;
-      }, [])}
+      }, columns)}
     </select>
   );
 };
